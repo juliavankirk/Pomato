@@ -1,7 +1,9 @@
+import tool.InputOutput;
+
 public class Main {
 
     public static void main(String[] args) {
 	// write your code here
-        System.out.println("Herro Pomato!");
+        InputOutput.inputString("Input username:");
     }
 }
