@@ -16,10 +16,7 @@ public class Employee extends User {
     }
 
     /**
-     * Getters and Setters
-     */
-
-    /**
      * Methods
      */
 }
+
