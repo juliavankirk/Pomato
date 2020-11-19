@@ -8,6 +8,7 @@ public class Employee extends User {
 
     /**
      * Constructor
+     *
      */
 
     public Employee(String userName, String password) {
