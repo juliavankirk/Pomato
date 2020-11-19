@@ -10,6 +10,11 @@ public class Manager extends User {
      * Constructor
      */
 
+    public Manager(String userName, String password) {
+        super(userName,password);
+
+    }
+
     /**
      * Getters and Setters
      */

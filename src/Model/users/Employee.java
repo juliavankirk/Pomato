@@ -10,6 +10,11 @@ public class Employee extends User {
      * Constructor
      */
 
+    public Employee(String userName, String password) {
+        super(userName,password);
+
+    }
+
     /**
      * Getters and Setters
      */
