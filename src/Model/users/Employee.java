@@ -8,12 +8,10 @@ public class Employee extends User {
 
     /**
      * Constructor
-     *
-     *
      */
 
-    public Employee(String userName, String password) {
-        super(userName,password);
+    public Employee(String firstname, String lastName, String userName, String password) {
+        super(firstname, lastName, userName, password);
 
     }
 

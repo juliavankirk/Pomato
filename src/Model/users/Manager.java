@@ -10,8 +10,8 @@ public class Manager extends User {
      * Constructor
      */
 
-    public Manager(String userName, String password) {
-        super(userName,password);
+    public Manager(String firstname, String lastName, String userName, String password) {
+        super(firstname, lastName, userName, password);
 
     }
 
