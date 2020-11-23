@@ -2,7 +2,7 @@ package Model.users;
 import java.util.UUID;
 
 
-public class User {
+public abstract class User {
 
     /**
      * Attributes
