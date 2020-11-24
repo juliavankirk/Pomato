@@ -2,12 +2,14 @@ package Model.users;
 import java.util.UUID;
 
 
-public class User {
+public abstract class User {
 
     /**
      * Attributes
      */
 
+    private String firstname;
+    private String lastName;
     private String id = UUID.randomUUID().toString();
     private String userName;
     private String password;
@@ -16,7 +18,9 @@ public class User {
      * Constructor
      */
 
-    public User(String userName, String password) {
+    public User(String firstname, String lastName, String userName, String password) {
+        this.firstname = firstname;
+        this.lastName = lastName;
         this.userName = userName;
         this.password = password;
     }
@@ -41,12 +45,26 @@ public class User {
         this.password = password;
     }
 
+    public String getFirstname() {
+        return firstname;
+    }
+
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
     /**
      * Methods
      */
     public String toString() {
-        return "Your username is:\n" + this.userName + "\nYour password is:\n" + this.password + "\nDon't forget these "
-                + "information or you will be cursed to not be able to use this app forever";
+        return this.firstname + " " + this.lastName;
     }
 }
-// hiiiii
