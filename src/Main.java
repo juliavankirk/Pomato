@@ -7,7 +7,3 @@ public class Main {
         controller.main();
     }
 }
-/**
- * Hello people
- * test test
- */

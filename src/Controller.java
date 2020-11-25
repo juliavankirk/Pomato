@@ -1,21 +1,24 @@
 import Model.Project.Database;
 import Model.Project.Project;
-import Model.Users.Employee;
 import Model.Users.User;
 import View.VMainMenu;
+import View.VRegister;
 
 import javax.xml.crypto.Data;
+import java.util.UUID;
 
 public class Controller {
     //Attributes
     Database mDatabase;
     VMainMenu mVMainMenu;
+    VRegister mVRegister;
 
 
     //Constructor
     public Controller() {
         mDatabase = new Database();
         mVMainMenu = new VMainMenu();
+        mVRegister = new VRegister();
     }
 
     public void main() {
@@ -25,14 +28,21 @@ public class Controller {
     }
 
     void doMainMenu() {
-
-        String password;
         mVMainMenu.render();
+
+        UUID id = null;
+        String password;
+
         String mainMenuSelect = mVMainMenu.read();
 
         switch (mainMenuSelect) {
             case "1" -> {
+                //Register menu
+                User user = mVRegister.getUserData();
 
+                mDatabase.addUser( user );
+                mVRegister.registerSuccess();
+                doMainMenu();
             }
             case "2" -> {
 
@@ -42,6 +52,10 @@ public class Controller {
             }
             case "X" -> {
 
+            }
+            default -> {
+                mVMainMenu.renderError();
+                doMainMenu();
             }
         }
     }

@@ -2,32 +2,31 @@ package Model.Users;
 import java.util.UUID;
 
 
-public abstract class User {
+public class User {
 
     //Attributes
     private UUID mId;
     private String mFirstName;
     private String mLastName;
-    private String mUserName;
     private String mPassword;
+    private String mCompanyName;
+    private String mJobTitle;
+    private Double mHourlyWage;
 
     //Constructor
-    public User(String firstName, String lastName, String userName, String password) {
+    public User( String firstName, String lastName, String password, String companyName,
+                 String jobTitle, Double hourlyWage) {
         mId = UUID.randomUUID();
         mFirstName = firstName;
         mLastName = lastName;
-        mUserName = userName;
         mPassword = password;
+        mCompanyName = companyName;
+        mJobTitle = jobTitle;
+        mHourlyWage = hourlyWage;
     }
 
     //Methods
     public UUID getId() { return mId; }
-
-    public String getUserName() {
-        return mUserName;
-    }
-
-    public void setUserName(String userName) { mUserName = userName; }
 
     public String getPassword() {
         return mPassword;
@@ -52,5 +51,21 @@ public abstract class User {
     public void setLastName(String lastName) {
         mLastName = lastName;
     }
-    abstract String toRow();
+
+    public String getCompanyName() { return mCompanyName; }
+
+    public String getJobTitle() { return mJobTitle; }
+
+    public Double getHourlyWage() { return mHourlyWage; }
+
+    public String toRow() {
+        String retVal = ("User ID: " + getId());
+        retVal += ("Employee: " + getName());
+        retVal += ("Company: " + getCompanyName());
+        retVal += ("Position: " + getJobTitle());
+        retVal += ("Hourly Wage: " + getHourlyWage());
+
+        return retVal;
+    }
+
 }

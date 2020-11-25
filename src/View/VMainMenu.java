@@ -12,7 +12,7 @@ public class VMainMenu {
                 "1. Register\n" + //Password = "admin1234"
                 "2. Log-in\n" + //Password = "password123"
                 "3. User Manual\n" +
-                "4. Exit system \n");
+                "X. Exit system \n");
     }
 
     public void renderExit() {
@@ -25,7 +25,7 @@ public class VMainMenu {
     }
 
     public String read() {
-        String mainMenuSelect = Utilities.stringInput();
+       String mainMenuSelect = Utilities.stringInput();
 
         return mainMenuSelect;
     }
