@@ -1,6 +1,6 @@
-package controller;
+package Controller;
 
-public class mainController {
+public class Controller {
 //    InputOutput inputOutput = new InputOutput();
 
 }

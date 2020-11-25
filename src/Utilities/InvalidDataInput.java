@@ -1,4 +1,4 @@
-package tool;
+package Utilities;
 
 public class InvalidDataInput extends RuntimeException  {
 

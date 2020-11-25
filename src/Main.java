@@ -1,4 +1,4 @@
-import tool.InputOutput;
+import Utilities.InputOutput;
 
 public class Main {
 

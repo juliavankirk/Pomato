@@ -1,4 +1,4 @@
-package tool;
+package Utilities;
 
 import java.util.Scanner;
 
@@ -8,41 +8,36 @@ public class InputOutput {
 
     public static String inputString(String messageToUser) {
         System.out.print(messageToUser);
-        String inputResult = input.nextLine();
+        String value = input.nextLine();
 
-        return inputResult;
+        return value;
     }
 
     public static int inputInt(String messageToUser) {
-        int inputResult = input.nextInt();
+        int value = input.nextInt();
         input.nextLine();
         System.out.println(messageToUser);
 
-        return inputResult;
+        return value;
     }
 
     public static double inputDouble(String messageToUser) {
-        double inputResult = input.nextDouble();
+        double value = input.nextDouble();
         input.nextLine();
         System.out.println(messageToUser);
 
-        return inputResult;
-    }
-
-    public static boolean inputBoolean(String messageToUser) {
-        boolean inputResult = input.nextBoolean();
-        input.nextLine();
-        System.out.println(messageToUser);
-
-        return inputResult;
+        return value;
     }
 
     public static float inputFloat(String messageToUser) {
-        float inputResult = input.nextFloat();
+        float value = input.nextFloat();
         input.nextLine();
         System.out.println(messageToUser);
 
-        return inputResult;
+        return value;
+    }
+    public static String line() {
+        return "--------------------------------------------------------------------------------------------------------\n";
     }
 
     public static void closeScanner() {
