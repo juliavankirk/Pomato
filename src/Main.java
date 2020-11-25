@@ -1,10 +1,10 @@
-import Utilities.InputOutput;
-
 public class Main {
 
     public static void main(String[] args) {
 	// write your code here
-        InputOutput.inputString("Input username:");
+        Controller controller = new Controller();
+
+        controller.main();
     }
 }
 /**
