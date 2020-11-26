@@ -6,9 +6,12 @@ import view.*;
 
 import java.util.UUID;
 
+//
+
 public class Controller {
     //Attributes
     Database mDatabase;
+
     VMenuMain mVMenuMain;
     VMenuRegister mVMenuRegister;
     VMenuLogin mVMenuLogin;
@@ -19,6 +22,7 @@ public class Controller {
     //Constructor
     public Controller() {
         mDatabase = new Database();
+
         mVMenuMain = new VMenuMain(null);
         mVMenuRegister = new VMenuRegister(null);
         mVMenuLogin = new VMenuLogin(null);
@@ -67,6 +71,6 @@ public class Controller {
                 doMainMenu();
             }
         }
+        doMainMenu();
     }
-
 }
