@@ -26,10 +26,7 @@ public class VMenuExit extends VMenu {
 
     @Override
     public void renderMenu(boolean line) {
-        if (line = true) {
-            System.out.println("--------------------------------------------");
-        }
-        System.out.println(menuHeader + "\n");
+        System.out.println(InputOutput.line() + menuHeader + "\n");
     }
 
     @Override

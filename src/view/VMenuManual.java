@@ -25,10 +25,8 @@ public class VMenuManual extends VMenu {
 
     @Override
     public void renderMenu(boolean line) {
-        if (line = true) {
-            System.out.println("--------------------------------------------");
-        }
-        System.out.println(menuHeader + "\n");
+
+        System.out.println(InputOutput.line() + menuHeader + "\n");
 
         System.out.println("Lorem ipsum, lorem ipsum, lorem ipsum, lorem ipsum, lorem ipsum, lorem ipsum, \n" +
                 "lorem ipsum, lorem ipsum, lorem ipsum, lorem ipsum, lorem ipsum, lorem ipsum, \n" +

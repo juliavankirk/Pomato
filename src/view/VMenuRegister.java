@@ -16,8 +16,8 @@ public class VMenuRegister extends VMenu {
 
     @Override
     public void renderMenu(boolean line) {
-        System.out.println(menuHeader + "\n");
-        System.out.println(InputOutput.line() + "Creating an account. Please enter the following information:\n ");
+        System.out.println(InputOutput.line() + menuHeader + "\n");
+        System.out.println("Creating an account. Please enter the following information:\n ");
     }
 
     @Override

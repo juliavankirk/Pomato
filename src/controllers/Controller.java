@@ -19,8 +19,11 @@ public class Controller {
     //Constructor
     public Controller() {
         mDatabase = new Database();
-        mVMenuMain = new VMenuMain(null,mVMenuRegister,mVMenuLogin,mVMenuManual,mVMenuExit);
+        mVMenuMain = new VMenuMain(null);
         mVMenuRegister = new VMenuRegister(null);
+        mVMenuLogin = new VMenuLogin(null);
+        mVMenuManual = new VMenuManual(null);
+        mVMenuExit = new VMenuExit(null);
     }
 
     public void main() {
@@ -40,6 +43,7 @@ public class Controller {
         switch (mainMenuSelect) {
             case 1 -> {
                 //Register menu
+                mVMenuRegister.renderMenu(true);
                 User user = mVMenuRegister.getUserData();
 
                 mDatabase.addUser( user );
@@ -48,13 +52,15 @@ public class Controller {
             }
             case 2 -> {
                 mVMenuLogin.renderMenu(true);
-
+                mVMenuLogin.readInput();
             }
             case 3 -> {
-
+                mVMenuManual.renderMenu(true);
+                mVMenuManual.readInput();
             }
             case 4 -> {
-
+                mVMenuExit.renderMenu(true);
+                mVMenuExit.readInput();
             }
             default -> {
                 mVMenuMain.renderError();
