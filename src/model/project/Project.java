@@ -1,7 +1,7 @@
-package Model.Project;
+package model.project;
 
-import Model.Users.User;
-import Utilities.InvalidDataInput;
+import model.users.User;
+import utilities.InvalidDataInput;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;

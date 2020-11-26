@@ -1,4 +1,4 @@
-package Model.Users;
+package model.users;
 import java.util.UUID;
 
 
