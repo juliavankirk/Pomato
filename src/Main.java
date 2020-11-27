@@ -1,11 +1,12 @@
-import controllers.Controller;
+import view.Menu;
 
 public class Main {
 
-    public static void main(String[] args) {
-	// write your code here
-        Controller controller = new Controller();
+//    public Controller controller = new Controller();
+    Menu menu;
 
-        controller.main();
+    public static void main(String[] args) {
+        PomatoApp pomatoApp = new PomatoApp();
+        pomatoApp.runProgram();
     }
 }

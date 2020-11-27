@@ -1,5 +1,7 @@
 package view;
 
+import controllers.Controller;
+
 public class Menu {
 
     VMenu mCurrentMenu;
@@ -8,10 +10,10 @@ public class Menu {
         mCurrentMenu = new VMenuMain(null);
     }
 
-    public void excecute() {
+    public void excecute(Controller controller) {
 
         while (mCurrentMenu != null) {
-            mCurrentMenu = mCurrentMenu.renderMenu(true);
+            mCurrentMenu = mCurrentMenu.executeMenu(controller);
         }
     }
 }

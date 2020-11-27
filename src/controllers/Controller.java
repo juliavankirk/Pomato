@@ -1,17 +1,15 @@
 package controllers;
 
-import model.Database;
+import model.project.Database;
 import model.users.User;
 import view.*;
-
-import java.util.UUID;
 
 //
 
 public class Controller {
     //Attributes
     Database mDatabase;
-    Menu menu;
+//    Menu menu;
 
 //    VMenuMain mVMenuMain;
 //    VMenuRegister mVMenuRegister;
@@ -19,20 +17,13 @@ public class Controller {
 //    VMenuManual mVMenuManual;
 //    VMenuExit mVMenuExit;
 
-
     //Constructor
     public Controller() {
         mDatabase = new Database();
-        menu = new Menu();
-    }
-
-    public void main() {
-//        System.out.println("Welcome to Pomato!\n");
-        menu.excecute();
-//        doMainMenu();
+//        menu = new Menu();
     }
     
-    void addUser(User user) {
+    public void addUser(User user) {
         mDatabase.addUser( user );
     }
 
