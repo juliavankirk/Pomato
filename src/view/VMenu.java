@@ -13,16 +13,15 @@ public abstract class VMenu {
      * Attribute
      */
 
-    Controller viewController;
-    VMenu parent;
+    protected VMenu parent;
 
-    boolean line = false;
-    String menuHeader;
-    String menuLabel;
-    String menuQuestion;
-    String menuChoice;
+    protected boolean line = false;
+    protected String menuHeader;
+    protected String menuLabel;
+    protected String menuQuestion;
+    protected String menuChoice;
 
-    ArrayList<VMenu> children;
+    protected ArrayList<VMenu> children;
 
 
     /**
@@ -38,15 +37,26 @@ public abstract class VMenu {
      *  Methods
      */
 
-    public abstract void renderMenu(boolean line);
+    public abstract VMenu renderMenu(boolean line);
 
-    public abstract int readInput();
+    public VMenu chooseMenu() {
+        VMenu chosenVMenu;
+
+        int inputResult = InputOutput.inputInt(menuQuestion);
+        if (inputResult > 0 && inputResult < children.size() + 1){
+            chosenVMenu = children.get(inputResult - 1);
+        } else {
+            chosenVMenu = parent;
+        }
+
+        return chosenVMenu;
+    }
 
     public void renderExit() {
         System.out.println("Exiting the system. Goodbye!");
     }
 
-    public void readBack() {
+    public void renderBack() {
         InputOutput.inputString("Press any key to go back");
     }
 

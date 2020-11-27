@@ -7,12 +7,11 @@ import java.util.ArrayList;
 
 public class VMenuMain extends VMenu{
 
-    ArrayList<VMenu> children;
+//    ArrayList<VMenu> mChildren;
 
     /**
      * Contructors
      */
-
     public VMenuMain(VMenu parent) {
         super(null);
         menuHeader = "Main Menu";
@@ -28,7 +27,7 @@ public class VMenuMain extends VMenu{
 
 
     @Override
-    public void renderMenu(boolean line) {
+    public VMenu renderMenu(boolean line) {
 
         System.out.println(InputOutput.line() + menuHeader + "\n");
 
@@ -39,33 +38,18 @@ public class VMenuMain extends VMenu{
             System.out.println((children.size() + 1) + ". Go back");
         }
         System.out.println("");
-    }
 
+        return chooseMenu();
+
+//        return parent;
+    }
 
     public void renderExit() {
         System.out.println("Exiting the system. Goodbye!");
     }
 
-
     public void renderError() {
         System.out.println("Invalid selection, restarting...");
     }
 
-    @Override
-    public int readInput() {
-        int min = 1;
-        int max = children.size();
-        VMenu chosenVMenu;
-
-        if (parent != null) {
-            max++;
-        }
-
-        int inputResult = InputOutput.inputInt(menuQuestion);
-        while(inputResult < min || inputResult > max) {
-            inputResult = InputOutput.inputInt("Please enter a valid value(" + min + "-" + (max + 0) + "): ");
-        }
-
-        return inputResult;
-    }
 }

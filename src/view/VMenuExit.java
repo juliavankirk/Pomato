@@ -14,7 +14,7 @@ public class VMenuExit extends VMenu {
         super(parent);
         menuHeader = "Exit";
         menuLabel = "Exit Pomato";
-        menuQuestion = "";
+        menuQuestion = "Are you sure you want to exit?(Yes/No)";
         menuChoice = "E";
         children = null;
     }
@@ -25,18 +25,22 @@ public class VMenuExit extends VMenu {
      */
 
     @Override
-    public void renderMenu(boolean line) {
+    public VMenu renderMenu(boolean line) {
         System.out.println(InputOutput.line() + menuHeader + "\n");
+
+        chooseMenu();
+
+        return parent;
     }
 
-    @Override
-    public int readInput() {
-        String yesNo = InputOutput.inputString("Are you sure you want to exit?(Yes/No)");
-
-        if (yesNo.equalsIgnoreCase("YES")) {
-            System.exit(0);
-        }
-
-        return 0;
-    }
+//    @Override
+//    public int readInput() {
+//        String yesNo = InputOutput.inputString(menuQuestion);
+//
+//        if (yesNo.equalsIgnoreCase("YES")) {
+//            System.exit(0);
+//        }
+//
+//        return 0;
+//    }
 }

@@ -15,14 +15,14 @@ public class VMenuRegister extends VMenu {
     }
 
     @Override
-    public void renderMenu(boolean line) {
+    public VMenu renderMenu(boolean line) {
         System.out.println(InputOutput.line() + menuHeader + "\n");
         System.out.println("Creating an account. Please enter the following information:\n ");
-    }
+        getUserData();
 
-    @Override
-    public int readInput() {
-        return 0;
+        chooseMenu();
+
+        return parent;
     }
 
     public User getUserData() {

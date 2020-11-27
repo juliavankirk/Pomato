@@ -24,7 +24,7 @@ public class VMenuManual extends VMenu {
      */
 
     @Override
-    public void renderMenu(boolean line) {
+    public VMenu renderMenu(boolean line) {
 
         System.out.println(InputOutput.line() + menuHeader + "\n");
 
@@ -37,12 +37,9 @@ public class VMenuManual extends VMenu {
                 "lorem ipsum, lorem ipsum, lorem ipsum, lorem ipsum, lorem ipsum, lorem ipsum, \n" +
                 "lorem ipsum, lorem ipsum, lorem ipsum, lorem ipsum, lorem ipsum, lorem ipsum, \n"
         );
-    }
 
-    @Override
-    public int readInput() {
-        InputOutput.inputString("Press any key to continue");
+        chooseMenu();
 
-        return 0;
+        return parent;
     }
 }
