@@ -1,6 +1,7 @@
 package view;
 
 
+import controllers.Controller;
 import view.submenu.VMenuLoggedIn;
 
 import java.util.ArrayList;
@@ -18,16 +19,21 @@ public class VMenuMain extends VMenu{
         menuLabel = "Go back to Main Menu";
         menuQuestion = "Enter choice";
         menuChoice = "M";
-        actions = new ArrayList<>();
-//        actions.add()
+
         subMenus = new ArrayList<VMenu>();
         subMenus.add(new VMenuLoggedIn(this));
-//        children.add(new MenuRegister(this));
-//        children.add(new VMenuLogin(this));
-//        children.add(new VMenuManual(this));
-//        children.add(new VMenuExit(this));
+        subMenus.add(new VMenuRegister(this));
+        subMenus.add(new VMenuLogin(this));
+        subMenus.add(new VMenuManual(this));
+        subMenus.add(new VMenuExit(this));
         subMenu = true;
     }
+
+    @Override
+    public void menuContent(Controller controller) {
+
+    }
+
 
     public void renderExit() {
         System.out.println("Exiting the system. Goodbye!");

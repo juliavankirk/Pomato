@@ -1,5 +1,6 @@
 package view.submenu;
 
+import controllers.Controller;
 import view.VMenu;
 
 import java.util.ArrayList;
@@ -19,5 +20,10 @@ public class VMenuProject extends VMenu {
         subMenus.add(new VMenuTaskBoard(this));
 
         subMenu = true;
+    }
+
+    @Override
+    public void menuContent(Controller controller) {
+
     }
 }

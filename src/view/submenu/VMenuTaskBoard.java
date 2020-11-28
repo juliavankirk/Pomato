@@ -1,5 +1,6 @@
 package view.submenu;
 
+import controllers.Controller;
 import view.VMenu;
 
 public class VMenuTaskBoard extends VMenu {
@@ -14,5 +15,10 @@ public class VMenuTaskBoard extends VMenu {
         menuQuestion = "Enter choice";
         subMenus = null;
         subMenu = false;
+    }
+
+    @Override
+    public void menuContent(Controller controller) {
+
     }
 }

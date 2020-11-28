@@ -3,7 +3,6 @@ package view;
 
 import controllers.Controller;
 import utilities.InputOutput;
-import view.old.Action;
 
 import java.util.ArrayList;
 
@@ -14,7 +13,7 @@ public abstract class VMenu {
      * Attribute
      */
 
-    protected VMenu mParent;
+    protected VMenu mParentMenu;
 
     protected String menuHeader;
     protected String menuLabel;
@@ -24,15 +23,13 @@ public abstract class VMenu {
     protected ArrayList<VMenu> subMenus;
     protected boolean subMenu;
 
-    protected ArrayList<Action> actions;
-
 
     /**
      * Contructors
      */
 
     public VMenu(VMenu parent) {
-        mParent = parent;
+        mParentMenu = parent;
     }
 
 
@@ -48,30 +45,25 @@ public abstract class VMenu {
      *
      */
 
-    public VMenu chooseMenu(VMenu mParent) {
-        VMenu chosenVMenu;
-
-        int inputResult = InputOutput.inputInt(menuQuestion);
-        if (inputResult > 0 && inputResult < subMenus.size() + 1){
-            chosenVMenu = subMenus.get(inputResult - 1);
-        } else {
-            chosenVMenu = mParent;
-        }
-
-        return chosenVMenu;
-    }
-
+    // 1. This handles executing a menu
     public VMenu executeMenu(Controller controller) {
 
+        // 2. Every Menu has a header.
         System.out.println(InputOutput.line() + menuHeader + "\n");
 
+        // 3. This prints Sub Menu choices. But only if the menu has Sub Menu's
         if (subMenu == true) {
             for (int i = 0; i < subMenus.size(); i++) {
                 System.out.println((i + 1) + ". " + subMenus.get(i).menuLabel);
             }
         }
 
-        if (mParent != null) {
+        // 4. This handles any extra choices in the menu. Until we want to go back.
+        menuContent(controller);
+
+        // 5. This method only runs if we are in a Sub Menu. Main Menu can't have "Go back".
+        if (mParentMenu != null) {
+
             if (subMenu == true) {
                 System.out.println((subMenus.size() + 1) + ". Go back");
             } else {
@@ -80,19 +72,25 @@ public abstract class VMenu {
         }
         System.out.println("");
 
-        return chooseMenu(mParent);
+        // 6. We go to the last method that handles asking a question to the user.
+        return chooseMenu(mParentMenu);
     }
 
-    //    public Action chooseAction(Action action) {
-//        VAction chosenVAction;
-//
-//        int inputResult = InputOutput.inputInt(menuQuestion);
-//        if (inputResult > 0 && inputResult < children.size() + 1){
-//            chosenVMenu = children.get(inputResult - 1);
-//        } else {
-//            chosenVMenu = mParent;
-//        }
-//
-//        return chosenVAction;
-//    }
+    // 4. A Menu can choose it's own content.
+    public abstract void menuContent(Controller controller);
+
+    // 6. A menu at last contains a question. Where do you want to go?
+    public VMenu chooseMenu(VMenu mParent) {
+        VMenu chosenVMenu;
+
+
+        int inputResult = InputOutput.inputInt(menuQuestion);
+        if (subMenu == true && inputResult > 0 && inputResult < subMenus.size() + 1) {
+            chosenVMenu = subMenus.get(inputResult - 1);
+        } else {
+            chosenVMenu = mParent;
+        }
+
+        return chosenVMenu;
+    }
 }

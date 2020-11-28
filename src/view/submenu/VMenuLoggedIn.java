@@ -1,5 +1,6 @@
 package view.submenu;
 
+import controllers.Controller;
 import view.*;
 
 import java.util.ArrayList;
@@ -18,7 +19,13 @@ public class VMenuLoggedIn extends VMenu {
         menuQuestion = "Enter choice";
         subMenus = new ArrayList<VMenu>();
         subMenus.add(new VMenuProject(this));
+        subMenus.add(new VMenuManual(this));
 
         subMenu = true;
+    }
+
+    @Override
+    public void menuContent(Controller controller) {
+
     }
 }
