@@ -25,6 +25,7 @@ public class Controller {
     public void executeViews(Controller controller) {
 
         // This is the loop that keeps us within the different menu's
+        // Since we are always in a menu this will always run.
         while (mCurrentMenu != null) {
             mCurrentMenu = mCurrentMenu.executeMenu(controller);
         }

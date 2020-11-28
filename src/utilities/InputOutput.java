@@ -1,6 +1,5 @@
 package utilities;
 
-import java.io.InputStream;
 import java.util.Scanner;
 
 public class InputOutput {

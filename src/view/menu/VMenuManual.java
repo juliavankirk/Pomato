@@ -7,9 +7,8 @@ public class VMenuManual extends VMenu {
 
 
     /**
-     * Contructors
+     * Constructors
      */
-
     public VMenuManual(VMenu parent) {
         super(parent);
         menuHeader = "Manual";
@@ -17,14 +16,13 @@ public class VMenuManual extends VMenu {
         menuQuestion = "Enter choice";
         menuChoice = "X";
         subMenus = null;
-        subMenu = false;
+//        subMenu = false;
     }
 
 
     /**
      * Methods
      */
-
     @Override
     public void menuContent(Controller controller) {
 
@@ -38,6 +36,6 @@ public class VMenuManual extends VMenu {
                 "lorem ipsum, lorem ipsum, lorem ipsum, lorem ipsum, lorem ipsum, lorem ipsum, \n"
         );
 
-        System.out.println("");
+        System.out.println(" ");
     }
 }

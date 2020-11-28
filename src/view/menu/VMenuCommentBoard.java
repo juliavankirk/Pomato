@@ -15,7 +15,7 @@ public class VMenuCommentBoard extends VMenu {
         menuLabel = "View Comments Board";
         menuQuestion = "Enter choice";
         subMenus = null;
-        subMenu = false;
+//        subMenu = false;
     }
 
     @Override

@@ -8,7 +8,7 @@ public class VMenuExit extends VMenu {
 
 
     /**
-     * Contructors
+     * Constructors
      */
     public VMenuExit(VMenu parent) {
         super(parent);
@@ -17,7 +17,7 @@ public class VMenuExit extends VMenu {
         menuQuestion = "Enter choice";
         menuChoice = "E";
         subMenus = null;
-        subMenu = false;
+//        subMenu = false;
     }
 
 
@@ -34,6 +34,6 @@ public class VMenuExit extends VMenu {
             System.exit(0);
         }
 
-        System.out.println("");
+        System.out.println(" ");
     }
 }

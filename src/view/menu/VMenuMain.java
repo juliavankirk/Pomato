@@ -8,10 +8,9 @@ import java.util.ArrayList;
 
 public class VMenuMain extends VMenu {
 
-//    ArrayList<VMenu> mChildren;
 
     /**
-     * Contructors
+     * Constructors
      */
     public VMenuMain(VMenu parent) {
         super(null);
@@ -19,28 +18,30 @@ public class VMenuMain extends VMenu {
         menuLabel = "Go back to Main Menu";
         menuQuestion = "Enter choice";
         menuChoice = "M";
-
-        subMenus = new ArrayList<VMenu>();
-//        subMenus.add(new VMenuLoggedIn(this));
+        subMenus = new ArrayList<>();
         subMenus.add(new VMenuRegister(this));
         subMenus.add(new VMenuLogin(this));
         subMenus.add(new VMenuManual(this));
         subMenus.add(new VMenuExit(this));
-        subMenu = true;
+//        subMenu = true;
     }
 
+
+    /**
+     * Methods
+     */
     @Override
     public void menuContent(Controller controller) {
 
     }
 
 
-    public void renderExit() {
-        System.out.println("Exiting the system. Goodbye!");
-    }
-
-    public void renderError() {
-        System.out.println("Invalid selection, restarting...");
-    }
+//    public void renderExit() {
+//        System.out.println("Exiting the system. Goodbye!");
+//    }
+//
+//    public void renderError() {
+//        System.out.println("Invalid selection, restarting...");
+//    }
 
 }

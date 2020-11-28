@@ -8,18 +8,17 @@ import java.util.ArrayList;
 public class VMenuProject extends VMenu {
 
     /**
-     * Contructors
+     * Constructors
      */
     public VMenuProject(VMenu parent) {
         super(parent);
         menuHeader = "Project Page";
         menuLabel = "View Project";
         menuQuestion = "Enter choice";
-        subMenus = new ArrayList<VMenu>();
+        subMenus = new ArrayList<>();
         subMenus.add(new VMenuCommentBoard(this));
         subMenus.add(new VMenuTaskBoard(this));
-
-        subMenu = true;
+//        subMenu = true;
     }
 
     @Override

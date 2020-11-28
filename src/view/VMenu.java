@@ -21,7 +21,7 @@ public abstract class VMenu {
     protected String menuChoice;
 
     protected ArrayList<VMenu> subMenus;
-    protected boolean subMenu;
+//    protected boolean subMenu;
 
 
     /**
@@ -51,11 +51,11 @@ public abstract class VMenu {
         // 2. Every Menu has a header.
         System.out.println(InputOutput.line() + menuHeader + "\n");
 
-        // 3. This handles any extra choices in the menu. Until we want to go back.
+        // 3. This handles any extra choices in the menu.
         menuContent(controller);
 
         // 4. This prints Sub Menu choices. But only if the menu has Sub Menu's
-        if (subMenu == true) {
+        if (subMenus != null) {
             for (int i = 0; i < subMenus.size(); i++) {
                 System.out.println((i + 1) + ". " + subMenus.get(i).menuLabel);
             }
@@ -64,13 +64,13 @@ public abstract class VMenu {
         // 5. This method only runs if we are in a Sub Menu. Main Menu can't have "Go back".
         if (mParentMenu != null) {
 
-            if (subMenu == true) {
+            if (subMenus != null) {
                 System.out.println((subMenus.size() + 1) + ". Go back");
             } else {
                 System.out.println("1. Go back");
             }
         }
-        System.out.println("");
+        System.out.println(" ");
 
         // 6. We go to the last method that handles asking a question to the user.
         return chooseMenu(mParentMenu);
@@ -85,7 +85,7 @@ public abstract class VMenu {
 
 
         int inputResult = InputOutput.inputInt(menuQuestion);
-        if (subMenu == true && inputResult > 0 && inputResult < subMenus.size() + 1) {
+        if (subMenus != null && inputResult > 0 && inputResult < subMenus.size() + 1) {
             chosenVMenu = subMenus.get(inputResult - 1);
         } else {
             chosenVMenu = mParent;

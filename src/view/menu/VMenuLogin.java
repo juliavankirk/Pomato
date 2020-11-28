@@ -9,8 +9,6 @@ import java.util.ArrayList;
 public class VMenuLogin extends VMenu {
 
 
-//    ArrayList<VMenu> children;
-
     /**
      * Constructors
      */
@@ -20,11 +18,10 @@ public class VMenuLogin extends VMenu {
         menuLabel = "Log-In";
         menuQuestion = "Enter choice";
         menuChoice = "L";
-        subMenus = new ArrayList<VMenu>();
+        subMenus = new ArrayList<>();
         subMenus.add(new VMenuLoggedIn(this));
 //        subMenus.add(new VMenuCommentBoard(this));
-
-        subMenu = true;
+//        subMenu = true;
     }
 
 
@@ -38,7 +35,8 @@ public class VMenuLogin extends VMenu {
         String password = InputOutput.inputString("Enter Password");
 
         // TODO Check if user exists
+        System.out.println(userName + " " + password);
 
-        System.out.println("");
+        System.out.println(" ");
     }
 }

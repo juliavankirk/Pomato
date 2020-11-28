@@ -10,21 +10,24 @@ public class VMenuLoggedIn extends VMenu {
 
 
     /**
-     * Contructors
+     * Constructors
      */
     public VMenuLoggedIn(VMenu parent) {
         super(parent.getParentMenu());
         menuHeader = "Your Personal Menu";
         menuLabel = "Continue";
         menuQuestion = "Enter choice";
-        subMenus = new ArrayList<VMenu>();
+        subMenus = new ArrayList<>();
         subMenus.add(new VMenuProject(this));
         subMenus.add(new VMenuMessage(this));
 //        subMenus.add(new VMenuManual(this));
-
-        subMenu = true;
+//        subMenu = true;
     }
 
+
+    /**
+     * Methods
+     */
     @Override
     public void menuContent(Controller controller) {
 

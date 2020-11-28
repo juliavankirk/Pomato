@@ -3,13 +3,11 @@ package view.menu;
 import controllers.Controller;
 import view.VMenu;
 
-import java.util.ArrayList;
-
 public class VMenuMessage extends VMenu {
 
 
     /**
-     * Contructors
+     * Constructors
      */
     public VMenuMessage(VMenu parent) {
         super(parent);
@@ -17,8 +15,7 @@ public class VMenuMessage extends VMenu {
         menuLabel = "View/Send Messages";
         menuQuestion = "Enter choice";
         subMenus = null;
-
-        subMenu = false;
+//        subMenu = false;
     }
 
     @Override

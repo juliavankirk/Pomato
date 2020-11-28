@@ -6,7 +6,7 @@ import view.VMenu;
 public class VMenuTaskBoard extends VMenu {
 
     /**
-     * Contructors
+     * Constructors
      */
     public VMenuTaskBoard(VMenu parent) {
         super(parent);
@@ -14,7 +14,7 @@ public class VMenuTaskBoard extends VMenu {
         menuLabel = "View Task Board";
         menuQuestion = "Enter choice";
         subMenus = null;
-        subMenu = false;
+//        subMenu = false;
     }
 
     @Override
