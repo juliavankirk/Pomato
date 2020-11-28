@@ -15,7 +15,7 @@ public class User {
 
     //Constructor
     public User( String firstName, String lastName, String password, String companyName,
-                 String jobTitle, Double hourlyWage) {
+                Double hourlyWage, String jobTitle) {
         mId = UUID.randomUUID();
         mFirstName = firstName;
         mLastName = lastName;

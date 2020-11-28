@@ -39,10 +39,10 @@ public class VMenuRegister extends VMenu {
         jobTitle = InputOutput.inputString("\nPosition: ");
         hourlyWage = InputOutput.inputDouble("\nHourly wage: ");
         password = InputOutput.inputString("\nPassword: ");
-        User user = new User( firstName, lastName, password, companyName, jobTitle, hourlyWage );
+//        User user = new User( firstName, lastName, password, companyName, jobTitle, hourlyWage );
 
         // 2. Send the gathered data to be handled by the controller.
-        controller.addUser(user);
+        controller.addUser( firstName, lastName, password, companyName, hourlyWage, jobTitle );
 
         System.out.println("");
     }

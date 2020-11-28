@@ -1,5 +1,5 @@
 import controllers.Controller;
-import view.MenuController;
+//import view.MenuController;
 
 /**
  * My reason for this class is that I couldn't
@@ -8,11 +8,12 @@ import view.MenuController;
 public class PomatoApp {
 
     Controller controller;
-    MenuController menuController;
+//    MenuController menuController;
 
     public void runProgram() {
         controller = new Controller();
-        menuController = new MenuController();
-        menuController.excecute(controller);
+        controller.executeViews(controller);
+//        menuController = new MenuController();
+//        menuController.excecuteMenu(controller);
     }
 }
