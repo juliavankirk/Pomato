@@ -18,7 +18,7 @@ public class Database {
 
     public Collection<User> getUserList() { return mUserList.values(); }
     public void addUser(User user) { mUserList.put(user.getId(), user); }
-    public void removerUser(UUID id) { mUserList.remove(id); }
+    public void removeUser(UUID id) { mUserList.remove(id); }
     public User getUserById (UUID id) { return mUserList.get(id); }
 
     public Collection<Project> getProjectList() { return mProjectList.values(); }

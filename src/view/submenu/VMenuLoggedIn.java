@@ -20,6 +20,7 @@ public class VMenuLoggedIn extends VMenu {
         subMenus = new ArrayList<VMenu>();
         subMenus.add(new VMenuProject(this));
         subMenus.add(new VMenuManual(this));
+        subMenus.add(new VMenuAccount(this));
 
         subMenu = true;
     }

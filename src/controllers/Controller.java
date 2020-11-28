@@ -4,6 +4,8 @@ import model.project.Database;
 import model.users.User;
 import view.*;
 
+import java.util.UUID;
+
 //
 
 public class Controller {
@@ -25,8 +27,12 @@ public class Controller {
     
     public void addUser(User user) {
         mDatabase.addUser( user );
-    }
 
+    }
+    public void removeUser(String id){
+        mDatabase.removeUser(UUID.fromString(id));
+
+    }
 //    void doMainMenu() {
 //        mVMenuMain.renderMenu(true);
 //
