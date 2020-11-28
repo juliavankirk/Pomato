@@ -1,7 +1,7 @@
-package view;
+package view.menu;
 
 import controllers.Controller;
-import utilities.InputOutput;
+import view.VMenu;
 
 public class VMenuManual extends VMenu {
 

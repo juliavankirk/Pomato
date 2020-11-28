@@ -1,19 +1,17 @@
-package view.submenu;
+package view.menu;
 
 import controllers.Controller;
 import view.VMenu;
 
-public class VMenuCommentBoard extends VMenu {
-
+public class VMenuTaskBoard extends VMenu {
 
     /**
      * Contructors
      */
-
-    public VMenuCommentBoard(VMenu parent) {
+    public VMenuTaskBoard(VMenu parent) {
         super(parent);
-        menuHeader = "Comment Board";
-        menuLabel = "View Comments Board";
+        menuHeader = "Task Board";
+        menuLabel = "View Task Board";
         menuQuestion = "Enter choice";
         subMenus = null;
         subMenu = false;

@@ -53,6 +53,10 @@ public class InputOutput {
         return "--------------------------------------------------------------------------------------------------------\n";
     }
 
+    public static String shortLine() {
+        return "----------------------------------------------------\n";
+    }
+
     public static void closeScanner() {
         input.close();
     }

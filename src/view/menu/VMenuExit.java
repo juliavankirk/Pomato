@@ -1,7 +1,8 @@
-package view;
+package view.menu;
 
 import controllers.Controller;
 import utilities.InputOutput;
+import view.VMenu;
 
 public class VMenuExit extends VMenu {
 
@@ -9,7 +10,6 @@ public class VMenuExit extends VMenu {
     /**
      * Contructors
      */
-
     public VMenuExit(VMenu parent) {
         super(parent);
         menuHeader = "Exit";
@@ -24,7 +24,6 @@ public class VMenuExit extends VMenu {
     /**
      * Methods
      */
-
     @Override
     public void menuContent(Controller controller) {
 //        System.out.println(InputOutput.line() + menuHeader + "\n");

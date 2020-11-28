@@ -38,10 +38,10 @@ public abstract class VMenu {
      *  executeMenu handles everything that happens when we want to launch a menu
      *  It prints and handles Input.
      *  It then is supposed to send relevant data into the controller to be handled.
-     *  Then, in all menu's, we are asked a question.
+     *  Then, in all menu's, we are asked a question. Example "Enter "menu" choice:"...
      *
      *  1. Execute menu (Print, Input, Send data to be handled by controller)
-     *  2. Choose sub-menu
+     *  2. Choose sub-menu or "Go back".
      *
      */
 
@@ -51,15 +51,15 @@ public abstract class VMenu {
         // 2. Every Menu has a header.
         System.out.println(InputOutput.line() + menuHeader + "\n");
 
-        // 3. This prints Sub Menu choices. But only if the menu has Sub Menu's
+        // 3. This handles any extra choices in the menu. Until we want to go back.
+        menuContent(controller);
+
+        // 4. This prints Sub Menu choices. But only if the menu has Sub Menu's
         if (subMenu == true) {
             for (int i = 0; i < subMenus.size(); i++) {
                 System.out.println((i + 1) + ". " + subMenus.get(i).menuLabel);
             }
         }
-
-        // 4. This handles any extra choices in the menu. Until we want to go back.
-        menuContent(controller);
 
         // 5. This method only runs if we are in a Sub Menu. Main Menu can't have "Go back".
         if (mParentMenu != null) {
@@ -76,7 +76,7 @@ public abstract class VMenu {
         return chooseMenu(mParentMenu);
     }
 
-    // 4. A Menu can choose it's own content.
+    // 3. A Menu can choose it's own content.
     public abstract void menuContent(Controller controller);
 
     // 6. A menu at last contains a question. Where do you want to go?
@@ -92,5 +92,9 @@ public abstract class VMenu {
         }
 
         return chosenVMenu;
+    }
+
+    public VMenu getParentMenu() {
+        return mParentMenu;
     }
 }

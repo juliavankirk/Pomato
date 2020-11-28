@@ -1,4 +1,4 @@
-package view.submenu;
+package view.menu;
 
 import controllers.Controller;
 import view.*;
@@ -8,18 +8,19 @@ import java.util.ArrayList;
 // When the user is logged in
 public class VMenuLoggedIn extends VMenu {
 
-/**
- * Contructors
- */
 
+    /**
+     * Contructors
+     */
     public VMenuLoggedIn(VMenu parent) {
-        super(parent);
+        super(parent.getParentMenu());
         menuHeader = "Your Personal Menu";
-        menuLabel = "Logged-In Menu";
+        menuLabel = "Continue";
         menuQuestion = "Enter choice";
         subMenus = new ArrayList<VMenu>();
         subMenus.add(new VMenuProject(this));
-        subMenus.add(new VMenuManual(this));
+        subMenus.add(new VMenuMessage(this));
+//        subMenus.add(new VMenuManual(this));
 
         subMenu = true;
     }

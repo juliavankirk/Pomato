@@ -1,4 +1,4 @@
-package view.submenu;
+package view.menu;
 
 import controllers.Controller;
 import view.VMenu;

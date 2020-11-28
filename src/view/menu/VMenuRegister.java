@@ -1,8 +1,9 @@
-package view;
+package view.menu;
 
 import controllers.Controller;
 import model.users.User;
 import utilities.InputOutput;
+import view.VMenu;
 
 public class VMenuRegister extends VMenu {
 

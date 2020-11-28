@@ -1,12 +1,12 @@
-package view;
+package view.menu;
 
 
 import controllers.Controller;
-import view.submenu.VMenuLoggedIn;
+import view.VMenu;
 
 import java.util.ArrayList;
 
-public class VMenuMain extends VMenu{
+public class VMenuMain extends VMenu {
 
 //    ArrayList<VMenu> mChildren;
 
@@ -21,7 +21,7 @@ public class VMenuMain extends VMenu{
         menuChoice = "M";
 
         subMenus = new ArrayList<VMenu>();
-        subMenus.add(new VMenuLoggedIn(this));
+//        subMenus.add(new VMenuLoggedIn(this));
         subMenus.add(new VMenuRegister(this));
         subMenus.add(new VMenuLogin(this));
         subMenus.add(new VMenuManual(this));
