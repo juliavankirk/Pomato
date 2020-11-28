@@ -2,11 +2,15 @@ package view;
 
 import controllers.Controller;
 
-public class Menu {
+/**
+ * Menu Controller? I don't know if I like to have the loop like this here but it keeps everything very simple.
+ */
+
+public class MenuController {
 
     VMenu mCurrentMenu;
 
-    public Menu() {
+    public MenuController() {
         mCurrentMenu = new VMenuMain(null);
     }
 

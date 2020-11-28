@@ -1,14 +1,18 @@
 import controllers.Controller;
-import view.Menu;
+import view.MenuController;
+
+/**
+ * My reason for this class is that I couldn't
+ */
 
 public class PomatoApp {
 
     Controller controller;
-    Menu menu;
+    MenuController menuController;
 
     public void runProgram() {
         controller = new Controller();
-        menu = new Menu();
-        menu.excecute(controller);
+        menuController = new MenuController();
+        menuController.excecute(controller);
     }
 }
