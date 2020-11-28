@@ -11,10 +11,10 @@ public class VMenuCommentBoard extends VMenu {
      */
     public VMenuCommentBoard(VMenu parent) {
         super(parent);
-        menuHeader = "Comment Board";
-        menuLabel = "View Comments Board";
-        menuQuestion = "Enter choice";
-        subMenus = null;
+        mMenuHeader = "Comment Board";
+        mMenuLabel = "View Comments Board";
+        mMenuQuestion = "Enter choice";
+        mSubMenus = null;
 //        subMenu = false;
     }
 

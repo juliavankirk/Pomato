@@ -12,11 +12,11 @@ public class VMenuExit extends VMenu {
      */
     public VMenuExit(VMenu parent) {
         super(parent);
-        menuHeader = "Exit";
-        menuLabel = "Exit Pomato";
-        menuQuestion = "Enter choice";
-        menuChoice = "E";
-        subMenus = null;
+        mMenuHeader = "Exit";
+        mMenuLabel = "Exit Pomato";
+        mMenuQuestion = "Enter choice";
+        mMenuChoice = "E";
+        mSubMenus = null;
 //        subMenu = false;
     }
 

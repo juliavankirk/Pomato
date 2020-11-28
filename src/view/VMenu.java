@@ -15,12 +15,12 @@ public abstract class VMenu {
 
     protected VMenu mParentMenu;
 
-    protected String menuHeader;
-    protected String menuLabel;
-    protected String menuQuestion;
-    protected String menuChoice;
+    protected String mMenuHeader;
+    protected String mMenuLabel;
+    protected String mMenuQuestion;
+    protected String mMenuChoice;
 
-    protected ArrayList<VMenu> subMenus;
+    protected ArrayList<VMenu> mSubMenus;
 //    protected boolean subMenu;
 
 
@@ -49,23 +49,23 @@ public abstract class VMenu {
     public VMenu executeMenu(Controller controller) {
 
         // 2. Every Menu has a header.
-        System.out.println(InputOutput.line() + menuHeader + "\n");
+        System.out.println(InputOutput.line() + mMenuHeader + "\n");
 
         // 3. This handles any extra choices in the menu.
         menuContent(controller);
 
         // 4. This prints Sub Menu choices. But only if the menu has Sub Menu's
-        if (subMenus != null) {
-            for (int i = 0; i < subMenus.size(); i++) {
-                System.out.println((i + 1) + ". " + subMenus.get(i).menuLabel);
+        if (mSubMenus != null) {
+            for (int i = 0; i < mSubMenus.size(); i++) {
+                System.out.println((i + 1) + ". " + mSubMenus.get(i).mMenuLabel);
             }
         }
 
         // 5. This method only runs if we are in a Sub Menu. Main Menu can't have "Go back".
         if (mParentMenu != null) {
 
-            if (subMenus != null) {
-                System.out.println((subMenus.size() + 1) + ". Go back");
+            if (mSubMenus != null) {
+                System.out.println((mSubMenus.size() + 1) + ". Go back");
             } else {
                 System.out.println("1. Go back");
             }
@@ -84,9 +84,9 @@ public abstract class VMenu {
         VMenu chosenVMenu;
 
 
-        int inputResult = InputOutput.inputInt(menuQuestion);
-        if (subMenus != null && inputResult > 0 && inputResult < subMenus.size() + 1) {
-            chosenVMenu = subMenus.get(inputResult - 1);
+        int inputResult = InputOutput.inputInt(mMenuQuestion);
+        if (mSubMenus != null && inputResult > 0 && inputResult < mSubMenus.size() + 1) {
+            chosenVMenu = mSubMenus.get(inputResult - 1);
         } else {
             chosenVMenu = mParent;
         }

@@ -14,12 +14,12 @@ public class VMenuLoggedIn extends VMenu {
      */
     public VMenuLoggedIn(VMenu parent) {
         super(parent.getParentMenu());
-        menuHeader = "Your Personal Menu";
-        menuLabel = "Continue";
-        menuQuestion = "Enter choice";
-        subMenus = new ArrayList<>();
-        subMenus.add(new VMenuProject(this));
-        subMenus.add(new VMenuMessage(this));
+        mMenuHeader = "Your Personal Menu";
+        mMenuLabel = "Continue";
+        mMenuQuestion = "Enter choice";
+        mSubMenus = new ArrayList<>();
+        mSubMenus.add(new VMenuProject(this));
+        mSubMenus.add(new VMenuMessage(this));
 //        subMenus.add(new VMenuManual(this));
 //        subMenu = true;
     }

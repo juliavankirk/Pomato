@@ -14,15 +14,15 @@ public class VMenuMain extends VMenu {
      */
     public VMenuMain(VMenu parent) {
         super(null);
-        menuHeader = "Main Menu";
-        menuLabel = "Go back to Main Menu";
-        menuQuestion = "Enter choice";
-        menuChoice = "M";
-        subMenus = new ArrayList<>();
-        subMenus.add(new VMenuRegister(this));
-        subMenus.add(new VMenuLogin(this));
-        subMenus.add(new VMenuManual(this));
-        subMenus.add(new VMenuExit(this));
+        mMenuHeader = "Main Menu";
+        mMenuLabel = "Go back to Main Menu";
+        mMenuQuestion = "Enter choice";
+        mMenuChoice = "M";
+        mSubMenus = new ArrayList<>();
+        mSubMenus.add(new VMenuRegister(this));
+        mSubMenus.add(new VMenuLogin(this));
+        mSubMenus.add(new VMenuManual(this));
+        mSubMenus.add(new VMenuExit(this));
 //        subMenu = true;
     }
 

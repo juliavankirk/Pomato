@@ -11,11 +11,11 @@ public class VMenuManual extends VMenu {
      */
     public VMenuManual(VMenu parent) {
         super(parent);
-        menuHeader = "Manual";
-        menuLabel = "View manual";
-        menuQuestion = "Enter choice";
-        menuChoice = "X";
-        subMenus = null;
+        mMenuHeader = "Manual";
+        mMenuLabel = "View manual";
+        mMenuQuestion = "Enter choice";
+        mMenuChoice = "X";
+        mSubMenus = null;
 //        subMenu = false;
     }
 

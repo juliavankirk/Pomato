@@ -12,12 +12,12 @@ public class VMenuProject extends VMenu {
      */
     public VMenuProject(VMenu parent) {
         super(parent);
-        menuHeader = "Project Page";
-        menuLabel = "View Project";
-        menuQuestion = "Enter choice";
-        subMenus = new ArrayList<>();
-        subMenus.add(new VMenuCommentBoard(this));
-        subMenus.add(new VMenuTaskBoard(this));
+        mMenuHeader = "Project Page";
+        mMenuLabel = "View Project";
+        mMenuQuestion = "Enter choice";
+        mSubMenus = new ArrayList<>();
+        mSubMenus.add(new VMenuCommentBoard(this));
+        mSubMenus.add(new VMenuTaskBoard(this));
 //        subMenu = true;
     }
 

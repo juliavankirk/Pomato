@@ -11,10 +11,10 @@ public class VMenuMessage extends VMenu {
      */
     public VMenuMessage(VMenu parent) {
         super(parent);
-        menuHeader = "Message Page";
-        menuLabel = "View/Send Messages";
-        menuQuestion = "Enter choice";
-        subMenus = null;
+        mMenuHeader = "Message Page";
+        mMenuLabel = "View/Send Messages";
+        mMenuQuestion = "Enter choice";
+        mSubMenus = null;
 //        subMenu = false;
     }
 
