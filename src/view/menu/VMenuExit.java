@@ -1,30 +1,29 @@
-package view;
+package view.menu;
 
 import controllers.Controller;
 import utilities.InputOutput;
+import view.VMenu;
 
 public class VMenuExit extends VMenu {
 
 
     /**
-     * Contructors
+     * Constructors
      */
-
     public VMenuExit(VMenu parent) {
         super(parent);
-        menuHeader = "Exit";
-        menuLabel = "Exit Pomato";
-        menuQuestion = "Enter choice";
-        menuChoice = "E";
-        subMenus = null;
-        subMenu = false;
+        mMenuHeader = "Exit";
+        mMenuLabel = "Exit Pomato";
+        mMenuQuestion = "Enter choice";
+        mMenuChoice = "E";
+        mSubMenus = null;
+//        subMenu = false;
     }
 
 
     /**
      * Methods
      */
-
     @Override
     public void menuContent(Controller controller) {
 //        System.out.println(InputOutput.line() + menuHeader + "\n");
@@ -35,6 +34,6 @@ public class VMenuExit extends VMenu {
             System.exit(0);
         }
 
-        System.out.println("");
+        System.out.println(" ");
     }
 }

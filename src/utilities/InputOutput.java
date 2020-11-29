@@ -1,6 +1,5 @@
 package utilities;
 
-import java.io.InputStream;
 import java.util.Scanner;
 
 public class InputOutput {
@@ -51,6 +50,10 @@ public class InputOutput {
 
     public static String line() {
         return "--------------------------------------------------------------------------------------------------------\n";
+    }
+
+    public static String shortLine() {
+        return "----------------------------------------------------\n";
     }
 
     public static void closeScanner() {

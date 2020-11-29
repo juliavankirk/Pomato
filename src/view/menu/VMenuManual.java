@@ -1,30 +1,28 @@
-package view;
+package view.menu;
 
 import controllers.Controller;
-import utilities.InputOutput;
+import view.VMenu;
 
 public class VMenuManual extends VMenu {
 
 
     /**
-     * Contructors
+     * Constructors
      */
-
     public VMenuManual(VMenu parent) {
         super(parent);
-        menuHeader = "Manual";
-        menuLabel = "View manual";
-        menuQuestion = "Enter choice";
-        menuChoice = "X";
-        subMenus = null;
-        subMenu = false;
+        mMenuHeader = "Manual";
+        mMenuLabel = "View manual";
+        mMenuQuestion = "Enter choice";
+        mMenuChoice = "X";
+        mSubMenus = null;
+//        subMenu = false;
     }
 
 
     /**
      * Methods
      */
-
     @Override
     public void menuContent(Controller controller) {
 
@@ -38,6 +36,6 @@ public class VMenuManual extends VMenu {
                 "lorem ipsum, lorem ipsum, lorem ipsum, lorem ipsum, lorem ipsum, lorem ipsum, \n"
         );
 
-        System.out.println("");
+        System.out.println(" ");
     }
 }

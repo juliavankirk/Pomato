@@ -1,4 +1,4 @@
-package view.submenu;
+package view.menu;
 
 import controllers.Controller;
 import view.VMenu;
@@ -6,15 +6,15 @@ import view.VMenu;
 public class VMenuTaskBoard extends VMenu {
 
     /**
-     * Contructors
+     * Constructors
      */
     public VMenuTaskBoard(VMenu parent) {
         super(parent);
-        menuHeader = "Task Board";
-        menuLabel = "View Task Board";
-        menuQuestion = "Enter choice";
-        subMenus = null;
-        subMenu = false;
+        mMenuHeader = "Task Board";
+        mMenuLabel = "View Task Board";
+        mMenuQuestion = "Enter choice";
+        mSubMenus = null;
+//        subMenu = false;
     }
 
     @Override

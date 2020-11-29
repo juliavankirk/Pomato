@@ -1,4 +1,4 @@
-package view.submenu;
+package view.menu;
 
 import controllers.Controller;
 import view.VMenu;
@@ -7,20 +7,19 @@ public class VMenuCommentBoard extends VMenu {
 
 
     /**
-     * Contructors
+     * Constructors
      */
-
     public VMenuCommentBoard(VMenu parent) {
         super(parent);
-        menuHeader = "Comment Board";
-        menuLabel = "View Comments Board";
-        menuQuestion = "Enter choice";
-        subMenus = null;
-        subMenu = false;
+        mMenuHeader = "Comment Board";
+        mMenuLabel = "View Comments Board";
+        mMenuQuestion = "Enter choice";
+        mSubMenus = null;
+//        subMenu = false;
     }
 
     @Override
     public void menuContent(Controller controller) {
-
+        // TODO personal comment board?
     }
 }
