@@ -5,6 +5,7 @@ import java.util.UUID;
 public class User {
 
     //Attributes
+    private String mUserName;
     private UUID mId;
     private String mFirstName;
     private String mLastName;
@@ -14,8 +15,9 @@ public class User {
     private Double mHourlyWage;
 
     //Constructor
-    public User( String firstName, String lastName, String password, String companyName,
+    public User( String userName, String firstName, String lastName, String password, String companyName,
                 Double hourlyWage, String jobTitle) {
+        mUserName = userName;
         mId = UUID.randomUUID();
         mFirstName = firstName;
         mLastName = lastName;
@@ -26,6 +28,16 @@ public class User {
     }
 
     //Methods
+
+
+    public String getmUserName() {
+        return mUserName;
+    }
+
+    public void setmUserName(String mUserName) {
+        this.mUserName = mUserName;
+    }
+
     public UUID getId() { return mId; }
 
     public String getPassword() {

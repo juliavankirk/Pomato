@@ -52,19 +52,22 @@ public class Controller {
     }
 
 
-    public String logInUser(UUID userName, String password) {
+    public String logInUser(String userName, String password) {
 
-        HashMap<UUID, User> userList = (HashMap<UUID, User>) mDatabase.getUserList();
 
-        if(userList.containsKey(userName)) {
-            String EnteredPassword = userList.get(userName).getPassword();
-            if(EnteredPassword.equalsIgnoreCase(password)) {
-               return "Bravo! You logged in.";
-            } else {
-                return "Password is incorrect";
-            }
-        }
-        return "Username is incorrect";
+//        for (String v : values) {
+//            System.out.println("Value: " + v);
+//        }
+//
+//        if(userList.containsKey(userName)) {
+//            String EnteredPassword = userList.get(userName).getPassword();
+//            if(EnteredPassword.equalsIgnoreCase(password)) {
+//               return "Bravo! You logged in.";
+//            } else {
+//                return "Password is incorrect";
+//            }
+//        }
+//        return "Username is incorrect";
     }
 
 
