@@ -5,7 +5,6 @@ import utilities.InputOutput;
 import view.VMenu;
 
 import java.util.ArrayList;
-import java.util.UUID;
 
 public class VMenuLogin extends VMenu {
 
@@ -31,20 +30,17 @@ public class VMenuLogin extends VMenu {
     @Override
     public void menuContent(Controller controller) {
 
-        String StringUserName = InputOutput.inputString("Enter Username");
-//        UUID UUIDUserName = UUID.fromString(StringUserName);
+        mSubMenus.clear();
+        String userName = InputOutput.inputString("Enter Username");
         String password = InputOutput.inputString("Enter Password");
 
-        String response = controller.logInUser(StringUserName, password);
+        String response = controller.logInUser(userName, password);
         System.out.println(response);
 
-        if (!(response.equals("Bravo! You logged in."))) {
-
+        if (response.equals("Bravo! You logged in.")) {
+            mSubMenus.add(new VMenuLoggedIn(this));
         }
 
-        // if username exists then
-//        if () {
-//            mSubMenus.add(new VMenuLoggedIn(this));
-//        }
     }
+
 }

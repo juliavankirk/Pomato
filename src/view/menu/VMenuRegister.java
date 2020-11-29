@@ -32,6 +32,7 @@ public class VMenuRegister extends VMenu {
         // 1. Print the Menu Content and handle input
         System.out.println("Creating an account. Please enter the following information:\n ");
 
+//        userName = InputOutput.inputString("User Name");
         firstName = InputOutput.inputString("First Name");
         lastName = InputOutput.inputString("\nLast Name");
         companyName = InputOutput.inputString("\nCompany Name");
@@ -41,9 +42,9 @@ public class VMenuRegister extends VMenu {
 //        User user = new User( firstName, lastName, password, companyName, jobTitle, hourlyWage );
 
         // 2. Send the gathered data to be handled by the controller.
-        controller.addUser( firstName, lastName, password, companyName, hourlyWage, jobTitle );
+        controller.addUser(firstName, lastName, password, companyName, hourlyWage, jobTitle );
 
-        System.out.println(" ");
+        System.out.println("");
     }
 
     // TODO Send a request to controller,

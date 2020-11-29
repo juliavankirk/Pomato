@@ -6,8 +6,7 @@ import view.VMenu;
 import view.menu.VMenuMain;
 
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.UUID;
+import java.util.Iterator;
 
 public class Controller {
     //Attributes
@@ -41,33 +40,33 @@ public class Controller {
 
 
     public void addUser(
+//            String userName,
             String firstName,
             String lastName,
             String password,
             String companyName,
             double jobTitle,
             String hourlyWage ) {
-        User user = new User(firstName, lastName, password, companyName, jobTitle, hourlyWage);
+        User user = new User( firstName, lastName, password, companyName, jobTitle, hourlyWage);
         mDatabase.addUser( user );
+        System.out.println("Your user name is: " + user.getId() + "\nYour password is: " + user.getPassword());
     }
 
 
-    public String logInUser(String userName, String password) {
+    public String logInUser(String enteredUserName, String enteredPassword) {
+        Collection<User> userList = mDatabase.getUserList();
 
-
-//        for (String v : values) {
-//            System.out.println("Value: " + v);
-//        }
-//
-//        if(userList.containsKey(userName)) {
-//            String EnteredPassword = userList.get(userName).getPassword();
-//            if(EnteredPassword.equalsIgnoreCase(password)) {
-//               return "Bravo! You logged in.";
-//            } else {
-//                return "Password is incorrect";
-//            }
-//        }
-//        return "Username is incorrect";
+        for (Iterator<User> iterator = userList.iterator(); iterator.hasNext();) {
+            User someOne  = iterator.next();
+            if (someOne.getId().equals(enteredUserName)) {
+                if (someOne.getPassword().equals(enteredPassword)) {
+                    return "Bravo! You logged in.";
+                } else {
+                    return "Password is incorrect";
+                }
+            }
+        }
+        return "Username is incorrect";
     }
 
 
