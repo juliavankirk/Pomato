@@ -20,6 +20,7 @@ public class Database {
     public void removeUser(UUID id) { mUserList.remove(id); }
     public User getUserById (UUID id) { return mUserList.get(id); }
 
+
     public Collection<Project> getProjectList() { return mProjectList.values(); }
     public void addProject (Project project) { mProjectList.put(project.getId(), project); }
     public void removeProject(UUID id) { mProjectList.remove(id); }
