@@ -7,11 +7,11 @@ import java.util.HashMap;
 import java.util.UUID;
 
 public class Database {
-    public HashMap<UUID, User> mUserList;
+    public HashMap<String, User> mUserList;
     public HashMap<UUID, Project> mProjectList;
 
     public Database() {
-        mUserList = new HashMap<UUID, User>();
+        mUserList = new HashMap<String, User>();
         mProjectList = new HashMap<UUID, Project>();
     }
 

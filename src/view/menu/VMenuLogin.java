@@ -19,7 +19,6 @@ public class VMenuLogin extends VMenu {
         mMenuQuestion = "Enter choice";
         mMenuChoice = "L";
         mSubMenus = new ArrayList<>();
-        mSubMenus.add(new VMenuLoggedIn(this));
 //        subMenus.add(new VMenuCommentBoard(this));
 //        subMenu = true;
     }
@@ -31,12 +30,17 @@ public class VMenuLogin extends VMenu {
     @Override
     public void menuContent(Controller controller) {
 
+        mSubMenus.clear();
         String userName = InputOutput.inputString("Enter Username");
         String password = InputOutput.inputString("Enter Password");
 
-        // TODO Check if user exists
-        System.out.println(userName + " " + password);
+        String response = controller.logInUser(userName, password);
+        System.out.println(response);
 
-        System.out.println(" ");
+        if (response.equals("Bravo! You logged in.")) {
+            mSubMenus.add(new VMenuLoggedIn(this));
+        }
+
     }
+
 }
