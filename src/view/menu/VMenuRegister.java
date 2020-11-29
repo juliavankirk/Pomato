@@ -32,12 +32,12 @@ public class VMenuRegister extends VMenu {
         // 1. Print the Menu Content and handle input
         System.out.println("Creating an account. Please enter the following information:\n ");
 
-        firstName = InputOutput.inputString("First Name: ");
-        lastName = InputOutput.inputString("\nLast Name: ");
-        companyName = InputOutput.inputString("\nCompany Name: ");
-        jobTitle = InputOutput.inputString("\nPosition: ");
-        hourlyWage = InputOutput.inputDouble("\nHourly wage: ");
-        password = InputOutput.inputString("\nPassword: ");
+        firstName = InputOutput.inputString("First Name");
+        lastName = InputOutput.inputString("\nLast Name");
+        companyName = InputOutput.inputString("\nCompany Name");
+        jobTitle = InputOutput.inputString("\nPosition");
+        hourlyWage = InputOutput.inputDouble("\nHourly wage");
+        password = InputOutput.inputString("\nPassword");
 //        User user = new User( firstName, lastName, password, companyName, jobTitle, hourlyWage );
 
         // 2. Send the gathered data to be handled by the controller.

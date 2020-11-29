@@ -1,7 +1,6 @@
 package view.menu;
 
 import controllers.Controller;
-import utilities.InputOutput;
 import view.VMenu;
 
 import java.util.ArrayList;
@@ -31,12 +30,16 @@ public class VMenuLogin extends VMenu {
     @Override
     public void menuContent(Controller controller) {
 
-        String userName = InputOutput.inputString("Enter Username");
-        String password = InputOutput.inputString("Enter Password");
+//        String StringUserName = InputOutput.inputString("Enter Username");
+//        UUID UUIDUserName = UUID.fromString(StringUserName);
+//        String password = InputOutput.inputString("Enter Password");
+//
+//        String response = controller.logInUser(UUIDUserName, password);
+//        System.out.println(response);
+//
+//        if (!(response.equals("Bravo! You logged in."))) {
+//
+//        }
 
-        // TODO Check if user exists
-        System.out.println(userName + " " + password);
-
-        System.out.println(" ");
     }
 }

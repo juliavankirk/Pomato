@@ -2,8 +2,12 @@ package controllers;
 
 import model.project.Database;
 import model.users.User;
-import view.*;
+import view.VMenu;
 import view.menu.VMenuMain;
+
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.UUID;
 
 public class Controller {
     //Attributes
@@ -45,6 +49,22 @@ public class Controller {
             String hourlyWage ) {
         User user = new User(firstName, lastName, password, companyName, jobTitle, hourlyWage);
         mDatabase.addUser( user );
+    }
+
+
+    public String logInUser(UUID userName, String password) {
+
+        HashMap<UUID, User> userList = (HashMap<UUID, User>) mDatabase.getUserList();
+
+        if(userList.containsKey(userName)) {
+            String EnteredPassword = userList.get(userName).getPassword();
+            if(EnteredPassword.equalsIgnoreCase(password)) {
+               return "Bravo! You logged in.";
+            } else {
+                return "Password is incorrect";
+            }
+        }
+        return "Username is incorrect";
     }
 
 
