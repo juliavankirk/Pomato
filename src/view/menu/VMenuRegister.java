@@ -15,7 +15,7 @@ public class VMenuRegister extends VMenu {
         super(parent);
         mMenuHeader = "Register Form";
         mMenuLabel = "Register";
-        mMenuQuestion = "Press any key to go back";
+        mMenuQuestion = "Enter Choice";
 //        children = null;
     }
 
