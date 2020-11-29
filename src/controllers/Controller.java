@@ -27,6 +27,10 @@ public class Controller {
         // This is the loop that keeps us within the different menu's
         // Since we are always in a menu this will always run.
         while (mCurrentMenu != null) {
+
+            // The method ".executeMenu" in the class "VMenu" returns the "chosenMenu",
+            // which means that "mCurrentMenu" becomes the "chosenMenu".
+            // So if we choose the "VMenuLogin" then we execute that menu.
             mCurrentMenu = mCurrentMenu.executeMenu(controller);
         }
     }

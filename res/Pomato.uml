@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>Main</OriginalElement>
+  <nodes>
+    <node x="1368.0294117647059" y="430.0">model.users.User</node>
+    <node x="1290.2903921568627" y="590.0">model.project.Database</node>
+    <node x="600.0" y="270.0">view.menu.VMenuMessage</node>
+    <node x="10.5" y="270.0">view.menu.VMenuRegister</node>
+    <node x="260.63514705882307" y="590.0">view.menu.VMenuMain</node>
+    <node x="544.5943137254901" y="80.0">view.VMenu</node>
+    <node x="182.5" y="270.0">view.menu.VMenuExit</node>
+    <node x="539.0" y="430.0">view.menu.VMenuLoggedIn</node>
+    <node x="779.5" y="270.0">view.menu.VMenuCommentBoard</node>
+    <node x="1249.8587745098034" y="510.0">model.project.Project</node>
+    <node x="715.0" y="350.0">view.menu.VMenuProject</node>
+    <node x="983.5" y="270.0">view.menu.VMenuTaskBoard</node>
+    <node x="55.76098039215685" y="0.0">utilities.InputOutput</node>
+    <node x="432.0" y="270.0">view.menu.VMenuManual</node>
+    <node x="1172.0294117647059" y="430.0">utilities.InvalidDataInput</node>
+    <node x="749.4997549019602" y="740.0">controllers.Controller</node>
+    <node x="334.5" y="510.0">view.menu.VMenuLogin</node>
+    <node x="773.4997549019602" y="820.0">Main</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="Main" target="controllers.Controller">
+      <point x="-20.0" y="-15.0" />
+      <point x="793.4997549019602" y="795.0" />
+      <point x="781.4997549019602" y="795.0" />
+      <point x="-32.0" y="15.0" />
+    </edge>
+    <edge source="model.project.Database" target="model.users.User">
+      <point x="14.0" y="-15.0" />
+      <point x="1360.2903921568627" y="560.0" />
+      <point x="1407.1237254901962" y="560.0" />
+      <point x="1407.1237254901962" y="490.0" />
+      <point x="1401.362745098039" y="490.0" />
+      <point x="-6.6666666666667425" y="15.0" />
+    </edge>
+    <edge source="view.menu.VMenuMain" target="view.menu.VMenuExit">
+      <point x="-30.0" y="-15.0" />
+      <point x="290.63514705882307" y="560.0" />
+      <point x="249.95892156862732" y="560.0" />
+      <point x="249.95892156862732" y="325.0" />
+      <point x="272.5" y="325.0" />
+      <point x="30.0" y="15.0" />
+    </edge>
+    <edge source="view.menu.VMenuMain" target="view.menu.VMenuRegister">
+      <point x="-50.0" y="-15.0" />
+      <point x="270.63514705882307" y="570.0" />
+      <point x="87.09406862745038" y="570.0" />
+      <point x="87.09406862745038" y="325.0" />
+      <point x="124.5" y="325.0" />
+      <point x="38.0" y="15.0" />
+    </edge>
+    <edge source="view.menu.VMenuCommentBoard" target="controllers.Controller">
+      <point x="46.0" y="15.0" />
+      <point x="917.5" y="650.0" />
+      <point x="821.029166666666" y="650.0" />
+      <point x="7.529411764705856" y="-15.0" />
+    </edge>
+    <edge source="view.menu.VMenuLoggedIn" target="view.menu.VMenuProject">
+      <point x="57.0" y="-15.0" />
+      <point x="672.0" y="405.0" />
+      <point x="751.0" y="405.0" />
+      <point x="-36.0" y="15.0" />
+    </edge>
+    <edge source="view.menu.VMenuLogin" target="controllers.Controller">
+      <point x="31.999999999999943" y="15.0" />
+      <point x="430.49999999999994" y="560.0" />
+      <point x="448.135147058823" y="560.0" />
+      <point x="448.135147058823" y="680.0" />
+      <point x="783.3821078431367" y="680.0" />
+      <point x="-30.117647058823536" y="-15.0" />
+    </edge>
+    <edge source="view.menu.VMenuLogin" target="view.VMenu">
+      <point x="15.999999999999943" y="-15.0" />
+      <point x="414.49999999999994" y="490.0" />
+      <point x="404.0" y="490.0" />
+      <point x="404.0" y="210.0" />
+      <point x="574.5943137254901" y="210.0" />
+      <point x="-14.0" y="15.0" />
+    </edge>
+    <edge source="view.menu.VMenuRegister" target="view.VMenu">
+      <point x="50.66666666666666" y="-15.0" />
+      <point x="137.16666666666663" y="150.0" />
+      <point x="550.5943137254901" y="150.0" />
+      <point x="-38.0" y="15.0" />
+    </edge>
+    <edge source="view.menu.VMenuLogin" target="utilities.InputOutput">
+      <point x="-48.00000000000006" y="-15.0" />
+      <point x="350.49999999999994" y="490.0" />
+      <point x="0.0" y="490.0" />
+      <point x="0.0" y="50.0" />
+      <point x="72.76098039215685" y="50.0" />
+      <point x="-51.0" y="15.0" />
+    </edge>
+    <edge source="controllers.Controller" target="model.project.Database">
+      <point x="37.64705882352939" y="-15.0" />
+      <point x="851.1468137254897" y="690.0" />
+      <point x="1318.2903921568627" y="690.0" />
+      <point x="-28.0" y="15.0" />
+    </edge>
+    <edge source="view.menu.VMenuMain" target="view.menu.VMenuManual">
+      <point x="50.0" y="-15.0" />
+      <point x="370.63514705882307" y="570.0" />
+      <point x="485.9852941176471" y="570.0" />
+      <point x="485.9852941176471" y="325.0" />
+      <point x="466.0" y="325.0" />
+      <point x="-34.0" y="15.0" />
+    </edge>
+    <edge source="view.menu.VMenuProject" target="view.menu.VMenuTaskBoard">
+      <point x="54.0" y="-15.0" />
+      <point x="841.0" y="325.0" />
+      <point x="1023.5" y="325.0" />
+      <point x="-40.0" y="15.0" />
+    </edge>
+    <edge source="view.menu.VMenuExit" target="utilities.InputOutput">
+      <point x="-40.0" y="-15.0" />
+      <point x="202.5" y="130.0" />
+      <point x="207.09431372549017" y="130.0" />
+      <point x="207.09431372549017" y="60.0" />
+      <point x="140.76098039215685" y="60.0" />
+      <point x="17.0" y="15.0" />
+    </edge>
+    <edge source="view.menu.VMenuCommentBoard" target="view.VMenu">
+      <point x="46.0" y="-15.0" />
+      <point x="917.5" y="190.0" />
+      <point x="614.5943137254901" y="190.0" />
+      <point x="26.0" y="15.0" />
+    </edge>
+    <edge source="view.menu.VMenuExit" target="controllers.Controller">
+      <point x="-30.0" y="15.0" />
+      <point x="212.5" y="325.0" />
+      <point x="230.13514705882307" y="325.0" />
+      <point x="230.13514705882307" y="710.0" />
+      <point x="760.7938725490189" y="710.0" />
+      <point x="-52.70588235294122" y="-15.0" />
+    </edge>
+    <edge source="view.menu.VMenuTaskBoard" target="controllers.Controller">
+      <point x="40.0" y="15.0" />
+      <point x="1103.5" y="660.0" />
+      <point x="828.5585784313719" y="660.0" />
+      <point x="15.058823529411711" y="-15.0" />
+    </edge>
+    <edge source="view.menu.VMenuMessage" target="controllers.Controller">
+      <point x="36.0" y="15.0" />
+      <point x="708.0" y="325.0" />
+      <point x="701.5" y="325.0" />
+      <point x="701.5" y="650.0" />
+      <point x="805.9703431372543" y="650.0" />
+      <point x="-7.529411764705856" y="-15.0" />
+    </edge>
+    <edge source="view.menu.VMenuTaskBoard" target="view.VMenu">
+      <point x="40.0" y="-15.0" />
+      <point x="1103.5" y="170.0" />
+      <point x="622.5943137254901" y="170.0" />
+      <point x="34.0" y="15.0" />
+    </edge>
+    <edge source="view.menu.VMenuLogin" target="view.menu.VMenuLoggedIn">
+      <point x="47.99999999999994" y="-15.0" />
+      <point x="446.49999999999994" y="490.0" />
+      <point x="577.0" y="490.0" />
+      <point x="-38.0" y="15.0" />
+    </edge>
+    <edge source="view.menu.VMenuMessage" target="view.VMenu">
+      <point x="36.0" y="-15.0" />
+      <point x="708.0" y="230.0" />
+      <point x="598.5943137254901" y="230.0" />
+      <point x="10.0" y="15.0" />
+    </edge>
+    <edge source="view.menu.VMenuMain" target="view.menu.VMenuLogin">
+      <point x="30.0" y="-15.0" />
+      <point x="350.63514705882307" y="560.0" />
+      <point x="366.5" y="560.0" />
+      <point x="-32.0" y="15.0" />
+    </edge>
+    <edge source="model.project.Project" target="model.users.User">
+      <point x="0.0" y="-15.0" />
+      <point x="1301.8587745098034" y="480.0" />
+      <point x="1374.6960784313726" y="480.0" />
+      <point x="-33.33333333333326" y="15.0" />
+    </edge>
+    <edge source="view.menu.VMenuManual" target="controllers.Controller">
+      <point x="34.0" y="15.0" />
+      <point x="534.0" y="325.0" />
+      <point x="501.63514705882307" y="325.0" />
+      <point x="501.63514705882307" y="670.0" />
+      <point x="790.9115196078426" y="670.0" />
+      <point x="-22.58823529411768" y="-15.0" />
+    </edge>
+    <edge source="view.menu.VMenuExit" target="view.VMenu">
+      <point x="0.0" y="-15.0" />
+      <point x="242.5" y="160.0" />
+      <point x="554.5943137254901" y="160.0" />
+      <point x="-34.0" y="15.0" />
+    </edge>
+    <edge source="view.menu.VMenuRegister" target="controllers.Controller">
+      <point x="-38.0" y="15.0" />
+      <point x="48.5" y="325.0" />
+      <point x="76.09406862745038" y="325.0" />
+      <point x="76.09406862745038" y="720.0" />
+      <point x="753.2644607843131" y="720.0" />
+      <point x="-60.23529411764707" y="-15.0" />
+    </edge>
+    <edge source="controllers.Controller" target="view.menu.VMenuMain">
+      <point x="-45.17647058823536" y="-15.0" />
+      <point x="768.3232843137248" y="700.0" />
+      <point x="290.63514705882307" y="700.0" />
+      <point x="-30.0" y="15.0" />
+    </edge>
+    <edge source="model.project.Database" target="model.project.Project">
+      <point x="-42.0" y="-15.0" />
+      <point x="1304.2903921568627" y="570.0" />
+      <point x="1275.8587745098034" y="570.0" />
+      <point x="-26.0" y="15.0" />
+    </edge>
+    <edge source="view.menu.VMenuMain" target="view.VMenu">
+      <point x="-10.0" y="-15.0" />
+      <point x="310.63514705882307" y="570.0" />
+      <point x="313.0" y="570.0" />
+      <point x="313.0" y="180.0" />
+      <point x="562.5943137254901" y="180.0" />
+      <point x="-26.0" y="15.0" />
+    </edge>
+    <edge source="controllers.Controller" target="model.users.User">
+      <point x="60.23529411764707" y="-15.0" />
+      <point x="873.7350490196072" y="720.0" />
+      <point x="1443.403137254902" y="720.0" />
+      <point x="1443.403137254902" y="490.0" />
+      <point x="1441.362745098039" y="490.0" />
+      <point x="33.33333333333326" y="15.0" />
+    </edge>
+    <edge source="view.menu.VMenuLoggedIn" target="view.menu.VMenuMessage">
+      <point x="19.0" y="-15.0" />
+      <point x="634.0" y="405.0" />
+      <point x="638.25" y="405.0" />
+      <point x="638.25" y="325.0" />
+      <point x="636.0" y="325.0" />
+      <point x="-36.0" y="15.0" />
+    </edge>
+    <edge source="view.menu.VMenuMain" target="controllers.Controller">
+      <point x="30.0" y="15.0" />
+      <point x="350.63514705882307" y="690.0" />
+      <point x="775.8526960784309" y="690.0" />
+      <point x="-37.64705882352939" y="-15.0" />
+    </edge>
+    <edge source="view.menu.VMenuLoggedIn" target="view.VMenu">
+      <point x="-57.0" y="-15.0" />
+      <point x="558.0" y="405.0" />
+      <point x="578.5" y="405.0" />
+      <point x="578.5" y="240.0" />
+      <point x="586.5943137254901" y="240.0" />
+      <point x="-2.0" y="15.0" />
+    </edge>
+    <edge source="model.project.Project" target="utilities.InvalidDataInput">
+      <point x="-34.66666666666674" y="-15.0" />
+      <point x="1267.1921078431365" y="490.0" />
+      <point x="1260.0294117647059" y="490.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="view.menu.VMenuRegister" target="utilities.InputOutput">
+      <point x="-50.66666666666663" y="-15.0" />
+      <point x="35.83333333333337" y="250.0" />
+      <point x="41.05181372548975" y="250.0" />
+      <point x="41.05181372548975" y="60.0" />
+      <point x="106.76098039215685" y="60.0" />
+      <point x="-17.0" y="15.0" />
+    </edge>
+    <edge source="view.VMenu" target="controllers.Controller">
+      <point x="38.0" y="15.0" />
+      <point x="626.5943137254901" y="160.0" />
+      <point x="1154.0" y="160.0" />
+      <point x="1154.0" y="670.0" />
+      <point x="836.087990196078" y="670.0" />
+      <point x="22.58823529411768" y="-15.0" />
+    </edge>
+    <edge source="view.menu.VMenuLoggedIn" target="controllers.Controller">
+      <point x="38.0" y="15.0" />
+      <point x="653.0" y="660.0" />
+      <point x="798.4409313725484" y="660.0" />
+      <point x="-15.058823529411711" y="-15.0" />
+    </edge>
+    <edge source="view.menu.VMenuProject" target="view.VMenu">
+      <point x="-18.0" y="-15.0" />
+      <point x="769.0" y="210.0" />
+      <point x="606.5943137254901" y="210.0" />
+      <point x="18.0" y="15.0" />
+    </edge>
+    <edge source="view.menu.VMenuProject" target="controllers.Controller">
+      <point x="36.0" y="15.0" />
+      <point x="823.0" y="640.0" />
+      <point x="813.4997549019602" y="640.0" />
+      <point x="0.0" y="-15.0" />
+    </edge>
+    <edge source="view.menu.VMenuProject" target="view.menu.VMenuCommentBoard">
+      <point x="18.0" y="-15.0" />
+      <point x="805.0" y="325.0" />
+      <point x="825.5" y="325.0" />
+      <point x="-46.0" y="15.0" />
+    </edge>
+    <edge source="view.VMenu" target="utilities.InputOutput">
+      <point x="0.0" y="-15.0" />
+      <point x="588.5943137254901" y="50.0" />
+      <point x="174.7609803921568" y="50.0" />
+      <point x="50.99999999999994" y="15.0" />
+    </edge>
+    <edge source="controllers.Controller" target="view.VMenu">
+      <point x="30.117647058823536" y="-15.0" />
+      <point x="843.6174019607838" y="680.0" />
+      <point x="1161.5294117647059" y="680.0" />
+      <point x="1161.5294117647059" y="150.0" />
+      <point x="630.5943137254901" y="150.0" />
+      <point x="42.0" y="15.0" />
+    </edge>
+    <edge source="view.menu.VMenuManual" target="view.VMenu">
+      <point x="-34.0" y="-15.0" />
+      <point x="466.0" y="220.0" />
+      <point x="578.5943137254901" y="220.0" />
+      <point x="-10.0" y="15.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.6237113402061856" x="1133.1198347107438" y="465.0" />
+  <SelectedNodes />
+  <Categories />
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
