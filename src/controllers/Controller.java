@@ -4,11 +4,12 @@ import model.project.Database;
 import model.users.User;
 import view.VMenu;
 import view.menu.VMenuMain;
-
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.UUID;
 
 public class Controller {
+
     //Attributes
     Database mDatabase;
     VMenu mCurrentMenu;
@@ -40,7 +41,7 @@ public class Controller {
 
 
     public void addUser(
-//            String userName,
+//
             String firstName,
             String lastName,
             String password,
@@ -49,9 +50,12 @@ public class Controller {
             String hourlyWage ) {
         User user = new User( firstName, lastName, password, companyName, jobTitle, hourlyWage);
         mDatabase.addUser( user );
-        System.out.println("Your user name is: " + user.getId() + "\nYour password is: " + user.getPassword());
+        System.out.println("Your username is: " + user.getId() + "\nYour password is: " + user.getPassword());
     }
 
+    public void removeUser(String id) {
+        mDatabase.removeUser(UUID.fromString(id));
+    }
 
     public String logInUser(String enteredUserName, String enteredPassword) {
         Collection<User> userList = mDatabase.getUserList();
