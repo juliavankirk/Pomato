@@ -4,6 +4,8 @@ import model.project.Database;
 import model.users.User;
 import view.VMenu;
 import view.menu.VMenuMain;
+
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.UUID;
@@ -71,6 +73,23 @@ public class Controller {
             }
         }
         return "Username is incorrect";
+    }
+
+    public String createProject(String title, String description, String ownerId) {
+        User pOwner = null;
+        Collection<User> userList = mDatabase.getUserList();
+        for (Iterator<User> iterator = userList.iterator(); iterator.hasNext();) {
+            User somOne = iterator.next();
+            if(somOne.getId().equals(ownerId)) {
+                pOwner = somOne;
+            }
+        }
+        ArrayList<User> projectMembers = new ArrayList<>();
+        projectMembers.add(pOwner);
+
+//        Project project = new Project(title, description, projectMembers);
+
+        return "The project is created successfully!";
     }
 
 
