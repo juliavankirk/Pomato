@@ -4,9 +4,12 @@ import model.project.Database;
 import model.users.User;
 import view.VMenu;
 import view.menu.VMenuMain;
+
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.UUID;
+import model.project.Task;
 
 public class Controller {
 
@@ -39,9 +42,42 @@ public class Controller {
         }
     }
 
+    public void addTask(
+            String title,
+            String description,
+            double dueDate,
+            double estimatedTime,
+            String priority
+    ) {
+        Task task = new Task(title, description,dueDate,estimatedTime,priority);
+        mDatabase.addTask(task);
+        System.out.println(task.toString());
+    }
 
+    public void removeTask(String id) {
+        Collection<Task> taskList = mDatabase.getTaskList();
+
+        for (Iterator<Task> iterator = taskList.iterator(); iterator.hasNext();){
+
+            Task someone = iterator.next();
+
+            if(someone.getId().equals(id));
+
+            }
+
+        }
+
+
+    public ArrayList<Task> getTaskList() {
+
+        return mDatabase.getTaskList();
+    }
+
+
+    /**
+     *  Handling user
+     */
     public void addUser(
-//
             String firstName,
             String lastName,
             String password,

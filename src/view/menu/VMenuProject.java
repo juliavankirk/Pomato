@@ -16,13 +16,15 @@ public class VMenuProject extends VMenu {
         mMenuLabel = "View Project";
         mMenuQuestion = "Enter choice";
         mSubMenus = new ArrayList<>();
+        mSubMenus.add(new VMenuViewTaskBoard(this));
         mSubMenus.add(new VMenuCommentBoard(this));
-        mSubMenus.add(new VMenuTaskBoard(this));
 //        subMenu = true;
     }
 
     @Override
     public void menuContent(Controller controller) {
+        // 1. Create new Board
+        // 2. View task board
 
     }
 }

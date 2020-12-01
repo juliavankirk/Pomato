@@ -27,7 +27,7 @@ public class Project {
         mProjectMembers = projectMembers;
         mStartDate = startDate;
         mDueDate = dueDate;
-        mTasks = new ArrayList<String>();
+//        mTasks = new ArrayList<String>();
 
         if (mDueDate.isEqual(mStartDate) || mDueDate.isBefore(mStartDate)){
             throw new InvalidDataInput("Invalid input. Duration of the project must be positive");
