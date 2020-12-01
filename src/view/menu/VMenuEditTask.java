@@ -7,8 +7,8 @@ public class VMenuEditTask extends VMenu {
 
     VMenuEditTask(VMenu parent){
         super(parent);
-        mMenuHeader = "Edit Tasks";
-        mMenuLabel = "";
+        mMenuHeader = "Edit Task";
+        mMenuLabel = "Edit Task";
         mMenuQuestion = "Enter choice";
         mSubMenus = null;
     }

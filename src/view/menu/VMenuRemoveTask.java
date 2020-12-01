@@ -9,7 +9,7 @@ public class VMenuRemoveTask extends VMenu {
     VMenuRemoveTask(VMenu parent) {
         super(parent);
         mMenuHeader = "Remove Task";
-        mMenuLabel = "Remove";
+        mMenuLabel = "Remove Task";
         mMenuQuestion = "Enter choice";
         mSubMenus = null;
     }
@@ -20,8 +20,8 @@ public class VMenuRemoveTask extends VMenu {
         System.out.println("Remove Tasks:\n ");
 
         String id = InputOutput.inputString("Please enter task ID: ");
-        controller.removeTask(id);
-
+        String remove = controller.removeTask(id);
+        System.out.println(remove);
     }
 }
 

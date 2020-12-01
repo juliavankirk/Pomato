@@ -11,9 +11,9 @@ public class VMenuCreateTask extends VMenu {
 
     VMenuCreateTask(VMenu parent) {
         super(parent);
-        mMenuHeader = "";
-        mMenuLabel = "";
-        mMenuQuestion = "";
+        mMenuHeader = "Create Task";
+        mMenuLabel = "Create Task";
+        mMenuQuestion = "Enter choice";
         mSubMenus = null;
     }
 

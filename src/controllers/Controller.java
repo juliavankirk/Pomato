@@ -54,22 +54,24 @@ public class Controller {
         System.out.println(task.toString());
     }
 
-    public void removeTask(String id) {
-        Collection<Task> taskList = mDatabase.getTaskList();
-
-        for (Iterator<Task> iterator = taskList.iterator(); iterator.hasNext();){
-
-            Task someone = iterator.next();
-
-            if(someone.getId().equals(id));
-
+        public String removeTask(String taskId)  {
+            int idToRemove = -1;
+            for (int i = 0; i < getTaskList().size(); i++) {
+                if (getTaskList().get(i).getId().equals(taskId)) {
+                    idToRemove = i;
+                }
+                    }
+            if (idToRemove != -1) {
+                mDatabase.removeTask(UUID.fromString(taskId));
+                return "Task with ID: " + taskId + " has been removed";
+            } else {
+                return "Task with ID: " + taskId + " was not found";
             }
-
         }
 
 
-    public ArrayList<Task> getTaskList() {
 
+    public ArrayList<Task> getTaskList() {
         return mDatabase.getTaskList();
     }
 
