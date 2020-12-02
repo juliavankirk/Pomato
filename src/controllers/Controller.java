@@ -1,6 +1,7 @@
 package controllers;
 
 import model.project.Database;
+import model.project.Project;
 import model.users.User;
 import view.VMenu;
 import view.menu.VMenuMain;
@@ -109,6 +110,27 @@ public class Controller {
             }
         }
         return "Username is incorrect";
+    }
+
+    public String createProject(String title, String description, ArrayList<String> enteredIds,
+                                LocalDate startDate, LocalDate dueDate, String password) {
+
+        Project project = new Project(title, description, startDate, dueDate, password);
+
+        Collection<User> userList = mDatabase.getUserList();
+
+        for (int i = 0; i < enteredIds.size(); i++) {
+            for (Iterator<User> iterator = userList.iterator(); iterator.hasNext(); ) {
+                User someOne = iterator.next();
+                if (someOne.getId().equals(enteredIds.get(i))) {
+                   project.getProjectMembers().add(someOne);
+                   someOne.getProjects().add(project);
+                }
+            }
+        }
+
+        return "Project " + project.getProjectTitle() + " is created successfully!\nThe Id of this project is: " +
+                project.getId() + "\nThe password of this project is: " + project.getPassword();
     }
 
 

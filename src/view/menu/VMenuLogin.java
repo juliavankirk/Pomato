@@ -38,7 +38,7 @@ public class VMenuLogin extends VMenu {
         System.out.println(response);
 
         if (response.equals("Bravo! You logged in.")) {
-            mSubMenus.add(new VMenuLoggedIn(this));
+          mSubMenus.add(new VMenuLoggedIn(this));
         }
 
     }
