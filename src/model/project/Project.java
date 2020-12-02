@@ -18,9 +18,10 @@ public class Project {
     private LocalDate mStartDate;
     private LocalDate mDueDate;
     private ArrayList<String> mTasks;
+    private String mPassword;
 
     //Constructor
-    public Project(String projectTitle, String projectDescription, ArrayList<User> projectMembers, LocalDate startDate, LocalDate dueDate) {
+    public Project(String projectTitle, String projectDescription, ArrayList<User> projectMembers, LocalDate startDate, LocalDate dueDate, String passsword) {
         mId = UUID.randomUUID();
         mProjectTitle = projectTitle;
         mProjectDescription = projectDescription;
@@ -28,6 +29,7 @@ public class Project {
         mStartDate = startDate;
         mDueDate = dueDate;
         mTasks = new ArrayList<String>();
+        mPassword = passsword;
 
         if (mDueDate.isEqual(mStartDate) || mDueDate.isBefore(mStartDate)){
             throw new InvalidDataInput("Invalid input. Duration of the project must be positive");
@@ -83,6 +85,14 @@ public class Project {
 
     public void setTasks(ArrayList<String> tasks) {
         mTasks = tasks;
+    }
+
+    public String getPassword() {
+        return mPassword;
+    }
+
+    public void setPassword(String mPassword) {
+        this.mPassword = mPassword;
     }
 
     //Methods

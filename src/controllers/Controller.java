@@ -1,10 +1,12 @@
 package controllers;
 
 import model.project.Database;
+import model.project.Project;
 import model.users.User;
 import view.VMenu;
 import view.menu.VMenuMain;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
@@ -75,21 +77,30 @@ public class Controller {
         return "Username is incorrect";
     }
 
-    public String createProject(String title, String description, String ownerId) {
-        User pOwner = null;
+    public String createProject(String title,
+                                String description,
+                                ArrayList<String> enteredIds,
+                                LocalDate startDate,
+                                LocalDate dueDate,
+                                String password)
+    {
+
+        ArrayList<User> pMembers = new ArrayList<>();
         Collection<User> userList = mDatabase.getUserList();
-        for (Iterator<User> iterator = userList.iterator(); iterator.hasNext();) {
-            User somOne = iterator.next();
-            if(somOne.getId().equals(ownerId)) {
-                pOwner = somOne;
+
+        for (int i = 0; i < enteredIds.size(); i++) {
+            for (Iterator<User> iterator = userList.iterator(); iterator.hasNext(); ) {
+                User someOne = iterator.next();
+                if (someOne.getId().equals(enteredIds.get(i))) {
+                   pMembers.add(someOne);
+                }
             }
         }
-        ArrayList<User> projectMembers = new ArrayList<>();
-        projectMembers.add(pOwner);
 
-//        Project project = new Project(title, description, projectMembers);
+        Project project = new Project(title, description, pMembers, startDate, dueDate, password);
 
-        return "The project is created successfully!";
+        return "Project " + project.getProjectTitle() + " is created successfully!\nThe Id of this project is: " +
+                project.getId() + "\nThe password of this project is: " + project.getPassword();
     }
 
 
