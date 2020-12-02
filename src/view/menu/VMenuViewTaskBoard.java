@@ -30,8 +30,8 @@ public class VMenuViewTaskBoard extends VMenu {
         for (int i = 0; i < taskList.size(); i++) {
             Task currentTask = taskList.get(i);
 
-            if (currentTask.equals("TODO")) {
-                System.out.println("TODO");
+            if (currentTask.equals("TO-DO")) {
+                System.out.println("TO-DO");
                 System.out.println(currentTask);
 
             } else if (currentTask.equals("IN PROGRESS")) {

@@ -9,13 +9,13 @@ public class Task {
     private UUID   mId;
     private String mTaskTitle;
     private String mTaskDescription;
-    private double mTaskDueDate;
     private double mTaskEstimatedTime;
     private String mTaskPriority;
-    LocalDate mDateCreated;
+    private LocalDate mDateCreated;
+    private LocalDate mTaskDueDate;
     private String mTaskStatus;
 
-    public Task(String taskTitle, String taskDescription, double taskDueDate, double taskEstimatedTime, String taskPriority) {
+    public Task(String taskTitle, String taskDescription, LocalDate taskDueDate, double taskEstimatedTime, String taskPriority) {
         mId = UUID.randomUUID();
         mTaskTitle = taskTitle;
         mTaskDescription = taskDescription;
@@ -29,7 +29,7 @@ public class Task {
     public String getTaskTitle(){ return mTaskTitle; }
     public String getTaskDescription(){ return mTaskDescription; }
 
-    public double getTaskDueDate(){ return mTaskDueDate; }
+    public LocalDate getTaskDueDate(){ return mTaskDueDate; }
 
     public double getTaskEstimatedTime(){ return mTaskEstimatedTime; }
 
@@ -43,7 +43,7 @@ public class Task {
 
     public void setTaskDescription(String taskDescription) { mTaskDescription = taskDescription;}
 
-    public void setTaskDueDate(double taskDueDate){ mTaskDueDate = taskDueDate;}
+    public void setTaskDueDate(LocalDate taskDueDate){ mTaskDueDate = taskDueDate;}
 
     public void setTaskEstimatedTime(double taskEstimatedTime){ mTaskEstimatedTime = taskEstimatedTime;}
 
@@ -56,9 +56,17 @@ public class Task {
 
 
 
-//    protected ArrayList<Task> mSubTask;
-
-
-
+    public String toString() {
+        String retVal = (getTaskStatus());
+        retVal += ("\n" +getTaskTitle() + ": ");
+        retVal += ("\n" +getTaskDescription() + " ");
+        retVal += ("\nDate Created: " + getDateCreated());
+        retVal += ("\nDue Date: " + getTaskDueDate());
+        retVal += ("\nStatus: " + getTaskStatus());
+        retVal += ("\nEstimated Time: " + getTaskEstimatedTime() + " hours");
+        retVal += ("\nPriority: " + getTaskPriority() + "/5");
+        retVal += ("\nID: " + getId());
+        return retVal;
+    }
 
 }

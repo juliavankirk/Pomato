@@ -17,9 +17,7 @@ public class VMenuRemoveTask extends VMenu {
     @Override
     public void menuContent(Controller controller) {
 
-        System.out.println("Remove Tasks:\n ");
-
-        String id = InputOutput.inputString("Please enter task ID: ");
+        String id = InputOutput.inputString("Please enter task ID");
         String remove = controller.removeTask(id);
         System.out.println(remove);
     }

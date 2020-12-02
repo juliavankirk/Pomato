@@ -8,7 +8,7 @@ public class VMenuRemoveUser extends VMenu {
     public VMenuRemoveUser(VMenu parent) {
         super(parent);
         mMenuHeader = "Remove Account";
-        mMenuLabel = "Remove";
+        mMenuLabel = "Remove Account";
         mMenuQuestion = "Enter choice";
         mSubMenus = null;
 
@@ -17,10 +17,7 @@ public class VMenuRemoveUser extends VMenu {
     @Override
     public void menuContent(Controller controller) {
 
-
-        System.out.println("Remove account:\n ");
-
-        String Id = InputOutput.inputString("Please enter your ID: ");
+        String Id = InputOutput.inputString("Please enter your ID");
         controller.removeUser(Id);
     }
 }

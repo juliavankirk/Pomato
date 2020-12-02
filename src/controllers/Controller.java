@@ -5,6 +5,7 @@ import model.users.User;
 import view.VMenu;
 import view.menu.VMenuMain;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
@@ -45,30 +46,29 @@ public class Controller {
     public void addTask(
             String title,
             String description,
-            double dueDate,
+            LocalDate dueDate,
             double estimatedTime,
             String priority
     ) {
-        Task task = new Task(title, description,dueDate,estimatedTime,priority);
+        Task task = new Task(title, description, dueDate, estimatedTime, priority);
         mDatabase.addTask(task);
         System.out.println(task.toString());
     }
 
-        public String removeTask(String taskId)  {
-            int idToRemove = -1;
-            for (int i = 0; i < getTaskList().size(); i++) {
-                if (getTaskList().get(i).getId().equals(taskId)) {
-                    idToRemove = i;
-                }
-                    }
-            if (idToRemove != -1) {
-                mDatabase.removeTask(UUID.fromString(taskId));
-                return "Task with ID: " + taskId + " has been removed";
-            } else {
-                return "Task with ID: " + taskId + " was not found";
+    public String removeTask(String taskId)  {
+        int idToRemove = -1;
+        for (int i = 0; i < getTaskList().size(); i++) {
+            if (getTaskList().get(i).getId().equals(taskId)) {
+                idToRemove = i;
             }
         }
-
+        if (idToRemove != -1) {
+            mDatabase.removeTask(UUID.fromString(taskId));
+            return "Task with ID: " + taskId + " has been removed";
+        } else {
+            return "Task with ID: " + taskId + " was not found";
+        }
+    }
 
 
     public ArrayList<Task> getTaskList() {

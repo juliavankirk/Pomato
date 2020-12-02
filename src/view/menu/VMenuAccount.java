@@ -9,7 +9,7 @@ public class VMenuAccount extends VMenu {
     public VMenuAccount(VMenu parent) {
         super(parent);
         mMenuHeader = "User Account";
-        mMenuLabel = "Handle user account";
+        mMenuLabel = "Handle User account";
         mMenuQuestion = "Enter choice";
         mSubMenus = new ArrayList<>();
         mSubMenus.add(new VMenuRemoveUser(this));

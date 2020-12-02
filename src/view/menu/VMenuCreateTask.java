@@ -6,6 +6,7 @@ import view.VMenu;
 import controllers.Controller;
 
 import java.awt.im.InputContext;
+import java.time.LocalDate;
 
 public class VMenuCreateTask extends VMenu {
 
@@ -19,17 +20,18 @@ public class VMenuCreateTask extends VMenu {
 
     @Override
     public void menuContent(Controller controller) {
-        String taskTitle, taskDescription, taskPriority;
-        double taskDueDate, taskEstimatedTime;
+        String title, description, priority;
+        double estimatedTime;
+        LocalDate dueDate;
 
-        taskTitle = InputOutput.inputString("Title");
-        taskDescription = InputOutput.inputString("Description");
-        taskPriority = InputOutput.inputString("Priority");
+        System.out.println("Please enter the following information\n ");
+        title = InputOutput.inputString("Title");
+        description = InputOutput.inputString("Description");
+        priority = InputOutput.inputString("Priority (1-5)");
+        dueDate = LocalDate.parse(InputOutput.inputString("Due Date (yyyy-mm-dd)"));
+        estimatedTime = InputOutput.inputDouble("Estimated Time (hours)");
 
-        taskDueDate = InputOutput.inputDouble("Due Date (yyyy-mm-dd): ");
-        taskEstimatedTime = InputOutput.inputDouble("Estimated Time (yyyy-mm-dd): ");
-
-        //controller.addTask(taskTitle,taskDescription,taskPriority,taskDueDate,taskEstimatedTime);
+        controller.addTask(title, description, dueDate, estimatedTime, priority);
 
 
         System.out.println("");
