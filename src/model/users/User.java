@@ -1,4 +1,7 @@
 package model.users;
+import model.project.Project;
+
+import java.util.ArrayList;
 import java.util.UUID;
 
 
@@ -13,6 +16,7 @@ public class User {
     private String mCompanyName;
     private String mJobTitle;
     private Double mHourlyWage;
+    private ArrayList<Project> mProjects;
 
     //Constructor
     public User(String firstName, String lastName, String password, String companyName,
@@ -25,6 +29,7 @@ public class User {
         mCompanyName = companyName;
         mJobTitle = jobTitle;
         mHourlyWage = hourlyWage;
+        mProjects = new ArrayList<Project>();
     }
 
     //Methods
@@ -69,6 +74,14 @@ public class User {
     public String getJobTitle() { return mJobTitle; }
 
     public Double getHourlyWage() { return mHourlyWage; }
+
+    public ArrayList<Project> getProjects() {
+        return mProjects;
+    }
+
+    public void setProjects(ArrayList<Project> mProjects) {
+        this.mProjects = mProjects;
+    }
 
     public String toRow() {
         String retVal = ("User ID: " + getId());

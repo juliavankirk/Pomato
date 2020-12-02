@@ -77,27 +77,22 @@ public class Controller {
         return "Username is incorrect";
     }
 
-    public String createProject(String title,
-                                String description,
-                                ArrayList<String> enteredIds,
-                                LocalDate startDate,
-                                LocalDate dueDate,
-                                String password)
-    {
+    public String createProject(String title, String description, ArrayList<String> enteredIds,
+                                LocalDate startDate, LocalDate dueDate, String password) {
 
-        ArrayList<User> pMembers = new ArrayList<>();
+        Project project = new Project(title, description, startDate, dueDate, password);
+
         Collection<User> userList = mDatabase.getUserList();
 
         for (int i = 0; i < enteredIds.size(); i++) {
             for (Iterator<User> iterator = userList.iterator(); iterator.hasNext(); ) {
                 User someOne = iterator.next();
                 if (someOne.getId().equals(enteredIds.get(i))) {
-                   pMembers.add(someOne);
+                   project.getProjectMembers().add(someOne);
+                   someOne.getProjects().add(project);
                 }
             }
         }
-
-        Project project = new Project(title, description, pMembers, startDate, dueDate, password);
 
         return "Project " + project.getProjectTitle() + " is created successfully!\nThe Id of this project is: " +
                 project.getId() + "\nThe password of this project is: " + project.getPassword();

@@ -21,15 +21,15 @@ public class Project {
     private String mPassword;
 
     //Constructor
-    public Project(String projectTitle, String projectDescription, ArrayList<User> projectMembers, LocalDate startDate, LocalDate dueDate, String passsword) {
+    public Project(String projectTitle, String projectDescription, LocalDate startDate, LocalDate dueDate, String password) {
         mId = UUID.randomUUID();
         mProjectTitle = projectTitle;
         mProjectDescription = projectDescription;
-        mProjectMembers = projectMembers;
+        mProjectMembers = new ArrayList<User>();
         mStartDate = startDate;
         mDueDate = dueDate;
         mTasks = new ArrayList<String>();
-        mPassword = passsword;
+        mPassword = password;
 
         if (mDueDate.isEqual(mStartDate) || mDueDate.isBefore(mStartDate)){
             throw new InvalidDataInput("Invalid input. Duration of the project must be positive");
