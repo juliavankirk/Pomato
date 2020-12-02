@@ -21,13 +21,14 @@ public class Project {
     private String mPassword;
 
     //Constructor
-    public Project(String projectTitle, String projectDescription, ArrayList<User> projectMembers, LocalDate startDate, LocalDate dueDate, String password) {
+    public Project(String projectTitle, String projectDescription/*, ArrayList<User> projectMembers*/, LocalDate startDate, LocalDate dueDate, String password) {
         mId = UUID.randomUUID();
         mProjectTitle = projectTitle;
         mProjectDescription = projectDescription;
         mProjectMembers = new ArrayList<User>();
         mStartDate = startDate;
         mDueDate = dueDate;
+//        mProjectMembers = projectMembers;
 //        mTasks = new ArrayList<String>();
         mPassword = password;
 

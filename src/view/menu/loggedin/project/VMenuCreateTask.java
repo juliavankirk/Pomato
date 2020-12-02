@@ -1,4 +1,4 @@
-package view.menu;
+package view.menu.loggedin.project;
 
 import model.project.Task;
 import utilities.InputOutput;
@@ -22,19 +22,30 @@ public class VMenuCreateTask extends VMenu {
     public void menuContent(Controller controller) {
         String title, description, priority;
         double estimatedTime;
-        LocalDate dueDate;
+        LocalDate dueDate, startDate;
 
         System.out.println("Please enter the following information\n ");
         title = InputOutput.inputString("Title");
         description = InputOutput.inputString("Description");
+        estimatedTime = InputOutput.inputDouble("Estimated Time (hours)");
         priority = InputOutput.inputString("Priority (1-5)");
         dueDate = LocalDate.parse(InputOutput.inputString("Due Date (yyyy-mm-dd)"));
-        estimatedTime = InputOutput.inputDouble("Estimated Time (hours)");
+        startDate = LocalDate.now();
+        controller.addTask(title, description, dueDate, startDate, estimatedTime, priority);
 
-        controller.addTask(title, description, dueDate, estimatedTime, priority);
+        addMoreTasks(controller);
+//        System.out.println("");
 
+    }
 
-        System.out.println("");
+    private void addMoreTasks (Controller controller) {
+        String answer;
 
+        answer = InputOutput.inputString("Would you like to add more tasks?(yes/no)");
+        while (answer.equals("yes")) {
+            answer = "";
+            menuContent(controller);
+        }
+//        System.out.println("");
     }
 }

@@ -1,4 +1,4 @@
-package view.menu;
+package view.menu.loggedin;
 
 import controllers.Controller;
 import utilities.InputOutput;
@@ -41,12 +41,11 @@ public class VMenuCreateProject extends VMenu {
         LocalDate startDate = LocalDate.parse(InputOutput.inputString("Please enter the start date of project (yyyy-mm-dd)"));
         LocalDate dueDate = LocalDate.parse(InputOutput.inputString("Please enter due date of project (yyyy-mm-dd)"));
 
-        String password = InputOutput.inputString("Choose a password for the project");
+        String password = InputOutput.inputString("Choose a password for the project\n");
 
         String message = controller.createProject(pTitle, pDescription, pMembersIds, startDate, dueDate, password);
         System.out.println(message);
 
-
-
+        System.out.println(" ");
     }
 }

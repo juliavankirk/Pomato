@@ -56,6 +56,10 @@ public class InputOutput {
         return "----------------------------------------------------\n";
     }
 
+    public static String superShortLine() {
+        return "-----------------------\n";
+    }
+
     public static void closeScanner() {
         input.close();
     }

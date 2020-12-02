@@ -2,7 +2,9 @@ package view.menu;
 
 
 import controllers.Controller;
+import utilities.InputOutput;
 import view.VMenu;
+import view.menu.loggedin.VMenuProject;
 
 import java.util.ArrayList;
 
@@ -23,6 +25,7 @@ public class VMenuMain extends VMenu {
         mSubMenus.add(new VMenuLogin(this));
         mSubMenus.add(new VMenuManual(this));
         mSubMenus.add(new VMenuExit(this));
+        mSubMenus.add(new VMenuProject(this));
 //        subMenu = true;
     }
 

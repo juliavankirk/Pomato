@@ -15,15 +15,15 @@ public class Task {
     private LocalDate mTaskDueDate;
     private String mTaskStatus;
 
-    public Task(String taskTitle, String taskDescription, LocalDate taskDueDate, double taskEstimatedTime, String taskPriority) {
+    public Task(String taskTitle, String taskDescription, LocalDate taskDueDate, LocalDate taskStartDate, double taskEstimatedTime, String taskPriority) {
         mId = UUID.randomUUID();
         mTaskTitle = taskTitle;
         mTaskDescription = taskDescription;
-        mTaskDueDate = taskDueDate;
         mTaskEstimatedTime = taskEstimatedTime;
         mTaskPriority = taskPriority;
         mDateCreated = LocalDate.now();
-        mTaskStatus = "TO-DO";
+        mTaskDueDate = taskDueDate;
+        mTaskStatus = "TODO";
     }
     public UUID getId() { return mId; }
     public String getTaskTitle(){ return mTaskTitle; }
@@ -57,15 +57,15 @@ public class Task {
 
 
     public String toString() {
-        String retVal = (getTaskStatus());
-        retVal += ("\n" +getTaskTitle() + ": ");
-        retVal += ("\n" +getTaskDescription() + " ");
+        String retVal = "";
+        retVal += ("Title: " +getTaskTitle());
+        retVal += ("\nDescription: " +getTaskDescription());
         retVal += ("\nDate Created: " + getDateCreated());
         retVal += ("\nDue Date: " + getTaskDueDate());
-        retVal += ("\nStatus: " + getTaskStatus());
+//        retVal += ("\nStatus: " + getTaskStatus());
         retVal += ("\nEstimated Time: " + getTaskEstimatedTime() + " hours");
         retVal += ("\nPriority: " + getTaskPriority() + "/5");
-        retVal += ("\nID: " + getId());
+        retVal += ("\nID: " + getId() + "\n");
         return retVal;
     }
 

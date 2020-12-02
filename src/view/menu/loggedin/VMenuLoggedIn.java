@@ -1,7 +1,8 @@
-package view.menu;
+package view.menu.loggedin;
 
 import controllers.Controller;
 import view.*;
+import view.menu.loggedin.account.VMenuAccount;
 
 import java.util.ArrayList;
 
@@ -18,8 +19,8 @@ public class VMenuLoggedIn extends VMenu {
         mMenuLabel = "Continue";
         mMenuQuestion = "Enter choice";
         mSubMenus = new ArrayList<>();
-        mSubMenus.add(new VMenuProject(this));
         mSubMenus.add(new VMenuCreateProject(this));
+        mSubMenus.add(new VMenuProject(this));
         mSubMenus.add(new VMenuMessage(this));
         mSubMenus.add(new VMenuAccount(this));
 //        subMenus.add(new VMenuManual(this));

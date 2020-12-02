@@ -1,4 +1,4 @@
-package view.menu;
+package view.menu.loggedin.account;
 
 import controllers.Controller;
 import utilities.InputOutput;

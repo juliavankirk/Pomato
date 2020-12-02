@@ -1,11 +1,14 @@
-package view.menu;
+package view.menu.loggedin;
 
 import controllers.Controller;
 import view.VMenu;
+import view.menu.loggedin.project.VMenuCommentBoard;
+import view.menu.loggedin.project.VMenuViewTaskBoard;
 
 import java.util.ArrayList;
 
 public class VMenuProject extends VMenu {
+
 
     /**
      * Constructors
@@ -25,6 +28,5 @@ public class VMenuProject extends VMenu {
     public void menuContent(Controller controller) {
         // 1. Create new Board
         // 2. View task board
-
     }
 }

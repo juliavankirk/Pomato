@@ -31,5 +31,6 @@ public class Database {
 
     public ArrayList<Task> getTaskList(){ return mTaskList;}
     public void addTask(Task task){ mTaskList.add(task);}
-    public void removeTask(UUID id){ mTaskList.remove(id);}
+    public void removeTask(int index){ mTaskList.remove(index);}
+//    public Task getTaskById (UUID id) { return mTaskList.get(id);}
 }

@@ -1,18 +1,18 @@
-package view.menu;
+package view.menu.loggedin;
 
 import controllers.Controller;
 import view.VMenu;
 
-public class VMenuCommentBoard extends VMenu {
+public class VMenuMessage extends VMenu {
 
 
     /**
      * Constructors
      */
-    public VMenuCommentBoard(VMenu parent) {
+    public VMenuMessage(VMenu parent) {
         super(parent);
-        mMenuHeader = "Comment Board";
-        mMenuLabel = "View Comments Board";
+        mMenuHeader = "Message Page";
+        mMenuLabel = "View/Send Messages";
         mMenuQuestion = "Enter choice";
         mSubMenus = null;
 //        subMenu = false;
@@ -20,6 +20,6 @@ public class VMenuCommentBoard extends VMenu {
 
     @Override
     public void menuContent(Controller controller) {
-        // TODO personal comment board?
+        // TODO personal message center?
     }
 }
