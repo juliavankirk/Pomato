@@ -153,6 +153,25 @@ public class Controller {
         return getCurrentUser().getProjects();
     }
 
+    public void addMembers(ArrayList<String> newMembersIds) {
+
+        Collection<User> userList = mDatabase.getUserList();
+
+        for (int i = 0; i < newMembersIds.size(); i++) {
+            for (Iterator<User> iterator = userList.iterator(); iterator.hasNext(); ) {
+                User someOne = iterator.next();
+
+                if (someOne.getId().equals(newMembersIds.get(i))) {
+                    mCurrentProject.getProjectMembers().add(someOne);
+                    someOne.getProjects().add(mCurrentProject);
+                    someOne.addRole(mCurrentProject.getId());
+                }
+            }
+        }
+
+
+    }
+
 
     /**
      * Methods for Current Logged-In User

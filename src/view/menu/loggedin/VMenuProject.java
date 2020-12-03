@@ -1,9 +1,8 @@
 package view.menu.loggedin;
 
 import controllers.Controller;
-import model.project.Project;
-import utilities.InputOutput;
 import view.VMenu;
+import view.menu.loggedin.project.VMenuAddMember;
 import view.menu.loggedin.project.VMenuCommentBoard;
 import view.menu.loggedin.project.VMenuViewTaskBoard;
 
@@ -23,6 +22,7 @@ public class VMenuProject extends VMenu {
         mSubMenus = new ArrayList<>();
         mSubMenus.add(new VMenuViewTaskBoard(this));
         mSubMenus.add(new VMenuCommentBoard(this));
+        mSubMenus.add(new VMenuAddMember(this));
 //        subMenu = true;
     }
 
