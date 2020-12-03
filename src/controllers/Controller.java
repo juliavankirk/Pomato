@@ -234,19 +234,6 @@ public class Controller {
         System.out.println("Roles are successfully changed");
     }
 
-
-    /**
-     * Methods for Current Logged-In User
-     */
-    public void setCurrentUser(User currentUser) {
-        mCurrentUser = currentUser;
-    }
-
-    public User getCurrentUser() {
-        return mCurrentUser;
-    }
-
-
     /**
      * Methods for Current Project
      */
