@@ -15,11 +15,13 @@ import model.project.Task;
 
 public class Controller {
 
+
     //Attributes
     Database mDatabase;
     VMenu mCurrentMenu;
     private User mCurrentUser;
     private Project mCurrentProject;
+
 
     //Constructor
     public Controller() {
@@ -48,16 +50,12 @@ public class Controller {
         }
     }
 
-    public void addTask(
-            String title,
-            String description,
-            LocalDate dueDate,
-            LocalDate startDate,
-            double estimatedTime,
-            double priority
-    ) {
+
+    /**
+     * Handling Task/Tasks
+     */
+    public void addTask(String title, String description, LocalDate dueDate, LocalDate startDate, double estimatedTime, double priority) {
         Task task = new Task(title, description, dueDate, startDate, estimatedTime, priority);
-//        mDatabase.addTask(task);
         getCurrentProject().addTask(task);
     }
 
@@ -92,22 +90,26 @@ public class Controller {
         return null;
     }
 
+    public ArrayList<Task> getTaskListFromCurrentProject() {
 
+        return getCurrentProject().getTaskList();
+    }
+
+    /**
+     * Updating Task
+     */
     public void updateTaskStatus(String updatedStatus, String taskId){
     Task task = getTaskById(taskId);
     task.setTaskStatus(updatedStatus);
     }
-
     public void updateTaskTitle(String updatedTitle, String taskId){
         Task task = getTaskById(taskId);
         task.setTaskTitle(updatedTitle);
     }
-
     public void updateTaskDescription(String updatedDescription, String taskId){
         Task task = getTaskById(taskId);
         task.setTaskDescription(updatedDescription);
     }
-
     public void updateTaskPriority(Double updatedPriority, String taskId){
         Task task = getTaskById(taskId);
         task.setTaskPriority(updatedPriority);
@@ -119,13 +121,6 @@ public class Controller {
     public void updateTaskEstimatedTime(Double estimatedTime, String taskId){
         Task task = getTaskById(taskId);
         task.setTaskEstimatedTime(estimatedTime);
-    }
-
-
-
-    public ArrayList<Task> getTaskListFromCurrentProject() {
-
-        return getCurrentProject().getTaskList();
     }
 
 
@@ -162,8 +157,21 @@ public class Controller {
         return "Username is incorrect";
     }
 
+    /**
+     * Methods for Current Logged-In User
+     */
+    public void setCurrentUser(User currentUser) {
+        mCurrentUser = currentUser;
+    }
 
-    //User can create project and add members
+    public User getCurrentUser() {
+        return mCurrentUser;
+    }
+
+
+    /**
+     * Handling Project
+     */
     public String createProject(String title, String description, ArrayList<String> enteredIds,
                                 LocalDate startDate, LocalDate dueDate/*, String password*/) {
 
@@ -190,19 +198,6 @@ public class Controller {
     public ArrayList<Project> getProjects() {
         return getCurrentUser().getProjects();
     }
-
-
-    /**
-     * Methods for Current Logged-In User
-     */
-    public void setCurrentUser(User currentUser) {
-        mCurrentUser = currentUser;
-    }
-
-    public User getCurrentUser() {
-        return mCurrentUser;
-    }
-
 
     /**
      * Methods for Current Project
