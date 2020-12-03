@@ -68,7 +68,7 @@ public class Controller {
             UUID stringUuid = getTaskListFromCurrentProject().get(i).getId();
 
             if ( stringUuid.toString().equals(taskId)) {
-                mDatabase.removeTask(i);
+                getCurrentProject().removeTask(i);
                 return "Task with ID: " + taskId + " has been removed";
             }
         }
