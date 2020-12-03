@@ -61,7 +61,7 @@ public class Controller {
         getCurrentProject().addTask(task);
     }
 
-    public String removeTask(String taskId)  {
+    public String removeTask(String taskId) {
         int taskListSize = getTaskListFromCurrentProject().size();
 
         for (int i = 0; i < taskListSize; i++) {
@@ -80,6 +80,47 @@ public class Controller {
 //        }
         return "Task with ID: " + taskId + " was not found";
     }
+
+    public Task getTaskById(String taskId) {
+        int taskListSize = getTaskListFromCurrentProject().size();
+        for (int i = 0; i < taskListSize; i++) {
+            UUID stringUuid = getTaskListFromCurrentProject().get(i).getId();
+            if (stringUuid.toString().equals(taskId)) {
+                return getTaskListFromCurrentProject().get(i);
+            }
+        }
+        return null;
+    }
+
+
+    public void updateTaskStatus(String updatedStatus, String taskId){
+    Task task = getTaskById(taskId);
+    task.setTaskStatus(updatedStatus);
+    }
+
+    public void updateTaskTitle(String updatedTitle, String taskId){
+        Task task = getTaskById(taskId);
+        task.setTaskTitle(updatedTitle);
+    }
+
+    public void updateTaskDescription(String updatedDescription, String taskId){
+        Task task = getTaskById(taskId);
+        task.setTaskDescription(updatedDescription);
+    }
+
+    public void updateTaskPriority(Double updatedPriority, String taskId){
+        Task task = getTaskById(taskId);
+        task.setTaskPriority(updatedPriority);
+    }
+    public void updateTaskDueDate(LocalDate dueDate, String taskId){
+        Task task = getTaskById(taskId);
+        task.setTaskDueDate(dueDate);
+    }
+    public void updateTaskEstimatedTime(Double estimatedTime, String taskId){
+        Task task = getTaskById(taskId);
+        task.setTaskEstimatedTime(estimatedTime);
+    }
+
 
 
     public ArrayList<Task> getTaskListFromCurrentProject() {
@@ -174,9 +215,6 @@ public class Controller {
         return mCurrentProject;
     }
 
-    //    public void removeUser(UUID id) {
-//        mDatabase.removerUser(UUID id);
-//    }
 
 //    void doMainMenu() {
 //        mVMenuMain.renderMenu(true);
