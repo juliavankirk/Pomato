@@ -2,7 +2,6 @@ package model.users;
 import model.project.Project;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.UUID;
 
 
@@ -18,7 +17,8 @@ public class User {
     private String mJobTitle;
     private Double mHourlyWage;
     private ArrayList<Project> mProjects;
-    private HashMap<String, String> mRole;
+    private ArrayList<Role> mRoles;
+
 //    private ArrayList<UUID> mProjectsUserCanAccess;
 
     //Constructor
@@ -33,7 +33,8 @@ public class User {
         mJobTitle = jobTitle;
         mHourlyWage = hourlyWage;
         mProjects = new ArrayList<Project>();
-        mRole.keySet();
+        mRoles = new ArrayList<Role>();
+
 //        mProjectsUserCanAccess = new ArrayList<>();
     }
 
@@ -89,23 +90,15 @@ public class User {
         return mProjects;
     }
 
-    public void setProjects(ArrayList<Project> mProjects) {
-        this.mProjects = mProjects;
+    public void addRole(String projectId) {
+        mRoles.add(new Role(projectId));
     }
 
-    public String getRole() {
-        return mRole;
-    }
-
-    public void setRole(String mRole) {
-        this.mRole = mRole;
-    }
-
-    public void changeRole() {
-        if(mRole.equals("Manager")) {
-            mRole = "Development Team";
-        } else{
-            mRole = "Manager";
+    public void changeRole(String projectId) {
+        for(int i = 0; i < mRoles.size(); i++){
+            if (projectId.equals(mRoles.get(i).getProjectId())) {
+                mRoles.get(i).changeRole();
+            }
         }
     }
 

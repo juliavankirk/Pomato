@@ -9,12 +9,12 @@ import java.util.UUID;
 
 public class Database {
     public HashMap<String, User> mUserList;
-    public HashMap<UUID, Project> mProjectList;
+    public HashMap<String, Project> mProjectList;
     public ArrayList <Task> mTaskList;
 
     public Database() {
         mUserList = new HashMap<String, User>();
-        mProjectList = new HashMap<UUID, Project>();
+        mProjectList = new HashMap<String, Project>();
         mTaskList = new ArrayList<Task>();
     }
 

@@ -2,6 +2,7 @@ package controllers;
 
 import model.project.Database;
 import model.project.Project;
+import model.project.Task;
 import model.users.User;
 import view.VMenu;
 import view.menu.VMenuMain;
@@ -11,7 +12,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.UUID;
-import model.project.Task;
 
 public class Controller {
 
@@ -124,9 +124,10 @@ public class Controller {
 
     //User can create project and add members
     public String createProject(String title, String description, ArrayList<String> enteredIds,
-                                LocalDate startDate, LocalDate dueDate/*, String password*/) {
+                                LocalDate startDate, LocalDate dueDate) {
 
-        Project project = new Project(title, description, startDate, dueDate/*, password*/);
+        Project project = new Project(title, description, startDate, dueDate);
+        String projectId = project.getId();
 
         Collection<User> userList = mDatabase.getUserList();
 
@@ -137,9 +138,11 @@ public class Controller {
                 if (someOne.getId().equals(enteredIds.get(i))) {
                    project.getProjectMembers().add(someOne);
                    someOne.getProjects().add(project);
+                   someOne.addRole(projectId);
                 }
             }
         }
+        mCurrentUser.changeRole(projectId);
 
         return "\nProject " + project.getProjectTitle() + " is created successfully!";/*\nThe Id of this project is: " +
                 project.getId() + "\nThe password of this project is: " + project.getPassword();

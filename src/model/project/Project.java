@@ -11,7 +11,7 @@ import java.util.UUID;
 public class Project {
 
     //Attributes
-    private UUID mId;
+    private String mId;
     private String mProjectTitle;
     private String mProjectDescription;
     private ArrayList<User> mProjectMembers;
@@ -23,7 +23,7 @@ public class Project {
 
     //Constructor
     public Project(String projectTitle, String projectDescription/*, ArrayList<User> projectMembers*/, LocalDate startDate, LocalDate dueDate/*, String password*/) {
-        mId = UUID.randomUUID();
+        mId = UUID.randomUUID().toString();
         mProjectTitle = projectTitle;
         mProjectDescription = projectDescription;
         mProjectMembers = new ArrayList<User>();
@@ -40,7 +40,7 @@ public class Project {
     }
 
     //Getters and Setters
-    public UUID getId() { return mId; }
+    public String getId() { return mId; }
 
     public String getProjectTitle() {
         return mProjectTitle;
