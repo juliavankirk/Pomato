@@ -172,6 +172,19 @@ public class Controller {
 
     }
 
+    public void changeRoles(ArrayList<String> memberIds) {
+
+        for(int i = 0; i < memberIds.size(); i++) {
+            for(int j = 0; j < getCurrentProject().getProjectMembers().size(); j++) {
+                if(memberIds.get(i).equals(getCurrentProject().getProjectMembers().get(j).getId())) {
+                    getCurrentProject().getProjectMembers().get(j).changeRole(getCurrentProject().getId());
+                }
+            }
+
+        }
+        System.out.println("Roles are successfully changed");
+    }
+
 
     /**
      * Methods for Current Logged-In User

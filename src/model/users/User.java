@@ -90,6 +90,16 @@ public class User {
         return mProjects;
     }
 
+    public String getRole(String projectId) {
+        String role = "";
+        for(int i = 0; i < mRoles.size(); i++){
+            if (projectId.equals(mRoles.get(i).getProjectId())) {
+                role = mRoles.get(i).getMemberRole();
+            }
+        }
+        return role;
+    }
+
     public void addRole(String projectId) {
         mRoles.add(new Role(projectId));
     }
