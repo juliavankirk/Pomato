@@ -19,7 +19,7 @@ public class Project {
     private LocalDate mDueDate;
     private ArrayList<Task> mTaskList;
 //    private ArrayList<Board> mBoards;
-    private String mPassword;
+
 
     //Constructor
     public Project(String projectTitle, String projectDescription/*, ArrayList<User> projectMembers*/, LocalDate startDate, LocalDate dueDate/*, String password*/) {
@@ -95,14 +95,6 @@ public class Project {
         mBoards = boards;
     }
      */
-
-    public String getPassword() {
-        return mPassword;
-    }
-
-    public void setPassword(String mPassword) {
-        this.mPassword = mPassword;
-    }
 
     //Methods
     public long projectDuration () {

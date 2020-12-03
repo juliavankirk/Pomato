@@ -31,6 +31,7 @@ public class VMenuCreateProject extends VMenu {
 
         // TODO Make into owner?
         pMembersIds.add(controller.getCurrentUser().getId());
+        controller.getCurrentUser().changeRole();
         String answer = InputOutput.inputString("Would you like to add more members?(yes/no)");
         while(answer.equals("yes")) {
             String memberId = InputOutput.inputString("Insert member's Id");
