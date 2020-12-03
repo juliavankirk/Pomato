@@ -46,7 +46,7 @@ public class VMenuViewTaskBoard extends VMenu {
 
         for (Task currentTask : taskList) {
 
-            if (currentTask.getTaskStatus().equals(status)) {
+            if (currentTask.getStatus().equals(status)) {
                 System.out.print(InputOutput.superShortLine());
                 System.out.println(currentTask);
             }

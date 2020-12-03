@@ -7,64 +7,62 @@ import java.util.UUID;
 
 public class Task {
     private UUID   mId;
-    private String mTaskTitle;
-    private String mTaskDescription;
-    private double mTaskEstimatedTime;
-    private double mTaskPriority;
+    private String mTitle;
+    private String mDescription;
+    private double mEstimatedTime;
+    private int mPriority;
     private LocalDate mDateCreated;
-    private LocalDate mTaskDueDate;
-    private String mTaskStatus;
+    private LocalDate mDueDate;
+    private String mStatus;
 
-    public Task(String taskTitle, String taskDescription, LocalDate taskDueDate, LocalDate taskStartDate, double taskEstimatedTime, double taskPriority) {
+    //Do we have to initialize startDate in constructor? Its already set?
+    public Task(String Title, String Description, LocalDate DueDate, LocalDate taskStartDate, double EstimatedTime, int Priority) {
         mId = UUID.randomUUID();
-        mTaskTitle = taskTitle;
-        mTaskDescription = taskDescription;
-        mTaskEstimatedTime = taskEstimatedTime;
-        mTaskPriority = taskPriority;
+        mTitle = Title;
+        mDescription = Description;
+        mEstimatedTime = EstimatedTime;
+        mPriority = Priority;
         mDateCreated = LocalDate.now();
-        mTaskDueDate = taskDueDate;
-        mTaskStatus = "TODO";
+        mDueDate = DueDate;
+        mStatus = "TODO";
     }
     public UUID getId() { return mId; }
-    public String getTaskTitle(){ return mTaskTitle; }
-    public String getTaskDescription(){ return mTaskDescription; }
+    public String getTitle(){ return mTitle; }
+    public String getDescription(){ return mDescription; }
 
-    public LocalDate getTaskDueDate(){ return mTaskDueDate; }
+    public LocalDate getDueDate(){ return mDueDate; }
 
-    public double getTaskEstimatedTime(){ return mTaskEstimatedTime; }
+    public double getEstimatedTime(){ return mEstimatedTime; }
 
-    public double getTaskPriority(){ return mTaskPriority; }
+    public double getPriority(){ return mPriority; }
 
     public LocalDate getDateCreated(){ return mDateCreated; }
 
-    public String getTaskStatus(){ return mTaskStatus; }
+    public String getStatus(){ return mStatus; }
 
-    public void setTaskTitle(String taskTitle) { mTaskTitle = taskTitle; }
+    public void setTitle(String Title) { mTitle = Title; }
 
-    public void setTaskDescription(String taskDescription) { mTaskDescription = taskDescription;}
+    public void setDescription(String Description) { mDescription = Description;}
 
-    public void setTaskDueDate(LocalDate taskDueDate){ mTaskDueDate = taskDueDate;}
+    public void setDueDate(LocalDate DueDate){ mDueDate = DueDate;}
 
-    public void setTaskEstimatedTime(double taskEstimatedTime){ mTaskEstimatedTime = taskEstimatedTime;}
+    public void setEstimatedTime(double EstimatedTime){ mEstimatedTime = EstimatedTime;}
 
-    public void setTaskPriority (double taskPriority) { mTaskPriority = taskPriority;}
+    public void setPriority (int taskPriority) { mPriority = taskPriority;}
 
-    public void setDateCreated (LocalDate dateCreated) { mDateCreated = dateCreated; }
-
-    public void setTaskStatus (String taskStatus){ mTaskStatus = taskStatus;}
+    public void setStatus (String taskStatus){ mStatus = taskStatus;}
 
 
 
 
     public String toString() {
         String retVal = "";
-        retVal += ("Title: " +getTaskTitle());
-        retVal += ("\nDescription: " +getTaskDescription());
+        retVal += ("Title: " +getTitle());
+        retVal += ("\nDescription: " +getDescription());
         retVal += ("\nDate Created: " + getDateCreated());
-        retVal += ("\nDue Date: " + getTaskDueDate());
-//        retVal += ("\nStatus: " + getTaskStatus());
-        retVal += ("\nEstimated Time: " + getTaskEstimatedTime() + " hours");
-        retVal += ("\nPriority: " + getTaskPriority() + "/5");
+        retVal += ("\nDue Date: " + getDueDate());
+        retVal += ("\nEstimated Time: " + getEstimatedTime() + " hours");
+        retVal += ("\nPriority: " + getPriority() + "/5");
         retVal += ("\nID: " + getId() + "\n");
         return retVal;
     }

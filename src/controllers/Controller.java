@@ -54,7 +54,7 @@ public class Controller {
     /**
      * Handling Task/Tasks
      */
-    public void addTask(String title, String description, LocalDate dueDate, LocalDate startDate, double estimatedTime, double priority) {
+    public void addTask(String title, String description, LocalDate dueDate, LocalDate startDate, double estimatedTime, int priority) {
         Task task = new Task(title, description, dueDate, startDate, estimatedTime, priority);
         getCurrentProject().addTask(task);
     }
@@ -100,27 +100,27 @@ public class Controller {
      */
     public void updateTaskStatus(String updatedStatus, String taskId){
     Task task = getTaskById(taskId);
-    task.setTaskStatus(updatedStatus);
+    task.setStatus(updatedStatus);
     }
     public void updateTaskTitle(String updatedTitle, String taskId){
         Task task = getTaskById(taskId);
-        task.setTaskTitle(updatedTitle);
+        task.setTitle(updatedTitle);
     }
     public void updateTaskDescription(String updatedDescription, String taskId){
         Task task = getTaskById(taskId);
-        task.setTaskDescription(updatedDescription);
+        task.setDescription(updatedDescription);
     }
-    public void updateTaskPriority(Double updatedPriority, String taskId){
+    public void updateTaskPriority(int updatedPriority, String taskId){
         Task task = getTaskById(taskId);
-        task.setTaskPriority(updatedPriority);
+        task.setPriority(updatedPriority);
     }
     public void updateTaskDueDate(LocalDate dueDate, String taskId){
         Task task = getTaskById(taskId);
-        task.setTaskDueDate(dueDate);
+        task.setDueDate(dueDate);
     }
     public void updateTaskEstimatedTime(Double estimatedTime, String taskId){
         Task task = getTaskById(taskId);
-        task.setTaskEstimatedTime(estimatedTime);
+        task.setEstimatedTime(estimatedTime);
     }
 
 

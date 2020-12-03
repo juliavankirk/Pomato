@@ -26,21 +26,21 @@ public class VMenuEditTask extends VMenu {
         //TODO
 
         String taskId, updatedTitle, updatedDescription, updatedStatus;
-        double updatedEstimation, updatedPriority;
+        double updatedEstimation;
         LocalDate updatedDueDate;
-        int property;
+        int property, updatedPriority;
 
         taskId = InputOutput.inputString("Which task do you want to edit? (ID)");
-        Task foundId = controller.getTaskById(taskId);
+        Task task = controller.getTaskById(taskId);
 
-        if (foundId != null) {
-            property = InputOutput.inputInt("Which property would you like to change?" +
-                    "\n(1)Title" +
-                    "\n(2)Description" +
-                    "\n(3)Estimated Time" +
-                    "\n(4)Priority" +
-                    "\n(5)Due Date" +
-                    "\n(6)Status");
+        /*When the user have made a change to a property, they will be given the option
+        to make another change to the chosen task, until they enter the number 7.
+         */
+        if (task != null) {
+            do {
+                propertyChoices();
+                property = InputOutput.inputInt("Enter your option");
+
 
                 switch (property) {
                     case 1 -> {
@@ -48,36 +48,52 @@ public class VMenuEditTask extends VMenu {
                         controller.updateTaskTitle(updatedTitle, taskId);
                     }
                     case 2 -> {
-                        updatedDescription = InputOutput.inputString("Enter new title");
+                        updatedDescription = InputOutput.inputString("Enter new description");
                         controller.updateTaskDescription(updatedDescription, taskId);
                     }
                     case 3 -> {
-                        updatedStatus = InputOutput.inputString("Enter new title");
+                        updatedStatus = InputOutput.inputString("Enter new Status(TODO, IN PROGRESS or COMPLETED)");
                         controller.updateTaskStatus(updatedStatus, taskId);
                     }
                     case 4 -> {
                         updatedEstimation = InputOutput.inputDouble("Enter new Estimated Time(hours)");
-                        controller.updateTaskEstimatedTime(updatedEstimation,taskId);
+                        controller.updateTaskEstimatedTime(updatedEstimation, taskId);
                     }
                     case 5 -> {
-                        updatedPriority = InputOutput.inputDouble("Enter new Priority(1-5)");
-                        controller.updateTaskPriority(updatedPriority,taskId);
+                        updatedPriority = InputOutput.inputInt("Enter new Priority(1-5)");
+                        controller.updateTaskPriority(updatedPriority, taskId);
                     }
                     case 6 -> {
                         updatedDueDate = LocalDate.parse(InputOutput.inputString("Enter new Due Date (yyyy-mm-dd)"));
-                        controller.updateTaskDueDate(updatedDueDate,taskId);
+                        controller.updateTaskDueDate(updatedDueDate, taskId);
                     }
 
-                    case 7 ->{
-
+                    case 7 -> {
+                        //Case for the user to leave and go back to the taskboard.
                     }
                     default -> {
                         System.out.println("Invalid option");
                     }
                     //TODO Edit task
                 }
+            } while (property != 7);
+
         } else {
-            System.out.println("invalid");
+            System.out.println("invalid id, please enter another id");
         }
+    }
+        public void propertyChoices() {
+
+        String propertyC = "Which property would you like to change? Type one of the options below:\n" +
+                "1. Title\n" +
+                "2. Description\n" +
+                "3. Status\n" +
+                "4. Estimated time\n" +
+                "5. Priority\n" +
+                "6. Due Date\n"+
+                "7. Return\n"; /*Not sure about naming it "return", since they get an option
+            afterwards which is go back, maybe Done?*/
+
+        System.out.println(propertyC);
     }
 }
