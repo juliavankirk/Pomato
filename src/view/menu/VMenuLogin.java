@@ -3,7 +3,6 @@ package view.menu;
 import controllers.Controller;
 import utilities.InputOutput;
 import view.VMenu;
-import view.menu.loggedin.VMenuLoggedIn;
 
 import java.util.ArrayList;
 
@@ -39,7 +38,7 @@ public class VMenuLogin extends VMenu {
         System.out.println(response);
 
         if (response.equals("Bravo! You logged in.")) {
-          mSubMenus.add(new VMenuLoggedIn(this));
+            mSubMenus.add(new VMenuLoggedIn(this));
         }
 
         System.out.println(" ");

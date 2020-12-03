@@ -17,20 +17,22 @@ public class Project {
     private ArrayList<User> mProjectMembers;
     private LocalDate mStartDate;
     private LocalDate mDueDate;
-    private ArrayList<String> mTasks;
+    private ArrayList<Task> mTaskList;
+//    private ArrayList<Board> mBoards;
     private String mPassword;
 
     //Constructor
-    public Project(String projectTitle, String projectDescription/*, ArrayList<User> projectMembers*/, LocalDate startDate, LocalDate dueDate, String password) {
+    public Project(String projectTitle, String projectDescription/*, ArrayList<User> projectMembers*/, LocalDate startDate, LocalDate dueDate/*, String password*/) {
         mId = UUID.randomUUID();
         mProjectTitle = projectTitle;
         mProjectDescription = projectDescription;
         mProjectMembers = new ArrayList<User>();
         mStartDate = startDate;
         mDueDate = dueDate;
+        mTaskList = new ArrayList<>();
 //        mProjectMembers = projectMembers;
-//        mTasks = new ArrayList<String>();
-        mPassword = password;
+//        mBoards = new ArrayList<Board>();
+//        mPassword = password;
 
         if (mDueDate.isEqual(mStartDate) || mDueDate.isBefore(mStartDate)){
             throw new InvalidDataInput("Invalid input. Duration of the project must be positive");
@@ -80,13 +82,19 @@ public class Project {
         mDueDate = dueDate;
     }
 
-    public ArrayList<String> getTasks() {
-        return mTasks;
-    }
+    public ArrayList<Task> getTaskList(){ return mTaskList;}
+    public void addTask(Task task){ mTaskList.add(task);}
+    public void removeTask(int index){ mTaskList.remove(index);}
+//    public Task getTaskById (UUID id) { return mTaskList.get(id);}
 
-    public void setTasks(ArrayList<String> tasks) {
-        mTasks = tasks;
+    /*
+    public ArrayList<Board> getBoards() {
+        return mBoards;
     }
+    public void setBoards(ArrayList<Board> boards) {
+        mBoards = boards;
+    }
+     */
 
     public String getPassword() {
         return mPassword;

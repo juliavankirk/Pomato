@@ -60,7 +60,30 @@ public class InputOutput {
         return "-----------------------\n";
     }
 
+    public static String superSuperShortLine() {return "----------\n";}
+
     public static void closeScanner() {
         input.close();
+    }
+
+
+    /**
+     * Extra
+     */
+    // Input an integer between a min and a max value:
+    public static int inputIntMinMax(String messageToUser, int min, int max) {
+        System.out.print(messageToUser + ":");
+        int inputResult = input.nextInt();
+        input.nextLine();
+
+        // Checks if user types a number between the variables "min" and "max".
+        // Loop is repeated until a correct number is entered.
+        while (inputResult < min || inputResult > max) {
+            System.out.print("Please enter a valid value(" + min + "-" + max + "): ");
+            inputResult = input.nextInt();
+            input.nextLine();
+        }
+
+        return inputResult;
     }
 }

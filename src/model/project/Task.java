@@ -10,12 +10,12 @@ public class Task {
     private String mTaskTitle;
     private String mTaskDescription;
     private double mTaskEstimatedTime;
-    private String mTaskPriority;
+    private double mTaskPriority;
     private LocalDate mDateCreated;
     private LocalDate mTaskDueDate;
     private String mTaskStatus;
 
-    public Task(String taskTitle, String taskDescription, LocalDate taskDueDate, LocalDate taskStartDate, double taskEstimatedTime, String taskPriority) {
+    public Task(String taskTitle, String taskDescription, LocalDate taskDueDate, LocalDate taskStartDate, double taskEstimatedTime, double taskPriority) {
         mId = UUID.randomUUID();
         mTaskTitle = taskTitle;
         mTaskDescription = taskDescription;
@@ -33,7 +33,7 @@ public class Task {
 
     public double getTaskEstimatedTime(){ return mTaskEstimatedTime; }
 
-    public String getTaskPriority(){ return mTaskPriority; }
+    public double getTaskPriority(){ return mTaskPriority; }
 
     public LocalDate getDateCreated(){ return mDateCreated; }
 
@@ -47,7 +47,7 @@ public class Task {
 
     public void setTaskEstimatedTime(double taskEstimatedTime){ mTaskEstimatedTime = taskEstimatedTime;}
 
-    public void setTaskPriority (String taskPriority) { mTaskPriority = taskPriority;}
+    public void setTaskPriority (double taskPriority) { mTaskPriority = taskPriority;}
 
     public void setDateCreated (LocalDate dateCreated) { mDateCreated = dateCreated; }
 

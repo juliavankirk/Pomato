@@ -31,47 +31,22 @@ public class VMenuViewTaskBoard extends VMenu {
     @Override
     public void menuContent(Controller controller) {
         ArrayList<Task> taskList = controller.getTaskList();
+        String status;
 
         System.out.print(InputOutput.shortLine());
-        printTodo(taskList);
+        printLists(taskList, status = "TODO");
         System.out.print(InputOutput.shortLine());
-        printInProgress(taskList);
+        printLists(taskList, status = "IN PROGRESS");
         System.out.print(InputOutput.shortLine());
-        printCompleted(taskList);
+        printLists(taskList, status = "COMPLETED");
     }
 
-    private void printTodo(ArrayList<Task> taskList) {
-        System.out.println("TODO");
+    private void printLists(ArrayList<Task> taskList, String status) {
+        System.out.println(status);
 
         for (Task currentTask : taskList) {
 
-            if (currentTask.getTaskStatus().equals("TODO")) {
-                System.out.print(InputOutput.superShortLine());
-                System.out.println(currentTask);
-            }
-        }
-        System.out.println(" ");
-    }
-
-    private void printInProgress(ArrayList<Task> taskList) {
-        System.out.println("IN PROGRESS");
-
-        for (Task currentTask : taskList) {
-
-            if (currentTask.getTaskStatus().equals("IN PROGRESS")) {
-                System.out.print(InputOutput.superShortLine());
-                System.out.println(currentTask);
-            }
-        }
-        System.out.println(" ");
-    }
-
-    private void printCompleted(ArrayList<Task> taskList) {
-        System.out.println("COMPLETED");
-
-        for (Task currentTask : taskList) {
-
-            if (currentTask.getTaskStatus().equals("COMPLETED")) {
+            if (currentTask.getTaskStatus().equals(status)) {
                 System.out.print(InputOutput.superShortLine());
                 System.out.println(currentTask);
             }

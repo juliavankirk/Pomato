@@ -18,11 +18,15 @@ public class Controller {
     //Attributes
     Database mDatabase;
     VMenu mCurrentMenu;
+    private User mCurrentUser;
+    private Project mCurrentProject;
 
     //Constructor
     public Controller() {
         mDatabase = new Database();
         mCurrentMenu = new VMenuMain(null);
+        mCurrentUser = null;
+        mCurrentProject = null;
     }
 
 
@@ -50,10 +54,11 @@ public class Controller {
             LocalDate dueDate,
             LocalDate startDate,
             double estimatedTime,
-            String priority
+            double priority
     ) {
         Task task = new Task(title, description, dueDate, startDate, estimatedTime, priority);
-        mDatabase.addTask(task);
+//        mDatabase.addTask(task);
+        getCurrentProject().addTask(task);
     }
 
     public String removeTask(String taskId)  {
@@ -78,19 +83,15 @@ public class Controller {
 
 
     public ArrayList<Task> getTaskList() {
-        return mDatabase.getTaskList();
+
+        return mDatabase.mTaskList;
     }
 
 
     /**
      *  Handling user
      */
-    public void addUser(
-            String firstName,
-            String lastName,
-            String password,
-            String companyName,
-            double jobTitle,
+    public void addUser(String firstName, String lastName, String password, String companyName, double jobTitle,
             String hourlyWage ) {
         User user = new User( firstName, lastName, password, companyName, jobTitle, hourlyWage);
         mDatabase.addUser( user );
@@ -108,8 +109,11 @@ public class Controller {
             User someOne  = iterator.next();
             if (someOne.getId().equals(enteredUserName)) {
                 if (someOne.getPassword().equals(enteredPassword)) {
+                    setCurrentUser(someOne);
+
                     return "Bravo! You logged in.";
                 } else {
+
                     return "Password is incorrect";
                 }
             }
@@ -117,10 +121,12 @@ public class Controller {
         return "Username is incorrect";
     }
 
-    public String createProject(String title, String description, ArrayList<String> enteredIds,
-                                LocalDate startDate, LocalDate dueDate, String password) {
 
-        Project project = new Project(title, description, startDate, dueDate, password);
+    //User can create project and add members
+    public String createProject(String title, String description, ArrayList<String> enteredIds,
+                                LocalDate startDate, LocalDate dueDate/*, String password*/) {
+
+        Project project = new Project(title, description, startDate, dueDate/*, password*/);
 
         Collection<User> userList = mDatabase.getUserList();
 
@@ -135,12 +141,40 @@ public class Controller {
             }
         }
 
-        return "Project " + project.getProjectTitle() + " is created successfully!\nThe Id of this project is: " +
+        return "\nProject " + project.getProjectTitle() + " is created successfully!";/*\nThe Id of this project is: " +
                 project.getId() + "\nThe password of this project is: " + project.getPassword();
+                */
+    }
+
+    public ArrayList<Project> getProjects() {
+        return getCurrentUser().getProjects();
     }
 
 
-//    public void removeUser(UUID id) {
+    /**
+     * Methods for Current Logged-In User
+     */
+    public void setCurrentUser(User currentUser) {
+        mCurrentUser = currentUser;
+    }
+
+    public User getCurrentUser() {
+        return mCurrentUser;
+    }
+
+
+    /**
+     * Methods for Current Project
+     */
+    public void setCurrentProject(int chosenProject) {
+        mCurrentProject = getCurrentUser().getProjects().get(chosenProject);
+    }
+
+    public Project getCurrentProject() {
+        return mCurrentProject;
+    }
+
+    //    public void removeUser(UUID id) {
 //        mDatabase.removerUser(UUID id);
 //    }
 

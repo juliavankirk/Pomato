@@ -4,6 +4,8 @@ import controllers.Controller;
 import utilities.InputOutput;
 import view.VMenu;
 
+import java.util.ArrayList;
+
 public class VMenuExit extends VMenu {
 
 
@@ -17,7 +19,7 @@ public class VMenuExit extends VMenu {
         mMenuQuestion = "Enter choice";
         mMenuChoice = "E";
         mSubMenus = null;
-//        subMenu = false;
+//        mSubMenu = false;
     }
 
 
@@ -26,6 +28,8 @@ public class VMenuExit extends VMenu {
      */
     @Override
     public void menuContent(Controller controller) {
+
+
 //        System.out.println(InputOutput.line() + menuHeader + "\n");
         String yesNo = InputOutput.inputString("Are you sure you want to exit?(Yes/No)");
 
@@ -33,6 +37,9 @@ public class VMenuExit extends VMenu {
             System.out.println("Exiting the system. Goodbye!");
             System.exit(0);
         }
+
+//        mSubMenus = new ArrayList<>();
+//        mSubMenus.add(new VMenuMain(null));
 
         System.out.println(" ");
     }

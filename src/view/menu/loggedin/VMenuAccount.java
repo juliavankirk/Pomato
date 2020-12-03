@@ -1,6 +1,7 @@
-package view.menu.loggedin.account;
+package view.menu.loggedin;
 import controllers.Controller;
 import view.VMenu;
+import view.menu.loggedin.account.VMenuRemoveUser;
 
 import java.util.ArrayList;
 

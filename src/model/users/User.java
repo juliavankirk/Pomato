@@ -17,6 +17,7 @@ public class User {
     private String mJobTitle;
     private Double mHourlyWage;
     private ArrayList<Project> mProjects;
+//    private ArrayList<UUID> mProjectsUserCanAccess;
 
     //Constructor
     public User(String firstName, String lastName, String password, String companyName,
@@ -30,6 +31,7 @@ public class User {
         mJobTitle = jobTitle;
         mHourlyWage = hourlyWage;
         mProjects = new ArrayList<Project>();
+//        mProjectsUserCanAccess = new ArrayList<>();
     }
 
     //Methods
@@ -41,6 +43,11 @@ public class User {
 //
 //    public void setUserName(String mUserName) {
 //        this.mUserName = mUserName;
+//    }
+
+
+//    public ArrayList<UUID> getmProjectsUserCanAccess() {
+//        return mProjectsUserCanAccess;
 //    }
 
     public String getId() { return mId; }

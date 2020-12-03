@@ -1,6 +1,8 @@
 package view.menu.loggedin;
 
 import controllers.Controller;
+import model.project.Project;
+import utilities.InputOutput;
 import view.VMenu;
 import view.menu.loggedin.project.VMenuCommentBoard;
 import view.menu.loggedin.project.VMenuViewTaskBoard;
