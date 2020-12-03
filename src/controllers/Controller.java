@@ -2,6 +2,7 @@ package controllers;
 
 import model.project.Database;
 import model.project.Project;
+import model.project.Task;
 import model.users.User;
 import view.VMenu;
 import view.menu.VMenuMain;
@@ -11,7 +12,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.UUID;
-import model.project.Task;
 
 public class Controller {
 
@@ -173,9 +173,10 @@ public class Controller {
      * Handling Project
      */
     public String createProject(String title, String description, ArrayList<String> enteredIds,
-                                LocalDate startDate, LocalDate dueDate/*, String password*/) {
+                                LocalDate startDate, LocalDate dueDate) {
 
-        Project project = new Project(title, description, startDate, dueDate/*, password*/);
+        Project project = new Project(title, description, startDate, dueDate);
+        String projectId = project.getId();
 
         Collection<User> userList = mDatabase.getUserList();
 
@@ -186,9 +187,11 @@ public class Controller {
                 if (someOne.getId().equals(enteredIds.get(i))) {
                    project.getProjectMembers().add(someOne);
                    someOne.getProjects().add(project);
+                   someOne.addRole(projectId);
                 }
             }
         }
+        mCurrentUser.changeRole(projectId);
 
         return "\nProject " + project.getProjectTitle() + " is created successfully!";/*\nThe Id of this project is: " +
                 project.getId() + "\nThe password of this project is: " + project.getPassword();
@@ -198,6 +201,51 @@ public class Controller {
     public ArrayList<Project> getProjects() {
         return getCurrentUser().getProjects();
     }
+
+    public void addMembers(ArrayList<String> newMembersIds) {
+
+        Collection<User> userList = mDatabase.getUserList();
+
+        for (int i = 0; i < newMembersIds.size(); i++) {
+            for (Iterator<User> iterator = userList.iterator(); iterator.hasNext(); ) {
+                User someOne = iterator.next();
+
+                if (someOne.getId().equals(newMembersIds.get(i))) {
+                    mCurrentProject.getProjectMembers().add(someOne);
+                    someOne.getProjects().add(mCurrentProject);
+                    someOne.addRole(mCurrentProject.getId());
+                }
+            }
+        }
+
+
+    }
+
+    public void changeRoles(ArrayList<String> memberIds) {
+
+        for(int i = 0; i < memberIds.size(); i++) {
+            for(int j = 0; j < getCurrentProject().getProjectMembers().size(); j++) {
+                if(memberIds.get(i).equals(getCurrentProject().getProjectMembers().get(j).getId())) {
+                    getCurrentProject().getProjectMembers().get(j).changeRole(getCurrentProject().getId());
+                }
+            }
+
+        }
+        System.out.println("Roles are successfully changed");
+    }
+
+
+    /**
+     * Methods for Current Logged-In User
+     */
+    public void setCurrentUser(User currentUser) {
+        mCurrentUser = currentUser;
+    }
+
+    public User getCurrentUser() {
+        return mCurrentUser;
+    }
+
 
     /**
      * Methods for Current Project

@@ -29,7 +29,6 @@ public class VMenuCreateProject extends VMenu {
 
         String pDescription = InputOutput.inputString(("Project description"));
 
-        // TODO Make into owner?
         pMembersIds.add(controller.getCurrentUser().getId());
         String answer = InputOutput.inputString("Would you like to add more members?(yes/no)");
         while(answer.equals("yes")) {
@@ -41,9 +40,8 @@ public class VMenuCreateProject extends VMenu {
         LocalDate startDate = LocalDate.parse(InputOutput.inputString("Please enter the start date of project (yyyy-mm-dd)"));
         LocalDate dueDate = LocalDate.parse(InputOutput.inputString("Please enter due date of project (yyyy-mm-dd)"));
 
-//        String password = InputOutput.inputString("Choose a password for the project\n");
 
-        String message = controller.createProject(pTitle, pDescription, pMembersIds, startDate, dueDate /*,password*/);
+        String message = controller.createProject(pTitle, pDescription, pMembersIds, startDate, dueDate);
         System.out.println(message);
 
         System.out.println(" ");

@@ -17,6 +17,8 @@ public class User {
     private String mJobTitle;
     private Double mHourlyWage;
     private ArrayList<Project> mProjects;
+    private ArrayList<Role> mRoles;
+
 //    private ArrayList<UUID> mProjectsUserCanAccess;
 
     //Constructor
@@ -31,6 +33,8 @@ public class User {
         mJobTitle = jobTitle;
         mHourlyWage = hourlyWage;
         mProjects = new ArrayList<Project>();
+        mRoles = new ArrayList<Role>();
+
 //        mProjectsUserCanAccess = new ArrayList<>();
     }
 
@@ -86,8 +90,26 @@ public class User {
         return mProjects;
     }
 
-    public void setProjects(ArrayList<Project> mProjects) {
-        this.mProjects = mProjects;
+    public String getRole(String projectId) {
+        String role = "";
+        for(int i = 0; i < mRoles.size(); i++){
+            if (projectId.equals(mRoles.get(i).getProjectId())) {
+                role = mRoles.get(i).getMemberRole();
+            }
+        }
+        return role;
+    }
+
+    public void addRole(String projectId) {
+        mRoles.add(new Role(projectId));
+    }
+
+    public void changeRole(String projectId) {
+        for(int i = 0; i < mRoles.size(); i++){
+            if (projectId.equals(mRoles.get(i).getProjectId())) {
+                mRoles.get(i).changeRole();
+            }
+        }
     }
 
     public String toRow() {
