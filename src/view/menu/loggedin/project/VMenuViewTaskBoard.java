@@ -30,7 +30,7 @@ public class VMenuViewTaskBoard extends VMenu {
      */
     @Override
     public void menuContent(Controller controller) {
-        ArrayList<Task> taskList = controller.getTaskList();
+        ArrayList<Task> taskList = controller.getTaskListFromCurrentProject();
         String status;
 
         System.out.print(InputOutput.shortLine());

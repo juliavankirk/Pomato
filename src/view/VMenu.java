@@ -50,15 +50,20 @@ public abstract class VMenu {
 
         // 2. Every Menu has a header.
         System.out.print(InputOutput.line() + mMenuHeader + "\n");
+        // System.out.print(InputOutput.superSuperShortLine());
+        // Custom length on LINE instead of above code
+//        for (int i = 0; i < mMenuHeader.length(); i++) {
+//            System.out.print("--");
+//        }
+//        System.out.println( "\n" + mMenuHeader);
 
         // 3. This handles any extra choices in the menu.
         menuContent(controller);
 
         // 4. This prints Sub Menu choices. But only if the menu has Sub Menu's
         if (mSubMenus != null) {
-//            System.out.print(InputOutput.superSuperShortLine());
-
-            // Custom length on LINE instead of above
+            // System.out.print(InputOutput.superSuperShortLine());
+            // Custom length on LINE instead of above code
             for (int i = 0; i < mMenuHeader.length(); i++) {
                 System.out.print("-");
             }

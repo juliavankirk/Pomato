@@ -21,5 +21,3 @@ public class VMenuRemoveTask extends VMenu {
         System.out.println(remove);
     }
 }
-
-

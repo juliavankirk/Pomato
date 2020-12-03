@@ -19,6 +19,11 @@ public class VMenuEditTask extends VMenu {
 
     @Override
     public void menuContent(Controller controller) {
+        //TODO
+        System.out.println("Which task do you want to edit? (ID)");
+
+        System.out.println("Which property would you like to change?(T)Title");
+
         //TODO Edit task
     }
 }

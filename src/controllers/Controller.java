@@ -62,10 +62,10 @@ public class Controller {
     }
 
     public String removeTask(String taskId)  {
-        int idToRemove = -1;
+        int taskListSize = getTaskListFromCurrentProject().size();
 
-        for (int i = 0; i < getTaskList().size(); i++) {
-            UUID stringUuid = getTaskList().get(i).getId();
+        for (int i = 0; i < taskListSize; i++) {
+            UUID stringUuid = getTaskListFromCurrentProject().get(i).getId();
 
             if ( stringUuid.toString().equals(taskId)) {
                 mDatabase.removeTask(i);
@@ -82,9 +82,9 @@ public class Controller {
     }
 
 
-    public ArrayList<Task> getTaskList() {
+    public ArrayList<Task> getTaskListFromCurrentProject() {
 
-        return mDatabase.mTaskList;
+        return getCurrentProject().getTaskList();
     }
 
 
