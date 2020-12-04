@@ -20,9 +20,7 @@ public class VMenuCreateTask extends VMenu {
 
     @Override
     public void menuContent(Controller controller) {
-        String title, description;
-        double priority, estimatedTime;
-        LocalDate dueDate, startDate;
+        String title, description; double estimatedTime; LocalDate dueDate, startDate; int priority;
 
         System.out.println("Please enter the following information\n ");
         title = InputOutput.inputString("Title");
@@ -31,10 +29,10 @@ public class VMenuCreateTask extends VMenu {
         priority = InputOutput.inputIntMinMax("Priority (1-5)",1,5);
         dueDate = LocalDate.parse(InputOutput.inputString("Due Date (yyyy-mm-dd)"));
         startDate = LocalDate.now();
+        //Do we have to initialize startDate? Its already set?
         controller.addTask(title, description, dueDate, startDate, estimatedTime, priority);
 
         addMoreTasks(controller);
-//        System.out.println("");
 
     }
 
@@ -46,6 +44,5 @@ public class VMenuCreateTask extends VMenu {
             answer = "";
             menuContent(controller);
         }
-//        System.out.println("");
     }
 }
