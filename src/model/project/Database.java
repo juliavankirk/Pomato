@@ -2,12 +2,13 @@ package model.project;
 
 import model.users.User;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.UUID;
 
-public class Database {
+public class Database implements Serializable {
     public HashMap<String, User> mUserList;
     public HashMap<String, Project> mProjectList;
     public ArrayList <Task> mTaskList;

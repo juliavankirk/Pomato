@@ -1,6 +1,8 @@
 package model.users;
 
-public class Role {
+import java.io.Serializable;
+
+public class Role implements Serializable {
 
     /**
      * Attribute

@@ -26,7 +26,7 @@ public class VMenuRegister extends VMenu {
 
     @Override
     public void menuContent(Controller controller) {
-        String firstName, lastName, password, companyName, jobTitle;
+        String userName, firstName, lastName, password, companyName, jobTitle;
         double hourlyWage;
 
         // 1. Print the Menu Content and handle input
@@ -38,10 +38,11 @@ public class VMenuRegister extends VMenu {
         companyName = InputOutput.inputString("Company Name");
         jobTitle = InputOutput.inputString("Position");
         hourlyWage = InputOutput.inputDouble("Hourly wage");
+        userName = InputOutput.inputString("Username");
         password = InputOutput.inputString("Password");
 
         // 2. Send the gathered data to be handled by the controller.
-        controller.addUser(firstName, lastName, password, companyName, hourlyWage, jobTitle );
+        controller.addUser(userName, firstName, lastName, password, companyName, hourlyWage, jobTitle );
 
         System.out.println("");
     }
