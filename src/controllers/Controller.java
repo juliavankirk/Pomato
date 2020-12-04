@@ -143,7 +143,7 @@ public class Controller {
 
         for(User foundUser: mDatabase.getUserList()) {
             if (foundUser.getUserName().equals(userName)) {
-                System.out.println("That username is already taken");
+                System.out.println("\nAccount registration failed!\nThe Username: " + userName + ", is already taken");
             } else {
                 mDatabase.addUser( user );
                 System.out.println("Your username is: " + user.getUserName() + "\nYour password is: " + user.getPassword());
@@ -264,7 +264,7 @@ public class Controller {
 
 
     /**
-     * Method for saving to a file:
+     * Method for saving DATABASE to a file:
      */
 
     //TODO Save the Database with all the users
