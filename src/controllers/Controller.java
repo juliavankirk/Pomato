@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.UUID;
+import model.project.Task;
 
 public class Controller {
 
@@ -137,6 +138,7 @@ public class Controller {
     public void removeUser(String id) {
         mDatabase.removeUser(UUID.fromString(id));
     }
+
 
     public String logInUser(String enteredUserName, String enteredPassword) {
         Collection<User> userList = mDatabase.getUserList();
