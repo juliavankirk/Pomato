@@ -193,9 +193,7 @@ public class Controller {
         }
         mCurrentUser.changeRole(projectId);
 
-        return "\nProject " + project.getProjectTitle() + " is created successfully!";/*\nThe Id of this project is: " +
-                project.getId() + "\nThe password of this project is: " + project.getPassword();
-                */
+        return "\nProject " + project.getProjectTitle() + " is created successfully!";
     }
 
     public ArrayList<Project> getProjects() {
@@ -229,7 +227,6 @@ public class Controller {
                     getCurrentProject().getProjectMembers().get(j).changeRole(getCurrentProject().getId());
                 }
             }
-
         }
         System.out.println("Roles are successfully changed");
     }

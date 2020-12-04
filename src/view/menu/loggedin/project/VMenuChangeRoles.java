@@ -15,7 +15,7 @@ public class VMenuChangeRoles extends VMenu {
     public VMenuChangeRoles (VMenu parent) {
         super(parent);
         mMenuHeader = "Change members roles";
-        mMenuLabel = "New role";
+        mMenuLabel = "Change members roles";
         mMenuQuestion = "Enter choice";
     }
 
@@ -27,6 +27,7 @@ public class VMenuChangeRoles extends VMenu {
         while(answer.equals("yes")) {
             String newRoleId = InputOutput.inputString("Insert the IDs of members you wish to change their " +
                     "roles");
+            newRolesIds.add(newRoleId);
             answer = InputOutput.inputString("Would you like to add more IDs?(yes/No)");
         }
         controller.changeRoles(newRolesIds);
@@ -35,6 +36,6 @@ public class VMenuChangeRoles extends VMenu {
                     "than a poor developer.");
         }
         System.out.println(" ");
-
+//2nd
     }
 }
