@@ -140,8 +140,15 @@ public class Controller {
     public void addUser(String userName, String firstName, String lastName, String password, String companyName, double jobTitle,
             String hourlyWage ) {
         User user = new User(userName, firstName, lastName, password, companyName, jobTitle, hourlyWage);
-        mDatabase.addUser( user );
-        System.out.println("Your username is: " + user.getUserName() + "\nYour password is: " + user.getPassword());
+
+        for(User foundUser: mDatabase.getUserList()) {
+            if (foundUser.getUserName().equals(userName)) {
+                System.out.println("That username is already taken");
+            } else {
+                mDatabase.addUser( user );
+                System.out.println("Your username is: " + user.getUserName() + "\nYour password is: " + user.getPassword());
+            }
+        }
     }
 
     public void removeUser(String id) {
@@ -270,7 +277,7 @@ public class Controller {
             outStream.writeObject(mDatabase);
             outStream.close();
             fileOut.close();
-            System.out.println("Changes are saved in " + fileLocation);
+//            System.out.println("Changes are saved in " + fileLocation);
 
         } catch (IOException ex) {
             ex.printStackTrace();
