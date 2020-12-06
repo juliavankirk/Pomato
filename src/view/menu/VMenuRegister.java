@@ -39,6 +39,9 @@ public class VMenuRegister extends VMenu {
         jobTitle = InputOutput.inputString("Position");
         hourlyWage = InputOutput.inputDouble("Hourly wage");
         userName = InputOutput.inputString("Username");
+        while (controller.checkUsername(userName).equals("This username is taken before. Please select another username.")) {
+            userName = InputOutput.inputString("Username");
+        }
         password = InputOutput.inputString("Password");
 
         // 2. Send the gathered data to be handled by the controller.
@@ -47,9 +50,7 @@ public class VMenuRegister extends VMenu {
         System.out.println("");
     }
 
-    // TODO Send a request to controller,
-    //  Controller checks if User really exists in the database,
-    //  Then print this if User is found? ( Overcomplicated? :´) )
+
 //    public void registerSuccess() {
 //        System.out.println("Register success!");
 //    }

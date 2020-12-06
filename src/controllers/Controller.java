@@ -137,6 +137,20 @@ public class Controller {
     /**
      *  Handling user
      */
+
+    public String checkUsername(String enteredUsername) {
+        Collection<User> userList = mDatabase.getUserList();
+
+        for (Iterator<User> iterator = userList.iterator(); iterator.hasNext(); ) {
+            User someOne = iterator.next();
+            if(someOne.getUserName().equals(enteredUsername)) {
+                return "This username is taken before. Please select another username.";
+            }
+        }
+        return enteredUsername;
+    }
+
+
     public void addUser(String userName, String firstName, String lastName, String password, String companyName, double jobTitle,
             String hourlyWage ) {
         User user = new User(userName, firstName, lastName, password, companyName, jobTitle, hourlyWage);
@@ -211,7 +225,7 @@ public class Controller {
         }
         mCurrentUser.changeRole(projectId);
 
-        return "\nProject " + project.getProjectTitle() + " is created successfully!";
+        return "\nProject " + project.getProjectTitle() + " is created successfully! You are the manager of this project now ;)";
     }
 
     public ArrayList<Project> getProjects() {
