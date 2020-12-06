@@ -40,7 +40,7 @@ public class VMenuRegister extends VMenu {
         hourlyWage = InputOutput.inputDouble("Hourly wage");
         userName = InputOutput.inputString("Username");
         String message = controller.checkUsername(userName);
-        while (message.equals("This username is taken before. Please select another username.")) {
+        while (!message.equals(userName)) {
             System.out.println(message);
             userName = InputOutput.inputString("Username");
             message = controller.checkUsername(userName);
