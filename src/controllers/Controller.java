@@ -154,15 +154,8 @@ public class Controller {
     public void addUser(String userName, String firstName, String lastName, String password, String companyName, double jobTitle,
             String hourlyWage ) {
         User user = new User(userName, firstName, lastName, password, companyName, jobTitle, hourlyWage);
-
-        for(User foundUser: mDatabase.getUserList()) {
-            if (foundUser.getUserName().equals(userName)) {
-                System.out.println("\nAccount registration failed!\nThe Username: " + userName + ", is already taken");
-            } else {
-                mDatabase.addUser( user );
-                System.out.println("Your username is: " + user.getUserName() + "\nYour password is: " + user.getPassword());
-            }
-        }
+        mDatabase.addUser( user );
+        System.out.println("Your username is: " + user.getUserName() + "\nYour password is: " + user.getPassword());
     }
 
     public void removeUser(String id) {
