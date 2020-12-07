@@ -28,6 +28,7 @@ public class Task {
         mStatus = "TODO";
         mChecklists = new ArrayList<>();
     }
+
     public UUID getId() { return mId; }
     public String getTitle(){ return mTitle; }
     public String getDescription(){ return mDescription; }
@@ -68,7 +69,10 @@ public class Task {
         retVal += ("\nEstimated Time: " + getEstimatedTime() + " hours");
         retVal += ("\nPriority: " + getPriority() + "/5");
         retVal += ("\nID: " + getId() + "\n");
-        retVal += ("\nChecklist: " + getChecklists() + "\n");
+
+        if (!(getChecklists().isEmpty())){
+            retVal += ("\nChecklist: " + getChecklists() + "\n");
+        }
         return retVal;
     }
 

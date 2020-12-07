@@ -22,10 +22,23 @@ public class Checklist {
     public void setName(String name){mName = name;}
 
     public String toString() {
-        String retVal = "";
-        retVal += ("Name: " +getName());
-        retVal += ("\nID: " + getId() + "\n");
-        return retVal;
+        StringBuilder retVal = new StringBuilder();
+        retVal.append("\n").append(getName());
+        retVal.append("\nID: ").append(getId()).append("\n");
+        for (int i = 0; i < mItems.size(); i++) {
+            Item currentItem = mItems.get(i);
+
+            if (currentItem.getStatus().equals("Not Done")) {
+                retVal.append( "[ ] " + currentItem.getTopic() + "\n");
+            } else {
+                retVal.append( "[V] " + currentItem.getTopic() + "\n");
+            }
+        }
+        return retVal.toString();
+    }
+
+    public void setItems(ArrayList<Item> items) {
+        mItems = items;
     }
 }
 

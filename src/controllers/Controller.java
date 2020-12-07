@@ -1,9 +1,6 @@
 package controllers;
 
-import model.project.Checklist;
-import model.project.Database;
-import model.project.Project;
-import model.project.Task;
+import model.project.*;
 import model.users.User;
 import view.VMenu;
 import view.menu.VMenuMain;
@@ -94,11 +91,26 @@ public class Controller {
         return getCurrentProject().getTaskList().get
     }*/
 
-    public String addChecklist(String name, String taskId) {
+    public String addChecklist(String name, String taskId, ArrayList<String> itemStringList) {
         Task task = getTaskById(taskId);
         Checklist checklist = new Checklist(name);
-        task.addChecklist(checklist);
-        return "Checklist with name: " + name + " has successfully been created";
+
+
+        if (!(itemStringList.isEmpty())) {
+            ArrayList<Item> itemList = new ArrayList<>();
+
+            for (String s : itemStringList) {
+                itemList.add(new Item(s));
+            }
+            checklist.setItems(itemList);
+            task.addChecklist(checklist);
+
+            return "Checklist with name: " + name + " and " + (itemList.size()+1) + " item(s), has successfully been created";
+        } else {
+            task.addChecklist(checklist);
+
+            return "Checklist with name: " + name + " has successfully been created";
+        }
     }
 
     /**
