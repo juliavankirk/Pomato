@@ -3,12 +3,13 @@ package model.project;
 import model.users.User;
 import utilities.InvalidDataInput;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.UUID;
 
-public class Project {
+public class Project implements Serializable {
 
     //Attributes
     private String mId;
@@ -82,9 +83,19 @@ public class Project {
         mDueDate = dueDate;
     }
 
+
+    /**
+     * Methods
+     */
+
+    public long projectDuration () {
+        return ChronoUnit.DAYS.between(mStartDate, mDueDate);
+    }
+
     public ArrayList<Task> getTaskList(){ return mTaskList;}
-    public void addTask(Task task){ mTaskList.add(task);}
+    public void addTaskToList(Task task){ mTaskList.add(task);}
     public void removeTask(int index){ mTaskList.remove(index);}
+    // public Task getTaskById (UUID id) { return mTaskList.get(id);}
     public Task getTaskById (int index) { return mTaskList.get(index);}
 
     /*
@@ -96,9 +107,18 @@ public class Project {
     }
      */
 
-    //Methods
-    public long projectDuration () {
-        return ChronoUnit.DAYS.between(mStartDate, mDueDate);
+    public String getInfo(){
+        String projectInfo =
+                getId() + ";" +
+                getProjectTitle() + ";" +
+                getProjectDescription() + ";" +
+                getProjectMembers().get(0) + ";" +
+                getStartDate() + ";" +
+                getDueDate() + ";" +
+                getTaskList() + ";"
+                ;
+
+        return projectInfo;
     }
 
     public String toString() {

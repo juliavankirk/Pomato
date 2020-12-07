@@ -5,6 +5,7 @@ import model.users.User;
 import view.VMenu;
 import view.menu.VMenuMain;
 
+import java.io.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -35,11 +36,17 @@ public class Controller {
      * I don't know if I like to have the loop like this here but it keeps everything very simple.
      * This loop is what makes moving through the menu's possible.
      */
-    public void executeViews(Controller controller) {
+    public void executeViewsAndDatabase(Controller controller) {
+
+        //Loading the database once, when the program starts
+        loadDatabase();
 
         // This is the loop that keeps us within the different menu's
         // Since we are always in a menu this will always run.
         while (mCurrentMenu != null) {
+
+            // Right now we are saving the database every time we switch view
+            saveDatabase();
 
             // The method ".executeMenu" in the class "VMenu" returns the "chosenMenu",
             // which means that "mCurrentMenu" becomes the "chosenMenu".
@@ -54,7 +61,7 @@ public class Controller {
      */
     public void addTask(String title, String description, LocalDate dueDate, LocalDate startDate, double estimatedTime, int priority) {
         Task task = new Task(title, description, dueDate, startDate, estimatedTime, priority);
-        getCurrentProject().addTask(task);
+        getCurrentProject().addTaskToList(task);
     }
 
     public String removeTask(String taskId) {
@@ -68,6 +75,12 @@ public class Controller {
                 return "Task with ID: " + taskId + " has been removed";
             }
         }
+//        if (idToRemove != -1) {
+//            mDatabase.removeTask(UUID.fromString(taskId));
+//            return "Task with ID: " + taskId + " has been removed";
+//        } else {
+//            return "Task with ID: " + taskId + " was not found";
+//        }
         return "Task with ID: " + taskId + " was not found";
     }
 
@@ -145,23 +158,38 @@ public class Controller {
     /**
      *  Handling user
      */
-    public void addUser(String firstName, String lastName, String password, String companyName, double jobTitle,
+
+    public String checkUsername(String enteredUsername) {
+        Collection<User> userList = mDatabase.getUserList();
+
+        for (Iterator<User> iterator = userList.iterator(); iterator.hasNext(); ) {
+            User someOne = iterator.next();
+            if(someOne.getUserName().equals(enteredUsername)) {
+                return "This username is taken before. Please select another username.";
+            }
+        }
+        return enteredUsername;
+    }
+
+
+    public void addUser(String userName, String firstName, String lastName, String password, String companyName, double jobTitle,
             String hourlyWage ) {
-        User user = new User( firstName, lastName, password, companyName, jobTitle, hourlyWage);
+        User user = new User(userName, firstName, lastName, password, companyName, jobTitle, hourlyWage);
         mDatabase.addUser( user );
-        System.out.println("Your username is: " + user.getId() + "\nYour password is: " + user.getPassword());
+        System.out.println("Your username is: " + user.getUserName() + "\nYour password is: " + user.getPassword());
     }
 
     public void removeUser(String id) {
         mDatabase.removeUser(UUID.fromString(id));
     }
 
+
     public String logInUser(String enteredUserName, String enteredPassword) {
         Collection<User> userList = mDatabase.getUserList();
 
         for (Iterator<User> iterator = userList.iterator(); iterator.hasNext();) {
             User someOne  = iterator.next();
-            if (someOne.getId().equals(enteredUserName)) {
+            if (someOne.getUserName().equals(enteredUserName)) {
                 if (someOne.getPassword().equals(enteredPassword)) {
                     setCurrentUser(someOne);
 
@@ -211,7 +239,7 @@ public class Controller {
         }
         mCurrentUser.changeRole(projectId);
 
-        return "\nProject " + project.getProjectTitle() + " is created successfully!";
+        return "\nProject " + project.getProjectTitle() + " is created successfully! You are the manager of this project now ;)";
     }
 
     public ArrayList<Project> getProjects() {
@@ -254,6 +282,8 @@ public class Controller {
      */
     public void setCurrentProject(int chosenProject) {
         mCurrentProject = getCurrentUser().getProjects().get(chosenProject);
+
+        saveDatabase(); // We save the project once it has been accessed
     }
 
     public Project getCurrentProject() {
@@ -261,7 +291,49 @@ public class Controller {
     }
 
 
+    /**
+     * Method for saving DATABASE to a file:
+     */
 
+    //TODO Save the Database with all the users
+    public void saveDatabase() {
+        String fileLocation = "data/database.ser";
+
+        try {
+            FileOutputStream fileOut = new FileOutputStream(fileLocation);
+            ObjectOutputStream outStream = new ObjectOutputStream(fileOut);
+            outStream.writeObject(mDatabase);
+            outStream.close();
+            fileOut.close();
+//            System.out.println("Changes are saved in " + fileLocation);
+
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public void loadDatabase() {
+        String fileLocation = "data/database.ser";
+//        mDatabase = null;
+
+        try {
+            FileInputStream fileInput = new FileInputStream(fileLocation);
+            ObjectInputStream inputStream = new ObjectInputStream(fileInput);
+            mDatabase = (Database) inputStream.readObject();
+            inputStream.close();
+            fileInput.close();
+        }
+        catch (IOException ioEx) {
+            System.out.println("File is empty");
+            ioEx.printStackTrace();
+            return;
+        }
+        catch (ClassNotFoundException classEx) {
+            System.out.println("Database not found");
+            classEx.printStackTrace();
+            return;
+        }
+    }
 //    void doMainMenu() {
 //        mVMenuMain.renderMenu(true);
 //
