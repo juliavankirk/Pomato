@@ -2,10 +2,11 @@ package model.project;
 
 import view.VMenu;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.UUID;
 
-public class Task {
+public class Task implements Serializable {
     private UUID   mId;
     private String mTitle;
     private String mDescription;

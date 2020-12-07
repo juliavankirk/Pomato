@@ -12,6 +12,7 @@ public class Main {
      * Attributes
      */
     Controller controller;
+//    StorageController storageController = new StorageController();
 
 
     /**
@@ -30,7 +31,7 @@ public class Main {
      */
     public void runProgram() {
         controller = new Controller();
-        controller.executeViews(controller);
+        controller.executeViewsAndDatabase(controller);
     }
 
 

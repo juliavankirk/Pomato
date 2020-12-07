@@ -1,14 +1,15 @@
 package model.users;
 import model.project.Project;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.UUID;
 
 
-public class User {
+public class User implements Serializable {
 
     //Attributes
-//    private String mUserName;
+    private String mUserName;
     private String mId;
     private String mFirstName;
     private String mLastName;
@@ -22,9 +23,9 @@ public class User {
 //    private ArrayList<UUID> mProjectsUserCanAccess;
 
     //Constructor
-    public User(String firstName, String lastName, String password, String companyName,
+    public User(String userName, String firstName, String lastName, String password, String companyName,
                 Double hourlyWage, String jobTitle) {
-//        mUserName = userName;
+        mUserName = userName;
         mId = UUID.randomUUID().toString();
         mFirstName = firstName;
         mLastName = lastName;
@@ -41,13 +42,13 @@ public class User {
     //Methods
 
 
-//    public String getUserName() {
-//        return mUserName;
-//    }
-//
-//    public void setUserName(String mUserName) {
-//        this.mUserName = mUserName;
-//    }
+    public String getUserName() {
+        return mUserName;
+    }
+
+    public void setUserName(String userName) {
+        mUserName = userName;
+    }
 
 
 //    public ArrayList<UUID> getmProjectsUserCanAccess() {
