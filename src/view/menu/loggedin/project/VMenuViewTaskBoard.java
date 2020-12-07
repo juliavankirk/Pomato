@@ -22,6 +22,7 @@ public class VMenuViewTaskBoard extends VMenu {
         mSubMenus.add(new VMenuCreateTask(this));
         mSubMenus.add(new VMenuRemoveTask(this));
         mSubMenus.add(new VMenuEditTask(this));
+        mSubMenus.add(new VMenuAddChecklist(this));
     }
 
 

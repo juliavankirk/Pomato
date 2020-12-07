@@ -1,5 +1,6 @@
 package controllers;
 
+import model.project.Checklist;
 import model.project.Database;
 import model.project.Project;
 import model.project.Task;
@@ -70,12 +71,6 @@ public class Controller {
                 return "Task with ID: " + taskId + " has been removed";
             }
         }
-//        if (idToRemove != -1) {
-//            mDatabase.removeTask(UUID.fromString(taskId));
-//            return "Task with ID: " + taskId + " has been removed";
-//        } else {
-//            return "Task with ID: " + taskId + " was not found";
-//        }
         return "Task with ID: " + taskId + " was not found";
     }
 
@@ -93,6 +88,17 @@ public class Controller {
     public ArrayList<Task> getTaskListFromCurrentProject() {
 
         return getCurrentProject().getTaskList();
+    }
+
+   /* public ArrayList<Checklist> getChecklistFromCurrentTask(){
+        return getCurrentProject().getTaskList().get
+    }*/
+
+    public String addChecklist(String name, String taskId) {
+        Task task = getTaskById(taskId);
+        Checklist checklist = new Checklist(name);
+        task.addChecklist(checklist);
+        return "Checklist with name: " + name + " has successfully been created";
     }
 
     /**
@@ -241,6 +247,7 @@ public class Controller {
     public Project getCurrentProject() {
         return mCurrentProject;
     }
+
 
 
 //    void doMainMenu() {
