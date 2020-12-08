@@ -1,22 +1,24 @@
 package model.project;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.UUID;
 
-public class Checklist {
+public class Checklist implements Serializable {
 
     private UUID mId;
     private String mName;
-    private ArrayList<Item> mItems; // really unsure about the naming,
+    private ArrayList<ChecklistItem> mChecklistItems; // really unsure about the naming,
     // but couldn't come up with something better
+    // I'm really unsure about ChecklistItems as a name too hehe. Ohh well.
 
     public Checklist(String name){
         mId = UUID.randomUUID();
         mName = name;
-        mItems = new ArrayList<>();
+        mChecklistItems = new ArrayList<>();
     }
 
-    public ArrayList<Item> getItems(){ return mItems;}
+    public ArrayList<ChecklistItem> getItems(){ return mChecklistItems;}
     public String getName(){return mName;}
     public UUID getId(){return mId;}
     public void setName(String name){mName = name;}
@@ -24,21 +26,21 @@ public class Checklist {
     public String toString() {
         StringBuilder retVal = new StringBuilder();
         retVal.append("\n").append(getName());
-        retVal.append("\nID: ").append(getId()).append("\n");
-        for (int i = 0; i < mItems.size(); i++) {
-            Item currentItem = mItems.get(i);
+        retVal.append(", ID: ").append(getId()).append("\n");
+        for (int i = 0; i < mChecklistItems.size(); i++) {
+            ChecklistItem currentChecklistItem = mChecklistItems.get(i);
 
-            if (currentItem.getStatus().equals("Not Done")) {
-                retVal.append( "[ ] " + currentItem.getTopic() + "\n");
+            if (currentChecklistItem.getStatus().equals("Not Done")) {
+                retVal.append( "[ ] " + currentChecklistItem.getTopic() + "\n");
             } else {
-                retVal.append( "[V] " + currentItem.getTopic() + "\n");
+                retVal.append( "[V] " + currentChecklistItem.getTopic() + "\n");
             }
         }
         return retVal.toString();
     }
 
-    public void setItems(ArrayList<Item> items) {
-        mItems = items;
+    public void setItems(ArrayList<ChecklistItem> checklistItems) {
+        mChecklistItems = checklistItems;
     }
 }
 

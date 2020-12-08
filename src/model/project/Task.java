@@ -73,8 +73,18 @@ public class Task implements Serializable {
         retVal += ("\nPriority: " + getPriority() + "/5");
         retVal += ("\nID: " + getId() + "\n");
 
+
+
         if (!(getChecklists().isEmpty())){
-            retVal += ("\nChecklist: " + getChecklists() + "\n");
+            retVal += ("\nChecklists: ");
+
+            for (int i = 0; i < mChecklists.size(); i++) {
+                Checklist currentChecklist = mChecklists.get(i);
+                String currentIndex = mChecklists.get(i).toString();
+                retVal += (currentChecklist);
+            }
+
+
         }
         return retVal;
     }

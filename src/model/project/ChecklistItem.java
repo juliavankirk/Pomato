@@ -1,13 +1,14 @@
 package model.project;
 
+import java.io.Serializable;
 import java.util.UUID;
 
-public class Item {
+public class ChecklistItem implements Serializable {
     private UUID mId;
     private String mTopic;
     private String mStatus;
 
-    public Item (String topic){
+    public ChecklistItem(String topic){
         mId = UUID.randomUUID();
         mTopic = topic;
         mStatus = "Not Done";

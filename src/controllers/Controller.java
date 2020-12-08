@@ -75,12 +75,6 @@ public class Controller {
                 return "Task with ID: " + taskId + " has been removed";
             }
         }
-//        if (idToRemove != -1) {
-//            mDatabase.removeTask(UUID.fromString(taskId));
-//            return "Task with ID: " + taskId + " has been removed";
-//        } else {
-//            return "Task with ID: " + taskId + " was not found";
-//        }
         return "Task with ID: " + taskId + " was not found";
     }
 
@@ -110,15 +104,15 @@ public class Controller {
 
 
         if (!(itemStringList.isEmpty())) {
-            ArrayList<Item> itemList = new ArrayList<>();
+            ArrayList<ChecklistItem> checklistItemList = new ArrayList<>();
 
             for (String s : itemStringList) {
-                itemList.add(new Item(s));
+                checklistItemList.add(new ChecklistItem(s));
             }
-            checklist.setItems(itemList);
+            checklist.setItems(checklistItemList);
             task.addChecklist(checklist);
 
-            return "Checklist with name: " + name + " and " + (itemList.size()+1) + " item(s), has successfully been created";
+            return "Checklist with name: " + name + " and " + checklistItemList.size() + " item(s), has successfully been created";
         } else {
             task.addChecklist(checklist);
 
