@@ -4,6 +4,7 @@ import view.VMenu;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.UUID;
 
 public class Task implements Serializable {
@@ -14,21 +15,28 @@ public class Task implements Serializable {
     private int mPriority;
     private LocalDate mDateCreated;
     private LocalDate mDueDate;
+    private LocalDate mStartDate;
+    private LocalDate mEndDate;
     private String mStatus;
 
     //Do we have to initialize startDate in constructor? Its already set?
-    public Task(String Title, String Description, LocalDate DueDate, LocalDate taskStartDate, double EstimatedTime, int Priority) {
+    public Task(String title, String description, LocalDate dueDate, LocalDate startDate, LocalDate endDate, double estimatedTime, int priority) {
         mId = UUID.randomUUID();
-        mTitle = Title;
-        mDescription = Description;
-        mEstimatedTime = EstimatedTime;
-        mPriority = Priority;
+        mTitle = title;
+        mDescription = description;
+        mStartDate = startDate;
+        mEndDate = null;
+        mEstimatedTime = estimatedTime;
+        mPriority = priority;
         mDateCreated = LocalDate.now();
-        mDueDate = DueDate;
+        mDueDate = dueDate;
         mStatus = "TODO";
     }
+
     public UUID getId() { return mId; }
+
     public String getTitle(){ return mTitle; }
+
     public String getDescription(){ return mDescription; }
 
     public LocalDate getDueDate(){ return mDueDate; }
@@ -43,15 +51,24 @@ public class Task implements Serializable {
 
     public void setTitle(String Title) { mTitle = Title; }
 
-    public void setDescription(String Description) { mDescription = Description;}
+    public void setDescription(String Description) { mDescription = Description; }
 
-    public void setDueDate(LocalDate DueDate){ mDueDate = DueDate;}
+    public void setDueDate(LocalDate DueDate){ mDueDate = DueDate; }
 
-    public void setEstimatedTime(double EstimatedTime){ mEstimatedTime = EstimatedTime;}
+    public void setEstimatedTime(double EstimatedTime){ mEstimatedTime = EstimatedTime; }
 
-    public void setPriority (int taskPriority) { mPriority = taskPriority;}
+    public void setPriority (int taskPriority) { mPriority = taskPriority; }
 
-    public void setStatus (String taskStatus){ mStatus = taskStatus;}
+    public void setStatus (String taskStatus){ mStatus = taskStatus; }
+
+    //method that returns total days spent on task
+    public long totalDays() {
+        //end date is assigned current date if null, otherwise passed value is entered
+        LocalDate submission = mEndDate == null ? LocalDate.now() : mEndDate;
+        //delta calculation between start and end dates
+        long daysBetween = Period.between(mStartDate, submission).getDays() + 1;
+        return daysBetween;
+    }
 
 
 
