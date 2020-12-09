@@ -7,10 +7,7 @@ import view.menu.VMenuMain;
 
 import java.io.*;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.UUID;
+import java.util.*;
 
 public class Controller {
 
@@ -307,25 +304,30 @@ public class Controller {
     }
 
     public void loadDatabase() {
-        String fileLocation = "data/database.ser";
-//        mDatabase = null;
+
+        String STORAGE = "./src/STORAGE.csv";
 
         try {
-            FileInputStream fileInput = new FileInputStream(fileLocation);
-            ObjectInputStream inputStream = new ObjectInputStream(fileInput);
-            mDatabase = (Database) inputStream.readObject();
-            inputStream.close();
-            fileInput.close();
-        }
-        catch (IOException ioEx) {
-            System.out.println("File is empty");
-            ioEx.printStackTrace();
-            return;
-        }
-        catch (ClassNotFoundException classEx) {
-            System.out.println("Database not found");
-            classEx.printStackTrace();
-            return;
+            File customerFile = new File(STORAGE);
+            FileReader fileReader = new FileReader(customerFile);
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+            String line = null;
+            while ((line = bufferedReader.readLine()) != null) {
+                String[] retrievedInfo = line.split(";");
+
+                if (retrievedInfo[0].equals("User")) {
+                    User user = new User(retrievedInfo);
+                    if (checkUsername(user.getUserName()).equals("This username is taken before. Please select another username.")) {
+                        mDatabase.addUser(user);
+                        System.out.println("Added: " + Arrays.toString(retrievedInfo));
+                    }
+                }
+            }
+
+        } catch (FileNotFoundException e) {
+
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 //    void doMainMenu() {
