@@ -59,8 +59,9 @@ public class Task implements Serializable {
     public void setStatus (String status){ mStatus = status;}
 
     public ArrayList<Checklist> getChecklists(){ return mChecklists;}
+    public Checklist getChecklistById (int id) { return mChecklists.get(id);}
     public void addChecklist(Checklist checklist){ mChecklists.add(checklist);}
-    public void removeChecklist(int index){ mChecklists.remove(index);}
+    public void removeChecklist(int id){ mChecklists.remove(id);}
 
 
     public String toString() {

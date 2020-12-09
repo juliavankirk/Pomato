@@ -70,7 +70,7 @@ public class Controller {
         for (int i = 0; i < taskListSize; i++) {
             UUID stringUuid = getTaskListFromCurrentProject().get(i).getId();
 
-            if ( stringUuid.toString().equals(taskId)) {
+            if (stringUuid.toString().equals(taskId)) {
                 getCurrentProject().removeTask(i);
                 return "Task with ID: " + taskId + " has been removed";
             }
@@ -80,8 +80,10 @@ public class Controller {
 
     public Task getTaskById(String taskId) {
         int taskListSize = getTaskListFromCurrentProject().size();
+
         for (int i = 0; i < taskListSize; i++) {
             UUID stringUuid = getTaskListFromCurrentProject().get(i).getId();
+
             if (stringUuid.toString().equals(taskId)) {
                 return getTaskListFromCurrentProject().get(i);
             }
@@ -94,9 +96,10 @@ public class Controller {
         return getCurrentProject().getTaskList();
     }
 
-   /* public ArrayList<Checklist> getChecklistFromCurrentTask(){
-        return getCurrentProject().getTaskList().get
-    }*/
+
+
+    // get one ckecklist
+
 
     public String addChecklist(String name, String taskId, ArrayList<String> itemStringList) {
         Task task = getTaskById(taskId);
@@ -119,6 +122,42 @@ public class Controller {
             return "Checklist with name: " + name + " has successfully been created";
         }
     }
+
+    public Checklist getChecklistById(String checklistId, String taskId) {
+        Task task = getTaskById(taskId);
+        int checklistSize = task.getChecklists().size();
+        for (int i = 0; i < checklistSize; i++) {
+            // get checklist
+            Checklist currentChecklist = task.getChecklists().get(i);
+            // get id
+            UUID stringUuid = currentChecklist.getId();
+            if (stringUuid.toString().equals(checklistId)) {
+                return currentChecklist;
+            }
+        }
+        return null;
+    }
+
+    public ArrayList<Checklist> getChecklists(String taskId) {
+        Task task = getTaskById(taskId);
+        return task.getChecklists();
+    }
+
+    public String removeChecklist(String checklistId, String taskId) {
+        ArrayList<Checklist> checklists = getChecklists(taskId);
+         Checklist checklist = getChecklistById(checklistId,taskId);
+          if (checklist != null){
+        checklists.remove(checklist);
+        return "The checklist has successfully been removed";
+    }
+        return "The checklist could not be found";
+    }
+
+    public void updateChecklistName(String updatedName, String checklistId, String taskId){
+        Checklist checklist = getChecklistById(checklistId,taskId);
+        checklist.setName(updatedName);
+    }
+
 
     /**
      * Updating Task

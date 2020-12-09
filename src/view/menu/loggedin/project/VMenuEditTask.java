@@ -25,7 +25,8 @@ public class VMenuEditTask extends VMenu {
     public void menuContent(Controller controller) {
         //TODO
 
-        String taskId, updatedTitle, updatedDescription, updatedStatus;
+
+        String taskId, checklistId, remove, updatedTitle, updatedDescription, updatedStatus, updatedName;
         double updatedEstimation;
         LocalDate updatedDueDate;
         int property, updatedPriority;
@@ -36,62 +37,82 @@ public class VMenuEditTask extends VMenu {
         /*When the user have made a change to a property, they will be given the option
         to make another change to the chosen task, until they enter the number 7.
          */
-        if (task != null) {
-            do {
-                propertyChoices();
-                property = InputOutput.inputInt("Enter your option");
+
+            if (task != null) {
+                do {
+                    propertyChoices();
+                    property = InputOutput.inputInt("Enter your option");
 
 
-                switch (property) {
-                    case 1 -> {
-                        updatedTitle = InputOutput.inputString("Enter new title");
-                        controller.updateTaskTitle(updatedTitle, taskId);
-                    }
-                    case 2 -> {
-                        updatedDescription = InputOutput.inputString("Enter new description");
-                        controller.updateTaskDescription(updatedDescription, taskId);
-                    }
-                    case 3 -> {
-                        updatedStatus = InputOutput.inputString("Enter new Status(TODO, IN PROGRESS or COMPLETED)");
-                        controller.updateTaskStatus(updatedStatus, taskId);
-                    }
-                    case 4 -> {
-                        updatedEstimation = InputOutput.inputDouble("Enter new Estimated Time(hours)");
-                        controller.updateTaskEstimatedTime(updatedEstimation, taskId);
-                    }
-                    case 5 -> {
-                        updatedPriority = InputOutput.inputInt("Enter new Priority(1-5)");
-                        controller.updateTaskPriority(updatedPriority, taskId);
-                    }
-                    case 6 -> {
-                        updatedDueDate = LocalDate.parse(InputOutput.inputString("Enter new Due Date (yyyy-mm-dd)"));
-                        controller.updateTaskDueDate(updatedDueDate, taskId);
-                    }
+                    switch (property) {
+                        case 1 -> {
+                            updatedTitle = InputOutput.inputString("Enter new title");
+                            controller.updateTaskTitle(updatedTitle, taskId);
+                        }
+                        case 2 -> {
+                            updatedDescription = InputOutput.inputString("Enter new description");
+                            controller.updateTaskDescription(updatedDescription, taskId);
+                        }
+                        case 3 -> {
+                            updatedStatus = InputOutput.inputString("Enter new Status(TODO, IN PROGRESS or COMPLETED)");
+                            controller.updateTaskStatus(updatedStatus, taskId);
+                        }
+                        case 4 -> {
+                            updatedEstimation = InputOutput.inputDouble("Enter new Estimated Time(hours)");
+                            controller.updateTaskEstimatedTime(updatedEstimation, taskId);
+                        }
+                        case 5 -> {
+                            updatedPriority = InputOutput.inputInt("Enter new Priority(1-5)");
+                            controller.updateTaskPriority(updatedPriority, taskId);
+                        }
+                        case 6 -> {
+                            updatedDueDate = LocalDate.parse(InputOutput.inputString("Enter new Due Date (yyyy-mm-dd)"));
+                            controller.updateTaskDueDate(updatedDueDate, taskId);
+                        }
 
-                    case 7 -> {
-                        //Case for the user to leave and go back to the taskboard.
-                    }
-                    default -> {
-                        System.out.println("Invalid option");
-                    }
-                    //TODO Edit task
-                }
-            } while (property != 7);
+                        case 7 -> {
+                            checklistId = InputOutput.inputString("Please enter checklist ID");
+                            remove = controller.removeChecklist(checklistId, taskId);
+                            System.out.println(remove);
 
-        } else {
-            System.out.println("invalid id, please enter another id");
+                        }
+
+                        case 8 -> {
+                            checklistId = InputOutput.inputString("Please enter checklist ID");
+                            updatedName = InputOutput.inputString("please enter new checklist name");
+                            controller.updateChecklistName(updatedName,checklistId, taskId);
+                        }
+                        default -> {
+                            System.out.println("Invalid option");
+                        }
+                        //TODO Edit task
+                    }
+                } while (property != 7);
+
+            } else {
+                System.out.println("invalid id, please enter another id");
+            }
         }
-    }
-        public void propertyChoices() {
+
+
+    public void propertyChoices() {
 
         String propertyC = "Which property would you like to change? Type one of the options below:\n" +
-                "1. Title\n" +
-                "2. Description\n" +
-                "3. Status\n" +
-                "4. Estimated time\n" +
-                "5. Priority\n" +
-                "6. Due Date\n"+
-                "7. Return\n"; /*Not sure about naming it "return", since they get an option
+                "1. Change Task Title\n" +
+                "2. Change Task Description\n" +
+                "3. Change Task Status\n" +
+                "4. Change Task Estimated time\n" +
+                "5. Change Task Priority\n" +
+                "6. Change Task Due Date\n"+
+                "--------------------\n" +
+                "7. Remove checklist\n"+
+                "8. Change checklist name\n" +
+                "9. Remove checklist items\n" +
+                "10.Add checklist items\n" +
+                "11.Change item status\n" +
+                "12.Change item topic\n" +
+                "--------------------\n" +
+                "13. Done\n"; /*Not sure about naming it "return", since they get an option
             afterwards which is go back, maybe Done?*/
 
         System.out.println(propertyC);
