@@ -26,7 +26,7 @@ public class VMenuEditTask extends VMenu {
         //TODO
 
 
-        String taskId, checklistId, itemId, message, response, topic, updatedTitle, updatedDescription, updatedStatus, updatedName, updatedTopic;
+        String taskId, checklistId, itemId, message,id, response, topic, updatedTitle, updatedDescription, updatedStatus, updatedName, updatedTopic;
         double updatedEstimation;
         LocalDate updatedDueDate;
         int property, updatedPriority;
@@ -93,14 +93,16 @@ public class VMenuEditTask extends VMenu {
 
                         case 10 -> {
                             checklistId = InputOutput.inputString("Please enter checklist ID you would like to add items to");
+                            System.out.println("Please enter the following information\n ");
 
-                            { do
-                                topic = InputOutput.inputString("Please enter item topic");
-                                message = controller.checkItemTopic(topic, checklistId, taskId);
+
+                            do{
+                                id = InputOutput.inputString("Id");
+                                message = controller.checkItemId(id, checklistId, taskId);
                                 System.out.println(message);
-                            }while (!message.equals(topic))
-
-                                controller.addChecklistItems(checklistId, topic, taskId);
+                            }while (!message.equals(id));
+                                topic = InputOutput.inputString("Topic");
+                                controller.addChecklistItems(checklistId, topic, taskId, id);
                         }
 
                         case 11 ->{
@@ -115,7 +117,7 @@ public class VMenuEditTask extends VMenu {
 
                         case 12 -> {
                             checklistId = InputOutput.inputString("Please enter checklist ID");
-                            itemId = InputOutput.inputString("please enter topic ");
+                            itemId = InputOutput.inputString("please enter checklist item ID");
                             updatedTopic = InputOutput.inputString("Please enter new item topic");
                             controller.updateItemTopic(updatedTopic,checklistId,taskId,itemId);
                             // Change item topic

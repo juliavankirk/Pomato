@@ -104,12 +104,12 @@ public class Controller {
      */
 
 
-    public String addChecklist(String name, String taskId, ArrayList<String> itemStringList) {
+    public String addChecklist(String name, String taskId/*, ArrayList<String> itemStringList*/) {
         Task task = getTaskById(taskId);
         Checklist checklist = new Checklist(name);
 
 
-        if (!(itemStringList.isEmpty())) {
+        /*if (!(itemStringList.isEmpty())) {
             ArrayList<ChecklistItem> checklistItemList = new ArrayList<>();
 
             for (String s : itemStringList) {
@@ -119,11 +119,11 @@ public class Controller {
             task.addChecklist(checklist);
 
             return "Checklist with name: " + name + " and " + checklistItemList.size() + " item(s), has successfully been created";
-        } else {
+        } else {*/
             task.addChecklist(checklist);
 
             return "Checklist with name: " + name + " has successfully been created";
-        }
+       // }
     }
 
     public Checklist getChecklistById(String checklistId, String taskId) {
@@ -177,8 +177,8 @@ public class Controller {
             // get checklist
             ChecklistItem currentChecklistItem = checklist.getChecklistItems().get(i);
             // get id
-            UUID stringUuid = currentChecklistItem.getId();
-            if (stringUuid.toString().equals(checklistId)) {
+            //UUID stringUuid = currentChecklistItem.getId();
+            if (currentChecklistItem.getId().equals(checklistId)) {
                 return currentChecklistItem;
             }
         }
@@ -205,23 +205,22 @@ public class Controller {
         checklistItem.setTopic(updatedTopic);
     }
 
-    public String checkItemTopic(String enteredTopic, String checklistId, String taskId){
+    public String checkItemId(String enteredId, String checklistId, String taskId){
         Checklist checklist = getChecklistById(checklistId, taskId);
         ArrayList <ChecklistItem> checklistItems = checklist.getChecklistItems();
         for (ChecklistItem checklistItem : checklistItems) {
-            if (checklistItem.getTopic().equals(enteredTopic)){
-                return "This topic already exists in the checklist, please enter another topic";
+            if (checklistItem.getId().equals(enteredId)){
+                return "Id: " + enteredId +  "already exists in this checklist, please enter another topic";
             }
-        }return enteredTopic;
+        }return enteredId;
     }
 
-    public String addChecklistItems(String checklistId, String taskId, String topic) {
+    public String addChecklistItems(String checklistId, String taskId, String topic, String id) {
         Checklist checklist = getChecklistById(checklistId, taskId);
-        ChecklistItem checklistItem = new ChecklistItem(topic);
-        checklist.getChecklistItems().add(checklistItem);
+        ChecklistItem checklistItem = new ChecklistItem(id, topic);
+        checklist.addChecklistItem(checklistItem);
         return "The item has successfully been added to the checklist";
     }
-
 
     /**
      * Updating Task

@@ -24,9 +24,9 @@ public class VMenuAddChecklist extends VMenu {
 
         id = InputOutput.inputString("Which task would you like to add a checklist to? id");
         name = InputOutput.inputString("Enter the name of the checklist");
-        ArrayList<String> itemListTwo = addCheckListItems(itemList, counter);
+        //ArrayList<String> itemListTwo = addCheckListItems(itemList, counter);
 
-        response = controller.addChecklist(name, id, itemListTwo);
+        response = controller.addChecklist(name, id /*itemListTwo*/);
         System.out.println(response);
 
     }

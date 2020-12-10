@@ -19,6 +19,7 @@ public class Checklist implements Serializable {
     }
 
     public ArrayList<ChecklistItem> getChecklistItems(){ return mChecklistItems;}
+    public void addChecklistItem(ChecklistItem checklistItem){ mChecklistItems.add(checklistItem);}
     public String getName(){return mName;}
     public UUID getId(){return mId;}
     public void setName(String name){mName = name;}
