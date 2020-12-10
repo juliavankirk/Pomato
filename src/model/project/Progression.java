@@ -15,9 +15,11 @@ public class Progression implements Serializable {
     private LocalDate mStartDate;
     private LocalDate mEndDate;
 
-    public Progression(User user, Role role, LocalDate startDate) {
+    public Progression(User user, Role role, Task task, LocalDate startDate) {
         mUser = user;
         mRole = role;
+        mTask = task;
+        mTask.startTask();
         mStartDate = startDate;
         mEndDate = null;
     }
