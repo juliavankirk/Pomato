@@ -203,7 +203,7 @@ public class Controller {
                                 LocalDate startDate, LocalDate dueDate) {
 
         Project project = new Project(title, description, startDate, dueDate);
-        String projectId = project.getId();
+        String projectId = project.getId().toString();
 
         Collection<User> userList = mDatabase.getUserList();
 
@@ -238,7 +238,7 @@ public class Controller {
                 if (someOne.getId().equals(newMembersIds.get(i))) {
                     mCurrentProject.getProjectMembers().add(someOne);
                     someOne.getProjects().add(mCurrentProject);
-                    someOne.addRole(mCurrentProject.getId());
+                    someOne.addRole(mCurrentProject.getId().toString());
                 }
             }
         }
@@ -251,7 +251,7 @@ public class Controller {
         for(int i = 0; i < memberIds.size(); i++) {
             for(int j = 0; j < getCurrentProject().getProjectMembers().size(); j++) {
                 if(memberIds.get(i).equals(getCurrentProject().getProjectMembers().get(j).getId())) {
-                    getCurrentProject().getProjectMembers().get(j).changeRole(getCurrentProject().getId());
+                    getCurrentProject().getProjectMembers().get(j).changeRole(getCurrentProject().getId().toString());
                 }
             }
         }

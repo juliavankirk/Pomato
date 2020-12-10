@@ -39,4 +39,6 @@ public class Progression implements Serializable {
         Double salary = totalHours() * mUser.getHourlyWage();
     }
 
+    public User getUser() { return mUser; }
+
 }

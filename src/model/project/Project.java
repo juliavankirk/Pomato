@@ -12,7 +12,7 @@ import java.util.UUID;
 public class Project implements Serializable {
 
     //Attributes
-    private String mId;
+    private UUID mId;
     private String mProjectTitle;
     private String mProjectDescription;
     private ArrayList<User> mProjectMembers;
@@ -25,7 +25,7 @@ public class Project implements Serializable {
     //Constructor
     public Project(String projectTitle, String projectDescription/*, ArrayList<User> projectMembers*/,
                    LocalDate startDate, LocalDate dueDate/*, String password*/) {
-        mId = UUID.randomUUID().toString();
+        mId = UUID.randomUUID();
         mProjectTitle = projectTitle;
         mProjectDescription = projectDescription;
         mProjectMembers = new ArrayList<User>();
@@ -42,7 +42,7 @@ public class Project implements Serializable {
     }
 
     //Getters and Setters
-    public String getId() { return mId; }
+    public UUID getId() { return mId; }
 
     public String getProjectTitle() {
         return mProjectTitle;

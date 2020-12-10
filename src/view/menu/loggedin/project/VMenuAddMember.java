@@ -20,7 +20,7 @@ public class VMenuAddMember extends VMenu {
 
     public void menuContent(Controller controller) {
 
-        if(controller.getCurrentUser().getRole(controller.getCurrentProject().getId()).equals("Manager")) {
+        if(controller.getCurrentUser().getRole(controller.getCurrentProject().getId().toString()).equals("Manager")) {
 
             ArrayList<String> pMembersIds = new ArrayList<String>();
             String answer = "yes";

@@ -7,14 +7,14 @@ import java.time.LocalDate;
 import java.util.*;
 
 public class Database implements Serializable {
-    public HashMap<String, User> mUserList;
-    public HashMap<String, Project> mProjectList;
+    public HashMap<UUID, User> mUserList;
+    public HashMap<UUID, Project> mProjectList;
     public ArrayList <Task> mTaskList;
     public ArrayList<Progression> mProgression;
 
     public Database() {
-        mUserList = new HashMap<String, User>();
-        mProjectList = new HashMap<String, Project>();
+        mUserList = new HashMap<UUID, User>();
+        mProjectList = new HashMap<UUID, Project>();
         mTaskList = new ArrayList<Task>();
         mProgression = new ArrayList<Progression>();
     }
@@ -45,6 +45,16 @@ public class Database implements Serializable {
         progression.submitTask(endDate);
 
         return progression.totalHours();
+    }
+
+    public Collection<Progression> getProgressForUser(User user) {
+        ArrayList<Progression> userProgress = new ArrayList<>();
+        for (Progression progress : mProgression) {
+            if (user.getName().equals(progress.getUser().getName())) {
+                userProgress.add(progress);
+            }
+        }
+        return userProgress;
     }
 
 
