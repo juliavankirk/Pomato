@@ -410,7 +410,6 @@ public class Controller {
 
     public void loadDatabase() {
         String fileLocation = "data/database.ser";
-//        mDatabase = null;
 
         try {
             FileInputStream fileInput = new FileInputStream(fileLocation);
@@ -420,14 +419,12 @@ public class Controller {
             fileInput.close();
         }
         catch (IOException ioEx) {
-            System.out.println("File is empty");
+            System.out.println("Database is incompatible");
             ioEx.printStackTrace();
-            return;
         }
         catch (ClassNotFoundException classEx) {
             System.out.println("Database not found");
             classEx.printStackTrace();
-            return;
         }
     }
 //    void doMainMenu() {
