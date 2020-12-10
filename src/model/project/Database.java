@@ -3,6 +3,7 @@ package model.project;
 import model.users.User;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -12,11 +13,13 @@ public class Database implements Serializable {
     public HashMap<String, User> mUserList;
     public HashMap<String, Project> mProjectList;
     public ArrayList <Task> mTaskList;
+    public ArrayList<Progression> mProgression;
 
     public Database() {
         mUserList = new HashMap<String, User>();
         mProjectList = new HashMap<String, Project>();
         mTaskList = new ArrayList<Task>();
+        mProgression = new ArrayList<Progression>();
     }
 
     public Collection<User> getUserList() { return mUserList.values(); }
@@ -34,6 +37,12 @@ public class Database implements Serializable {
     public void addTask(Task task){ mTaskList.add(task);}
     public void removeTask(int index){ mTaskList.remove(index);}
 //    public Task getTaskById (UUID id) { return mTaskList.get(id);}
+
+    public void startTask(User user, Task task, LocalDate startDate) {
+        Progression progression = new Progression(user, task, startDate);
+
+        mProgression.add(progression);
+    }
 
 
 }

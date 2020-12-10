@@ -9,15 +9,13 @@ import java.time.Period;
 
 public class Progression implements Serializable {
     private User mUser;
-    private Role mRole;
     private Project mProject;
     private Task mTask;
     private LocalDate mStartDate;
     private LocalDate mEndDate;
 
-    public Progression(User user, Role role, Task task, LocalDate startDate) {
+    public Progression(User user, Task task, LocalDate startDate) {
         mUser = user;
-        mRole = role;
         mTask = task;
         mTask.startTask();
         mStartDate = startDate;
