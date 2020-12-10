@@ -48,7 +48,7 @@ public class VMenuLoggedIn extends VMenu {
             // we set the project as the Current Active Project.
             int projectListSize = controller.getCurrentUser().getProjects().size();
             if ( projectListSize > (0) && !(inputResult > projectListSize)){
-                setCurrentProject(controller, inputResult);
+                controller.setCurrentProject(inputResult - 1);
             }
         } else {
             chosenVMenu = mParent;
@@ -77,7 +77,7 @@ public class VMenuLoggedIn extends VMenu {
         mSubMenus.add(new VMenuAccount(this));
     }
 
-    private void setCurrentProject(Controller controller, int chosenProject){
-        controller.setCurrentProject(chosenProject - 1);
-    }
+//    private void setCurrentProject(Controller controller, int chosenProject){
+//        controller.setCurrentProject(chosenProject - 1);
+//    }
 }

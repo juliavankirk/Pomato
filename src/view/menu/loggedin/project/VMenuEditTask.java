@@ -102,7 +102,7 @@ public class VMenuEditTask extends VMenu {
                                 System.out.println(message);
                             }while (!message.equals(id));
                                 topic = InputOutput.inputString("Topic");
-                                controller.addChecklistItems(checklistId, topic, taskId, id);
+                                controller.addChecklistItems(checklistId, taskId, topic, id);
                         }
 
                         case 11 ->{

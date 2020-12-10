@@ -97,9 +97,9 @@ public class User implements Serializable {
 
     public String getRole(String projectId) {
         String role = "";
-        for(int i = 0; i < mRoles.size(); i++){
-            if (projectId.equals(mRoles.get(i).getProjectId())) {
-                role = mRoles.get(i).getMemberRole();
+        for (Role mRole : mRoles) {
+            if (projectId.equals(mRole.getProjectId())) {
+                role = mRole.getMemberRole();
             }
         }
         return role;
@@ -110,9 +110,9 @@ public class User implements Serializable {
     }
 
     public void changeRole(String projectId) {
-        for(int i = 0; i < mRoles.size(); i++){
-            if (projectId.equals(mRoles.get(i).getProjectId())) {
-                mRoles.get(i).changeRole();
+        for (Role mRole : mRoles) {
+            if (projectId.equals(mRole.getProjectId())) {
+                mRole.changeRole();
             }
         }
     }

@@ -103,12 +103,38 @@ public class Controller {
         return getCurrentProject().getTaskList();
     }
 
-
-
-    /*
-    Handling checklists
+    /**
+     * Updating Task
      */
+    public void updateTaskStatus(String updatedStatus, String taskId){
+        SubTask subTask = getTaskById(taskId);
+        subTask.setStatus(updatedStatus);
+    }
+    public void updateTaskTitle(String updatedTitle, String taskId){
+        SubTask subTask = getTaskById(taskId);
+        subTask.setTitle(updatedTitle);
+    }
+    public void updateTaskDescription(String updatedDescription, String taskId){
+        SubTask subTask = getTaskById(taskId);
+        subTask.setDescription(updatedDescription);
+    }
+    public void updateTaskPriority(int updatedPriority, String taskId){
+        SubTask subTask = getTaskById(taskId);
+        subTask.setPriority(updatedPriority);
+    }
+    public void updateTaskDueDate(LocalDate dueDate, String taskId){
+        SubTask subTask = getTaskById(taskId);
+        subTask.setDueDate(dueDate);
+    }
+    public void updateTaskEstimatedTime(Double estimatedTime, String taskId){
+        SubTask subTask = getTaskById(taskId);
+        subTask.setEstimatedTime(estimatedTime);
+    }
 
+
+    /**
+     * Handling checklists
+     */
 
     public String addChecklist(String name, String taskId/*, ArrayList<String> itemStringList*/) {
         SubTask task = getTaskById(taskId);
@@ -229,44 +255,14 @@ public class Controller {
     }
 
     /**
-     * Updating Task
-     */
-    public void updateTaskStatus(String updatedStatus, String taskId){
-        SubTask subTask = getTaskById(taskId);
-        subTask.setStatus(updatedStatus);
-    }
-    public void updateTaskTitle(String updatedTitle, String taskId){
-        SubTask subTask = getTaskById(taskId);
-        subTask.setTitle(updatedTitle);
-    }
-    public void updateTaskDescription(String updatedDescription, String taskId){
-        SubTask subTask = getTaskById(taskId);
-        subTask.setDescription(updatedDescription);
-    }
-    public void updateTaskPriority(int updatedPriority, String taskId){
-        SubTask subTask = getTaskById(taskId);
-        subTask.setPriority(updatedPriority);
-    }
-    public void updateTaskDueDate(LocalDate dueDate, String taskId){
-        SubTask subTask = getTaskById(taskId);
-        subTask.setDueDate(dueDate);
-    }
-    public void updateTaskEstimatedTime(Double estimatedTime, String taskId){
-        SubTask subTask = getTaskById(taskId);
-        subTask.setEstimatedTime(estimatedTime);
-    }
-
-
-    /**
      *  Handling user
      */
 
     public String checkUsername(String enteredUsername) {
         Collection<User> userList = mDatabase.getUserList();
 
-        for (Iterator<User> iterator = userList.iterator(); iterator.hasNext(); ) {
-            User someOne = iterator.next();
-            if(someOne.getUserName().equals(enteredUsername)) {
+        for (User someOne : userList) {
+            if (someOne.getUserName().equals(enteredUsername)) {
                 return "This username is taken before. Please select another username.";
             }
         }
@@ -289,8 +285,7 @@ public class Controller {
     public String logInUser(String enteredUserName, String enteredPassword) {
         Collection<User> userList = mDatabase.getUserList();
 
-        for (Iterator<User> iterator = userList.iterator(); iterator.hasNext();) {
-            User someOne  = iterator.next();
+        for (User someOne : userList) {
             if (someOne.getUserName().equals(enteredUserName)) {
                 if (someOne.getPassword().equals(enteredPassword)) {
                     setCurrentUser(someOne);
@@ -328,14 +323,12 @@ public class Controller {
 
         Collection<User> userList = mDatabase.getUserList();
 
-        for (int i = 0; i < enteredIds.size(); i++) {
-            for (Iterator<User> iterator = userList.iterator(); iterator.hasNext(); ) {
-                User someOne = iterator.next();
-
-                if (someOne.getId().equals(enteredIds.get(i))) {
-                   project.getProjectMembers().add(someOne);
-                   someOne.getProjects().add(project);
-                   someOne.addRole(projectId);
+        for (String enteredId : enteredIds) {
+            for (User someOne : userList) {
+                if (someOne.getId().toString().equals(enteredId)) {
+                    project.getProjectMembers().add(someOne);
+                    someOne.getProjects().add(project);
+                    someOne.addRole(projectId);
                 }
             }
         }
@@ -352,11 +345,9 @@ public class Controller {
 
         Collection<User> userList = mDatabase.getUserList();
 
-        for (int i = 0; i < newMembersIds.size(); i++) {
-            for (Iterator<User> iterator = userList.iterator(); iterator.hasNext(); ) {
-                User someOne = iterator.next();
-
-                if (someOne.getId().equals(newMembersIds.get(i))) {
+        for (String newMembersId : newMembersIds) {
+            for (User someOne : userList) {
+                if (someOne.getId().toString().equals(newMembersId)) {
                     mCurrentProject.getProjectMembers().add(someOne);
                     someOne.getProjects().add(mCurrentProject);
                     someOne.addRole(mCurrentProject.getId().toString());
@@ -369,9 +360,9 @@ public class Controller {
 
     public void changeRoles(ArrayList<String> memberIds) {
 
-        for(int i = 0; i < memberIds.size(); i++) {
-            for(int j = 0; j < getCurrentProject().getProjectMembers().size(); j++) {
-                if(memberIds.get(i).equals(getCurrentProject().getProjectMembers().get(j).getId())) {
+        for (String memberId : memberIds) {
+            for (int j = 0; j < getCurrentProject().getProjectMembers().size(); j++) {
+                if (memberId.equals(getCurrentProject().getProjectMembers().get(j).getId().toString())) {
                     getCurrentProject().getProjectMembers().get(j).changeRole(getCurrentProject().getId().toString());
                 }
             }
@@ -396,8 +387,6 @@ public class Controller {
     /**
      * Method for saving DATABASE to a file:
      */
-
-    //TODO Save the Database with all the users
     public void saveDatabase() {
         String fileLocation = "data/database.ser";
 
@@ -407,8 +396,6 @@ public class Controller {
             outStream.writeObject(mDatabase);
             outStream.close();
             fileOut.close();
-//            System.out.println("Changes are saved in " + fileLocation);
-
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -433,41 +420,4 @@ public class Controller {
             classEx.printStackTrace();
         }
     }
-//    void doMainMenu() {
-//        mVMenuMain.renderMenu(true);
-//
-//        UUID id = null;
-//        String password;
-//
-//        int mainMenuSelect = mVMenuMain.readInput();
-//
-//        switch (mainMenuSelect) {
-//            case 1 -> {
-//                //Register menu
-//                mVMenuRegister.renderMenu(true);
-//                User user = mVMenuRegister.getUserData();
-//
-//                mDatabase.addUser( user );
-//                mVMenuRegister.registerSuccess();
-//                doMainMenu();
-//            }
-//            case 2 -> {
-//                mVMenuLogin.renderMenu(true);
-//                mVMenuLogin.readInput();
-//            }
-//            case 3 -> {
-//                mVMenuManual.renderMenu(true);
-//                mVMenuManual.readInput();
-//            }
-//            case 4 -> {
-//                mVMenuExit.renderMenu(true);
-//                mVMenuExit.readInput();
-//            }
-//            default -> {
-//                mVMenuMain.renderError();
-//                doMainMenu();
-//            }
-//        }
-//        doMainMenu();
-//    }
 }

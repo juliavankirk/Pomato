@@ -28,7 +28,7 @@ public class Project implements Serializable {
         mId = UUID.randomUUID();
         mProjectTitle = projectTitle;
         mProjectDescription = projectDescription;
-        mProjectMembers = new ArrayList<User>();
+        mProjectMembers = new ArrayList<>();
         mStartDate = startDate;
         mDueDate = dueDate;
         mSubTaskList = new ArrayList<>();
