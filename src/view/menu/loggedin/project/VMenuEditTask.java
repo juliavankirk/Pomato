@@ -26,7 +26,7 @@ public class VMenuEditTask extends VMenu {
         //TODO
 
 
-        String taskId, checklistId, remove, updatedTitle, updatedDescription, updatedStatus, updatedName;
+        String taskId, checklistId, itemId, message, response, topic, updatedTitle, updatedDescription, updatedStatus, updatedName, updatedTopic;
         double updatedEstimation;
         LocalDate updatedDueDate;
         int property, updatedPriority;
@@ -72,22 +72,64 @@ public class VMenuEditTask extends VMenu {
 
                         case 7 -> {
                             checklistId = InputOutput.inputString("Please enter checklist ID");
-                            remove = controller.removeChecklist(checklistId, taskId);
-                            System.out.println(remove);
+                            message = controller.removeChecklist(checklistId, taskId);
+                            System.out.println(message);
 
                         }
 
                         case 8 -> {
                             checklistId = InputOutput.inputString("Please enter checklist ID");
-                            updatedName = InputOutput.inputString("please enter new checklist name");
+                            updatedName = InputOutput.inputString("Please enter new checklist name");
                             controller.updateChecklistName(updatedName,checklistId, taskId);
+                        }
+
+                        case 9 -> {
+                            checklistId = InputOutput.inputString("Please enter checklist ID");
+                            itemId = InputOutput.inputString("Please enter checklist item ID");
+                            message = controller.removeChecklistItem(checklistId, itemId, taskId);
+                            System.out.println(message);
+                            //Remove checklist items
+                        }
+
+                        case 10 -> {
+                            checklistId = InputOutput.inputString("Please enter checklist ID you would like to add items to");
+
+                            { do
+                                topic = InputOutput.inputString("Please enter item topic");
+                                message = controller.checkItemTopic(topic, checklistId, taskId);
+                                System.out.println(message);
+                            }while (!message.equals(topic))
+
+                                controller.addChecklistItems(checklistId, topic, taskId);
+                        }
+
+                        case 11 ->{
+                            checklistId = InputOutput.inputString("Please enter checklist ID");
+                            itemId = InputOutput.inputString("Please enter checklist item ID");
+                            response = InputOutput.inputString("Would you like to change item status to Done? Enter yes");
+                            if ( response.equalsIgnoreCase("yes"));
+                            controller.updateItemStatus(checklistId,taskId,itemId);
+
+                            //Change item status
+                        }
+
+                        case 12 -> {
+                            checklistId = InputOutput.inputString("Please enter checklist ID");
+                            itemId = InputOutput.inputString("please enter topic ");
+                            updatedTopic = InputOutput.inputString("Please enter new item topic");
+                            controller.updateItemTopic(updatedTopic,checklistId,taskId,itemId);
+                            // Change item topic
+                        }
+
+                        case 13 -> {
+                            // A case so that the user can leave this section.
                         }
                         default -> {
                             System.out.println("Invalid option");
                         }
                         //TODO Edit task
                     }
-                } while (property != 7);
+                } while (property != 13);
 
             } else {
                 System.out.println("invalid id, please enter another id");

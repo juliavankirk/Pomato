@@ -1,5 +1,6 @@
 package controllers;
 
+import com.sun.jdi.event.MonitorContendedEnteredEvent;
 import model.project.*;
 import model.users.User;
 import view.VMenu;
@@ -98,7 +99,9 @@ public class Controller {
 
 
 
-    // get one ckecklist
+    /*
+    Handling checklists
+     */
 
 
     public String addChecklist(String name, String taskId, ArrayList<String> itemStringList) {
@@ -145,17 +148,78 @@ public class Controller {
 
     public String removeChecklist(String checklistId, String taskId) {
         ArrayList<Checklist> checklists = getChecklists(taskId);
-         Checklist checklist = getChecklistById(checklistId,taskId);
-          if (checklist != null){
-        checklists.remove(checklist);
-        return "The checklist has successfully been removed";
-    }
+        Checklist checklist = getChecklistById(checklistId, taskId);
+        if (checklist != null) {
+            checklists.remove(checklist);
+            return "The checklist has successfully been removed";
+        }
         return "The checklist could not be found";
     }
 
-    public void updateChecklistName(String updatedName, String checklistId, String taskId){
-        Checklist checklist = getChecklistById(checklistId,taskId);
+    public void updateChecklistName(String updatedName, String checklistId, String taskId) {
+        Checklist checklist = getChecklistById(checklistId, taskId);
         checklist.setName(updatedName);
+    }
+
+    /**
+     * handling checklist items
+     */
+
+    public ArrayList<ChecklistItem> getChecklistItems(String taskId, String checklistId) {
+        Checklist checklist = getChecklistById(checklistId, taskId);
+        return checklist.getChecklistItems();
+    }
+
+    public ChecklistItem getChecklistItemById(String checklistId, String taskId, String itemId) {
+        Checklist checklist = getChecklistById(checklistId, taskId);
+        int checklistItemSize = checklist.getChecklistItems().size();
+        for (int i = 0; i < checklistItemSize; i++) {
+            // get checklist
+            ChecklistItem currentChecklistItem = checklist.getChecklistItems().get(i);
+            // get id
+            UUID stringUuid = currentChecklistItem.getId();
+            if (stringUuid.toString().equals(checklistId)) {
+                return currentChecklistItem;
+            }
+        }
+        return null;
+    }
+
+    public String removeChecklistItem(String checklistId, String itemId, String taskId) {
+        ArrayList<ChecklistItem> checklistItems = getChecklistItems(taskId, checklistId);
+        ChecklistItem checklistItem = getChecklistItemById(checklistId, taskId, itemId);
+        if (checklistItem != null) {
+            checklistItems.remove(checklistItem);
+            return "The item has successfully been removed";
+        }
+        return "Checklist Item could not be found";
+    }
+
+    public void updateItemStatus(String checklistId, String taskId, String itemId) {
+        ChecklistItem checklistItem = getChecklistItemById(checklistId, taskId, itemId);
+        checklistItem.setStatus("Done");
+    }
+
+    public void updateItemTopic(String updatedTopic, String checklistId, String taskId, String itemId) {
+        ChecklistItem checklistItem = getChecklistItemById(checklistId, taskId, itemId);
+        checklistItem.setTopic(updatedTopic);
+    }
+
+    public String checkItemTopic(String enteredTopic, String checklistId, String taskId){
+        Checklist checklist = getChecklistById(checklistId, taskId);
+        ArrayList <ChecklistItem> checklistItems = checklist.getChecklistItems();
+        for (ChecklistItem checklistItem : checklistItems) {
+            if (checklistItem.getTopic().equals(enteredTopic)){
+                return "This topic already exists in the checklist, please enter another topic";
+            }
+        }return enteredTopic;
+    }
+
+    public String addChecklistItems(String checklistId, String taskId, String topic) {
+        Checklist checklist = getChecklistById(checklistId, taskId);
+        ChecklistItem checklistItem = new ChecklistItem(topic);
+        checklist.getChecklistItems().add(checklistItem);
+        return "The item has successfully been added to the checklist";
     }
 
 
