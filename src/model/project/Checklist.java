@@ -32,9 +32,9 @@ public class Checklist implements Serializable {
             ChecklistItem currentChecklistItem = mChecklistItems.get(i);
 
             if (currentChecklistItem.getStatus().equals("Not Done")) {
-                retVal.append( "[ ] " + currentChecklistItem.getTopic() + "\n");
+                retVal.append( currentChecklistItem.getId() + ". [ ] " + currentChecklistItem.getTopic() + "\n");
             } else {
-                retVal.append( "[V] " + currentChecklistItem.getTopic() + "\n");
+                retVal.append( currentChecklistItem.getId() + ". [V] " + currentChecklistItem.getTopic() + "\n");
             }
         }
         return retVal.toString();

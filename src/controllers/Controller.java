@@ -210,7 +210,7 @@ public class Controller {
             ChecklistItem currentChecklistItem = checklist.getChecklistItems().get(i);
             // get id
             //UUID stringUuid = currentChecklistItem.getId();
-            if (currentChecklistItem.getId().equals(checklistId)) {
+            if (currentChecklistItem.getId().equals(itemId)) {
                 return currentChecklistItem;
             }
         }

@@ -85,7 +85,7 @@ public class VMenuEditTask extends VMenu {
 
                         case 9 -> {
                             checklistId = InputOutput.inputString("Please enter checklist ID");
-                            itemId = InputOutput.inputString("Please enter checklist item ID");
+                            itemId = InputOutput.inputString("Please enter checklist item number");
                             message = controller.removeChecklistItem(checklistId, itemId, taskId);
                             System.out.println(message);
                             //Remove checklist items
@@ -107,7 +107,7 @@ public class VMenuEditTask extends VMenu {
 
                         case 11 ->{
                             checklistId = InputOutput.inputString("Please enter checklist ID");
-                            itemId = InputOutput.inputString("Please enter checklist item ID");
+                            itemId = InputOutput.inputString("Please enter checklist item number");
                             response = InputOutput.inputString("Would you like to change item status to Done? Enter yes");
                             if ( response.equalsIgnoreCase("yes"));
                             controller.updateItemStatus(checklistId,taskId,itemId);
@@ -117,7 +117,7 @@ public class VMenuEditTask extends VMenu {
 
                         case 12 -> {
                             checklistId = InputOutput.inputString("Please enter checklist ID");
-                            itemId = InputOutput.inputString("please enter checklist item ID");
+                            itemId = InputOutput.inputString("please enter checklist item number");
                             updatedTopic = InputOutput.inputString("Please enter new item topic");
                             controller.updateItemTopic(updatedTopic,checklistId,taskId,itemId);
                             // Change item topic
