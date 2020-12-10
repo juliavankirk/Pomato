@@ -29,7 +29,7 @@ public class VMenuCreateProject extends VMenu {
 
         String pDescription = InputOutput.inputString(("Project description"));
 
-        pMembersIds.add(controller.getCurrentUser().getId());
+        pMembersIds.add(controller.getCurrentUser().getId().toString());
         String answer = InputOutput.inputString("Would you like to add more members?(yes/no)");
         while(answer.equals("yes")) {
             String memberId = InputOutput.inputString("Insert member's Id");

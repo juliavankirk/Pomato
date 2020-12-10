@@ -56,12 +56,8 @@ public class Task implements Serializable {
 
     public void setDueDate(LocalDate DueDate){ mDueDate = DueDate; }
 
-    public void setPriority (int taskPriority) { mPriority = taskPriority; }
-    public void setEstimatedTime(double estimatedTime){ mEstimatedTime = estimatedTime;}
-
     public void setPriority (int priority) { mPriority = priority;}
 
-    public void setStatus (String taskStatus){ mStatus = taskStatus; }
     public void setStatus (String status){ mStatus = status;}
 
     public ArrayList<Checklist> getChecklists(){ return mChecklists;}

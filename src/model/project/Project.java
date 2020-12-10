@@ -97,7 +97,7 @@ public class Project implements Serializable {
     public void addTaskToList(SubTask subTask){ mSubTaskList.add(subTask); }
     public void removeTask(int index){ mSubTaskList.remove(index); }
     // public Task getTaskById (UUID id) { return mTaskList.get(id);}
-    public Task getTaskById (int index) { return mTaskList.get(index);}
+    public SubTask getTaskById (int index) { return mSubTaskList.get(index);}
 
     /*
     public ArrayList<Board> getBoards() {

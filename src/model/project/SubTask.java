@@ -5,6 +5,7 @@ import view.VMenu;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.ArrayList;
 import java.util.UUID;
 
 public class SubTask implements Serializable {
@@ -18,6 +19,7 @@ public class SubTask implements Serializable {
     private LocalDate mStartDate;
     private LocalDate mEndDate;
     private String mStatus;
+    private ArrayList<Checklist> mChecklists;
 
     //Do we have to initialize startDate in constructor? Its already set?
     public SubTask(String title, String description, LocalDate dueDate, LocalDate startDate,
@@ -32,6 +34,7 @@ public class SubTask implements Serializable {
         mDateCreated = LocalDate.now();
         mDueDate = dueDate;
         mStatus = "TODO";
+        mChecklists = new ArrayList<>();
     }
 
     public UUID getId() { return mId; }
@@ -76,6 +79,11 @@ public class SubTask implements Serializable {
         return daysBetween;
     }
 
+    public ArrayList<Checklist> getChecklists(){ return mChecklists;}
+    public Checklist getChecklistById (int id) { return mChecklists.get(id);}
+    public void addChecklist(Checklist checklist){ mChecklists.add(checklist);}
+    public void removeChecklist(int id){ mChecklists.remove(id);}
+
     public String toString() {
         String retVal = "";
         retVal += ("Title: " +getTitle());
@@ -85,6 +93,16 @@ public class SubTask implements Serializable {
         retVal += ("\nEstimated Time: " + getEstimatedTime() + " hours");
         retVal += ("\nPriority: " + getPriority() + "/5");
         retVal += ("\nID: " + getId() + "\n");
+
+        if (!(getChecklists().isEmpty())){
+            retVal += ("\nChecklists: ");
+
+            for (int i = 0; i < mChecklists.size(); i++) {
+                Checklist currentChecklist = mChecklists.get(i);
+                String currentIndex = mChecklists.get(i).toString();
+                retVal += (currentChecklist);
+            }
+        }
         return retVal;
     }
 

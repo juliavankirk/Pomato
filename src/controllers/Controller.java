@@ -148,7 +148,7 @@ public class Controller {
     }
 
     public ArrayList<Checklist> getChecklists(String taskId) {
-        Task task = getTaskById(taskId);
+        SubTask task = getTaskById(taskId);
         return task.getChecklists();
     }
 
