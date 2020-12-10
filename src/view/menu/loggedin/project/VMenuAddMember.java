@@ -32,8 +32,8 @@ public class VMenuAddMember extends VMenu {
             controller.addMembers(pMembersIds);
             System.out.println("New members are successfully added");
         } else {
-            System.out.println("You do not have the authority to make changes in this section. Because you are nothing" +
-                    " more than a poor developer.");
+            System.out.println("You do not have the authority to make changes in this section, because you are" +
+                                "nothing more than a poor developer.");
         }
         System.out.println(" ");
     }

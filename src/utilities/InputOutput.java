@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class InputOutput {
 
-    private static final Scanner input = new Scanner(System.in);
+    private final static Scanner input = new Scanner(System.in);
 
     public static String inputString(String messageToUser) {
         System.out.print(messageToUser + ":");

@@ -18,19 +18,20 @@ public class Project implements Serializable {
     private ArrayList<User> mProjectMembers;
     private LocalDate mStartDate;
     private LocalDate mDueDate;
-    private ArrayList<Task> mTaskList;
+    private ArrayList<SubTask> mSubTaskList;
 //    private ArrayList<Board> mBoards;
 
 
     //Constructor
-    public Project(String projectTitle, String projectDescription/*, ArrayList<User> projectMembers*/, LocalDate startDate, LocalDate dueDate/*, String password*/) {
+    public Project(String projectTitle, String projectDescription/*, ArrayList<User> projectMembers*/,
+                   LocalDate startDate, LocalDate dueDate/*, String password*/) {
         mId = UUID.randomUUID().toString();
         mProjectTitle = projectTitle;
         mProjectDescription = projectDescription;
         mProjectMembers = new ArrayList<User>();
         mStartDate = startDate;
         mDueDate = dueDate;
-        mTaskList = new ArrayList<>();
+        mSubTaskList = new ArrayList<>();
 //        mProjectMembers = projectMembers;
 //        mBoards = new ArrayList<Board>();
 //        mPassword = password;
@@ -92,9 +93,9 @@ public class Project implements Serializable {
         return ChronoUnit.DAYS.between(mStartDate, mDueDate);
     }
 
-    public ArrayList<Task> getTaskList(){ return mTaskList;}
-    public void addTaskToList(Task task){ mTaskList.add(task);}
-    public void removeTask(int index){ mTaskList.remove(index);}
+    public ArrayList<SubTask> getTaskList(){ return mSubTaskList; }
+    public void addTaskToList(SubTask subTask){ mSubTaskList.add(subTask); }
+    public void removeTask(int index){ mSubTaskList.remove(index); }
     // public Task getTaskById (UUID id) { return mTaskList.get(id);}
 
     /*

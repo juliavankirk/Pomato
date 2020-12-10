@@ -1,6 +1,7 @@
 package view.menu.loggedin.project;
 
 import controllers.Controller;
+import model.project.SubTask;
 import model.project.Task;
 import utilities.InputOutput;
 import view.VMenu;
@@ -30,25 +31,25 @@ public class VMenuViewTaskBoard extends VMenu {
      */
     @Override
     public void menuContent(Controller controller) {
-        ArrayList<Task> taskList = controller.getTaskListFromCurrentProject();
+        ArrayList<SubTask> subTaskList = controller.getTaskListFromCurrentProject();
         String status;
 
         System.out.print(InputOutput.shortLine());
-        printLists(taskList, status = "TODO");
+        printLists(subTaskList, status = "TODO");
         System.out.print(InputOutput.shortLine());
-        printLists(taskList, status = "IN PROGRESS");
+        printLists(subTaskList, status = "IN PROGRESS");
         System.out.print(InputOutput.shortLine());
-        printLists(taskList, status = "COMPLETED");
+        printLists(subTaskList, status = "COMPLETED");
     }
 
-    private void printLists(ArrayList<Task> taskList, String status) {
+    private void printLists(ArrayList<SubTask> subTaskList, String status) {
         System.out.println(status);
 
-        for (Task currentTask : taskList) {
+        for (SubTask currentSubTask : subTaskList) {
 
-            if (currentTask.getStatus().equals(status)) {
+            if (currentSubTask.getStatus().equals(status)) {
                 System.out.print(InputOutput.superShortLine());
-                System.out.println(currentTask);
+                System.out.println(currentSubTask);
             }
         }
         System.out.println(" ");

@@ -22,7 +22,7 @@ public class VMenuCreateTask extends VMenu {
     public void menuContent(Controller controller) {
         String title, description;
         double estimatedTime;
-        LocalDate dueDate, startDate, endDate;
+        LocalDate dueDate, startDate, endDate = null;
         int priority;
 
         System.out.println("Please enter the following information\n ");
@@ -34,7 +34,7 @@ public class VMenuCreateTask extends VMenu {
         startDate = LocalDate.now();
         //Do we have to initialize startDate? Its already set?
         //problems with endDate
-        controller.addTask(title, description, dueDate, startDate, endDate, estimatedTime, priority);
+        controller.addSubTask(title, description, dueDate, startDate, endDate, estimatedTime, priority);
 
         addMoreTasks(controller);
 

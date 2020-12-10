@@ -2,6 +2,7 @@ package controllers;
 
 import model.project.Database;
 import model.project.Project;
+import model.project.SubTask;
 import model.project.Task;
 import model.users.User;
 import view.VMenu;
@@ -64,13 +65,13 @@ public class Controller {
     /**
      * Handling Task/Tasks
      */
-    public void addTask(String title, String description, LocalDate dueDate, LocalDate startDate, LocalDate endDate,
+    public void addSubTask(String title, String description, LocalDate dueDate, LocalDate startDate, LocalDate endDate,
                         double estimatedTime, int priority) {
-        Task task = new Task(title, description, dueDate, startDate, endDate, estimatedTime, priority);
-        getCurrentProject().addTaskToList(task);
+        SubTask subTask = new SubTask(title, description, dueDate, startDate, endDate, estimatedTime, priority);
+        getCurrentProject().addTaskToList(subTask);
     }
 
-    public String removeTask(String taskId) {
+    public String removeSubTask(String taskId) {
         int taskListSize = getTaskListFromCurrentProject().size();
 
         for (int i = 0; i < taskListSize; i++) {
@@ -90,7 +91,7 @@ public class Controller {
         return "Task with ID: " + taskId + " was not found";
     }
 
-    public Task getTaskById(String taskId) {
+    public SubTask getTaskById(String taskId) {
         int taskListSize = getTaskListFromCurrentProject().size();
         for (int i = 0; i < taskListSize; i++) {
             UUID stringUuid = getTaskListFromCurrentProject().get(i).getId();
@@ -101,7 +102,7 @@ public class Controller {
         return null;
     }
 
-    public ArrayList<Task> getTaskListFromCurrentProject() {
+    public ArrayList<SubTask> getTaskListFromCurrentProject() {
 
         return getCurrentProject().getTaskList();
     }
@@ -110,28 +111,28 @@ public class Controller {
      * Updating Task
      */
     public void updateTaskStatus(String updatedStatus, String taskId){
-    Task task = getTaskById(taskId);
-    task.setStatus(updatedStatus);
+        SubTask subTask = getTaskById(taskId);
+        subTask.setStatus(updatedStatus);
     }
     public void updateTaskTitle(String updatedTitle, String taskId){
-        Task task = getTaskById(taskId);
-        task.setTitle(updatedTitle);
+        SubTask subTask = getTaskById(taskId);
+        subTask.setTitle(updatedTitle);
     }
     public void updateTaskDescription(String updatedDescription, String taskId){
-        Task task = getTaskById(taskId);
-        task.setDescription(updatedDescription);
+        SubTask subTask = getTaskById(taskId);
+        subTask.setDescription(updatedDescription);
     }
     public void updateTaskPriority(int updatedPriority, String taskId){
-        Task task = getTaskById(taskId);
-        task.setPriority(updatedPriority);
+        SubTask subTask = getTaskById(taskId);
+        subTask.setPriority(updatedPriority);
     }
     public void updateTaskDueDate(LocalDate dueDate, String taskId){
-        Task task = getTaskById(taskId);
-        task.setDueDate(dueDate);
+        SubTask subTask = getTaskById(taskId);
+        subTask.setDueDate(dueDate);
     }
     public void updateTaskEstimatedTime(Double estimatedTime, String taskId){
-        Task task = getTaskById(taskId);
-        task.setEstimatedTime(estimatedTime);
+        SubTask subTask = getTaskById(taskId);
+        subTask.setEstimatedTime(estimatedTime);
     }
 
 
