@@ -8,12 +8,12 @@ import controllers.Controller;
 import java.awt.im.InputContext;
 import java.time.LocalDate;
 
-public class VMenuCreateTask extends VMenu {
+public class VMenuCreateSubtask extends VMenu {
 
-    VMenuCreateTask(VMenu parent) {
+    VMenuCreateSubtask(VMenu parent) {
         super(parent);
-        mMenuHeader = "Create Task";
-        mMenuLabel = "Create Task";
+        mMenuHeader = "Create Subtask";
+        mMenuLabel = "Create Subtask";
         mMenuQuestion = "Enter choice";
         mSubMenus = null;
     }
@@ -43,7 +43,7 @@ public class VMenuCreateTask extends VMenu {
     private void addMoreTasks (Controller controller) {
         String answer;
 
-        answer = InputOutput.inputString("Would you like to add more tasks?(yes/no)");
+        answer = InputOutput.inputString("Would you like to add more subtasks?(yes/no)");
         while (answer.equals("yes")) {
             answer = "";
             menuContent(controller);

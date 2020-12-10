@@ -2,7 +2,6 @@ package view.menu.loggedin.project;
 
 import controllers.Controller;
 import model.project.SubTask;
-import model.project.Task;
 import utilities.InputOutput;
 import view.VMenu;
 
@@ -20,7 +19,7 @@ public class VMenuViewTaskBoard extends VMenu {
         mMenuLabel = "View Task Board";
         mMenuQuestion = "Enter choice";
         mSubMenus = new ArrayList<>();
-        mSubMenus.add(new VMenuCreateTask(this));
+        mSubMenus.add(new VMenuCreateSubtask(this));
         mSubMenus.add(new VMenuRemoveTask(this));
         mSubMenus.add(new VMenuEditTask(this));
     }
