@@ -8,7 +8,7 @@ import java.time.Period;
 import java.util.UUID;
 
 public class Task implements Serializable {
-    private UUID   mId;
+    private UUID mId;
     private String mTitle;
     private String mDescription;
     private int mPriority;

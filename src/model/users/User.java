@@ -1,8 +1,10 @@
 package model.users;
 import model.project.Project;
+import model.project.Task;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.UUID;
 
 
@@ -19,6 +21,7 @@ public class User implements Serializable {
     private Double mHourlyWage;
     private ArrayList<Project> mProjects;
     private ArrayList<Role> mRoles;
+    private HashMap<UUID, ArrayList<Task>> mTasks;
 
 //    private ArrayList<UUID> mProjectsUserCanAccess;
 
@@ -35,6 +38,7 @@ public class User implements Serializable {
         mHourlyWage = hourlyWage;
         mProjects = new ArrayList<Project>();
         mRoles = new ArrayList<Role>();
+        mTasks = new HashMap<UUID, ArrayList<Task>>();
 
 //        mProjectsUserCanAccess = new ArrayList<>();
     }
