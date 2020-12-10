@@ -4,10 +4,7 @@ import model.users.User;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.UUID;
+import java.util.*;
 
 public class Database implements Serializable {
     public HashMap<String, User> mUserList;
@@ -42,6 +39,12 @@ public class Database implements Serializable {
         Progression progression = new Progression(user, task, startDate);
 
         mProgression.add(progression);
+    }
+
+    public long submitTask(Progression progression, LocalDate endDate) {
+        progression.submitTask(endDate);
+
+        return progression.totalHours();
     }
 
 

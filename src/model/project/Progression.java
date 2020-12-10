@@ -1,6 +1,5 @@
 package model.project;
 
-import model.users.Role;
 import model.users.User;
 
 import java.io.Serializable;
@@ -28,12 +27,16 @@ public class Progression implements Serializable {
         mEndDate = endDate;
     }
 
-    public long totalDays() {
+    public long totalHours() {
         //end date is assigned current date if null, otherwise passed value is entered
         LocalDate submission = mEndDate == null ? LocalDate.now() : mEndDate;
         //delta calculation between start and end dates
         long daysBetween = Period.between(mStartDate, submission).getDays() + 1;
         return daysBetween;
+    }
+
+    public void totalWages() {
+        Double salary = totalHours() * mUser.getHourlyWage();
     }
 
 }
