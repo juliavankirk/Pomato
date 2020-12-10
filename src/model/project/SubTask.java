@@ -20,7 +20,7 @@ public class SubTask implements Serializable {
     private String mStatus;
 
     //Do we have to initialize startDate in constructor? Its already set?
-    public SubTask(String title, String description, LocalDate dueDate, LocalDate startDate, LocalDate endDate,
+    public SubTask(String title, String description, LocalDate dueDate, LocalDate startDate,
                 double estimatedTime, int priority) {
         mId = UUID.randomUUID();
         mTitle = title;
@@ -62,6 +62,11 @@ public class SubTask implements Serializable {
 
     public void setStatus (String taskStatus){ mStatus = taskStatus; }
 
+    //assigns value to end date
+    public void getSubmissionDate(LocalDate endDate) {
+        mEndDate = endDate;
+    }
+
     //method that returns total days spent on task
     public long totalDays() {
         //end date is assigned current date if null, otherwise passed value is entered
@@ -70,9 +75,6 @@ public class SubTask implements Serializable {
         long daysBetween = Period.between(mStartDate, submission).getDays() + 1;
         return daysBetween;
     }
-
-
-
 
     public String toString() {
         String retVal = "";

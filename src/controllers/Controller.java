@@ -65,9 +65,9 @@ public class Controller {
     /**
      * Handling Task/Tasks
      */
-    public void addSubTask(String title, String description, LocalDate dueDate, LocalDate startDate, LocalDate endDate,
-                        double estimatedTime, int priority) {
-        SubTask subTask = new SubTask(title, description, dueDate, startDate, endDate, estimatedTime, priority);
+    public void addSubTask(String title, String description, LocalDate dueDate, LocalDate startDate,
+                           double estimatedTime, int priority) {
+        SubTask subTask = new SubTask(title, description, dueDate, startDate, estimatedTime, priority);
         getCurrentProject().addTaskToList(subTask);
     }
 
