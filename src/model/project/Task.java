@@ -15,6 +15,7 @@ public class Task implements Serializable {
     private LocalDate mDateCreated;
     private LocalDate mDueDate;
     private String mStatus;
+    private Boolean mCompletion;
 
     //Do we have to initialize startDate in constructor? Its already set?
     public Task(String title, String description, LocalDate dueDate, int priority) {
@@ -25,6 +26,7 @@ public class Task implements Serializable {
         mDateCreated = LocalDate.now();
         mDueDate = dueDate;
         mStatus = "TODO";
+        mCompletion = false; //initialized as false as task is incomplete
     }
 
     public UUID getId() { return mId; }
@@ -40,6 +42,10 @@ public class Task implements Serializable {
     public LocalDate getDateCreated(){ return mDateCreated; }
 
     public String getStatus(){ return mStatus; }
+
+    public void startTask() { mCompletion = false; }
+
+    public void endTask() { mCompletion = true; }
 
     public void setTitle(String Title) { mTitle = Title; }
 

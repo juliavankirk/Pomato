@@ -37,7 +37,7 @@ public class Project implements Serializable {
 //        mPassword = password;
 
         if (mDueDate.isEqual(mStartDate) || mDueDate.isBefore(mStartDate)){
-            throw new InvalidDataInput("Invalid input. Duration of the project must be positive");
+            throw new InvalidDataInput("Invalid input. Due date must come after date of creation.");
         }
     }
 
