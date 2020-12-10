@@ -40,6 +40,13 @@ public class Project implements Serializable {
         }
     }
 
+    public Project(String title) {
+        mId = UUID.randomUUID().toString();
+        mProjectTitle = title;
+        mProjectMembers = new ArrayList<User>();
+        mTaskList = new ArrayList<>();
+    }
+
     //Getters and Setters
     public String getId() { return mId; }
 

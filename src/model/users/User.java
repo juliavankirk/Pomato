@@ -40,16 +40,17 @@ public class User implements Serializable {
     }
 
     public User(String[] savedAttributes) {
-        mUserName = savedAttributes[1];
-        mFirstName= savedAttributes[2];
-        mLastName = savedAttributes[3];
+        mId = UUID.randomUUID().toString();
+        mFirstName= savedAttributes[1];
+        mLastName = savedAttributes[2];
+        mUserName = savedAttributes[3];
         mPassword = savedAttributes[4];
         mCompanyName = savedAttributes[5];
         mHourlyWage = Double.parseDouble(savedAttributes[6]);
         mJobTitle = savedAttributes[7];
+        mProjects = new ArrayList<Project>();
+        mRoles = new ArrayList<Role>();
     }
-
-
 
     //Methods
 

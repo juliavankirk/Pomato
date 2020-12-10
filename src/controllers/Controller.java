@@ -163,6 +163,20 @@ public class Controller {
     }
 
 
+    public Project searchProjectByTitle(String title) {
+        Collection<Project> projectList = mDatabase.getProjectList();
+        for (Iterator<Project> iterator = projectList.iterator(); iterator.hasNext(); ) {
+            Project project = iterator.next();
+            if(project.getProjectTitle().equals(title)) {
+                return project;
+            }
+        }
+        Project newProject = new Project(title);
+        mDatabase.addProject(newProject);
+        return newProject;
+    }
+
+
     public void addUser(String userName, String firstName, String lastName, String password, String companyName, double jobTitle,
             String hourlyWage ) {
         User user = new User(userName, firstName, lastName, password, companyName, jobTitle, hourlyWage);
@@ -314,13 +328,19 @@ public class Controller {
             String line = null;
             while ((line = bufferedReader.readLine()) != null) {
                 String[] retrievedInfo = line.split(";");
-
                 if (retrievedInfo[0].equals("User")) {
                     User user = new User(retrievedInfo);
-                    if (checkUsername(user.getUserName()).equals("This username is taken before. Please select another username.")) {
-                        mDatabase.addUser(user);
-                        System.out.println("Added: " + Arrays.toString(retrievedInfo));
+                    for(int i = 0; i < (retrievedInfo.length - 8); i = i + 2) {
+                        Project project = searchProjectByTitle(retrievedInfo[i + 8]);
+                        user.getProjects().add(project);
+                        project.getProjectMembers().add(user);
+                        user.addRole(project.getId());
+                        if (!(user.getRole(project.getId()).equals(retrievedInfo[i + 9]))) {
+                            user.changeRole(project.getId());
+                        }
                     }
+                    mDatabase.addUser(user);
+                    System.out.println("Added: " + Arrays.toString(retrievedInfo));
                 }
             }
 

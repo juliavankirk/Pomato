@@ -21,6 +21,7 @@ public class VMenuMain extends VMenu {
         mSubMenus = new ArrayList<>();
         mSubMenus.add(new VMenuRegister(this));
         mSubMenus.add(new VMenuLogin(this));
+        mSubMenus.add(new VMenuImport(this));
         mSubMenus.add(new VMenuManual(this));
         mSubMenus.add(new VMenuExit(this));
 //        mSubMenus.add(new VMenuLoggedIn(this));
