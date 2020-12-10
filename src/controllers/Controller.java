@@ -4,6 +4,7 @@ import model.project.Database;
 import model.project.Project;
 import model.project.Task;
 import model.users.User;
+import utilities.InputOutput;
 import view.VMenu;
 import view.menu.VMenuMain;
 
@@ -66,7 +67,7 @@ public class Controller {
         for (int i = 0; i < taskListSize; i++) {
             UUID stringUuid = getTaskListFromCurrentProject().get(i).getId();
 
-            if ( stringUuid.toString().equals(taskId)) {
+            if (stringUuid.toString().equals(taskId)) {
                 getCurrentProject().removeTask(i);
                 return "Task with ID: " + taskId + " has been removed";
             }
@@ -99,39 +100,44 @@ public class Controller {
     /**
      * Updating Task
      */
-    public void updateTaskStatus(String updatedStatus, String taskId){
-    Task task = getTaskById(taskId);
-    task.setStatus(updatedStatus);
+    public void updateTaskStatus(String updatedStatus, String taskId) {
+        Task task = getTaskById(taskId);
+        task.setStatus(updatedStatus);
     }
-    public void updateTaskTitle(String updatedTitle, String taskId){
+
+    public void updateTaskTitle(String updatedTitle, String taskId) {
         Task task = getTaskById(taskId);
         task.setTitle(updatedTitle);
     }
-    public void updateTaskDescription(String updatedDescription, String taskId){
+
+    public void updateTaskDescription(String updatedDescription, String taskId) {
         Task task = getTaskById(taskId);
         task.setDescription(updatedDescription);
     }
-    public void updateTaskPriority(int updatedPriority, String taskId){
+
+    public void updateTaskPriority(int updatedPriority, String taskId) {
         Task task = getTaskById(taskId);
         task.setPriority(updatedPriority);
     }
-    public void updateTaskDueDate(LocalDate dueDate, String taskId){
+
+    public void updateTaskDueDate(LocalDate dueDate, String taskId) {
         Task task = getTaskById(taskId);
         task.setDueDate(dueDate);
     }
-    public void updateTaskEstimatedTime(Double estimatedTime, String taskId){
+
+    public void updateTaskEstimatedTime(Double estimatedTime, String taskId) {
         Task task = getTaskById(taskId);
         task.setEstimatedTime(estimatedTime);
     }
 
 
     /**
-     *  Handling user
+     * Handling user
      */
     public void addUser(String firstName, String lastName, String password, String companyName, double jobTitle,
-            String hourlyWage ) {
-        User user = new User( firstName, lastName, password, companyName, jobTitle, hourlyWage);
-        mDatabase.addUser( user );
+                        String hourlyWage) {
+        User user = new User(firstName, lastName, password, companyName, jobTitle, hourlyWage);
+        mDatabase.addUser(user);
         System.out.println("Your username is: " + user.getId() + "\nYour password is: " + user.getPassword());
     }
 
@@ -143,8 +149,8 @@ public class Controller {
     public String logInUser(String enteredUserName, String enteredPassword) {
         Collection<User> userList = mDatabase.getUserList();
 
-        for (Iterator<User> iterator = userList.iterator(); iterator.hasNext();) {
-            User someOne  = iterator.next();
+        for (Iterator<User> iterator = userList.iterator(); iterator.hasNext(); ) {
+            User someOne = iterator.next();
             if (someOne.getId().equals(enteredUserName)) {
                 if (someOne.getPassword().equals(enteredPassword)) {
                     setCurrentUser(someOne);
@@ -187,9 +193,9 @@ public class Controller {
                 User someOne = iterator.next();
 
                 if (someOne.getId().equals(enteredIds.get(i))) {
-                   project.getProjectMembers().add(someOne);
-                   someOne.getProjects().add(project);
-                   someOne.addRole(projectId);
+                    project.getProjectMembers().add(someOne);
+                    someOne.getProjects().add(project);
+                    someOne.addRole(projectId);
                 }
             }
         }
@@ -223,9 +229,9 @@ public class Controller {
 
     public void changeRoles(ArrayList<String> memberIds) {
 
-        for(int i = 0; i < memberIds.size(); i++) {
-            for(int j = 0; j < getCurrentProject().getProjectMembers().size(); j++) {
-                if(memberIds.get(i).equals(getCurrentProject().getProjectMembers().get(j).getId())) {
+        for (int i = 0; i < memberIds.size(); i++) {
+            for (int j = 0; j < getCurrentProject().getProjectMembers().size(); j++) {
+                if (memberIds.get(i).equals(getCurrentProject().getProjectMembers().get(j).getId())) {
                     getCurrentProject().getProjectMembers().get(j).changeRole(getCurrentProject().getId());
                 }
             }
@@ -243,6 +249,26 @@ public class Controller {
     public Project getCurrentProject() {
         return mCurrentProject;
     }
+
+
+    public String calculateHours(String userId, double hours) {
+
+        Collection<User> userList = mDatabase.getUserList();
+
+
+        for (int i = 0; i < mDatabase.mUserList.size(); i++) {
+            if (mDatabase.mUserList.containsKey(userId)) {
+
+                double calculatedHours = mCurrentUser.getHourlyWage() * hours;
+                mCurrentUser.setTotalWage(calculatedHours);
+
+                return "Your total wage is " + calculatedHours + " SEK";
+            }
+        }
+        return "You don't exist.";
+    }
+}
+
 
 
 //    void doMainMenu() {
@@ -282,4 +308,4 @@ public class Controller {
 //        }
 //        doMainMenu();
 //    }
-}
+

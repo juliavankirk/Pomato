@@ -18,7 +18,7 @@ public class User {
     private Double mHourlyWage;
     private ArrayList<Project> mProjects;
     private ArrayList<Role> mRoles;
-
+    private double mTotalWage;
 //    private ArrayList<UUID> mProjectsUserCanAccess;
 
     //Constructor
@@ -34,6 +34,7 @@ public class User {
         mHourlyWage = hourlyWage;
         mProjects = new ArrayList<Project>();
         mRoles = new ArrayList<Role>();
+        mTotalWage = 0;
 
 //        mProjectsUserCanAccess = new ArrayList<>();
     }
@@ -75,6 +76,8 @@ public class User {
     public String getLastName() {
         return mLastName;
     }
+
+    public void setTotalWage(double totalWage) { mTotalWage = totalWage; }
 
     public void setLastName(String lastName) {
         mLastName = lastName;
