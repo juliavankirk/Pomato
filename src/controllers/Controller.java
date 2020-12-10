@@ -1,5 +1,8 @@
 package controllers;
 
+import model.project.Database;
+import model.project.Project;
+import model.project.Task;
 import com.sun.jdi.event.MonitorContendedEnteredEvent;
 import model.project.*;
 import model.users.User;
@@ -17,6 +20,8 @@ public class Controller {
 
 
     //Attributes
+//    StorageController mStorageController;
+
     Database mDatabase;
     VMenu mCurrentMenu;
     private User mCurrentUser;
@@ -60,12 +65,13 @@ public class Controller {
     /**
      * Handling Task/Tasks
      */
-    public void addTask(String title, String description, LocalDate dueDate, LocalDate startDate, double estimatedTime, int priority) {
-        Task task = new Task(title, description, dueDate, startDate, estimatedTime, priority);
-        getCurrentProject().addTaskToList(task);
+    public void addSubTask(String title, String description, LocalDate dueDate, LocalDate startDate,
+                           double estimatedTime, int priority) {
+        SubTask subTask = new SubTask(title, description, dueDate, startDate, estimatedTime, priority);
+        getCurrentProject().addTaskToList(subTask);
     }
 
-    public String removeTask(String taskId) {
+    public String removeSubTask(String taskId) {
         int taskListSize = getTaskListFromCurrentProject().size();
 
         for (int i = 0; i < taskListSize; i++) {
@@ -79,7 +85,7 @@ public class Controller {
         return "Task with ID: " + taskId + " was not found";
     }
 
-    public Task getTaskById(String taskId) {
+    public SubTask getTaskById(String taskId) {
         int taskListSize = getTaskListFromCurrentProject().size();
 
         for (int i = 0; i < taskListSize; i++) {
@@ -92,7 +98,7 @@ public class Controller {
         return null;
     }
 
-    public ArrayList<Task> getTaskListFromCurrentProject() {
+    public ArrayList<SubTask> getTaskListFromCurrentProject() {
 
         return getCurrentProject().getTaskList();
     }
@@ -105,7 +111,7 @@ public class Controller {
 
 
     public String addChecklist(String name, String taskId/*, ArrayList<String> itemStringList*/) {
-        Task task = getTaskById(taskId);
+        SubTask task = getTaskById(taskId);
         Checklist checklist = new Checklist(name);
 
 
@@ -127,7 +133,7 @@ public class Controller {
     }
 
     public Checklist getChecklistById(String checklistId, String taskId) {
-        Task task = getTaskById(taskId);
+        SubTask task = getTaskById(taskId);
         int checklistSize = task.getChecklists().size();
         for (int i = 0; i < checklistSize; i++) {
             // get checklist
@@ -226,28 +232,28 @@ public class Controller {
      * Updating Task
      */
     public void updateTaskStatus(String updatedStatus, String taskId){
-    Task task = getTaskById(taskId);
-    task.setStatus(updatedStatus);
+        SubTask subTask = getTaskById(taskId);
+        subTask.setStatus(updatedStatus);
     }
     public void updateTaskTitle(String updatedTitle, String taskId){
-        Task task = getTaskById(taskId);
-        task.setTitle(updatedTitle);
+        SubTask subTask = getTaskById(taskId);
+        subTask.setTitle(updatedTitle);
     }
     public void updateTaskDescription(String updatedDescription, String taskId){
-        Task task = getTaskById(taskId);
-        task.setDescription(updatedDescription);
+        SubTask subTask = getTaskById(taskId);
+        subTask.setDescription(updatedDescription);
     }
     public void updateTaskPriority(int updatedPriority, String taskId){
-        Task task = getTaskById(taskId);
-        task.setPriority(updatedPriority);
+        SubTask subTask = getTaskById(taskId);
+        subTask.setPriority(updatedPriority);
     }
     public void updateTaskDueDate(LocalDate dueDate, String taskId){
-        Task task = getTaskById(taskId);
-        task.setDueDate(dueDate);
+        SubTask subTask = getTaskById(taskId);
+        subTask.setDueDate(dueDate);
     }
     public void updateTaskEstimatedTime(Double estimatedTime, String taskId){
-        Task task = getTaskById(taskId);
-        task.setEstimatedTime(estimatedTime);
+        SubTask subTask = getTaskById(taskId);
+        subTask.setEstimatedTime(estimatedTime);
     }
 
 
@@ -318,7 +324,7 @@ public class Controller {
                                 LocalDate startDate, LocalDate dueDate) {
 
         Project project = new Project(title, description, startDate, dueDate);
-        String projectId = project.getId();
+        String projectId = project.getId().toString();
 
         Collection<User> userList = mDatabase.getUserList();
 
@@ -353,7 +359,7 @@ public class Controller {
                 if (someOne.getId().equals(newMembersIds.get(i))) {
                     mCurrentProject.getProjectMembers().add(someOne);
                     someOne.getProjects().add(mCurrentProject);
-                    someOne.addRole(mCurrentProject.getId());
+                    someOne.addRole(mCurrentProject.getId().toString());
                 }
             }
         }
@@ -366,7 +372,7 @@ public class Controller {
         for(int i = 0; i < memberIds.size(); i++) {
             for(int j = 0; j < getCurrentProject().getProjectMembers().size(); j++) {
                 if(memberIds.get(i).equals(getCurrentProject().getProjectMembers().get(j).getId())) {
-                    getCurrentProject().getProjectMembers().get(j).changeRole(getCurrentProject().getId());
+                    getCurrentProject().getProjectMembers().get(j).changeRole(getCurrentProject().getId().toString());
                 }
             }
         }

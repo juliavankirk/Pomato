@@ -1,8 +1,10 @@
 package model.users;
 import model.project.Project;
+import model.project.Task;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.UUID;
 
 
@@ -10,7 +12,7 @@ public class User implements Serializable {
 
     //Attributes
     private String mUserName;
-    private String mId;
+    private UUID mId;
     private String mFirstName;
     private String mLastName;
     private String mPassword;
@@ -19,6 +21,7 @@ public class User implements Serializable {
     private Double mHourlyWage;
     private ArrayList<Project> mProjects;
     private ArrayList<Role> mRoles;
+    private HashMap<UUID, ArrayList<Task>> mTasks;
 
 //    private ArrayList<UUID> mProjectsUserCanAccess;
 
@@ -26,7 +29,7 @@ public class User implements Serializable {
     public User(String userName, String firstName, String lastName, String password, String companyName,
                 Double hourlyWage, String jobTitle) {
         mUserName = userName;
-        mId = UUID.randomUUID().toString();
+        mId = UUID.randomUUID();
         mFirstName = firstName;
         mLastName = lastName;
         mPassword = password;
@@ -35,6 +38,7 @@ public class User implements Serializable {
         mHourlyWage = hourlyWage;
         mProjects = new ArrayList<Project>();
         mRoles = new ArrayList<Role>();
+        mTasks = new HashMap<UUID, ArrayList<Task>>();
 
 //        mProjectsUserCanAccess = new ArrayList<>();
     }
@@ -55,7 +59,7 @@ public class User implements Serializable {
 //        return mProjectsUserCanAccess;
 //    }
 
-    public String getId() { return mId; }
+    public UUID getId() { return mId; }
 
     public String getPassword() {
         return mPassword;

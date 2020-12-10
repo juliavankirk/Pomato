@@ -21,7 +21,7 @@ public class VMenuChangeRoles extends VMenu {
 
     @Override
     public void menuContent(Controller controller) {
-        if(controller.getCurrentUser().getRole(controller.getCurrentProject().getId()).equals("Manager")) {
+        if(controller.getCurrentUser().getRole(controller.getCurrentProject().getId().toString()).equals("Manager")) {
         ArrayList<String> newRolesIds = new ArrayList<>();
         String answer = "yes";
         while(answer.equals("yes")) {

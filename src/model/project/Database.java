@@ -3,20 +3,20 @@ package model.project;
 import model.users.User;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.UUID;
+import java.time.LocalDate;
+import java.util.*;
 
 public class Database implements Serializable {
-    public HashMap<String, User> mUserList;
-    public HashMap<String, Project> mProjectList;
+    public HashMap<UUID, User> mUserList;
+    public HashMap<UUID, Project> mProjectList;
     public ArrayList <Task> mTaskList;
+    public ArrayList<Progression> mProgression;
 
     public Database() {
-        mUserList = new HashMap<String, User>();
-        mProjectList = new HashMap<String, Project>();
+        mUserList = new HashMap<UUID, User>();
+        mProjectList = new HashMap<UUID, Project>();
         mTaskList = new ArrayList<Task>();
+        mProgression = new ArrayList<Progression>();
     }
 
     public Collection<User> getUserList() { return mUserList.values(); }
@@ -34,4 +34,28 @@ public class Database implements Serializable {
     public void addTask(Task task){ mTaskList.add(task);}
     public void removeTask(int index){ mTaskList.remove(index);}
 //    public Task getTaskById (UUID id) { return mTaskList.get(id);}
+
+    public void startTask(User user, Task task, LocalDate startDate) {
+        Progression progression = new Progression(user, task, startDate);
+
+        mProgression.add(progression);
+    }
+
+    public long submitTask(Progression progression, LocalDate endDate) {
+        progression.submitTask(endDate);
+
+        return progression.totalHours();
+    }
+
+    public Collection<Progression> getProgressForUser(User user) {
+        ArrayList<Progression> userProgress = new ArrayList<>();
+        for (Progression progress : mProgression) {
+            if (user.getName().equals(progress.getUser().getName())) {
+                userProgress.add(progress);
+            }
+        }
+        return userProgress;
+    }
+
+
 }
