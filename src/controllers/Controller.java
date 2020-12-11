@@ -2,10 +2,8 @@ package controllers;
 
 import model.project.*;
 import model.users.User;
-import utilities.InputOutput;
 import view.VMenu;
 import view.menu.VMenuMain;
-import com.sun.jdi.event.MonitorContendedEnteredEvent;
 
 import java.io.*;
 import java.time.LocalDate;
@@ -391,21 +389,11 @@ public class Controller {
     }
 
 
-    public String calculateHours(String userName, double hours) {
-
-        Collection<User> userList = mDatabase.getUserList();
-
-
-        for (int i = 0; i < mDatabase.mUserList.size(); i++) {
-            if (!(checkUsername(userName).equals("This username is taken before. Please select another username."))) {
-
+    public String calculateHours(double hours) {
                 double calculatedHours = mCurrentUser.getHourlyWage() * hours;
                 mCurrentUser.setTotalWage(calculatedHours);
-
                 return "Your total wage is " + calculatedHours + " SEK";
-            }
-        }
-        return "You don't exist.";
+
     }
 
     /**

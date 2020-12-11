@@ -1,11 +1,8 @@
 package view.menu.loggedin.project;
 
 import controllers.Controller;
-import model.users.User;
 import utilities.InputOutput;
 import view.VMenu;
-
-import java.time.LocalDate;
 
 public class VMenuPersonalWage extends VMenu {
 
@@ -20,14 +17,12 @@ public class VMenuPersonalWage extends VMenu {
     }
     @Override
     public void menuContent(Controller controller) {
-        double hours; String userName;
-
-        // TODO Fix to currentUser
+        double hours;
         System.out.println("Please enter the following information\n ");
-        userName = InputOutput.inputString("Enter your Username");
+
         hours = InputOutput.inputDouble("Hours");
 
-        String messageToUser = controller.calculateHours(userName, hours);
+        String messageToUser = controller.calculateHours(hours);
         System.out.println(messageToUser);
 
 //        userId = User.getId();
