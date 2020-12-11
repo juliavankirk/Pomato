@@ -2,10 +2,7 @@ package view.menu.loggedin;
 
 import controllers.Controller;
 import view.VMenu;
-import view.menu.loggedin.project.VMenuAddMember;
-import view.menu.loggedin.project.VMenuChangeRoles;
-import view.menu.loggedin.project.VMenuCommentBoard;
-import view.menu.loggedin.project.VMenuViewTaskBoard;
+import view.menu.loggedin.project.*;
 
 import java.util.ArrayList;
 
@@ -25,6 +22,7 @@ public class VMenuProject extends VMenu {
         mSubMenus.add(new VMenuCommentBoard(this));
         mSubMenus.add(new VMenuAddMember(this));
         mSubMenus.add(new VMenuChangeRoles(this));
+        mSubMenus.add(new VMenuPersonalWage(this));
 //        subMenu = true;
     }
 

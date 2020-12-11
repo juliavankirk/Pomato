@@ -2,6 +2,7 @@ package controllers;
 
 import model.project.*;
 import model.users.User;
+import utilities.InputOutput;
 import view.VMenu;
 import view.menu.VMenuMain;
 import com.sun.jdi.event.MonitorContendedEnteredEvent;
@@ -247,7 +248,7 @@ public class Controller {
     }
 
     /**
-     *  Handling user
+     * Handling user
      */
 
     public String checkUsername(String enteredUsername) {
@@ -389,6 +390,23 @@ public class Controller {
         return mCurrentProject;
     }
 
+
+    public String calculateHours(String userId, double hours) {
+
+        Collection<User> userList = mDatabase.getUserList();
+
+
+        for (int i = 0; i < mDatabase.mUserList.size(); i++) {
+            if (mDatabase.mUserList.containsKey(userId)) {
+
+                double calculatedHours = mCurrentUser.getHourlyWage() * hours;
+                mCurrentUser.setTotalWage(calculatedHours);
+
+                return "Your total wage is " + calculatedHours + " SEK";
+            }
+        }
+        return "You don't exist.";
+    }
 
     /**
      * Method for saving DATABASE to a file:

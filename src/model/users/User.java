@@ -23,6 +23,7 @@ public class User implements Serializable {
     private ArrayList<Role> mRoles;
     private HashMap<UUID, ArrayList<Task>> mTasks;
 
+    private double mTotalWage;
 //    private ArrayList<UUID> mProjectsUserCanAccess;
 
     //Constructor
@@ -38,11 +39,12 @@ public class User implements Serializable {
         mHourlyWage = hourlyWage;
         mProjects = new ArrayList<Project>();
         mRoles = new ArrayList<Role>();
+        mTotalWage = 0;
         mTasks = new HashMap<UUID, ArrayList<Task>>();
 
-//        mProjectsUserCanAccess = new ArrayList<>();
     }
 
+    // Save to .csv:
     public User(String[] savedAttributes) {
         mId = UUID.randomUUID();
         mFirstName= savedAttributes[1];
@@ -57,7 +59,6 @@ public class User implements Serializable {
     }
 
     //Methods
-
 
     public String getUserName() {
         return mUserName;
@@ -93,6 +94,8 @@ public class User implements Serializable {
     public String getLastName() {
         return mLastName;
     }
+
+    public void setTotalWage(double totalWage) { mTotalWage = totalWage; }
 
     public void setLastName(String lastName) {
         mLastName = lastName;
