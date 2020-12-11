@@ -20,13 +20,14 @@ public class VMenuPersonalWage extends VMenu {
     }
     @Override
     public void menuContent(Controller controller) {
-        double hours; String userId;
+        double hours; String userName;
 
+        // TODO Fix to currentUser
         System.out.println("Please enter the following information\n ");
-        userId = InputOutput.inputString("Enter your User ID");
+        userName = InputOutput.inputString("Enter your Username");
         hours = InputOutput.inputDouble("Hours");
 
-        String messageToUser = controller.calculateHours(userId, hours);
+        String messageToUser = controller.calculateHours(userName, hours);
         System.out.println(messageToUser);
 
 //        userId = User.getId();

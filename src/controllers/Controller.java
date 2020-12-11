@@ -391,13 +391,13 @@ public class Controller {
     }
 
 
-    public String calculateHours(String userId, double hours) {
+    public String calculateHours(String userName, double hours) {
 
         Collection<User> userList = mDatabase.getUserList();
 
 
         for (int i = 0; i < mDatabase.mUserList.size(); i++) {
-            if (mDatabase.mUserList.containsKey(userId)) {
+            if (!(checkUsername(userName).equals("This username is taken before. Please select another username."))) {
 
                 double calculatedHours = mCurrentUser.getHourlyWage() * hours;
                 mCurrentUser.setTotalWage(calculatedHours);
