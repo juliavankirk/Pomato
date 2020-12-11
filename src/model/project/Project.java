@@ -42,10 +42,10 @@ public class Project implements Serializable {
     }
 
     public Project(String title) {
-        mId = UUID.randomUUID().toString();
+        mId = UUID.randomUUID();
         mProjectTitle = title;
         mProjectMembers = new ArrayList<User>();
-        mTaskList = new ArrayList<>();
+        mSubTaskList = new ArrayList<>();
     }
 
     //Getters and Setters

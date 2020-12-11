@@ -44,7 +44,7 @@ public class User implements Serializable {
     }
 
     public User(String[] savedAttributes) {
-        mId = UUID.randomUUID().toString();
+        mId = UUID.randomUUID();
         mFirstName= savedAttributes[1];
         mLastName = savedAttributes[2];
         mUserName = savedAttributes[3];
