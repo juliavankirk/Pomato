@@ -1,27 +1,19 @@
 package controllers;
 
-import model.project.Database;
-import model.project.Project;
-import model.project.Task;
-import com.sun.jdi.event.MonitorContendedEnteredEvent;
 import model.project.*;
 import model.users.User;
 import view.VMenu;
 import view.menu.VMenuMain;
+import com.sun.jdi.event.MonitorContendedEnteredEvent;
 
 import java.io.*;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.UUID;
+import java.util.*;
 
 public class Controller {
 
 
     //Attributes
-//    StorageController mStorageController;
-
     Database mDatabase;
     VMenu mCurrentMenu;
     private User mCurrentUser;
@@ -270,6 +262,20 @@ public class Controller {
     }
 
 
+    public Project searchProjectByTitle(String title) {
+        Collection<Project> projectList = mDatabase.getProjectList();
+        for (Iterator<Project> iterator = projectList.iterator(); iterator.hasNext(); ) {
+            Project project = iterator.next();
+            if(project.getProjectTitle().equals(title)) {
+                return project;
+            }
+        }
+        Project newProject = new Project(title);
+        mDatabase.addProject(newProject);
+        return newProject;
+    }
+
+
     public void addUser(String userName, String firstName, String lastName, String password, String companyName, double jobTitle,
             String hourlyWage ) {
         User user = new User(userName, firstName, lastName, password, companyName, jobTitle, hourlyWage);
@@ -403,6 +409,7 @@ public class Controller {
 
     public void loadDatabase() {
         String fileLocation = "data/database.ser";
+//        mDatabase = null;
 
         try {
             FileInputStream fileInput = new FileInputStream(fileLocation);
@@ -412,12 +419,48 @@ public class Controller {
             fileInput.close();
         }
         catch (IOException ioEx) {
-            System.out.println("Database is incompatible");
+            System.out.println("File is empty");
             ioEx.printStackTrace();
+            return;
         }
         catch (ClassNotFoundException classEx) {
             System.out.println("Database not found");
             classEx.printStackTrace();
+            return;
+        }
+    }
+
+    public void loadDatabaseTwo() {
+
+        String STORAGE = "./src/STORAGE.csv";
+
+        try {
+            File customerFile = new File(STORAGE);
+            FileReader fileReader = new FileReader(customerFile);
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+            String line = null;
+            while ((line = bufferedReader.readLine()) != null) {
+                String[] retrievedInfo = line.split(";");
+                if (retrievedInfo[0].equals("User")) {
+                    User user = new User(retrievedInfo);
+                    for(int i = 0; i < (retrievedInfo.length - 8); i = i + 2) {
+                        Project project = searchProjectByTitle(retrievedInfo[i + 8]);
+                        user.getProjects().add(project);
+                        project.getProjectMembers().add(user);
+                        user.addRole(project.getId());
+                        if (!(user.getRole(project.getId()).equals(retrievedInfo[i + 9]))) {
+                            user.changeRole(project.getId());
+                        }
+                    }
+                    mDatabase.addUser(user);
+                    System.out.println("Added: " + Arrays.toString(retrievedInfo));
+                }
+            }
+
+        } catch (FileNotFoundException e) {
+
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

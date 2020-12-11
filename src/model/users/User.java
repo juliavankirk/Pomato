@@ -18,7 +18,7 @@ public class User implements Serializable {
     private String mPassword;
     private String mCompanyName;
     private String mJobTitle;
-    private Double mHourlyWage;
+    private double mHourlyWage;
     private ArrayList<Project> mProjects;
     private ArrayList<Role> mRoles;
     private HashMap<UUID, ArrayList<Task>> mTasks;
@@ -27,7 +27,7 @@ public class User implements Serializable {
 
     //Constructor
     public User(String userName, String firstName, String lastName, String password, String companyName,
-                Double hourlyWage, String jobTitle) {
+                double hourlyWage, String jobTitle) {
         mUserName = userName;
         mId = UUID.randomUUID();
         mFirstName = firstName;
@@ -41,6 +41,19 @@ public class User implements Serializable {
         mTasks = new HashMap<UUID, ArrayList<Task>>();
 
 //        mProjectsUserCanAccess = new ArrayList<>();
+    }
+
+    public User(String[] savedAttributes) {
+        mId = UUID.randomUUID().toString();
+        mFirstName= savedAttributes[1];
+        mLastName = savedAttributes[2];
+        mUserName = savedAttributes[3];
+        mPassword = savedAttributes[4];
+        mCompanyName = savedAttributes[5];
+        mHourlyWage = Double.parseDouble(savedAttributes[6]);
+        mJobTitle = savedAttributes[7];
+        mProjects = new ArrayList<Project>();
+        mRoles = new ArrayList<Role>();
     }
 
     //Methods

@@ -26,6 +26,7 @@ public class VMenuAddMember extends VMenu {
             String answer = "yes";
             while (answer.equals("yes")) {
                 String memberId = InputOutput.inputString("Insert member's Id");
+                //TODO check if member IDs exist
                 pMembersIds.add(memberId);
                 answer = InputOutput.inputString("Do you want to continue adding members?(yes/no)");
             }
