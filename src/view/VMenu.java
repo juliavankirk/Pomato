@@ -49,13 +49,26 @@ public abstract class VMenu {
     public VMenu executeMenu(Controller controller) {
 
         // 2. Every Menu has a header.
-        System.out.println(InputOutput.line() + mMenuHeader + "\n");
+        System.out.print(InputOutput.line() + mMenuHeader + "\n");
+        // System.out.print(InputOutput.superSuperShortLine());
+        // Custom length on LINE instead of above code
+//        for (int i = 0; i < mMenuHeader.length(); i++) {
+//            System.out.print("--");
+//        }
+//        System.out.println( "\n" + mMenuHeader);
 
         // 3. This handles any extra choices in the menu.
         menuContent(controller);
 
         // 4. This prints Sub Menu choices. But only if the menu has Sub Menu's
         if (mSubMenus != null) {
+            // System.out.print(InputOutput.superSuperShortLine());
+            // Custom length on LINE instead of above code
+            for (int i = 0; i < mMenuHeader.length(); i++) {
+                System.out.print("-");
+            }
+            System.out.print("\n");
+
             for (int i = 0; i < mSubMenus.size(); i++) {
                 System.out.println((i + 1) + ". " + mSubMenus.get(i).mMenuLabel);
             }
@@ -67,25 +80,26 @@ public abstract class VMenu {
             if (mSubMenus != null) {
                 System.out.println((mSubMenus.size() + 1) + ". Go back");
             } else {
+                System.out.print(InputOutput.superSuperShortLine());
                 System.out.println("1. Go back");
             }
         }
         System.out.println(" ");
 
         // 6. We go to the last method that handles asking a question to the user.
-        return chooseMenu(mParentMenu);
+        return chooseMenu(mParentMenu, controller);
     }
 
     // 3. A Menu can choose it's own content.
     public abstract void menuContent(Controller controller);
 
     // 6. A menu at last contains a question. Where do you want to go?
-    public VMenu chooseMenu(VMenu mParent) {
+    public VMenu chooseMenu(VMenu mParent, Controller controller) {
         VMenu chosenVMenu;
 
-
-        int inputResult = InputOutput.inputInt(mMenuQuestion);
+        int inputResult = InputOutput.inputInt(mMenuQuestion/*,1,mSubMenus.size() + 1*/);
         if (mSubMenus != null && inputResult > 0 && inputResult < mSubMenus.size() + 1) {
+
             chosenVMenu = mSubMenus.get(inputResult - 1);
         } else {
             chosenVMenu = mParent;
@@ -96,5 +110,21 @@ public abstract class VMenu {
 
     public VMenu getParentMenu() {
         return mParentMenu;
+    }
+
+    public String getmMenuHeader() {
+        return mMenuHeader;
+    }
+
+    public void setmMenuHeader(String menuHeader) {
+        mMenuHeader = menuHeader;
+    }
+
+    public String getmMenuLabel() {
+        return mMenuLabel;
+    }
+
+    public void setmMenuLabel(String menuLabel) {
+        mMenuLabel = menuLabel;
     }
 }

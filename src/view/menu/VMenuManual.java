@@ -16,7 +16,7 @@ public class VMenuManual extends VMenu {
         mMenuQuestion = "Enter choice";
         mMenuChoice = "X";
         mSubMenus = null;
-//        subMenu = false;
+//        mSubMenu = false;
     }
 
 

@@ -3,12 +3,13 @@ package model.project;
 import model.users.User;
 import utilities.InvalidDataInput;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.UUID;
 
-public class Project {
+public class Project implements Serializable {
 
     //Attributes
     private UUID mId;
@@ -17,21 +18,34 @@ public class Project {
     private ArrayList<User> mProjectMembers;
     private LocalDate mStartDate;
     private LocalDate mDueDate;
-    private ArrayList<String> mTasks;
+    private ArrayList<SubTask> mSubTaskList;
+//    private ArrayList<Board> mBoards;
+
 
     //Constructor
-    public Project(String projectTitle, String projectDescription, ArrayList<User> projectMembers, LocalDate startDate, LocalDate dueDate) {
+    public Project(String projectTitle, String projectDescription/*, ArrayList<User> projectMembers*/,
+                   LocalDate startDate, LocalDate dueDate/*, String password*/) {
         mId = UUID.randomUUID();
         mProjectTitle = projectTitle;
         mProjectDescription = projectDescription;
-        mProjectMembers = projectMembers;
+        mProjectMembers = new ArrayList<>();
         mStartDate = startDate;
         mDueDate = dueDate;
-        mTasks = new ArrayList<String>();
+        mSubTaskList = new ArrayList<>();
+//        mProjectMembers = projectMembers;
+//        mBoards = new ArrayList<Board>();
+//        mPassword = password;
 
         if (mDueDate.isEqual(mStartDate) || mDueDate.isBefore(mStartDate)){
-            throw new InvalidDataInput("Invalid input. Duration of the project must be positive");
+            throw new InvalidDataInput("Invalid input. Due date must come after date of creation.");
         }
+    }
+
+    public Project(String title) {
+        mId = UUID.randomUUID();
+        mProjectTitle = title;
+        mProjectMembers = new ArrayList<User>();
+        mSubTaskList = new ArrayList<>();
     }
 
     //Getters and Setters
@@ -77,17 +91,42 @@ public class Project {
         mDueDate = dueDate;
     }
 
-    public ArrayList<String> getTasks() {
-        return mTasks;
-    }
 
-    public void setTasks(ArrayList<String> tasks) {
-        mTasks = tasks;
-    }
+    /**
+     * Methods
+     */
 
-    //Methods
     public long projectDuration () {
         return ChronoUnit.DAYS.between(mStartDate, mDueDate);
+    }
+
+    public ArrayList<SubTask> getTaskList(){ return mSubTaskList; }
+    public void addTaskToList(SubTask subTask){ mSubTaskList.add(subTask); }
+    public void removeTask(int index){ mSubTaskList.remove(index); }
+    // public Task getTaskById (UUID id) { return mTaskList.get(id);}
+    public SubTask getTaskById (int index) { return mSubTaskList.get(index);}
+
+    /*
+    public ArrayList<Board> getBoards() {
+        return mBoards;
+    }
+    public void setBoards(ArrayList<Board> boards) {
+        mBoards = boards;
+    }
+     */
+
+    public String getInfo(){
+        String projectInfo =
+                getId() + ";" +
+                getProjectTitle() + ";" +
+                getProjectDescription() + ";" +
+                getProjectMembers().get(0) + ";" +
+                getStartDate() + ";" +
+                getDueDate() + ";" +
+                getTaskList() + ";"
+                ;
+
+        return projectInfo;
     }
 
     public String toString() {

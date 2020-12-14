@@ -2,17 +2,21 @@ package model.project;
 
 import model.users.User;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.UUID;
+import java.io.Serializable;
+import java.time.LocalDate;
+import java.util.*;
 
-public class Database {
-    public HashMap<String, User> mUserList;
+public class Database implements Serializable {
+    public HashMap<UUID, User> mUserList;
     public HashMap<UUID, Project> mProjectList;
+    public ArrayList <Task> mTaskList;
+    public ArrayList<Progression> mProgression;
 
     public Database() {
-        mUserList = new HashMap<String, User>();
+        mUserList = new HashMap<UUID, User>();
         mProjectList = new HashMap<UUID, Project>();
+        mTaskList = new ArrayList<Task>();
+        mProgression = new ArrayList<Progression>();
     }
 
     public Collection<User> getUserList() { return mUserList.values(); }
@@ -25,4 +29,33 @@ public class Database {
     public void addProject (Project project) { mProjectList.put(project.getId(), project); }
     public void removeProject(UUID id) { mProjectList.remove(id); }
     public Project getProjectById (UUID id) { return mProjectList.get(id); }
+
+    public ArrayList<Task> getTaskList(){ return mTaskList;}
+    public void addTask(Task task){ mTaskList.add(task);}
+    public void removeTask(int index){ mTaskList.remove(index);}
+//    public Task getTaskById (UUID id) { return mTaskList.get(id);}
+
+    public void startTask(User user, Task task, LocalDate startDate) {
+        Progression progression = new Progression(user, task, startDate);
+
+        mProgression.add(progression);
+    }
+
+    public long submitTask(Progression progression, LocalDate endDate) {
+        progression.submitTask(endDate);
+
+        return progression.totalHours();
+    }
+
+    public Collection<Progression> getProgressForUser(User user) {
+        ArrayList<Progression> userProgress = new ArrayList<>();
+        for (Progression progress : mProgression) {
+            if (user.getName().equals(progress.getUser().getName())) {
+                userProgress.add(progress);
+            }
+        }
+        return userProgress;
+    }
+
+
 }

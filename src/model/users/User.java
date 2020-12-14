@@ -1,44 +1,79 @@
 package model.users;
+import model.project.Project;
+import model.project.Task;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.UUID;
 
 
-public class User {
+public class User implements Serializable {
 
     //Attributes
-//    private String mUserName;
-    private String mId;
+    private String mUserName;
+    private UUID mId;
     private String mFirstName;
     private String mLastName;
     private String mPassword;
     private String mCompanyName;
     private String mJobTitle;
-    private Double mHourlyWage;
+    private double mHourlyWage;
+    private ArrayList<Project> mProjects;
+    private ArrayList<Role> mRoles;
+    private HashMap<UUID, ArrayList<Task>> mTasks;
+
+    private double mTotalWage;
+//    private ArrayList<UUID> mProjectsUserCanAccess;
 
     //Constructor
-    public User(String firstName, String lastName, String password, String companyName,
-                Double hourlyWage, String jobTitle) {
-//        mUserName = userName;
-        mId = UUID.randomUUID().toString();
+    public User(String userName, String firstName, String lastName, String password, String companyName,
+                double hourlyWage, String jobTitle) {
+        mUserName = userName;
+        mId = UUID.randomUUID();
         mFirstName = firstName;
         mLastName = lastName;
         mPassword = password;
         mCompanyName = companyName;
         mJobTitle = jobTitle;
         mHourlyWage = hourlyWage;
+        mProjects = new ArrayList<Project>();
+        mRoles = new ArrayList<Role>();
+        mTotalWage = 0;
+        mTasks = new HashMap<UUID, ArrayList<Task>>();
+
+    }
+
+    // Save to .csv:
+    public User(String[] savedAttributes) {
+        mId = UUID.randomUUID();
+        mFirstName= savedAttributes[1];
+        mLastName = savedAttributes[2];
+        mUserName = savedAttributes[3];
+        mPassword = savedAttributes[4];
+        mCompanyName = savedAttributes[5];
+        mHourlyWage = Double.parseDouble(savedAttributes[6]);
+        mJobTitle = savedAttributes[7];
+        mProjects = new ArrayList<Project>();
+        mRoles = new ArrayList<Role>();
     }
 
     //Methods
 
+    public String getUserName() {
+        return mUserName;
+    }
 
-//    public String getUserName() {
-//        return mUserName;
-//    }
-//
-//    public void setUserName(String mUserName) {
-//        this.mUserName = mUserName;
+    public void setUserName(String userName) {
+        mUserName = userName;
+    }
+
+
+//    public ArrayList<UUID> getmProjectsUserCanAccess() {
+//        return mProjectsUserCanAccess;
 //    }
 
-    public String getId() { return mId; }
+    public UUID getId() { return mId; }
 
     public String getPassword() {
         return mPassword;
@@ -60,6 +95,8 @@ public class User {
         return mLastName;
     }
 
+    public void setTotalWage(double totalWage) { mTotalWage = totalWage; }
+
     public void setLastName(String lastName) {
         mLastName = lastName;
     }
@@ -69,6 +106,32 @@ public class User {
     public String getJobTitle() { return mJobTitle; }
 
     public Double getHourlyWage() { return mHourlyWage; }
+
+    public ArrayList<Project> getProjects() {
+        return mProjects;
+    }
+
+    public String getRole(String projectId) {
+        String role = "";
+        for (Role mRole : mRoles) {
+            if (projectId.equals(mRole.getProjectId())) {
+                role = mRole.getMemberRole();
+            }
+        }
+        return role;
+    }
+
+    public void addRole(String projectId) {
+        mRoles.add(new Role(projectId));
+    }
+
+    public void changeRole(String projectId) {
+        for (Role mRole : mRoles) {
+            if (projectId.equals(mRole.getProjectId())) {
+                mRole.changeRole();
+            }
+        }
+    }
 
     public String toRow() {
         String retVal = ("User ID: " + getId());

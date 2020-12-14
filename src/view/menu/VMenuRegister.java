@@ -26,7 +26,7 @@ public class VMenuRegister extends VMenu {
 
     @Override
     public void menuContent(Controller controller) {
-        String firstName, lastName, password, companyName, jobTitle;
+        String userName, firstName, lastName, password, companyName, jobTitle;
         double hourlyWage;
 
         // 1. Print the Menu Content and handle input
@@ -34,21 +34,26 @@ public class VMenuRegister extends VMenu {
 
 
         firstName = InputOutput.inputString("First Name");
-        lastName = InputOutput.inputString("\nLast Name");
-        companyName = InputOutput.inputString("\nCompany Name");
-        jobTitle = InputOutput.inputString("\nPosition");
-        hourlyWage = InputOutput.inputDouble("\nHourly wage");
-        password = InputOutput.inputString("\nPassword");
+        lastName = InputOutput.inputString("Last Name");
+        companyName = InputOutput.inputString("Company Name");
+        jobTitle = InputOutput.inputString("Position");
+        hourlyWage = InputOutput.inputDouble("Hourly wage");
+        userName = InputOutput.inputString("Username");
+        String message = controller.checkUsername(userName);
+        while (!message.equals(userName)) {
+            System.out.println(message);
+            userName = InputOutput.inputString("Username");
+            message = controller.checkUsername(userName);
+        }
+        password = InputOutput.inputString("Password");
 
         // 2. Send the gathered data to be handled by the controller.
-        controller.addUser(firstName, lastName, password, companyName, hourlyWage, jobTitle );
+        controller.addUser(userName, firstName, lastName, password, companyName, hourlyWage, jobTitle );
 
         System.out.println("");
     }
 
-    // TODO Send a request to controller,
-    //  Controller checks if User really exists in the database,
-    //  Then print this if User is found? ( Overcomplicated? :´) )
+
 //    public void registerSuccess() {
 //        System.out.println("Register success!");
 //    }

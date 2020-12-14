@@ -41,6 +41,7 @@ public class VMenuLogin extends VMenu {
             mSubMenus.add(new VMenuLoggedIn(this));
         }
 
+        System.out.println(" ");
     }
 
 }

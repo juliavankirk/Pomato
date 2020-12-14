@@ -1,14 +1,14 @@
-package view.menu;
+package view.menu.loggedin.account;
 
 import controllers.Controller;
 import utilities.InputOutput;
 import view.VMenu;
 
-public class VMenuRemove extends VMenu {
-    public VMenuRemove(VMenu parent) {
+public class VMenuRemoveUser extends VMenu {
+    public VMenuRemoveUser(VMenu parent) {
         super(parent);
         mMenuHeader = "Remove Account";
-        mMenuLabel = "Remove";
+        mMenuLabel = "Remove Account";
         mMenuQuestion = "Enter choice";
         mSubMenus = null;
 
@@ -16,9 +16,8 @@ public class VMenuRemove extends VMenu {
 
     @Override
     public void menuContent(Controller controller) {
-        System.out.println("Remove your account:\n ");
 
-        String Id = InputOutput.inputString("Please enter your ID: ");
+        String Id = InputOutput.inputString("Please enter your ID");
         controller.removeUser(Id);
     }
 }
