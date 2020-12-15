@@ -467,7 +467,9 @@ public class Controller {
                             user.changeRole(project.getId().toString());
                         }
                     }
-                    mDatabase.addUser(user);
+                    if (checkUsername(user.getUserName()).equals(user.getUserName())) {
+                        mDatabase.addUser(user);
+                    }
                     System.out.println("Added: " + Arrays.toString(retrievedInfo));
                 }
             }
