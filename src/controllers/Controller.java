@@ -355,13 +355,13 @@ public class Controller {
         return getCurrentUser().getProjects();
     }
 
-    public void addMembers(ArrayList<String> newMembersIds) {
+    public void addMembers(ArrayList<String> newMembersUsernames) {
 
         Collection<User> userList = mDatabase.getUserList();
 
-        for (String newMembersId : newMembersIds) {
+        for (String newMembersUsername : newMembersUsernames) {
             for (User someOne : userList) {
-                if (someOne.getId().toString().equals(newMembersId)) {
+                if (someOne.getUserName().equals(newMembersUsername)) {
                     mCurrentProject.getProjectMembers().add(someOne);
                     someOne.getProjects().add(mCurrentProject);
                     someOne.addRole(mCurrentProject.getId().toString());

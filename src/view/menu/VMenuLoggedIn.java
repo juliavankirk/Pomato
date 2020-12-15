@@ -71,7 +71,7 @@ public class VMenuLoggedIn extends VMenu {
             Project currentProject = projectList.get(i);
             mSubMenus.add(new VMenuProject(this));
             mSubMenus.get(i).setmMenuLabel("View Project: " + currentProject.getProjectTitle()
-                                         + "\n   Your role: " + current.getRole(currentProject.getId()) + "\n");
+                                         + "\n   Your role: " + current.getRole(currentProject.getId().toString()) + "\n");
             mSubMenus.get(i).setmMenuHeader("Project Page for " + currentProject.getProjectTitle());
         }
 
