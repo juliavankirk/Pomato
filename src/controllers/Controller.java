@@ -320,7 +320,7 @@ public class Controller {
     /**
      * Handling Project
      */
-    public String createProject(String title, String description, ArrayList<String> enteredIds,
+    public String createProject(String title, String description, ArrayList<String> enteredUsernames,
                                 LocalDate startDate, LocalDate dueDate) {
 
         Project project = new Project(title, description, startDate, dueDate);
@@ -328,9 +328,10 @@ public class Controller {
 
         Collection<User> userList = mDatabase.getUserList();
 
-        for (String enteredId : enteredIds) {
-            for (User someOne : userList) {
-                if (someOne.getId().toString().equals(enteredId)) {
+        for (int i = 0; i < enteredUsernames.size(); i++) {
+            for (Iterator<User> iterator = userList.iterator(); iterator.hasNext();) {
+                User someOne = iterator.next();
+                if (someOne.getUserName().equals(enteredUsernames.get(i))) {
                     project.getProjectMembers().add(someOne);
                     someOne.getProjects().add(project);
                     someOne.addRole(projectId);
@@ -339,7 +340,15 @@ public class Controller {
         }
         mCurrentUser.changeRole(projectId);
 
-        return "\nProject " + project.getProjectTitle() + " is created successfully! You are the manager of this project now ;)";
+        System.out.println("\nProject " + project.getProjectTitle() + " is created successfully! " +
+                "The following is " +
+                "added members to this project:\n");
+
+        for(int i = 0; i < project.getProjectMembers().size(); i++){
+            System.out.println(project.getProjectMembers().get(i));
+        }
+
+        return "\nYou are the manager of this project now ;)";
     }
 
     public ArrayList<Project> getProjects() {

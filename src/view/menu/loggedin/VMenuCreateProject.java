@@ -23,17 +23,17 @@ public class VMenuCreateProject extends VMenu {
     @Override
     public void menuContent(Controller controller) {
 
-        ArrayList<String> pMembersIds = new ArrayList<String>();
+        ArrayList<String> pMemberUsername = new ArrayList<String>();
 
         String pTitle = InputOutput.inputString("Project title");
 
         String pDescription = InputOutput.inputString(("Project description"));
 
-        pMembersIds.add(controller.getCurrentUser().getId().toString());
+        pMemberUsername.add(controller.getCurrentUser().getUserName());
         String answer = InputOutput.inputString("Would you like to add more members?(yes/no)");
         while(answer.equals("yes")) {
-            String memberId = InputOutput.inputString("Insert member's Id");
-            pMembersIds.add(memberId);
+            String memberUsername = InputOutput.inputString("Insert member's username");
+            pMemberUsername.add(memberUsername);
             answer = InputOutput.inputString("Do you want to continue adding members?(yes/no)");
         }
 
@@ -41,7 +41,7 @@ public class VMenuCreateProject extends VMenu {
         LocalDate dueDate = LocalDate.parse(InputOutput.inputString("Please enter due date of project (yyyy-mm-dd)"));
 
 
-        String message = controller.createProject(pTitle, pDescription, pMembersIds, startDate, dueDate);
+        String message = controller.createProject(pTitle, pDescription, pMemberUsername, startDate, dueDate);
         System.out.println(message);
 
         System.out.println(" ");

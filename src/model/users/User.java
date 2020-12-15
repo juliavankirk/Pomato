@@ -143,4 +143,8 @@ public class User implements Serializable {
         return retVal;
     }
 
+    public String toString(){
+        return "First name: " + mFirstName + "\nLast name: " + mLastName + "\n";
+    }
+
 }
