@@ -359,13 +359,13 @@ public class Controller {
         return getCurrentUser().getProjects();
     }
 
-    public void addMembers(ArrayList<String> newMembersIds) {
+    public void addMembers(ArrayList<String> newMembersUsernames) {
 
         Collection<User> userList = mDatabase.getUserList();
 
-        for (String newMembersId : newMembersIds) {
+        for (String newMembersUsername : newMembersUsernames) {
             for (User someOne : userList) {
-                if (someOne.getId().toString().equals(newMembersId)) {
+                if (someOne.getUserName().equals(newMembersUsername)) {
                     mCurrentProject.getProjectMembers().add(someOne);
                     someOne.getProjects().add(mCurrentProject);
                     someOne.addRole(mCurrentProject.getId().toString());
@@ -376,11 +376,11 @@ public class Controller {
 
     }
 
-    public void changeRoles(ArrayList<String> memberIds) {
+    public void changeRoles(ArrayList<String> memberUsernames) {
 
-        for (String memberId : memberIds) {
+        for (String memberUsername : memberUsernames) {
             for (int j = 0; j < getCurrentProject().getProjectMembers().size(); j++) {
-                if (memberId.equals(getCurrentProject().getProjectMembers().get(j).getId().toString())) {
+                if (memberUsername.equals(getCurrentProject().getProjectMembers().get(j).getUserName())) {
                     getCurrentProject().getProjectMembers().get(j).changeRole(getCurrentProject().getId().toString());
                 }
             }

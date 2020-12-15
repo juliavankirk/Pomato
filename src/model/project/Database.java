@@ -8,13 +8,13 @@ import java.util.*;
 
 public class Database implements Serializable {
     public HashMap<UUID, User> mUserList;
-    public HashMap<UUID, Project> mProjectList;
+    public HashMap<String, Project> mProjectList;
     public ArrayList <Task> mTaskList;
     public ArrayList<Progression> mProgression;
 
     public Database() {
         mUserList = new HashMap<UUID, User>();
-        mProjectList = new HashMap<UUID, Project>();
+        mProjectList = new HashMap<String, Project>();
         mTaskList = new ArrayList<Task>();
         mProgression = new ArrayList<Progression>();
     }
