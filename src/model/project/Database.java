@@ -7,26 +7,26 @@ import java.time.LocalDate;
 import java.util.*;
 
 public class Database implements Serializable {
-    public HashMap<UUID, User> mUserList;
-    public HashMap<UUID, Project> mProjectList;
+    public HashMap<String, User> mUserList;
+    public HashMap<String, Project> mProjectList;
     public ArrayList <Task> mTaskList;
     public ArrayList<Progression> mProgression;
 
     public Database() {
-        mUserList = new HashMap<UUID, User>();
-        mProjectList = new HashMap<UUID, Project>();
+        mUserList = new HashMap<String, User>();
+        mProjectList = new HashMap<String, Project>();
         mTaskList = new ArrayList<Task>();
         mProgression = new ArrayList<Progression>();
     }
 
     public Collection<User> getUserList() { return mUserList.values(); }
-    public void addUser(User user) { mUserList.put(user.getId(), user); }
+    public void addUser(User user) { mUserList.put(user.getId().toString(), user); }
     public void removeUser(UUID id) { mUserList.remove(id); }
     public User getUserById (UUID id) { return mUserList.get(id); }
 
 
     public Collection<Project> getProjectList() { return mProjectList.values(); }
-    public void addProject (Project project) { mProjectList.put(project.getId(), project); }
+    public void addProject (Project project) { mProjectList.put(project.getId().toString(), project); }
     public void removeProject(UUID id) { mProjectList.remove(id); }
     public Project getProjectById (UUID id) { return mProjectList.get(id); }
 

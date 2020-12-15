@@ -2,12 +2,13 @@ package view.menu;
 
 import controllers.Controller;
 import model.project.Project;
+import model.users.User;
 import utilities.InputOutput;
-import view.*;
+import view.VMenu;
+import view.menu.loggedin.VMenuAccount;
 import view.menu.loggedin.VMenuCreateProject;
 import view.menu.loggedin.VMenuMessage;
 import view.menu.loggedin.VMenuProject;
-import view.menu.loggedin.VMenuAccount;
 
 import java.util.ArrayList;
 
@@ -64,11 +65,13 @@ public class VMenuLoggedIn extends VMenu {
     private void addSubMenus(Controller controller){
         mSubMenus.clear();
         ArrayList<Project> projectList = controller.getProjects();
+        User current = controller.getCurrentUser();
 
         for (int i = 0; i < projectList.size(); i++) {
             Project currentProject = projectList.get(i);
             mSubMenus.add(new VMenuProject(this));
-            mSubMenus.get(i).setmMenuLabel("View Project: " + currentProject.getProjectTitle());
+            mSubMenus.get(i).setmMenuLabel("View Project: " + currentProject.getProjectTitle()
+                                         + "\n   Your role: " + current.getRole(currentProject.getId()) + "\n");
             mSubMenus.get(i).setmMenuHeader("Project Page for " + currentProject.getProjectTitle());
         }
 
