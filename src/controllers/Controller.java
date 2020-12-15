@@ -340,15 +340,19 @@ public class Controller {
         }
         mCurrentUser.changeRole(projectId);
 
-        System.out.println("\nProject " + project.getProjectTitle() + " is created successfully! " +
-                "The following is " +
-                "added members to this project:\n");
+        System.out.println("\nProject " + project.getProjectTitle() + " is created successfully!\n" +
+                "The following users are " +
+                "added as members to this project:");
 
         for(int i = 0; i < project.getProjectMembers().size(); i++){
-            System.out.println(project.getProjectMembers().get(i));
+            System.out.print(
+                project.getProjectMembers().get(i) +
+                project.getProjectMembers().get(i).getRole(project.toString()) +
+                "\n"
+            );
         }
 
-        return "\nYou are the manager of this project now ;)";
+        return "\n" + getCurrentUser().getFirstName() + " " + getCurrentUser().getLastName() + " is the manager of this project now ;)";
     }
 
     public ArrayList<Project> getProjects() {
