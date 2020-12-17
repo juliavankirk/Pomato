@@ -16,7 +16,7 @@ public class VMenuActivityLog extends VMenu {
         mSubMenus = null;
     }
 
-
+//
     @Override
     public void menuContent(Controller controller) {
 
