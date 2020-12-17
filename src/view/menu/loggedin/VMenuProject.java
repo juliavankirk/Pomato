@@ -23,6 +23,7 @@ public class VMenuProject extends VMenu {
         mSubMenus.add(new VMenuAddMember(this));
         mSubMenus.add(new VMenuChangeRoles(this));
         mSubMenus.add(new VMenuPersonalWage(this));
+        mSubMenus.add(new VMenuActivityLog(this));
 //        subMenu = true;
     }
 

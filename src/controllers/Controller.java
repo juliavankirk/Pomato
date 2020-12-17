@@ -60,6 +60,7 @@ public class Controller {
                            double estimatedTime, int priority) {
         SubTask subTask = new SubTask(title, description, dueDate, startDate, estimatedTime, priority);
         getCurrentProject().addTaskToList(subTask);
+        mDatabase.addActivity("Subtask: " + subTask.getTitle() + " has successfully been added to: " + getCurrentProject().getProjectTitle());
     }
 
     public String removeSubTask(String taskId) {
@@ -70,6 +71,7 @@ public class Controller {
 
             if (stringUuid.toString().equals(taskId)) {
                 getCurrentProject().removeTask(i);
+                mDatabase.addActivity("Task with ID: " + taskId + " has been removed from: " + getCurrentProject().getProjectTitle());
                 return "Task with ID: " + taskId + " has been removed";
             }
         }
@@ -100,28 +102,43 @@ public class Controller {
     public void updateTaskStatus(String updatedStatus, String taskId){
         SubTask subTask = getTaskById(taskId);
         subTask.setStatus(updatedStatus);
+        mDatabase.addActivity("Task with title: " + subTask.getTitle() + " has changed status to: " + updatedStatus);
     }
     public void updateTaskTitle(String updatedTitle, String taskId){
         SubTask subTask = getTaskById(taskId);
         subTask.setTitle(updatedTitle);
+        mDatabase.addActivity("Task with title: " + subTask.getTitle() + " has changed title to: " + updatedTitle);
     }
     public void updateTaskDescription(String updatedDescription, String taskId){
         SubTask subTask = getTaskById(taskId);
         subTask.setDescription(updatedDescription);
+        mDatabase.addActivity("Task with title: " + subTask.getTitle() + " has changed description to: " + updatedDescription);
     }
     public void updateTaskPriority(int updatedPriority, String taskId){
         SubTask subTask = getTaskById(taskId);
         subTask.setPriority(updatedPriority);
+        mDatabase.addActivity("Task with title: " + subTask.getTitle() + " has changed priority to: " + updatedPriority);
     }
     public void updateTaskDueDate(LocalDate dueDate, String taskId){
         SubTask subTask = getTaskById(taskId);
         subTask.setDueDate(dueDate);
+        mDatabase.addActivity("Task with title: " + subTask.getTitle() + " has changed due date to: " + dueDate);
     }
     public void updateTaskEstimatedTime(Double estimatedTime, String taskId){
         SubTask subTask = getTaskById(taskId);
         subTask.setEstimatedTime(estimatedTime);
+        mDatabase.addActivity("Task with title: " + subTask.getTitle() + " has changed estimated time to: " + estimatedTime);
     }
 
+    /**
+     * Handling activity log
+     *
+     */
+
+    public ArrayList<String> getActivityList(){
+
+        return mDatabase.getActivityList();
+    }
 
     /**
      * Handling checklists
@@ -144,6 +161,7 @@ public class Controller {
             return "Checklist with name: " + name + " and " + checklistItemList.size() + " item(s), has successfully been created";
         } else {*/
             task.addChecklist(checklist);
+            mDatabase.addActivity("checklist with name: " + checklist.getName() + " has been added to task with title : " + task.getTitle());
 
             return "Checklist with name: " + name + " has successfully been created";
        // }
@@ -174,6 +192,7 @@ public class Controller {
         Checklist checklist = getChecklistById(checklistId, taskId);
         if (checklist != null) {
             checklists.remove(checklist);
+            mDatabase.addActivity("Checklist with title: " + checklist.getName() + " has been removed from task with title: "  + getTaskById(taskId).getTitle());
             return "The checklist has successfully been removed";
         }
         return "The checklist could not be found";
@@ -182,6 +201,7 @@ public class Controller {
     public void updateChecklistName(String updatedName, String checklistId, String taskId) {
         Checklist checklist = getChecklistById(checklistId, taskId);
         checklist.setName(updatedName);
+        mDatabase.addActivity("Checklist with title: " + checklist.getName() + " in task with title: "  + getTaskById(taskId).getTitle() + " has changed title to: " + updatedName);
     }
 
     /**
@@ -213,6 +233,7 @@ public class Controller {
         ChecklistItem checklistItem = getChecklistItemById(checklistId, taskId, itemId);
         if (checklistItem != null) {
             checklistItems.remove(checklistItem);
+           mDatabase.addActivity(checklistItem.getTopic() + " has been removed from checklist with title: " + getChecklistById(checklistId, taskId).getName() );
             return "The item has successfully been removed";
         }
         return "Checklist Item could not be found";
@@ -221,11 +242,13 @@ public class Controller {
     public void updateItemStatus(String checklistId, String taskId, String itemId) {
         ChecklistItem checklistItem = getChecklistItemById(checklistId, taskId, itemId);
         checklistItem.setStatus("Done");
+        mDatabase.addActivity("Checklist item " + checklistItem.getTopic() + " in checklist: " + getChecklistById(checklistId,taskId).getName() +  " has changed status to DONE");
     }
 
     public void updateItemTopic(String updatedTopic, String checklistId, String taskId, String itemId) {
         ChecklistItem checklistItem = getChecklistItemById(checklistId, taskId, itemId);
         checklistItem.setTopic(updatedTopic);
+        mDatabase.addActivity("Checklist item " + checklistItem.getTopic() + " in checklist: " + getChecklistById(checklistId,taskId).getName() +  " has changed topic to: " + updatedTopic);
     }
 
     public String checkItemId(String enteredId, String checklistId, String taskId){
@@ -242,6 +265,7 @@ public class Controller {
         Checklist checklist = getChecklistById(checklistId, taskId);
         ChecklistItem checklistItem = new ChecklistItem(id, topic);
         checklist.addChecklistItem(checklistItem);
+        mDatabase.addActivity(checklistItem.getTopic() + " has been removed from checklist with title: " + checklist.getName());
         return "The item has successfully been added to the checklist";
     }
 

@@ -11,12 +11,14 @@ public class Database implements Serializable {
     public HashMap<UUID, Project> mProjectList;
     public ArrayList <Task> mTaskList;
     public ArrayList<Progression> mProgression;
+    public ArrayList <String> mActivityList;
 
     public Database() {
         mUserList = new HashMap<UUID, User>();
         mProjectList = new HashMap<UUID, Project>();
         mTaskList = new ArrayList<Task>();
         mProgression = new ArrayList<Progression>();
+        mActivityList = new ArrayList<String>();
     }
 
     public Collection<User> getUserList() { return mUserList.values(); }
@@ -29,6 +31,9 @@ public class Database implements Serializable {
     public void addProject (Project project) { mProjectList.put(project.getId(), project); }
     public void removeProject(UUID id) { mProjectList.remove(id); }
     public Project getProjectById (UUID id) { return mProjectList.get(id); }
+
+  public ArrayList<String> getActivityList(){return mActivityList;}
+  public void addActivity(String activity){mActivityList.add(activity);}
 
     public ArrayList<Task> getTaskList(){ return mTaskList;}
     public void addTask(Task task){ mTaskList.add(task);}
