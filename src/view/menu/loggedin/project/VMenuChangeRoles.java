@@ -15,7 +15,7 @@ public class VMenuChangeRoles extends VMenu {
     public VMenuChangeRoles (VMenu parent) {
         super(parent);
         mMenuHeader = "Change members roles";
-        mMenuLabel = "Change members roles";
+        mMenuLabel = "Manager: Change members roles";
         mMenuQuestion = "Enter choice";
     }
 
