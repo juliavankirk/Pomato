@@ -19,12 +19,14 @@ public class Project implements Serializable {
     private LocalDate mStartDate;
     private LocalDate mDueDate;
     private ArrayList<SubTask> mSubTaskList;
-//    private ArrayList<Board> mBoards;
+    private ArrayList<String> mActivityList;
 
 
-    //Constructor
+
+
+    //Constructors
     public Project(String projectTitle, String projectDescription/*, ArrayList<User> projectMembers*/,
-                   LocalDate startDate, LocalDate dueDate/*, String password*/) {
+                   LocalDate startDate, LocalDate dueDate) {
         mId = UUID.randomUUID();
         mProjectTitle = projectTitle;
         mProjectDescription = projectDescription;
@@ -32,9 +34,11 @@ public class Project implements Serializable {
         mStartDate = startDate;
         mDueDate = dueDate;
         mSubTaskList = new ArrayList<>();
+        mActivityList = new ArrayList();
+
+
 //        mProjectMembers = projectMembers;
-//        mBoards = new ArrayList<Board>();
-//        mPassword = password;
+
 
         if (mDueDate.isEqual(mStartDate) || mDueDate.isBefore(mStartDate)){
             throw new InvalidDataInput("Invalid input. Due date must come after date of creation.");
@@ -105,6 +109,9 @@ public class Project implements Serializable {
     public void removeTask(int index){ mSubTaskList.remove(index); }
     // public Task getTaskById (UUID id) { return mTaskList.get(id);}
     public SubTask getTaskById (int index) { return mSubTaskList.get(index);}
+
+    public ArrayList<String> getActivityList(){return mActivityList;}
+    public void addActivity(String activity){mActivityList.add(activity);}
 
     /*
     public ArrayList<Board> getBoards() {

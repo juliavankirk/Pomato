@@ -60,10 +60,12 @@ public class Controller {
                            double estimatedTime, int priority) {
         SubTask subTask = new SubTask(title, description, dueDate, startDate, estimatedTime, priority);
         getCurrentProject().addTaskToList(subTask);
-        mDatabase.addActivity("Subtask: " + subTask.getTitle() + " has successfully been added to: " + getCurrentProject().getProjectTitle());
+        mCurrentProject.addActivity(subTask.getTitle() + "\n" +
+                getCurrentUser().getName() + " has created this task" +  " " + java.time.LocalTime.now());
     }
 
     public String removeSubTask(String taskId) {
+        SubTask subTask = getTaskById(taskId);
         int taskListSize = getTaskListFromCurrentProject().size();
 
         for (int i = 0; i < taskListSize; i++) {
@@ -71,7 +73,8 @@ public class Controller {
 
             if (stringUuid.toString().equals(taskId)) {
                 getCurrentProject().removeTask(i);
-                mDatabase.addActivity("Task with ID: " + taskId + " has been removed from: " + getCurrentProject().getProjectTitle());
+                mCurrentProject.addActivity(subTask.getTitle() + "\n" +
+                        getCurrentUser().getName() + " has removed this task" + " " +  java.time.LocalTime.now());
                 return "Task with ID: " + taskId + " has been removed";
             }
         }
@@ -96,38 +99,45 @@ public class Controller {
         return getCurrentProject().getTaskList();
     }
 
+
     /**
      * Updating Task
      */
     public void updateTaskStatus(String updatedStatus, String taskId){
         SubTask subTask = getTaskById(taskId);
         subTask.setStatus(updatedStatus);
-        mDatabase.addActivity("Task with title: " + subTask.getTitle() + " has changed status to: " + updatedStatus);
+        mCurrentProject.addActivity(subTask.getTitle() + "\n" +
+                getCurrentUser().getName() + " has changed this task status to " + updatedStatus + " " + java.time.LocalTime.now());
     }
     public void updateTaskTitle(String updatedTitle, String taskId){
         SubTask subTask = getTaskById(taskId);
         subTask.setTitle(updatedTitle);
-        mDatabase.addActivity("Task with title: " + subTask.getTitle() + " has changed title to: " + updatedTitle);
+        mCurrentProject.addActivity(subTask.getTitle() + "\n"
+                + getCurrentUser().getName() + " has changed this task title to " + updatedTitle +  " " + java.time.LocalTime.now());
     }
     public void updateTaskDescription(String updatedDescription, String taskId){
         SubTask subTask = getTaskById(taskId);
         subTask.setDescription(updatedDescription);
-        mDatabase.addActivity("Task with title: " + subTask.getTitle() + " has changed description to: " + updatedDescription);
+        mCurrentProject.addActivity(subTask.getTitle() + "\n"
+                + getCurrentUser().getName() + " has changed this task description to " + updatedDescription +  " " + java.time.LocalTime.now());
     }
     public void updateTaskPriority(int updatedPriority, String taskId){
         SubTask subTask = getTaskById(taskId);
         subTask.setPriority(updatedPriority);
-        mDatabase.addActivity("Task with title: " + subTask.getTitle() + " has changed priority to: " + updatedPriority);
+        mCurrentProject.addActivity(subTask.getTitle() + "\n" +
+                getCurrentUser().getName() + " has changed this task priority to " + updatedPriority +  " " + java.time.LocalTime.now());
     }
     public void updateTaskDueDate(LocalDate dueDate, String taskId){
         SubTask subTask = getTaskById(taskId);
         subTask.setDueDate(dueDate);
-        mDatabase.addActivity("Task with title: " + subTask.getTitle() + " has changed due date to: " + dueDate);
+        mCurrentProject.addActivity(subTask.getTitle() + "\n"
+                + getCurrentUser().getName() + " has changed this task due date to " + dueDate +  " " + java.time.LocalTime.now());
     }
     public void updateTaskEstimatedTime(Double estimatedTime, String taskId){
         SubTask subTask = getTaskById(taskId);
         subTask.setEstimatedTime(estimatedTime);
-        mDatabase.addActivity("Task with title: " + subTask.getTitle() + " has changed estimated time to: " + estimatedTime);
+        mCurrentProject.addActivity(subTask.getTitle() + "\n"
+                + getCurrentUser().getName() + " has changed this task estimated time to " + estimatedTime +  " " + java.time.LocalTime.now());
     }
 
     /**
@@ -135,9 +145,10 @@ public class Controller {
      *
      */
 
-    public ArrayList<String> getActivityList(){
 
-        return mDatabase.getActivityList();
+    public ArrayList <String> getActivityListFromProject(){
+        return mCurrentProject.getActivityList();
+
     }
 
     /**
@@ -161,7 +172,8 @@ public class Controller {
             return "Checklist with name: " + name + " and " + checklistItemList.size() + " item(s), has successfully been created";
         } else {*/
             task.addChecklist(checklist);
-            mDatabase.addActivity("checklist with name: " + checklist.getName() + " has been added to task with title : " + task.getTitle());
+            mCurrentProject.addActivity(task.getTitle() + "\n" +
+                    getCurrentUser().getName() + " added a checklist with name " + checklist.getName() + " to this task " +  " " + java.time.LocalTime.now());
 
             return "Checklist with name: " + name + " has successfully been created";
        // }
@@ -192,7 +204,8 @@ public class Controller {
         Checklist checklist = getChecklistById(checklistId, taskId);
         if (checklist != null) {
             checklists.remove(checklist);
-            mDatabase.addActivity("Checklist with title: " + checklist.getName() + " has been removed from task with title: "  + getTaskById(taskId).getTitle());
+            mCurrentProject.addActivity(getTaskById(taskId).getTitle() + "\n" +
+                    getCurrentUser().getName() + " removed checklist with name " + checklist.getName() + " from this task "  +  " " + java.time.LocalTime.now());
             return "The checklist has successfully been removed";
         }
         return "The checklist could not be found";
@@ -201,7 +214,8 @@ public class Controller {
     public void updateChecklistName(String updatedName, String checklistId, String taskId) {
         Checklist checklist = getChecklistById(checklistId, taskId);
         checklist.setName(updatedName);
-        mDatabase.addActivity("Checklist with title: " + checklist.getName() + " in task with title: "  + getTaskById(taskId).getTitle() + " has changed title to: " + updatedName);
+        mCurrentProject.addActivity(getTaskById(taskId).getTitle() + "\n" +
+                getCurrentUser().getName() + " has changed a checklist title to " + updatedName + " in this task " +  " " + java.time.LocalTime.now());
     }
 
     /**
@@ -233,7 +247,8 @@ public class Controller {
         ChecklistItem checklistItem = getChecklistItemById(checklistId, taskId, itemId);
         if (checklistItem != null) {
             checklistItems.remove(checklistItem);
-           mDatabase.addActivity(checklistItem.getTopic() + " has been removed from checklist with title: " + getChecklistById(checklistId, taskId).getName() );
+           mCurrentProject.addActivity(getTaskById(taskId).getTitle() + "\n" +
+                           getCurrentUser().getName() + " has removed items from checklist with name " + getChecklistById(checklistId,taskId).getName() +  "in this task " +  " " + java.time.LocalTime.now());
             return "The item has successfully been removed";
         }
         return "Checklist Item could not be found";
@@ -242,13 +257,15 @@ public class Controller {
     public void updateItemStatus(String checklistId, String taskId, String itemId) {
         ChecklistItem checklistItem = getChecklistItemById(checklistId, taskId, itemId);
         checklistItem.setStatus("Done");
-        mDatabase.addActivity("Checklist item " + checklistItem.getTopic() + " in checklist: " + getChecklistById(checklistId,taskId).getName() +  " has changed status to DONE");
+        mCurrentProject.addActivity(getTaskById(taskId).getTitle() + "\n" +
+                getCurrentUser().getName() + " has changed item status in checklist with name " + getChecklistById(checklistId,taskId).getName() + " in this task " +  " " + java.time.LocalTime.now());
     }
 
     public void updateItemTopic(String updatedTopic, String checklistId, String taskId, String itemId) {
         ChecklistItem checklistItem = getChecklistItemById(checklistId, taskId, itemId);
         checklistItem.setTopic(updatedTopic);
-        mDatabase.addActivity("Checklist item " + checklistItem.getTopic() + " in checklist: " + getChecklistById(checklistId,taskId).getName() +  " has changed topic to: " + updatedTopic);
+        mCurrentProject.addActivity(getTaskById(taskId).getTitle() + "\n" +
+                getCurrentUser().getName() + " has updated a item topic in checklist with name " + getChecklistById(checklistId, taskId).getName() + " in this task " + " " + java.time.LocalTime.now());
     }
 
     public String checkItemId(String enteredId, String checklistId, String taskId){
@@ -265,7 +282,8 @@ public class Controller {
         Checklist checklist = getChecklistById(checklistId, taskId);
         ChecklistItem checklistItem = new ChecklistItem(id, topic);
         checklist.addChecklistItem(checklistItem);
-        mDatabase.addActivity(checklistItem.getTopic() + " has been removed from checklist with title: " + checklist.getName());
+        mCurrentProject.addActivity(getTaskById(taskId).getTitle() + "\n" +
+                getCurrentUser().getName() + " has added items to checklist " + checklist.getName() + " in this task " +  " " + java.time.LocalTime.now());
         return "The item has successfully been added to the checklist";
     }
 
@@ -318,8 +336,7 @@ public class Controller {
             if (someOne.getUserName().equals(enteredUserName)) {
                 if (someOne.getPassword().equals(enteredPassword)) {
                     setCurrentUser(someOne);
-
-                    return "Bravo! You logged in.";
+                 return "Bravo! You logged in.";
                 } else {
 
                     return "Password is incorrect";

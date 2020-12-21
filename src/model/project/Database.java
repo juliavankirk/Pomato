@@ -32,9 +32,6 @@ public class Database implements Serializable {
     public void removeProject(UUID id) { mProjectList.remove(id); }
     public Project getProjectById (UUID id) { return mProjectList.get(id); }
 
-  public ArrayList<String> getActivityList(){return mActivityList;}
-  public void addActivity(String activity){mActivityList.add(activity);}
-
     public ArrayList<Task> getTaskList(){ return mTaskList;}
     public void addTask(Task task){ mTaskList.add(task);}
     public void removeTask(int index){ mTaskList.remove(index);}

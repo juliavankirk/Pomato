@@ -84,7 +84,7 @@ public class User implements Serializable {
     }
 
     public String getName() {
-        return mFirstName + mLastName;
+        return mFirstName + " " + mLastName;
     }
 
     public void setFirstname(String firstName) {

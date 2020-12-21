@@ -20,7 +20,7 @@ public class VMenuActivityLog extends VMenu {
     @Override
     public void menuContent(Controller controller) {
 
-        ArrayList<String> activityList = controller.getActivityList();
+        ArrayList<String> activityList = controller.getActivityListFromProject();
 
             for (String activity : activityList) {
                     System.out.print(InputOutput.superShortLine());
