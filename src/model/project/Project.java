@@ -19,6 +19,7 @@ public class Project implements Serializable {
     private LocalDate mStartDate;
     private LocalDate mDueDate;
     private ArrayList<SubTask> mSubTaskList;
+    private ArrayList <Holiday> mHolidayList;
 //    private ArrayList<Board> mBoards;
 
 
@@ -32,6 +33,7 @@ public class Project implements Serializable {
         mStartDate = startDate;
         mDueDate = dueDate;
         mSubTaskList = new ArrayList<>();
+        mHolidayList = new ArrayList<>();
 //        mProjectMembers = projectMembers;
 //        mBoards = new ArrayList<Board>();
 //        mPassword = password;
@@ -105,6 +107,11 @@ public class Project implements Serializable {
     public void removeTask(int index){ mSubTaskList.remove(index); }
     // public Task getTaskById (UUID id) { return mTaskList.get(id);}
     public SubTask getTaskById (int index) { return mSubTaskList.get(index);}
+
+    public ArrayList<Holiday> getHolidayList() { return mHolidayList; }
+    public void addHolidayToList(Holiday holiday){ mHolidayList.add(holiday); }
+    public void removeHoliday(int index){ mHolidayList.remove(index); }
+    public Holiday getHolidayByName (int index) { return mHolidayList.get(index);}
 
     /*
     public ArrayList<Board> getBoards() {

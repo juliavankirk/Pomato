@@ -94,6 +94,7 @@ public class Controller {
         return getCurrentProject().getTaskList();
     }
 
+
     /**
      * Updating Task
      */
@@ -396,6 +397,36 @@ public class Controller {
 
     }
 
+    public void addHoliday(String hName, String hDescription, LocalDate hStartDate, LocalDate hEndDate) {
+
+        Holiday holiday = new Holiday(hName, hDescription, hStartDate, hEndDate);
+
+        getCurrentProject().addHolidayToList(holiday);
+    }
+
+
+
+    public String removeHolidayFromList(String developerName){
+
+    int holidayListSize = getHolidayListFromCurrentProject().size();
+
+        for (int i = 0; i < holidayListSize; i++) {
+        String userName = getHolidayListFromCurrentProject().get(i).getUserName();
+
+        if (developerName.toString().equals(userName)) {
+            getCurrentProject().removeHoliday(i);
+            return developerName + "'s " + "holiday information" + " has been removed";
+        }
+    }
+        return "Holiday that belongs to: " + developerName + " was not found";
+}
+
+    public ArrayList<Holiday> getHolidayListFromCurrentProject() {
+
+        return getCurrentProject().getHolidayList();
+
+    }
+
     /**
      * Method for saving DATABASE to a file:
      */
@@ -435,6 +466,8 @@ public class Controller {
             return;
         }
     }
+
+
 
     public void loadDatabaseTwo() {
 
