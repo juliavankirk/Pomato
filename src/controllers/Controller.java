@@ -410,6 +410,43 @@ public class Controller {
     }
 
     /**
+     * Handling Ideas
+     */
+
+    public void addIdeaToProject(String newIdea) {
+        Idea idea = new Idea(newIdea);
+        getCurrentProject().getIdeas().add(idea);
+    }
+
+    public void addLike(int ideaNum) {
+        getCurrentProject().getIdeas().get(ideaNum - 1).addLike();
+    }
+
+    public void addDisLike(int ideaNum) {
+        getCurrentProject().getIdeas().get(ideaNum - 1).addDisLike();
+    }
+
+    public void addComment(int ideaNum, String comment) {
+        String savedComment = getCurrentUser().getName() + " said: " + comment;
+        getCurrentProject().getIdeas().get(ideaNum - 1).addComment(savedComment);
+    }
+
+    public void removeIdea(int ideaNum) {
+        getCurrentProject().getIdeas().remove(ideaNum - 1);
+    }
+
+    public void viewComments(int ideaNum) {
+        ArrayList<String> comment = getCurrentProject().getIdeas().get(ideaNum - 1).getComment();
+        if(comment.size() != 0) {
+            for (int i = 0; i < comment.size(); i++) {
+                System.out.println(comment.get(i));
+            }
+        } else {
+            System.out.println("There is still no comment for this idea. You can be the one who adds the first comment.");
+        }
+    }
+
+    /**
      * Method for saving DATABASE to a file:
      */
     public void saveDatabase() {
@@ -466,9 +503,9 @@ public class Controller {
                         Project project = searchProjectByTitle(retrievedInfo[i + 8]);
                         user.getProjects().add(project);
                         project.getProjectMembers().add(user);
-                        user.addRole(project.getId().toString());
-                        if (!(user.getRole(project.getId().toString()).equals(retrievedInfo[i + 9]))) {
-                            user.changeRole(project.getId().toString());
+                        user.addRole(project.getId());
+                        if (!(user.getRole(project.getId()).equals(retrievedInfo[i + 9]))) {
+                            user.changeRole(project.getId());
                         }
                     }
                     if (checkUsername(user.getUserName()).equals(user.getUserName())) {

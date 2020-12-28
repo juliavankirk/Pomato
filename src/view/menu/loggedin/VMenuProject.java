@@ -36,6 +36,11 @@ public class VMenuProject extends VMenu {
 
         mSubMenus.add(new VMenuViewTaskBoard(this));
         mSubMenus.add(new VMenuCommentBoard(this));
+        mSubMenus.add(new VMenuIdeaBoard(this));
+        mSubMenus.add(new VMenuAddMember(this));
+        mSubMenus.add(new VMenuChangeRoles(this));
+        mSubMenus.add(new VMenuPersonalWage(this));
+//        subMenu = true;
         mSubMenus.add(new VMenuPersonalWage(this));
 
         String projectId = controller.getCurrentProject().getId();

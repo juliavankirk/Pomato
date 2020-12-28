@@ -19,6 +19,7 @@ public class Project implements Serializable {
     private LocalDate mStartDate;
     private LocalDate mDueDate;
     private ArrayList<SubTask> mSubTaskList;
+    private ArrayList<Idea> mIdeas;
 //    private ArrayList<Board> mBoards;
 
 
@@ -32,6 +33,7 @@ public class Project implements Serializable {
         mStartDate = startDate;
         mDueDate = dueDate;
         mSubTaskList = new ArrayList<>();
+        mIdeas = new ArrayList<Idea>();
 //        mProjectMembers = projectMembers;
 //        mBoards = new ArrayList<Board>();
 //        mPassword = password;
@@ -46,6 +48,7 @@ public class Project implements Serializable {
         mProjectTitle = title;
         mProjectMembers = new ArrayList<User>();
         mSubTaskList = new ArrayList<>();
+        mIdeas = new ArrayList<Idea>();
     }
 
     //Getters and Setters
@@ -91,6 +94,13 @@ public class Project implements Serializable {
         mDueDate = dueDate;
     }
 
+    public ArrayList<Idea> getIdeas() {
+        return mIdeas;
+    }
+
+    public void setIdeas(ArrayList<Idea> Ideas) {
+        mIdeas = Ideas;
+    }
 
     /**
      * Methods
@@ -105,6 +115,14 @@ public class Project implements Serializable {
     public void removeTask(int index){ mSubTaskList.remove(index); }
     // public Task getTaskById (UUID id) { return mTaskList.get(id);}
     public SubTask getTaskById (int index) { return mSubTaskList.get(index);}
+
+    public void AddIdea(Idea idea) {
+        mIdeas.add(idea);
+    }
+
+    public void removeIdea(Idea idea) {
+        mIdeas.remove(idea);
+    }
 
     /*
     public ArrayList<Board> getBoards() {
