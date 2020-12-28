@@ -113,7 +113,7 @@ public class User implements Serializable {
 
     public String getJobTitle() { return mJobTitle; }
 
-    public Double getHourlyWage() { return mHourlyWage; }
+    public double getHourlyWage() { return mHourlyWage; }
 
     public ArrayList<Project> getProjects() {
         return mProjects;

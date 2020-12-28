@@ -484,4 +484,12 @@ public class Controller {
             e.printStackTrace();
         }
     }
+
+    // Check only part of ID.
+//    public boolean checkIdWithDatabase(String inputId,  checkWithId){
+//
+//        if (checkWithId.contains(inputId) && !)
+//
+//            return true;
+//    }
 }
