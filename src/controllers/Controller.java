@@ -544,9 +544,9 @@ public class Controller {
                         Project project = searchProjectByTitle(retrievedInfo[i + 8]);
                         user.getProjects().add(project);
                         project.getProjectMembers().add(user);
-                        user.addRole(project.getId());
-                        if (!(user.getRole(project.getId()).equals(retrievedInfo[i + 9]))) {
-                            user.changeRole(project.getId());
+                        user.addRole(project.getId().toString());
+                        if (!(user.getRole(project.getId().toString()).equals(retrievedInfo[i + 9]))) {
+                            user.changeRole(project.getId().toString());
                         }
                     }
                     if (checkUsername(user.getUserName()).equals(user.getUserName())) {
