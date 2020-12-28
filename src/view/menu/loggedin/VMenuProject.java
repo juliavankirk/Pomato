@@ -43,7 +43,7 @@ public class VMenuProject extends VMenu {
 //        subMenu = true;
         mSubMenus.add(new VMenuPersonalWage(this));
 
-        String projectId = controller.getCurrentProject().getId();
+        String projectId = controller.getCurrentProject().getId().toString();
 
         // Only a project manager can access these subMenus
         if (controller.getCurrentUser().getRole(projectId).equals("Manager")){

@@ -28,7 +28,7 @@ public class Database implements Serializable {
 
 
     public Collection<Project> getProjectList() { return mProjectList.values(); }
-    public void addProject (Project project) { mProjectList.put(project.getId(), project); }
+    public void addProject (Project project) { mProjectList.put(project.getId().toString(), project); }
     public void removeProject(UUID id) { mProjectList.remove(id); }
     public Project getProjectById (UUID id) { return mProjectList.get(id); }
 

@@ -24,7 +24,7 @@ public class User implements Serializable {
     private ArrayList<Project> mProjects;
     private ArrayList<Role> mRoles;
     private HashMap<UUID, ArrayList<Task>> mTasks;
-    private HashMap<UUID, ArrayList<Messages> mInbox>;
+    private HashMap<UUID, ArrayList<Messages>> mInbox;
 
     private double mTotalWage;
 //    private ArrayList<UUID> mProjectsUserCanAccess;
