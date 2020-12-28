@@ -65,6 +65,10 @@ public class SubTask implements Serializable {
 
     public void setStatus (String taskStatus){ mStatus = taskStatus; }
 
+    public LocalDate getStartDate() {
+        return mStartDate;
+    }
+
     //assigns value to end date
     public void getSubmissionDate(LocalDate endDate) {
         mEndDate = endDate;
