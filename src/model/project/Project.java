@@ -12,29 +12,32 @@ import java.util.UUID;
 public class Project implements Serializable {
 
     //Attributes
-    private String mId;
+    private UUID mId;
     private String mProjectTitle;
     private String mProjectDescription;
     private ArrayList<User> mProjectMembers;
     private LocalDate mStartDate;
     private LocalDate mDueDate;
     private ArrayList<SubTask> mSubTaskList;
-//    private ArrayList<Board> mBoards;
+    private ArrayList<String> mActivityList;
+
 
 
     //Constructor
     public Project(String projectTitle, String projectDescription/*, ArrayList<User> projectMembers*/,
                    LocalDate startDate, LocalDate dueDate/*, String password*/) {
-        mId = UUID.randomUUID().toString();
+        mId = UUID.randomUUID();
         mProjectTitle = projectTitle;
         mProjectDescription = projectDescription;
         mProjectMembers = new ArrayList<>();
         mStartDate = startDate;
         mDueDate = dueDate;
         mSubTaskList = new ArrayList<>();
+        mActivityList = new ArrayList();
+
+
 //        mProjectMembers = projectMembers;
-//        mBoards = new ArrayList<Board>();
-//        mPassword = password;
+
 
         if (mDueDate.isEqual(mStartDate) || mDueDate.isBefore(mStartDate)){
             throw new InvalidDataInput("Invalid input. Due date must come after date of creation.");
@@ -42,14 +45,14 @@ public class Project implements Serializable {
     }
 
     public Project(String title) {
-        mId = UUID.randomUUID().toString();
+        mId = UUID.randomUUID();
         mProjectTitle = title;
         mProjectMembers = new ArrayList<User>();
         mSubTaskList = new ArrayList<>();
     }
 
     //Getters and Setters
-    public String getId() { return mId; }
+    public UUID getId() { return mId; }
 
     public String getProjectTitle() {
         return mProjectTitle;
@@ -105,6 +108,9 @@ public class Project implements Serializable {
     public void removeTask(int index){ mSubTaskList.remove(index); }
     // public Task getTaskById (UUID id) { return mTaskList.get(id);}
     public SubTask getTaskById (int index) { return mSubTaskList.get(index);}
+
+    public ArrayList<String> getActivityList(){return mActivityList;}
+    public void addActivity(String activity){mActivityList.add(activity);}
 
     /*
     public ArrayList<Board> getBoards() {

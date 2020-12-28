@@ -11,12 +11,14 @@ public class Database implements Serializable {
     public HashMap<String, Project> mProjectList;
     public ArrayList <Task> mTaskList;
     public ArrayList<Progression> mProgression;
+    public ArrayList <String> mActivityList;
 
     public Database() {
         mUserList = new HashMap<UUID, User>();
         mProjectList = new HashMap<String, Project>();
         mTaskList = new ArrayList<Task>();
         mProgression = new ArrayList<Progression>();
+        mActivityList = new ArrayList<String>();
     }
 
     public Collection<User> getUserList() { return mUserList.values(); }
