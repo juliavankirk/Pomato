@@ -60,9 +60,12 @@ public class Controller {
                            double estimatedTime, int priority) {
         SubTask subTask = new SubTask(title, description, dueDate, startDate, estimatedTime, priority);
         getCurrentProject().addTaskToList(subTask);
+        mCurrentProject.addActivity(subTask.getTitle() + "\n" +
+                getCurrentUser().getName() + " has created this task" +  " " + java.time.LocalTime.now());
     }
 
     public String removeSubTask(String taskId) {
+        SubTask subTask = getTaskById(taskId);
         int taskListSize = getTaskListFromCurrentProject().size();
 
         for (int i = 0; i < taskListSize; i++) {
@@ -70,6 +73,8 @@ public class Controller {
 
             if (stringUuid.toString().equals(taskId)) {
                 getCurrentProject().removeTask(i);
+                mCurrentProject.addActivity(subTask.getTitle() + "\n" +
+                        getCurrentUser().getName() + " has removed this task" + " " +  java.time.LocalTime.now());
                 return "Task with ID: " + taskId + " has been removed";
             }
         }
@@ -94,34 +99,57 @@ public class Controller {
         return getCurrentProject().getTaskList();
     }
 
+
     /**
      * Updating Task
      */
     public void updateTaskStatus(String updatedStatus, String taskId){
         SubTask subTask = getTaskById(taskId);
         subTask.setStatus(updatedStatus);
+        mCurrentProject.addActivity(subTask.getTitle() + "\n" +
+                getCurrentUser().getName() + " has changed this task status to " + updatedStatus + " " + java.time.LocalTime.now());
     }
     public void updateTaskTitle(String updatedTitle, String taskId){
         SubTask subTask = getTaskById(taskId);
         subTask.setTitle(updatedTitle);
+        mCurrentProject.addActivity(subTask.getTitle() + "\n"
+                + getCurrentUser().getName() + " has changed this task title to " + updatedTitle +  " " + java.time.LocalTime.now());
     }
     public void updateTaskDescription(String updatedDescription, String taskId){
         SubTask subTask = getTaskById(taskId);
         subTask.setDescription(updatedDescription);
+        mCurrentProject.addActivity(subTask.getTitle() + "\n"
+                + getCurrentUser().getName() + " has changed this task description to " + updatedDescription +  " " + java.time.LocalTime.now());
     }
     public void updateTaskPriority(int updatedPriority, String taskId){
         SubTask subTask = getTaskById(taskId);
         subTask.setPriority(updatedPriority);
+        mCurrentProject.addActivity(subTask.getTitle() + "\n" +
+                getCurrentUser().getName() + " has changed this task priority to " + updatedPriority +  " " + java.time.LocalTime.now());
     }
     public void updateTaskDueDate(LocalDate dueDate, String taskId){
         SubTask subTask = getTaskById(taskId);
         subTask.setDueDate(dueDate);
+        mCurrentProject.addActivity(subTask.getTitle() + "\n"
+                + getCurrentUser().getName() + " has changed this task due date to " + dueDate +  " " + java.time.LocalTime.now());
     }
     public void updateTaskEstimatedTime(Double estimatedTime, String taskId){
         SubTask subTask = getTaskById(taskId);
         subTask.setEstimatedTime(estimatedTime);
+        mCurrentProject.addActivity(subTask.getTitle() + "\n"
+                + getCurrentUser().getName() + " has changed this task estimated time to " + estimatedTime +  " " + java.time.LocalTime.now());
     }
 
+    /**
+     * Handling activity log
+     *
+     */
+
+
+    public ArrayList <String> getActivityListFromProject(){
+        return mCurrentProject.getActivityList();
+
+    }
 
     /**
      * Handling checklists
@@ -144,6 +172,8 @@ public class Controller {
             return "Checklist with name: " + name + " and " + checklistItemList.size() + " item(s), has successfully been created";
         } else {*/
             task.addChecklist(checklist);
+            mCurrentProject.addActivity(task.getTitle() + "\n" +
+                    getCurrentUser().getName() + " added a checklist with name " + checklist.getName() + " to this task " +  " " + java.time.LocalTime.now());
 
             return "Checklist with name: " + name + " has successfully been created";
        // }
@@ -174,6 +204,8 @@ public class Controller {
         Checklist checklist = getChecklistById(checklistId, taskId);
         if (checklist != null) {
             checklists.remove(checklist);
+            mCurrentProject.addActivity(getTaskById(taskId).getTitle() + "\n" +
+                    getCurrentUser().getName() + " removed checklist with name " + checklist.getName() + " from this task "  +  " " + java.time.LocalTime.now());
             return "The checklist has successfully been removed";
         }
         return "The checklist could not be found";
@@ -182,6 +214,8 @@ public class Controller {
     public void updateChecklistName(String updatedName, String checklistId, String taskId) {
         Checklist checklist = getChecklistById(checklistId, taskId);
         checklist.setName(updatedName);
+        mCurrentProject.addActivity(getTaskById(taskId).getTitle() + "\n" +
+                getCurrentUser().getName() + " has changed a checklist title to " + updatedName + " in this task " +  " " + java.time.LocalTime.now());
     }
 
     /**
@@ -213,6 +247,8 @@ public class Controller {
         ChecklistItem checklistItem = getChecklistItemById(checklistId, taskId, itemId);
         if (checklistItem != null) {
             checklistItems.remove(checklistItem);
+           mCurrentProject.addActivity(getTaskById(taskId).getTitle() + "\n" +
+                           getCurrentUser().getName() + " has removed items from checklist with name " + getChecklistById(checklistId,taskId).getName() +  "in this task " +  " " + java.time.LocalTime.now());
             return "The item has successfully been removed";
         }
         return "Checklist Item could not be found";
@@ -221,11 +257,15 @@ public class Controller {
     public void updateItemStatus(String checklistId, String taskId, String itemId) {
         ChecklistItem checklistItem = getChecklistItemById(checklistId, taskId, itemId);
         checklistItem.setStatus("Done");
+        mCurrentProject.addActivity(getTaskById(taskId).getTitle() + "\n" +
+                getCurrentUser().getName() + " has changed item status in checklist with name " + getChecklistById(checklistId,taskId).getName() + " in this task " +  " " + java.time.LocalTime.now());
     }
 
     public void updateItemTopic(String updatedTopic, String checklistId, String taskId, String itemId) {
         ChecklistItem checklistItem = getChecklistItemById(checklistId, taskId, itemId);
         checklistItem.setTopic(updatedTopic);
+        mCurrentProject.addActivity(getTaskById(taskId).getTitle() + "\n" +
+                getCurrentUser().getName() + " has updated a item topic in checklist with name " + getChecklistById(checklistId, taskId).getName() + " in this task " + " " + java.time.LocalTime.now());
     }
 
     public String checkItemId(String enteredId, String checklistId, String taskId){
@@ -242,6 +282,8 @@ public class Controller {
         Checklist checklist = getChecklistById(checklistId, taskId);
         ChecklistItem checklistItem = new ChecklistItem(id, topic);
         checklist.addChecklistItem(checklistItem);
+        mCurrentProject.addActivity(getTaskById(taskId).getTitle() + "\n" +
+                getCurrentUser().getName() + " has added items to checklist " + checklist.getName() + " in this task " +  " " + java.time.LocalTime.now());
         return "The item has successfully been added to the checklist";
     }
 
@@ -294,8 +336,7 @@ public class Controller {
             if (someOne.getUserName().equals(enteredUserName)) {
                 if (someOne.getPassword().equals(enteredPassword)) {
                     setCurrentUser(someOne);
-
-                    return "Bravo! You logged in.";
+                 return "Bravo! You logged in.";
                 } else {
 
                     return "Password is incorrect";
@@ -320,7 +361,7 @@ public class Controller {
     /**
      * Handling Project
      */
-    public String createProject(String title, String description, ArrayList<String> enteredIds,
+    public String createProject(String title, String description, ArrayList<String> enteredUsernames,
                                 LocalDate startDate, LocalDate dueDate) {
 
         Project project = new Project(title, description, startDate, dueDate);
@@ -328,9 +369,10 @@ public class Controller {
 
         Collection<User> userList = mDatabase.getUserList();
 
-        for (String enteredId : enteredIds) {
-            for (User someOne : userList) {
-                if (someOne.getId().toString().equals(enteredId)) {
+        for (int i = 0; i < enteredUsernames.size(); i++) {
+            for (Iterator<User> iterator = userList.iterator(); iterator.hasNext();) {
+                User someOne = iterator.next();
+                if (someOne.getUserName().equals(enteredUsernames.get(i))) {
                     project.getProjectMembers().add(someOne);
                     someOne.getProjects().add(project);
                     someOne.addRole(projectId);
@@ -339,20 +381,32 @@ public class Controller {
         }
         mCurrentUser.changeRole(projectId);
 
-        return "\nProject " + project.getProjectTitle() + " is created successfully! You are the manager of this project now ;)";
+        System.out.println("\nProject " + project.getProjectTitle() + " is created successfully!\n" +
+                "The following users are " +
+                "added as members to this project:");
+
+        for(int i = 0; i < project.getProjectMembers().size(); i++){
+            System.out.print(
+                project.getProjectMembers().get(i) +
+                project.getProjectMembers().get(i).getRole(project.toString()) +
+                "\n"
+            );
+        }
+
+        return "\n" + getCurrentUser().getFirstName() + " " + getCurrentUser().getLastName() + " is the manager of this project now ;)";
     }
 
     public ArrayList<Project> getProjects() {
         return getCurrentUser().getProjects();
     }
 
-    public void addMembers(ArrayList<String> newMembersIds) {
+    public void addMembers(ArrayList<String> newMembersUsernames) {
 
         Collection<User> userList = mDatabase.getUserList();
 
-        for (String newMembersId : newMembersIds) {
+        for (String newMembersUsername : newMembersUsernames) {
             for (User someOne : userList) {
-                if (someOne.getId().toString().equals(newMembersId)) {
+                if (someOne.getUserName().equals(newMembersUsername)) {
                     mCurrentProject.getProjectMembers().add(someOne);
                     someOne.getProjects().add(mCurrentProject);
                     someOne.addRole(mCurrentProject.getId().toString());
@@ -363,11 +417,11 @@ public class Controller {
 
     }
 
-    public void changeRoles(ArrayList<String> memberIds) {
+    public void changeRoles(ArrayList<String> memberUsernames) {
 
-        for (String memberId : memberIds) {
+        for (String memberUsername : memberUsernames) {
             for (int j = 0; j < getCurrentProject().getProjectMembers().size(); j++) {
-                if (memberId.equals(getCurrentProject().getProjectMembers().get(j).getId().toString())) {
+                if (memberUsername.equals(getCurrentProject().getProjectMembers().get(j).getUserName())) {
                     getCurrentProject().getProjectMembers().get(j).changeRole(getCurrentProject().getId().toString());
                 }
             }
@@ -394,6 +448,73 @@ public class Controller {
                 mCurrentUser.setTotalWage(calculatedHours);
                 return "Your total wage is " + calculatedHours + " SEK";
 
+    }
+
+    public void addHoliday(String hName, String hDescription, LocalDate hStartDate, LocalDate hEndDate) {
+
+        Holiday holiday = new Holiday(hName, hDescription, hStartDate, hEndDate);
+
+        getCurrentProject().addHolidayToList(holiday);
+    }
+
+
+
+    public String removeHolidayFromList(String developerName){
+
+    int holidayListSize = getHolidayListFromCurrentProject().size();
+
+        for (int i = 0; i < holidayListSize; i++) {
+        String userName = getHolidayListFromCurrentProject().get(i).getUserName();
+
+        if (developerName.toString().equals(userName)) {
+            getCurrentProject().removeHoliday(i);
+            return developerName + "'s " + "holiday information" + " has been removed";
+        }
+    }
+        return "Holiday that belongs to: " + developerName + " was not found";
+}
+
+    public ArrayList<Holiday> getHolidayListFromCurrentProject() {
+
+        return getCurrentProject().getHolidayList();
+
+    }
+
+    /**
+     * Handling Ideas
+     */
+
+    public void addIdeaToProject(String newIdea) {
+        Idea idea = new Idea(newIdea);
+        getCurrentProject().getIdeas().add(idea);
+    }
+
+    public void addLike(int ideaNum) {
+        getCurrentProject().getIdeas().get(ideaNum - 1).addLike();
+    }
+
+    public void addDisLike(int ideaNum) {
+        getCurrentProject().getIdeas().get(ideaNum - 1).addDisLike();
+    }
+
+    public void addComment(int ideaNum, String comment) {
+        String savedComment = getCurrentUser().getName() + " said: " + comment;
+        getCurrentProject().getIdeas().get(ideaNum - 1).addComment(savedComment);
+    }
+
+    public void removeIdea(int ideaNum) {
+        getCurrentProject().getIdeas().remove(ideaNum - 1);
+    }
+
+    public void viewComments(int ideaNum) {
+        ArrayList<String> comment = getCurrentProject().getIdeas().get(ideaNum - 1).getComment();
+        if(comment.size() != 0) {
+            for (int i = 0; i < comment.size(); i++) {
+                System.out.println(comment.get(i));
+            }
+        } else {
+            System.out.println("There is still no comment for this idea. You can be the one who adds the first comment.");
+        }
     }
 
     /**
@@ -436,6 +557,8 @@ public class Controller {
         }
     }
 
+
+
     public void loadDatabaseTwo() {
 
         String STORAGE = "./src/STORAGE.csv";
@@ -458,7 +581,9 @@ public class Controller {
                             user.changeRole(project.getId().toString());
                         }
                     }
-                    mDatabase.addUser(user);
+                    if (checkUsername(user.getUserName()).equals(user.getUserName())) {
+                        mDatabase.addUser(user);
+                    }
                     System.out.println("Added: " + Arrays.toString(retrievedInfo));
                 }
             }
@@ -469,4 +594,12 @@ public class Controller {
             e.printStackTrace();
         }
     }
+
+    // Check only part of ID.
+//    public boolean checkIdWithDatabase(String inputId,  checkWithId){
+//
+//        if (checkWithId.contains(inputId) && !)
+//
+//            return true;
+//    }
 }

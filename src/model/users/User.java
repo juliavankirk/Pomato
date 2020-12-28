@@ -1,10 +1,12 @@
 package model.users;
+import model.project.Messages;
 import model.project.Project;
 import model.project.Task;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Set;
 import java.util.UUID;
 
 
@@ -22,6 +24,7 @@ public class User implements Serializable {
     private ArrayList<Project> mProjects;
     private ArrayList<Role> mRoles;
     private HashMap<UUID, ArrayList<Task>> mTasks;
+    private HashMap<UUID, ArrayList<Messages>> mInbox;
 
     private double mTotalWage;
 //    private ArrayList<UUID> mProjectsUserCanAccess;
@@ -41,6 +44,7 @@ public class User implements Serializable {
         mRoles = new ArrayList<Role>();
         mTotalWage = 0;
         mTasks = new HashMap<UUID, ArrayList<Task>>();
+        mInbox = new HashMap<UUID, ArrayList<Messages>>();
 
     }
 
@@ -84,7 +88,11 @@ public class User implements Serializable {
     }
 
     public String getName() {
-        return mFirstName + mLastName;
+        return mFirstName + " " + mLastName;
+    }
+
+    public String getFirstName() {
+        return mFirstName;
     }
 
     public void setFirstname(String firstName) {
@@ -105,10 +113,39 @@ public class User implements Serializable {
 
     public String getJobTitle() { return mJobTitle; }
 
-    public Double getHourlyWage() { return mHourlyWage; }
+    public double getHourlyWage() { return mHourlyWage; }
 
     public ArrayList<Project> getProjects() {
         return mProjects;
+    }
+
+    public ArrayList<Messages> getInbox(UUID Id) { return mInbox.get(mId); }
+
+    public void addMessage (Messages message) {
+        ArrayList<Messages> messages = mInbox.get(message.getSenderId());
+        if ( null == messages ) {
+            messages = new ArrayList<Messages>();
+        }
+        messages.add(message);
+        mInbox.put(message.getSenderId(), messages);
+    }
+
+    public boolean removeMessage(int msgIndex, UUID senderId) {
+        ArrayList<Messages> messages = mInbox.get(senderId);
+        if ( null == messages ) {
+            return false;
+        } else if ( msgIndex < 0 || msgIndex >= messages.size() ) {
+            return false;
+        }
+        messages.remove(msgIndex);
+        if ( messages.isEmpty() ) {
+            mInbox.put(senderId, null);
+        }
+        return true;
+    }
+
+    public Set<UUID> getInboxId() {
+        return mInbox.keySet();
     }
 
     public String getRole(String projectId) {
@@ -141,6 +178,10 @@ public class User implements Serializable {
         retVal += ("Hourly Wage: " + getHourlyWage());
 
         return retVal;
+    }
+
+    public String toString(){
+        return "First name: " + mFirstName + "\nLast name: " + mLastName + "\n";
     }
 
 }

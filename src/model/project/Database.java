@@ -8,15 +8,18 @@ import java.util.*;
 
 public class Database implements Serializable {
     public HashMap<UUID, User> mUserList;
-    public HashMap<UUID, Project> mProjectList;
+    public HashMap<String, Project> mProjectList;
     public ArrayList <Task> mTaskList;
     public ArrayList<Progression> mProgression;
+    public ArrayList <String> mActivityList;
+
 
     public Database() {
         mUserList = new HashMap<UUID, User>();
-        mProjectList = new HashMap<UUID, Project>();
+        mProjectList = new HashMap<String, Project>();
         mTaskList = new ArrayList<Task>();
         mProgression = new ArrayList<Progression>();
+        mActivityList = new ArrayList<String>();
     }
 
     public Collection<User> getUserList() { return mUserList.values(); }
@@ -26,7 +29,7 @@ public class Database implements Serializable {
 
 
     public Collection<Project> getProjectList() { return mProjectList.values(); }
-    public void addProject (Project project) { mProjectList.put(project.getId(), project); }
+    public void addProject (Project project) { mProjectList.put(project.getId().toString(), project); }
     public void removeProject(UUID id) { mProjectList.remove(id); }
     public Project getProjectById (UUID id) { return mProjectList.get(id); }
 

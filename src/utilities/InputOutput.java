@@ -49,18 +49,18 @@ public class InputOutput {
     }
 
     public static String line() {
-        return "--------------------------------------------------------------------------------------------------------\n";
+        return "--------------------------------------------------------------------------------------------------------------------------------------\n";
     }
 
     public static String shortLine() {
-        return "----------------------------------------------------\n";
+        return "------------------------------------------------------------\n";
     }
 
     public static String superShortLine() {
-        return "-----------------------\n";
+        return "---------------------------\n";
     }
 
-    public static String superSuperShortLine() {return "----------\n";}
+    public static String superSuperShortLine() {return "------------\n";}
 
     public static void closeScanner() {
         input.close();
@@ -70,6 +70,7 @@ public class InputOutput {
     /**
      * Extra
      */
+
     // Input an integer between a min and a max value:
     public static int inputIntMinMax(String messageToUser, int min, int max) {
         System.out.print(messageToUser + ":");

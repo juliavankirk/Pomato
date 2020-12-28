@@ -2,9 +2,17 @@ package view.menu;
 
 
 import controllers.Controller;
+import model.project.Checklist;
+import model.project.SubTask;
+import model.project.Task;
+import model.users.User;
 import view.VMenu;
 
+import javax.tools.StandardJavaFileManager;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.UUID;
 
 public class VMenuMain extends VMenu {
 
@@ -28,22 +36,12 @@ public class VMenuMain extends VMenu {
 //        mSubMenu = true;
     }
 
-
     /**
      * Methods
      */
     @Override
     public void menuContent(Controller controller) {
-
+        // Empty since we only want to display the menu options(the SubMenus)
     }
-
-
-//    public void renderExit() {
-//        System.out.println("Exiting the system. Goodbye!");
-//    }
-//
-//    public void renderError() {
-//        System.out.println("Invalid selection, restarting...");
-//    }
-
 }
+

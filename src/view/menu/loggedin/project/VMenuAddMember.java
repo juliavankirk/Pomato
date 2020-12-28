@@ -14,7 +14,7 @@ public class VMenuAddMember extends VMenu {
     public VMenuAddMember(VMenu parent) {
         super(parent);
         mMenuHeader = "Add new members";
-        mMenuLabel = "Add members";
+        mMenuLabel = "Manager: Add members";
         mMenuQuestion = "Enter choice";
     }
 
@@ -22,15 +22,15 @@ public class VMenuAddMember extends VMenu {
 
         if(controller.getCurrentUser().getRole(controller.getCurrentProject().getId().toString()).equals("Manager")) {
 
-            ArrayList<String> pMembersIds = new ArrayList<String>();
+            ArrayList<String> pMembersUsernames = new ArrayList<String>();
             String answer = "yes";
             while (answer.equals("yes")) {
-                String memberId = InputOutput.inputString("Insert member's Id");
+                String memberUsername = InputOutput.inputString("Insert member's username");
                 //TODO check if member IDs exist
-                pMembersIds.add(memberId);
+                pMembersUsernames.add(memberUsername);
                 answer = InputOutput.inputString("Do you want to continue adding members?(yes/no)");
             }
-            controller.addMembers(pMembersIds);
+            controller.addMembers(pMembersUsernames);
             System.out.println("New members are successfully added");
         } else {
             System.out.println("You do not have the authority to make changes in this section, because you are" +
