@@ -52,12 +52,10 @@ public class VMenuCreateHoliday extends VMenu {
             answer = "";
             menuContent(controller);
         }
-/*
-        public void viewUserList(Controller controller) {
-            String
 
 
-        }*/
+
+        }
     }
-}
+
 

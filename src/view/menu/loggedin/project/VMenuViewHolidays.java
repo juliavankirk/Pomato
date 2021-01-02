@@ -21,19 +21,11 @@ public class VMenuViewHolidays extends VMenu {
     @Override
     public void menuContent(Controller controller) {
 
-        //System.out.println(controller.getHolidayListFromCurrentProject());
-
         ArrayList<Holiday> holidayList = controller.getHolidayListFromCurrentProject();
 
         for (Holiday holiday : holidayList) {
             System.out.print(InputOutput.superShortLine());
             System.out.println(holiday);
-
-
-
-
-
-
 
 
         }

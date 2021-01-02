@@ -9,8 +9,6 @@ import java.util.ArrayList;
 public class VMenuHolidays extends VMenu {
 
 
-    private Object VMenuViewHolidays;
-
     public VMenuHolidays(VMenu parent) {
         super(parent);
         mMenuHeader = "Employee's Holidays";
