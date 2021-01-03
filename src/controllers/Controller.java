@@ -606,6 +606,28 @@ public class Controller {
         }
     }
 
+    public void showMessages() {
+        for ( UUID Id : getCurrentUser().getInboxId()) { //for each instance in set of UUIDs
+            System.out.println(Id);
+        }
+    }
+
+    public void viewMessage(String input) {
+        try {
+            ArrayList<Messages> messages = getCurrentUser().getInbox(UUID.fromString(input));
+            if ( messages != null ) {
+                System.out.println();
+                for ( Messages message : messages) {
+                    System.out.println(message);
+                    System.out.println();
+                }
+            }
+
+        } catch (Exception e) {
+            System.out.println("Could not find message, please try again!");
+        }
+    }
+
     // Check only part of ID.
 //    public boolean checkIdWithDatabase(String inputId,  checkWithId){
 //
