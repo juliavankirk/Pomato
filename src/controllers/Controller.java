@@ -595,6 +595,17 @@ public class Controller {
         }
     }
 
+    public void sendMessage(String recipient, String subject, String content) {
+        Messages message = new Messages(getCurrentUser().getId(), subject, content);
+        for (User userMsgVar : mDatabase.getUserList()) {
+            if ( userMsgVar.getUserName().equals(recipient)) {
+                userMsgVar.addMessage(message);
+                System.out.println("Message successfully sent!");
+                break;
+            }
+        }
+    }
+
     // Check only part of ID.
 //    public boolean checkIdWithDatabase(String inputId,  checkWithId){
 //
