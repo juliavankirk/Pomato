@@ -2,6 +2,7 @@ package controllers;
 
 import model.project.*;
 import model.users.User;
+import utilities.InputOutput;
 import view.VMenu;
 import view.menu.VMenuMain;
 
@@ -627,6 +628,33 @@ public class Controller {
             System.out.println("Could not find message, please try again!");
         }
     }
+
+    public void deleteMessage(String delete) {
+        try {
+            UUID id = UUID.fromString(delete);
+            ArrayList<Messages> messages = getCurrentUser().getInbox(id);
+            if ( messages != null ) {
+                System.out.println();
+                int removeIndex = 0;
+                for ( Messages message : messages) {
+                    System.out.println(removeIndex);
+                    System.out.println(message);
+                    System.out.println();
+                    removeIndex++;
+                }
+                removeIndex = InputOutput.inputInt("Which message would you like to remove?");
+                if ( getCurrentUser().removeMessage(removeIndex, id)) {
+                    System.out.println("Successfully removed: " + removeIndex);
+                } else {
+                    System.out.println("Failed to remove: " + removeIndex + ". Please try again.\n");
+                }
+            }
+
+        } catch (Exception e) {
+            System.out.println("Message does not exist, please try again!");
+        }
+    }
+
 
     // Check only part of ID.
 //    public boolean checkIdWithDatabase(String inputId,  checkWithId){

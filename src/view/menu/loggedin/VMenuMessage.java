@@ -47,10 +47,13 @@ public class VMenuMessage extends VMenu {
                 controller.showMessages();
                 String input = InputOutput.inputString("Enter message you would like to view");
                 controller.viewMessage(input);
-
             }
 
             case 3 -> {
+                System.out.println("Delete a message");
+                controller.showMessages();
+                String delete = InputOutput.inputString("Select the message you would like to remove");
+                controller.deleteMessage(delete);
 
             }
 
