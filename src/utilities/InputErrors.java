@@ -1,6 +1,8 @@
 package utilities;
 
 public class InputErrors {
+    static int correctIntInput;
+    static double correctDoubleInput;
 
     public static String emptyFieldString(String userInput) {
         while (userInput.equals("")) {
@@ -11,29 +13,41 @@ public class InputErrors {
     }
 
     public static int irrelevantInt(String userInput) {
-        int correctInput = 0;
         try {
-            correctInput = Integer.parseInt(userInput);
+            correctIntInput = Integer.parseInt(userInput);
         }catch(NumberFormatException wrongInput){
-            System.err.println("\nYou should insert a number here.");
+            System.err.println("You should insert a number here.");
             userInput = InputOutput.inputString("Please try again");
             irrelevantInt(userInput);
-
         }
-        return correctInput;
+        return correctIntInput;
     }
 
     public static double irrelevantDouble(String userInput) {
-        double correctInput = 0.0;
         try {
-            correctInput = Double.parseDouble(userInput);
+            correctDoubleInput = Double.parseDouble(userInput);
         }catch(NumberFormatException wrongInput){
-            System.err.println("\nYou should insert a number here.");
+            System.err.println("You should insert a number here.");
             userInput = InputOutput.inputString("Please try again");
             irrelevantDouble(userInput);
-
         }
-        return correctInput;
+        return correctDoubleInput;
+    }
+
+    public static int inRangeIntInput (int userInput, int upperRange, int lowerRange) {
+        if (userInput < upperRange && userInput > lowerRange) {
+            return userInput;
+        }
+        System.err.println("The number you entered is out of range.");
+        userInput = irrelevantInt(InputOutput.inputString("Please try again"));
+        return inRangeIntInput(userInput, upperRange, lowerRange);
+    }
+
+    public static int checkMenuChoice(String userInput, int upperRange, int lowerRange) {
+        int userInt1 = irrelevantInt(userInput);
+        int userInt2 = inRangeIntInput(userInt1, upperRange, lowerRange);
+
+        return userInt2;
     }
 
     public static String incorrectYesOrNo (String userInput) {

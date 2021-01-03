@@ -3,6 +3,7 @@ package view.menu;
 import controllers.Controller;
 import model.project.Project;
 import model.users.User;
+import utilities.InputErrors;
 import utilities.InputOutput;
 import view.VMenu;
 import view.menu.loggedin.VMenuAccount;
@@ -40,9 +41,9 @@ public class VMenuLoggedIn extends VMenu {
     public VMenu chooseMenu(VMenu mParent, Controller controller) {
         VMenu chosenVMenu;
 
-        int inputResult = InputOutput.inputInt(mMenuQuestion/*,1,mSubMenus.size() + 1*/);
+        int inputResult = InputErrors.checkMenuChoice(InputOutput.inputString(mMenuQuestion), mSubMenus.size()+1, 0);
 
-        if (mSubMenus != null && inputResult > 0 && inputResult < mSubMenus.size() + 1) {
+//        if (mSubMenus != null && inputResult > 0 && inputResult < mSubMenus.size() + 1) {
             chosenVMenu = mSubMenus.get(inputResult - 1);
 
             // User has chosen a project they want to work on in the menu and,
@@ -51,9 +52,9 @@ public class VMenuLoggedIn extends VMenu {
             if ( projectListSize > (0) && !(inputResult > projectListSize)){
                 controller.setCurrentProject(inputResult - 1);
             }
-        } else {
-            chosenVMenu = mParent;
-        }
+//        } else {
+//            chosenVMenu = mParent;
+//        }
 
         return chosenVMenu;
     }
