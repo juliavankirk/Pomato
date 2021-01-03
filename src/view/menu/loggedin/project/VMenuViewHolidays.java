@@ -1,6 +1,8 @@
 package view.menu.loggedin.project;
 
 import controllers.Controller;
+import model.project.Holiday;
+import utilities.InputOutput;
 import view.VMenu;
 
 import java.util.ArrayList;
