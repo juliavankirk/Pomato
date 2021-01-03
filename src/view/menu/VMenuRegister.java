@@ -1,6 +1,7 @@
 package view.menu;
 
 import controllers.Controller;
+import utilities.InputErrors;
 import utilities.InputOutput;
 import view.VMenu;
 
@@ -33,19 +34,19 @@ public class VMenuRegister extends VMenu {
         System.out.println("Creating an account. Please enter the following information:\n ");
 
 
-        firstName = InputOutput.inputString("First Name");
-        lastName = InputOutput.inputString("Last Name");
-        companyName = InputOutput.inputString("Company Name");
-        jobTitle = InputOutput.inputString("Position");
-        hourlyWage = InputOutput.inputDouble("Hourly wage");
-        userName = InputOutput.inputString("Username");
+        firstName = InputErrors.emptyFieldString(InputOutput.inputString("First Name"));
+        lastName = InputErrors.emptyFieldString(InputOutput.inputString("Last Name"));
+        companyName = InputErrors.emptyFieldString(InputOutput.inputString("Company Name"));
+        jobTitle = InputErrors.emptyFieldString(InputOutput.inputString("Position"));
+        hourlyWage = InputErrors.irrelevantDouble(InputOutput.inputString("Hourly wage"));
+        userName = InputErrors.emptyFieldString(InputOutput.inputString("Username"));
         String message = controller.checkUsername(userName);
         while (!message.equals(userName)) {
             System.out.println(message);
             userName = InputOutput.inputString("Username");
             message = controller.checkUsername(userName);
         }
-        password = InputOutput.inputString("Password");
+        password = InputErrors.emptyFieldString(InputOutput.inputString("Password"));
 
         // 2. Send the gathered data to be handled by the controller.
         controller.addUser(userName, firstName, lastName, password, companyName, hourlyWage, jobTitle );
