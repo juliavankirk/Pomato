@@ -1,6 +1,7 @@
 package view.menu.loggedin;
 
 import controllers.Controller;
+import utilities.InputErrors;
 import utilities.InputOutput;
 import view.VMenu;
 
@@ -25,10 +26,8 @@ public class VMenuCreateProject extends VMenu {
 
         ArrayList<String> pMemberUsername = new ArrayList<String>();
 
-        String pTitle = InputOutput.inputString("Project title");
-
-        String pDescription = InputOutput.inputString(("Project description"));
-
+        String pTitle = InputErrors.emptyFieldString(InputOutput.inputString("Project title"));
+        String pDescription = InputErrors.emptyFieldString(InputOutput.inputString(("Project description")));
         pMemberUsername.add(controller.getCurrentUser().getUserName());
         String answer = InputOutput.inputString("Would you like to add more members?(yes/no)");
         while(answer.equals("yes")) {
@@ -37,8 +36,15 @@ public class VMenuCreateProject extends VMenu {
             answer = InputOutput.inputString("Do you want to continue adding members?(yes/no)");
         }
 
+
         LocalDate startDate = LocalDate.parse(InputOutput.inputString("Please enter the start date of project (yyyy-mm-dd)"));
         LocalDate dueDate = LocalDate.parse(InputOutput.inputString("Please enter due date of project (yyyy-mm-dd)"));
+        while (dueDate.isEqual(startDate) || dueDate.isBefore(startDate)){
+            startDate = LocalDate.parse(InputOutput.inputString("Due date must be later than start" +
+                    " date. Please insert dates one more time.\n Start date"));
+            dueDate = LocalDate.parse(InputOutput.inputString("Due date"));
+        }
+
 
 
         String message = controller.createProject(pTitle, pDescription, pMemberUsername, startDate, dueDate);
