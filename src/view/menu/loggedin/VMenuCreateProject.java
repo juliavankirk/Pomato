@@ -37,8 +37,8 @@ public class VMenuCreateProject extends VMenu {
         }
 
 
-        LocalDate startDate = LocalDate.parse(InputOutput.inputString("Please enter the start date of project (yyyy-mm-dd)"));
-        LocalDate dueDate = LocalDate.parse(InputOutput.inputString("Please enter due date of project (yyyy-mm-dd)"));
+        LocalDate startDate = InputErrors.checkDateFormat(InputOutput.inputString("Please enter the start date of project (yyyy-mm-dd)"));
+        LocalDate dueDate = InputErrors.checkDateFormat(InputOutput.inputString("Please enter due date of project (yyyy-mm-dd)"));
         while (dueDate.isEqual(startDate) || dueDate.isBefore(startDate)){
             startDate = LocalDate.parse(InputOutput.inputString("Due date must be later than start" +
                     " date. Please insert dates one more time.\n Start date"));

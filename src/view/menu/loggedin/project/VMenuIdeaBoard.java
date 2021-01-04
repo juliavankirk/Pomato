@@ -30,7 +30,7 @@ public class VMenuIdeaBoard extends VMenu {
      */
 
     public void menuContent(Controller controller) {
-        //TODO Fix this for imported projects
+
         int numberOfIdeas = controller.getCurrentProject().getIdeas().size();
         if (numberOfIdeas != 0) {
             ArrayList<Idea> ideaList = controller.getCurrentProject().getIdeas();
