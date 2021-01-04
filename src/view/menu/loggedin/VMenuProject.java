@@ -37,21 +37,18 @@ public class VMenuProject extends VMenu {
         mSubMenus.add(new VMenuViewTaskBoard(this));
         mSubMenus.add(new VMenuCommentBoard(this));
         mSubMenus.add(new VMenuIdeaBoard(this));
-        mSubMenus.add(new VMenuAddMember(this));
-        mSubMenus.add(new VMenuChangeRoles(this));
-        mSubMenus.add(new VMenuPersonalWage(this));
-        mSubMenus.add(new VMenuHolidays(this));
-//        subMenu = true;
         mSubMenus.add(new VMenuPersonalWage(this));
         mSubMenus.add(new VMenuActivityLog(this));
+        mSubMenus.add(new VMenuHolidays(this));
 //        subMenu = true;
-        mSubMenus.add(new VMenuPersonalWage(this));
 
         String projectId = controller.getCurrentProject().getId().toString();
 
         // Only a project manager can access these subMenus
         if (controller.getCurrentUser().getRole(projectId).equals("Manager")){
             mSubMenus.add(new VMenuEconomicOverview(this));
+            mSubMenus.add(new VMenuAddMember(this));
+            mSubMenus.add(new VMenuChangeRoles(this));
         }
     }
 
