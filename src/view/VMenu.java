@@ -2,6 +2,7 @@ package view;
 
 
 import controllers.Controller;
+import utilities.InputErrors;
 import utilities.InputOutput;
 
 import java.util.ArrayList;
@@ -97,13 +98,13 @@ public abstract class VMenu {
     public VMenu chooseMenu(VMenu mParent, Controller controller) {
         VMenu chosenVMenu;
 
-        int inputResult = InputOutput.inputInt(mMenuQuestion/*,1,mSubMenus.size() + 1*/);
-        if (mSubMenus != null && inputResult > 0 && inputResult < mSubMenus.size() + 1) {
+        int inputResult = InputErrors.checkMenuChoice(InputOutput.inputString(mMenuQuestion), mSubMenus.size() + 1, 0);
+//        if (mSubMenus != null && inputResult > 0 && inputResult < mSubMenus.size() + 1) {
 
             chosenVMenu = mSubMenus.get(inputResult - 1);
-        } else {
-            chosenVMenu = mParent;
-        }
+//        } else {
+//            chosenVMenu = mParent;
+//        }
 
         return chosenVMenu;
     }
