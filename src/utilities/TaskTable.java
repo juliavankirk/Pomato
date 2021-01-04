@@ -36,14 +36,14 @@ public class TaskTable {
      * CONSTRUCTORS
      * @param tasks         tasks should always be sent in through a constructor.
      * @param headerList    If a user does not send in a list with headers then a default list of headers will be created.
-     *                      That is why there is a constructor that does not contain a headerList as input through the
-     *                      parameters.
      */
     public TaskTable(ArrayList<SubTask> tasks, ArrayList<String> headerList) {
         this.headerList = headerList;
         this.tasks = tasks;
     }
     public TaskTable(ArrayList<SubTask> tasks) {
+        // this = this TaskTable class's constructor with the parameters (Arraylist<SubTask, ArrayList<String>)
+        // If I only send in tasks the list with headers will default to the ones below.
         this(tasks, new ArrayList<>(Arrays.asList("TODO", "IN PROGRESS", "COMPLETED")));
     }
 
@@ -51,7 +51,7 @@ public class TaskTable {
     /**
      * METHODS
      * @param lists The list I'm taking in here is a list of a list.
-     * @param <T>   This means that I can take in any object
+     * @param <T>   This means that I can take in any object. I forgot what this is called.
      * @return      I'm returning the list with the largest size since I need to know this to be able to print empty rows
      *              I need to create empty rows in order to fill the cards that are too short.
      */
