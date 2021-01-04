@@ -15,7 +15,8 @@ public class VMenuImport extends VMenu {
     
     @Override
     public void menuContent(Controller controller) {
-        System.out.println("The following information has been imported:\n");
+        System.out.println("The following information has been imported:\n" +
+                "[User,FirstName,LastName,UserName,Password,CompanyName,Salary,JobTitle,Project1,Role1,Project2,Role2,...]\n");
         controller.loadDatabaseTwo();
     }
 }

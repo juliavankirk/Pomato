@@ -1,6 +1,7 @@
 package view.menu.loggedin.project;
 
 import controllers.Controller;
+import utilities.InputErrors;
 import utilities.InputOutput;
 import view.VMenu;
 
@@ -26,15 +27,15 @@ public class VMenuAddMember extends VMenu {
             String answer = "yes";
             while (answer.equals("yes")) {
                 String memberUsername = InputOutput.inputString("Insert member's username");
-                //TODO check if member IDs exist
                 pMembersUsernames.add(memberUsername);
-                answer = InputOutput.inputString("Do you want to continue adding members?(yes/no)");
+                answer = InputErrors.incorrectYesOrNo(InputOutput.inputString("Do you want to continue adding members?(yes/no)"));
             }
             controller.addMembers(pMembersUsernames);
-            System.out.println("New members are successfully added");
+            System.out.println("if you cannot find a username you have entered before in here, you probably " +
+                    "entered it incorrectly or that user is already a member of this project.");
         } else {
             System.out.println("You do not have the authority to make changes in this section, because you are" +
-                                "nothing more than a poor developer.");
+                                "not a manager.");
         }
         System.out.println(" ");
     }

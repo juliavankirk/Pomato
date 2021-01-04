@@ -1,8 +1,12 @@
 package utilities;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+
 public class InputErrors {
     static int correctIntInput;
     static double correctDoubleInput;
+    static LocalDate correctDateInput;
 
     public static String emptyFieldString(String userInput) {
         while (userInput.equals("")) {
@@ -54,10 +58,19 @@ public class InputErrors {
         return userInt2;
     }
 
+    public static LocalDate checkDateFormat(String inputDate) {
+        try{
+            correctDateInput = LocalDate.parse(inputDate);
+        }catch(DateTimeParseException invalidFormat) {
+            System.err.println("The entered date format is not correct. You should enter the date in yyyy-mm-dd format.");
+            System.out.println("");
+            inputDate = InputOutput.inputString("Please try one more time");
+            checkDateFormat(inputDate);
+        }
+        return correctDateInput;
+    }
+
     public static String incorrectYesOrNo (String userInput) {
-        System.err.println("Invalid input. You should answer with yes or no.");
-        System.out.println("");
-        userInput = InputOutput.inputString("Please try again");
 
         switch (userInput) {
             case "yes" -> {
@@ -67,6 +80,9 @@ public class InputErrors {
                 return "no";
             }
             default -> {
+                System.err.println("Invalid input. You should answer with yes or no.");
+                System.out.println("");
+                userInput = InputOutput.inputString("Please try again");
                 return incorrectYesOrNo(userInput);
             }
         }
