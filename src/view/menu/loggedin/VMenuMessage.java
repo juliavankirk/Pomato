@@ -43,7 +43,7 @@ public class VMenuMessage extends VMenu {
             }
 
             case 2 -> {
-                System.out.println("Here are your messages");
+                System.out.println("Inbox");
                 controller.showMessages();
                 String input = InputOutput.inputString("Enter message you would like to view");
                 controller.viewMessage(input);
