@@ -98,13 +98,13 @@ public abstract class VMenu {
     public VMenu chooseMenu(VMenu mParent, Controller controller) {
         VMenu chosenVMenu;
 
-        int inputResult = InputErrors.checkMenuChoice(InputOutput.inputString(mMenuQuestion), mSubMenus.size() + 1, 0);
-//        if (mSubMenus != null && inputResult > 0 && inputResult < mSubMenus.size() + 1) {
+        int inputResult = InputErrors.checkMenuChoice(InputOutput.inputString(mMenuQuestion), mSubMenus.size() + 2, 0);
+        if (mSubMenus != null && inputResult > 0 && inputResult < mSubMenus.size() + 1) {
 
             chosenVMenu = mSubMenus.get(inputResult - 1);
-//        } else {
-//            chosenVMenu = mParent;
-//        }
+        } else {
+            chosenVMenu = mParent;
+        }
 
         return chosenVMenu;
     }

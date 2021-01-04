@@ -3,6 +3,8 @@ package view.menu;
 import controllers.Controller;
 import view.VMenu;
 
+import java.util.ArrayList;
+
 public class VMenuImport extends VMenu {
 
     public VMenuImport(VMenu parent) {
@@ -10,6 +12,7 @@ public class VMenuImport extends VMenu {
         mMenuHeader = "Import data";
         mMenuLabel = "Import data";
         mMenuQuestion = "Enter choice";
+        mSubMenus = new ArrayList<>();
 
     }
     
