@@ -1,6 +1,7 @@
 package view.menu.loggedin.project;
 
 import controllers.Controller;
+import utilities.InputErrors;
 import utilities.InputOutput;
 import view.VMenu;
 
@@ -27,8 +28,14 @@ public class VMenuLikeIdea extends VMenu {
 
     public void menuContent(Controller controller) {
 
-        int ideaNum = InputOutput.inputInt("Please insert the number of the idea you wish to like");
-        controller.addLike(ideaNum);
-        System.out.println("You Liked the Idea successfully!");
+        if (controller.getCurrentProject().getIdeas().size() == 0) {
+            System.out.println("There is no idea to like for now.");
+        } else {
+            int ideaNum = InputErrors.checkMenuChoice(InputOutput.inputString("Please" +
+                            " insert the number of the idea you wish to like"),
+                    controller.getCurrentProject().getIdeas().size() + 1, 0);
+            controller.addLike(ideaNum);
+            System.out.println("You Liked the Idea successfully!");
+        }
     }
 }
