@@ -46,13 +46,9 @@ public class Holiday implements Serializable {
         retVal += ("\nHoliday Description: " + getHolidayDescription());
         retVal += ("\nStart Date: " + getHolidayStartDate());
         retVal += ("\nEnd Date: " + getHolidayEndDate());
-        retVal += ("\n-----------------------------\n");
 
         return retVal;
-        /*return "Username: " + getUserName() +
-                "\nHoliday Description: " + getHolidayDescription() +
-                "\nStart Date: " + getHolidayStartDate() +
-                "\nEnd Date: " + getHolidayEndDate() + ("\n-----------------------------\n");*/
+
     }
 
 
