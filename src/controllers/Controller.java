@@ -581,7 +581,9 @@ public class Controller {
                     for(int i = 0; i < (retrievedInfo.length - 8); i = i + 2) {
                         Project project = searchProjectByTitle(retrievedInfo[i + 8]);
                         user.getProjects().add(project);
-                        project.getProjectMembers().add(user);
+                        if(!(project.getProjectMembers().contains(user.getUserName()))) {
+                            project.getProjectMembers().add(user);
+                        }
                         user.addRole(project.getId().toString());
                         if (!(user.getRole(project.getId().toString()).equals(retrievedInfo[i + 9]))) {
                             user.changeRole(project.getId().toString());

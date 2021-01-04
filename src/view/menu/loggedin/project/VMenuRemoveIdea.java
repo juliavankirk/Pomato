@@ -1,6 +1,7 @@
 package view.menu.loggedin.project;
 
 import controllers.Controller;
+import utilities.InputErrors;
 import utilities.InputOutput;
 import view.VMenu;
 
@@ -26,9 +27,14 @@ public class VMenuRemoveIdea extends VMenu {
      */
 
     public void menuContent(Controller controller) {
+        if (controller.getCurrentProject().getIdeas().size() == 0) {
+            System.out.println("There is no idea to remove for now.");
+        } else {
+            int ideaNum = InputErrors.checkMenuChoice(InputOutput.inputString("Which idea would " +
+                    "you like to remove"),controller.getCurrentProject().getIdeas().size()+1,0);
+            controller.removeIdea(ideaNum);
+            System.out.println("You successfully removed idea number " + ideaNum);
+    }
 
-        int ideaNum = InputOutput.inputInt("Which idea would you like to remove");
-        controller.removeIdea(ideaNum);
-        System.out.println("You successfully removed idea number " + ideaNum);
     }
 }
