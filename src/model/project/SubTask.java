@@ -1,7 +1,5 @@
 package model.project;
 
-import view.VMenu;
-
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
@@ -27,12 +25,12 @@ public class SubTask implements Serializable {
         mId = UUID.randomUUID();
         mTitle = title;
         mDescription = description;
+        mDueDate = dueDate;
         mStartDate = startDate;
         mEndDate = null;
-        mEstimatedTime = estimatedTime;
-        mPriority = priority;
         mDateCreated = LocalDate.now();
-        mDueDate = dueDate;
+        mPriority = priority;
+        mEstimatedTime = estimatedTime;
         mStatus = "TODO";
         mChecklists = new ArrayList<>();
     }

@@ -1,6 +1,7 @@
 package view.menu.loggedin.project;
 
 import controllers.Controller;
+import utilities.InputErrors;
 import utilities.InputOutput;
 import view.VMenu;
 
@@ -22,8 +23,8 @@ public class VMenuAddChecklist extends VMenu {
         ArrayList<String> itemList = new ArrayList<>();
         int counter = 0;
 
-        id = InputOutput.inputString("Which task would you like to add a checklist to? id");
-        name = InputOutput.inputString("Enter the name of the checklist");
+        id = InputErrors.emptyFieldString(InputOutput.inputString("Which task would you like to add a checklist to? id"));
+        name = InputErrors.emptyFieldString(InputOutput.inputString("Enter the name of the checklist"));
         //ArrayList<String> itemListTwo = addCheckListItems(itemList, counter);
 
         response = controller.addChecklist(name, id /*itemListTwo*/);

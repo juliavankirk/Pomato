@@ -2,7 +2,6 @@ package model.users;
 import model.project.Messages;
 import model.project.Project;
 import model.project.Task;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -32,14 +31,17 @@ public class User implements Serializable {
     //Constructor
     public User(String userName, String firstName, String lastName, String password, String companyName,
                 double hourlyWage, String jobTitle) {
-        mUserName = userName;
+
         mId = UUID.randomUUID();
+        mUserName = userName;
+        mPassword = password;
         mFirstName = firstName;
         mLastName = lastName;
-        mPassword = password;
+
         mCompanyName = companyName;
         mJobTitle = jobTitle;
         mHourlyWage = hourlyWage;
+
         mProjects = new ArrayList<Project>();
         mRoles = new ArrayList<Role>();
         mTotalWage = 0;

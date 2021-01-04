@@ -1,11 +1,8 @@
 package view.menu.loggedin.project;
-
-import model.project.Task;
+import utilities.InputErrors;
 import utilities.InputOutput;
 import view.VMenu;
 import controllers.Controller;
-
-import java.awt.im.InputContext;
 import java.time.LocalDate;
 
 public class VMenuCreateSubtask extends VMenu {
@@ -25,15 +22,22 @@ public class VMenuCreateSubtask extends VMenu {
         LocalDate dueDate, startDate;
         int priority;
 
-        System.out.println("Please enter the following information\n ");
-        title = InputOutput.inputString("Title");
-        description = InputOutput.inputString("Description");
-        estimatedTime = InputOutput.inputDouble("Estimated Time (hours)");
-        priority = InputOutput.inputIntMinMax("Priority (1-5)",1,5);
-        dueDate = LocalDate.parse(InputOutput.inputString("Due Date (yyyy-mm-dd)"));
-        startDate = LocalDate.now();
-        //Do we have to initialize startDate? Its already set?
-        controller.addSubTask(title, description, dueDate, startDate, estimatedTime, priority);
+            System.out.println("Please enter the following information\n ");
+            title = InputErrors.emptyFieldString(InputOutput.inputString("Title"));
+            description = InputErrors.emptyFieldString(InputOutput.inputString("Description"));
+            estimatedTime = InputErrors.irrelevantDouble(InputOutput.inputString("Estimated Time (hours)"));
+            priority = InputOutput.inputIntMinMax("Priority (1-5)", 1, 5);
+
+          dueDate = InputErrors.checkDateFormat(InputOutput.inputString("Due Date (yyyy-mm-dd)"));
+          startDate = LocalDate.now();
+            while (dueDate.isBefore(LocalDate.now())){
+                dueDate = LocalDate.parse(InputOutput.inputString("Due Date must be later than start date. Please insert date one more time (yyyy-mm-dd)"));
+            }
+
+            //Do we have to initialize startDate? Its already set?
+
+            controller.addSubTask(title, description, dueDate, startDate, estimatedTime, priority);
+
 
         addMoreTasks(controller);
 
@@ -42,7 +46,7 @@ public class VMenuCreateSubtask extends VMenu {
     private void addMoreTasks (Controller controller) {
         String answer;
 
-        answer = InputOutput.inputString("Would you like to add more subtasks?(yes/no)");
+        answer = InputErrors.incorrectYesOrNo(InputOutput.inputString("Would you like to add more subtasks?(yes/no)"));
         while (answer.equals("yes")) {
             answer = "";
             menuContent(controller);
