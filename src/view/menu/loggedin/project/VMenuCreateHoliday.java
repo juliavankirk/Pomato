@@ -2,6 +2,7 @@ package view.menu.loggedin.project;
 
 import controllers.Controller;
 import model.project.Holiday;
+import utilities.InputErrors;
 import utilities.InputOutput;
 import view.VMenu;
 
@@ -26,8 +27,8 @@ public class VMenuCreateHoliday extends VMenu {
 
                 System.out.println("Please enter the following information\n ");
 
-                String hName = InputOutput.inputString("Enter developers Username");
-                String hDescription = InputOutput.inputString("Enter type of Holiday (e.g. parental leave)");
+                String hName = InputErrors.emptyFieldString(InputOutput.inputString("Enter developers Username"));
+                String hDescription = InputErrors.emptyFieldString(InputOutput.inputString("Enter type of Holiday (e.g. parental leave)"));
                 LocalDate hStartDate = LocalDate.parse(InputOutput.inputString("Enter start date of the Holiday (yyyy-mm-dd)"));
                 LocalDate hEndDate = LocalDate.parse(InputOutput.inputString("Enter end date of the Holiday (yyyy-mm-dd)"));
                 controller.addHoliday(hName, hDescription, hStartDate, hEndDate);
@@ -47,15 +48,15 @@ public class VMenuCreateHoliday extends VMenu {
     private void addMoreHolidays (Controller controller) {
         String answer;
 
-        answer = InputOutput.inputString("Would you like to add more Holidays?(yes/no)");
+        answer = InputErrors.incorrectYesOrNo(InputOutput.inputString("Would you like to add more Holidays?(yes/no)"));
         while (answer.equals("yes")) {
-            answer = "";
+            answer = " ";
             menuContent(controller);
         }
 
-
+        }
 
         }
-    }
+
 
 
