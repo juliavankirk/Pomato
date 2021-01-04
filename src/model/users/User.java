@@ -49,18 +49,18 @@ public class User implements Serializable {
     }
 
     // Save to .csv:
-    public User(String[] savedAttributes) {
-        mId = UUID.randomUUID();
-        mFirstName= savedAttributes[1];
-        mLastName = savedAttributes[2];
-        mUserName = savedAttributes[3];
-        mPassword = savedAttributes[4];
-        mCompanyName = savedAttributes[5];
-        mHourlyWage = Double.parseDouble(savedAttributes[6]);
-        mJobTitle = savedAttributes[7];
-        mProjects = new ArrayList<Project>();
-        mRoles = new ArrayList<Role>();
-    }
+//    public User(String[] savedAttributes) {
+//        mId = UUID.randomUUID();
+//        mFirstName= savedAttributes[1];
+//        mLastName = savedAttributes[2];
+//        mUserName = savedAttributes[3];
+//        mPassword = savedAttributes[4];
+//        mCompanyName = savedAttributes[5];
+//        mHourlyWage = Double.parseDouble(savedAttributes[6]);
+//        mJobTitle = savedAttributes[7];
+//        mProjects = new ArrayList<Project>();
+//        mRoles = new ArrayList<Role>();
+//    }
 
     //Methods
 

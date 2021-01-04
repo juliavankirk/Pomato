@@ -576,19 +576,23 @@ public class Controller {
             while ((line = bufferedReader.readLine()) != null) {
                 String[] retrievedInfo = line.split(";");
                 if (retrievedInfo[0].equals("User")) {
-                    User user = new User(retrievedInfo);
-                    for(int i = 0; i < (retrievedInfo.length - 8); i = i + 2) {
-                        Project project = searchProjectByTitle(retrievedInfo[i + 8]);
-                        user.getProjects().add(project);
-                        if(!(project.getProjectMembers().contains(user.getUserName()))) {
-                            project.getProjectMembers().add(user);
+                    if (checkUsername(retrievedInfo[3]).equals(retrievedInfo[3])) {
+                        User user = new User(retrievedInfo[3], retrievedInfo[1], retrievedInfo[2],
+                                retrievedInfo[4], retrievedInfo[5], Double.parseDouble(retrievedInfo[6]), retrievedInfo[7]);
+
+                        for (int i = 0; i < (retrievedInfo.length - 8); i = i + 2) {
+                            Project project = searchProjectByTitle(retrievedInfo[i + 8]);
+                            if (!(user.getProjects().contains(project))) {
+                                user.getProjects().add(project);
+                            }
+                            if (!(project.getProjectMembers().contains(user.getUserName()))) {
+                                project.getProjectMembers().add(user);
+                            }
+                            user.addRole(project.getId().toString());
+                            if (!(user.getRole(project.getId().toString()).equals(retrievedInfo[i + 9]))) {
+                                user.changeRole(project.getId().toString());
+                            }
                         }
-                        user.addRole(project.getId().toString());
-                        if (!(user.getRole(project.getId().toString()).equals(retrievedInfo[i + 9]))) {
-                            user.changeRole(project.getId().toString());
-                        }
-                    }
-                    if (checkUsername(user.getUserName()).equals(user.getUserName())) {
                         mDatabase.addUser(user);
                     }
                     System.out.println("Added: " + Arrays.toString(retrievedInfo));
