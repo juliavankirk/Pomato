@@ -50,7 +50,7 @@ public class JsonHandler {
         fileWriter.close();
     }
 
-    private void serializeUserNested(){
-        User user = new User();
-    }
+//    private void serializeUserNested(){
+//        User user = new User();
+//    }
 }

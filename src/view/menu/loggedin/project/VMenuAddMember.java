@@ -17,6 +17,7 @@ public class VMenuAddMember extends VMenu {
         mMenuHeader = "Add new members";
         mMenuLabel = "Manager: Add members";
         mMenuQuestion = "Enter choice";
+        mSubMenus = null;
     }
 
     public void menuContent(Controller controller) {
