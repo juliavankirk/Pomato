@@ -9,7 +9,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.UUID;
 
-public class Project implements Serializable {
+public class Project implements Serializable{
 
     //Attributes
     private UUID mId;

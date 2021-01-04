@@ -546,12 +546,10 @@ public class Controller {
             fileInput.close();
         }
         catch (IOException ioEx) {
-            System.out.println("File is empty");
             ioEx.printStackTrace();
             return;
         }
         catch (ClassNotFoundException classEx) {
-            System.out.println("Database not found");
             classEx.printStackTrace();
             return;
         }

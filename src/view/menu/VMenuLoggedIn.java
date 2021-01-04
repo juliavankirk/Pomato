@@ -4,6 +4,7 @@ import controllers.Controller;
 import model.project.Project;
 import model.users.User;
 import utilities.InputOutput;
+import utilities.JsonHandler;
 import view.VMenu;
 import view.menu.loggedin.VMenuAccount;
 import view.menu.loggedin.VMenuCreateProject;
@@ -33,6 +34,9 @@ public class VMenuLoggedIn extends VMenu {
      */
     @Override
     public void menuContent(Controller controller) {
+        JsonHandler jsonSave = new JsonHandler();
+        jsonSave.test(controller);
+
         addSubMenus(controller);
     }
 
