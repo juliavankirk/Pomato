@@ -18,6 +18,7 @@ public class VMenuCreateProject extends VMenu {
         mMenuHeader = "New project";
         mMenuLabel = "Create new project";
         mMenuQuestion = "Enter choice";
+        mSubMenus = new ArrayList<>();
 
     }
 
