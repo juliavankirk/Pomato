@@ -97,8 +97,14 @@ public abstract class VMenu {
     // 6. A menu at last contains a question. Where do you want to go?
     public VMenu chooseMenu(VMenu mParent, Controller controller) {
         VMenu chosenVMenu;
+        int inputResult;
 
-        int inputResult = InputErrors.checkMenuChoice(InputOutput.inputString(mMenuQuestion), mSubMenus.size() + 2, 0);
+        if(mSubMenus != null) {
+            inputResult = InputErrors.checkMenuChoice(InputOutput.inputString(mMenuQuestion), mSubMenus.size() + 2, 0);
+        } else {
+            inputResult = InputErrors.checkMenuChoice(InputOutput.inputString(mMenuQuestion), 1, 0);
+        }
+
         if (mSubMenus != null && inputResult > 0 && inputResult < mSubMenus.size() + 1) {
 
             chosenVMenu = mSubMenus.get(inputResult - 1);
