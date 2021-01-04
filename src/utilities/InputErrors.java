@@ -7,6 +7,7 @@ public class InputErrors {
     public static String emptyFieldString(String userInput) {
         while (userInput.equals("")) {
             System.err.println("\nYou did not insert any information for this field.");
+            System.out.println("");
             userInput = InputOutput.inputString("Please try one more time");
         }
         return userInput;
@@ -17,6 +18,7 @@ public class InputErrors {
             correctIntInput = Integer.parseInt(userInput);
         }catch(NumberFormatException wrongInput){
             System.err.println("You should insert a number here.");
+            System.out.println("");
             userInput = InputOutput.inputString("Please try again");
             irrelevantInt(userInput);
         }
@@ -28,7 +30,8 @@ public class InputErrors {
             correctDoubleInput = Double.parseDouble(userInput);
         }catch(NumberFormatException wrongInput){
             System.err.println("You should insert a number here.");
-            userInput = InputOutput.inputString("Please try again");
+            System.out.println("");
+            userInput = InputOutput.inputString(" Please try again");
             irrelevantDouble(userInput);
         }
         return correctDoubleInput;
@@ -39,6 +42,7 @@ public class InputErrors {
             return userInput;
         }
         System.err.println("The number you entered is out of range.");
+        System.out.println("");
         userInput = irrelevantInt(InputOutput.inputString("Please try again"));
         return inRangeIntInput(userInput, upperRange, lowerRange);
     }
@@ -51,8 +55,9 @@ public class InputErrors {
     }
 
     public static String incorrectYesOrNo (String userInput) {
-        userInput = InputOutput.inputString("Invalid input. you should answer with yes " +
-                "or no. Please try again");
+        System.err.println("Invalid input. You should answer with yes or no.");
+        System.out.println("");
+        userInput = InputOutput.inputString("Please try again");
 
         switch (userInput) {
             case "yes" -> {
