@@ -1,9 +1,5 @@
 package utilities;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
@@ -78,6 +74,7 @@ public class InputErrors {
     public static String incorrectYesOrNo (String userInput) {
 
         switch (userInput) {
+
             case "yes" -> {
                 return "yes";
             }

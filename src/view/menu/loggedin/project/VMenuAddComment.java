@@ -33,7 +33,7 @@ public class VMenuAddComment extends VMenu {
             int ideaNum = InputErrors.checkMenuChoice(InputOutput.inputString("Please insert " +
                     "the number of the idea you wish to add comment to"),
                     controller.getCurrentProject().getIdeas().size()+1,0);
-            String comment = InputOutput.inputString("Please write your comment");
+            String comment = InputErrors.emptyFieldString(InputOutput.inputString("Please write your comment"));
             controller.addComment(ideaNum, comment);
             System.out.println("You successfully made a comment about this idea!");
         }
