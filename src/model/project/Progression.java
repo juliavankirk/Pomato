@@ -39,4 +39,8 @@ public class Progression implements Serializable {
 
     public User getUser() { return mUser; }
 
+    public Project getProject() { return mProject; }
+
+    public Task getTask() { return mTask; }
+
 }

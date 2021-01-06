@@ -18,7 +18,6 @@ public class Task implements Serializable {
     private int mPriority;
     private LocalDate mDateCreated;
     private LocalDate mDueDate;
-    private LocalDate mStartDate;
     private LocalDate mEndDate;
     private String mStatus;
     private Boolean mCompletion;
@@ -31,7 +30,6 @@ public class Task implements Serializable {
         mId = UUID.randomUUID();
         mTitle = title;
         mDescription = description;
-        mStartDate = startDate;
         mEndDate = null;
         mEstimatedTime = estimatedTime;
         mPriority = priority;
@@ -71,7 +69,7 @@ public class Task implements Serializable {
     public void setStatus (String taskStatus){ mStatus = taskStatus; }
 
     public LocalDate getStartDate() {
-        return mStartDate;
+        return mDateCreated;
     }
 
     public Boolean Completion() { return mCompletion; }
@@ -90,7 +88,7 @@ public class Task implements Serializable {
         //end date is assigned current date if null, otherwise passed value is entered
         LocalDate submission = mEndDate == null ? LocalDate.now() : mEndDate;
         //delta calculation between start and end dates
-        long daysBetween = Period.between(mStartDate, submission).getDays() + 1;
+        long daysBetween = Period.between(mDateCreated, submission).getDays() + 1;
         return daysBetween;
     }
 

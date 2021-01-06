@@ -21,7 +21,7 @@ public class Project implements Serializable {
     private ArrayList<Task> mTaskList;
     private ArrayList <Holiday> mHolidayList;
     private ArrayList<Idea> mIdeas;
-//    private ArrayList<Board> mBoards;
+    //private ArrayList<Board> mBoards;
     private ArrayList<String> mActivityList;
 
 
@@ -41,9 +41,9 @@ public class Project implements Serializable {
         mActivityList = new ArrayList();
 
 
-//        mProjectMembers = projectMembers;
-//        mBoards = new ArrayList<Board>();
-//        mPassword = password;
+    //mProjectMembers = projectMembers;
+    //mBoards = new ArrayList<Board>();
+    //mPassword = password;
 
         if (mDueDate.isEqual(mStartDate) || mDueDate.isBefore(mStartDate)){
             throw new InvalidDataInput("Invalid input. Due date must come after date of creation.");

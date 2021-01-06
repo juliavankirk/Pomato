@@ -50,6 +50,8 @@ public class Database implements Serializable {
         return progression.totalHours();
     }
 
+    public Collection<Progression> getProgressionList() { return mProgression; }
+
     public Collection<Progression> getProgressForUser(User user) {
         ArrayList<Progression> userProgress = new ArrayList<>();
         for (Progression progress : mProgression) {
