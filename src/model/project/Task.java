@@ -18,10 +18,12 @@ public class Task implements Serializable {
     private int mPriority;
     private LocalDate mDateCreated;
     private LocalDate mDueDate;
+    private LocalDate mStartDate;
     private LocalDate mEndDate;
     private String mStatus;
     private Boolean mCompletion;
     private ArrayList<Checklist> mChecklists;
+    private ArrayList<User> mUser;
 
     //Do we have to initialize startDate in constructor? Its already set?
     public Task(String title, String description, LocalDate dueDate, LocalDate startDate,
@@ -29,6 +31,7 @@ public class Task implements Serializable {
         mId = UUID.randomUUID();
         mTitle = title;
         mDescription = description;
+        mStartDate = startDate;
         mEndDate = null;
         mEstimatedTime = estimatedTime;
         mPriority = priority;
@@ -68,7 +71,7 @@ public class Task implements Serializable {
     public void setStatus (String taskStatus){ mStatus = taskStatus; }
 
     public LocalDate getStartDate() {
-        return mDateCreated;
+        return mStartDate;
     }
 
     public Boolean Completion() { return mCompletion; }
@@ -82,10 +85,27 @@ public class Task implements Serializable {
         mEndDate = endDate;
     }
 
+    //method that returns total days spent on task
+    public long totalDays() {
+        //end date is assigned current date if null, otherwise passed value is entered
+        LocalDate submission = mEndDate == null ? LocalDate.now() : mEndDate;
+        //delta calculation between start and end dates
+        long daysBetween = Period.between(mStartDate, submission).getDays() + 1;
+        return daysBetween;
+    }
+
     public ArrayList<Checklist> getChecklists(){ return mChecklists;}
     public Checklist getChecklistById (int id) { return mChecklists.get(id);}
     public void addChecklist(Checklist checklist){ mChecklists.add(checklist);}
     public void removeChecklist(int id){ mChecklists.remove(id);}
+
+    public ArrayList<User> getUserList() { return mUser; }
+
+    public User getUserById ( int id ) { return mUser.get(id);}
+
+    public void addUser(User user) { mUser.add(user); }
+
+    public void removeUser(int id) { mUser.remove(id); }
 
     public String toString() {
         String retVal = "";
