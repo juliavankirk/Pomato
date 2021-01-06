@@ -1,7 +1,6 @@
 package view.menu.loggedin.project;
 
 import controllers.Controller;
-import model.project.SubTask;
 import model.project.Task;
 import utilities.InputOutput;
 import view.VMenu;
@@ -33,12 +32,12 @@ public class VMenuEditTask extends VMenu {
         int property, updatedPriority;
 
         taskId = InputOutput.inputString("Which task do you want to edit? (ID)");
-        SubTask subTask = controller.getTaskById(taskId);
+        Task task = controller.getTaskById(taskId);
 
         /*When the user have made a change to a property, they will be given the option
         to make another change to the chosen task, until they enter the number 7.
          */
-        if (subTask != null) {
+        if (task != null) {
             do {
                 propertyChoices();
                 property = InputOutput.inputInt("Enter your option");

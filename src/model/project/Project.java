@@ -18,7 +18,7 @@ public class Project implements Serializable {
     private ArrayList<User> mProjectMembers;
     private LocalDate mStartDate;
     private LocalDate mDueDate;
-    private ArrayList<SubTask> mSubTaskList;
+    private ArrayList<Task> mTaskList;
     private ArrayList <Holiday> mHolidayList;
     private ArrayList<Idea> mIdeas;
 //    private ArrayList<Board> mBoards;
@@ -35,7 +35,7 @@ public class Project implements Serializable {
         mProjectMembers = new ArrayList<>();
         mStartDate = startDate;
         mDueDate = dueDate;
-        mSubTaskList = new ArrayList<>();
+        mTaskList = new ArrayList<>();
         mHolidayList = new ArrayList<>();
         mIdeas = new ArrayList<Idea>();
         mActivityList = new ArrayList();
@@ -54,7 +54,7 @@ public class Project implements Serializable {
         mId = UUID.randomUUID();
         mProjectTitle = title;
         mProjectMembers = new ArrayList<User>();
-        mSubTaskList = new ArrayList<>();
+        mTaskList = new ArrayList<>();
         mIdeas = new ArrayList<Idea>();
     }
 
@@ -117,11 +117,11 @@ public class Project implements Serializable {
         return ChronoUnit.DAYS.between(mStartDate, mDueDate);
     }
 
-    public ArrayList<SubTask> getTaskList(){ return mSubTaskList; }
-    public void addTaskToList(SubTask subTask){ mSubTaskList.add(subTask); }
-    public void removeTask(int index){ mSubTaskList.remove(index); }
+    public ArrayList<Task> getTaskList(){ return mTaskList; }
+    public void addTaskToList(Task task){ mTaskList.add(task); }
+    public void removeTask(int index){ mTaskList.remove(index); }
     // public Task getTaskById (UUID id) { return mTaskList.get(id);}
-    public SubTask getTaskById (int index) { return mSubTaskList.get(index);}
+    public Task getTaskById (int index) { return mTaskList.get(index);}
 
     public ArrayList<Holiday> getHolidayList() { return mHolidayList; }
     public void addHolidayToList(Holiday holiday){ mHolidayList.add(holiday); }

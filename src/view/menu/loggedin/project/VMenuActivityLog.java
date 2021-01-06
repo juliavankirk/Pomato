@@ -1,7 +1,6 @@
 package view.menu.loggedin.project;
 
 import controllers.Controller;
-import model.project.SubTask;
 import utilities.InputOutput;
 import view.VMenu;
 

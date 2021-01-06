@@ -1,17 +1,15 @@
 package view.menu.loggedin.project;
 
-import model.project.Task;
 import utilities.InputOutput;
 import view.VMenu;
 import controllers.Controller;
 
-import java.awt.im.InputContext;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class VMenuCreateSubtask extends VMenu {
+public class VMenuCreateTask extends VMenu {
 
-    VMenuCreateSubtask(VMenu parent) {
+    VMenuCreateTask(VMenu parent) {
         super(parent);
         mMenuHeader = "Create Subtask";
         mMenuLabel = "Create Subtask";
@@ -50,7 +48,7 @@ public class VMenuCreateSubtask extends VMenu {
             menuContent(controller);
         }
 
-        controller.addSubTask(title, description, dueDate, startDate, estimatedTime, priority, assignees);
+        controller.addTask(title, description, dueDate, startDate, estimatedTime, priority, assignees);
 
         addMoreTasks(controller);
 

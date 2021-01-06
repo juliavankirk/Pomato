@@ -2,12 +2,10 @@ package utilities;
 
 import model.project.Checklist;
 import model.project.ChecklistItem;
-import model.project.SubTask;
+import model.project.Task;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 import java.util.stream.Collectors;
 
 public class TaskTable {
@@ -16,7 +14,7 @@ public class TaskTable {
     /**
      * ATTRIBUTES
      */
-    ArrayList<SubTask> tasks;
+    ArrayList<Task> tasks;
     ArrayList<String> headerList;
     int cardWidth = 42;
 
@@ -24,7 +22,7 @@ public class TaskTable {
     private String cardDivider;
     private int cardRows;
     private int cardColumns;
-    private ArrayList<ArrayList<SubTask>> taskLists = new ArrayList<>();
+    private ArrayList<ArrayList<Task>> taskLists = new ArrayList<>();
     private int largestListSize;
 
     public static String dividerHorizontalChar = "-";
@@ -37,11 +35,11 @@ public class TaskTable {
      * @param tasks         tasks should always be sent in through a constructor.
      * @param headerList    If a user does not send in a list with headers then a default list of headers will be created.
      */
-    public TaskTable(ArrayList<SubTask> tasks, ArrayList<String> headerList) {
+    public TaskTable(ArrayList<Task> tasks, ArrayList<String> headerList) {
         this.headerList = headerList;
         this.tasks = tasks;
     }
-    public TaskTable(ArrayList<SubTask> tasks) {
+    public TaskTable(ArrayList<Task> tasks) {
         // this = this TaskTable class's constructor with the parameters (Arraylist<SubTask, ArrayList<String>)
         // If I only send in tasks the list with headers will default to the ones below.
         this(tasks, new ArrayList<>(Arrays.asList("TODO", "IN PROGRESS", "COMPLETED")));
@@ -119,11 +117,11 @@ public class TaskTable {
             ArrayList<ArrayList<String>> cardsForRowList = new ArrayList<>();
 
             for (int k = 0; k < taskLists.size(); k++) {
-                ArrayList<SubTask> currentTasks = this.taskLists.get(k);  //
+                ArrayList<Task> currentTasks = this.taskLists.get(k);  //
                 int thisSize = currentTasks.size();
 
                 if (thisSize > currentRow) {
-                    SubTask currentTask = currentTasks.get(currentRow);
+                    Task currentTask = currentTasks.get(currentRow);
                     cardsForRowList.add(createCard(currentTask));
 
                 } else {
@@ -168,7 +166,7 @@ public class TaskTable {
             System.out.println(divider);
         }
     }
-    private ArrayList<String> createCard(SubTask task){
+    private ArrayList<String> createCard(Task task){
         ArrayList<String> taskAttributeStringList = new ArrayList<>();
 
         taskAttributeStringList = new ArrayList<>(Arrays.asList(
@@ -303,7 +301,7 @@ public class TaskTable {
         this.divider = dividerCornerChar + (cardTop + dividerCornerChar).repeat(taskLists.size());
     }
 
-    private String initHorizontalCardDivider(SubTask task) {
+    private String initHorizontalCardDivider(Task task) {
 
         if (!(task.getChecklists().size() < 1)) {
             return dividerHorizontalChar.repeat(cardWidth - 2);
@@ -337,28 +335,28 @@ public class TaskTable {
     /**
      * Old and Experimental methods below
      */
-    private void print(ArrayList<SubTask> subTaskList) {
+    private void print(ArrayList<Task> taskList) {
         String status;
         System.out.print(InputOutput.shortLine());
-        printLists(subTaskList, status = "TODO");
+        printLists(taskList, status = "TODO");
         System.out.print(InputOutput.shortLine());
-        printLists(subTaskList, status = "IN PROGRESS");
+        printLists(taskList, status = "IN PROGRESS");
         System.out.print(InputOutput.shortLine());
-        printLists(subTaskList, status = "COMPLETED");
+        printLists(taskList, status = "COMPLETED");
     }
-    private void printLists(ArrayList<SubTask> subTaskList, String status) {
+    private void printLists(ArrayList<Task> taskList, String status) {
         System.out.println(status);
 
-        for (SubTask currentSubTask : subTaskList) {
+        for (Task currentTask : taskList) {
 
-            if (currentSubTask.getStatus().equals(status)) {
+            if (currentTask.getStatus().equals(status)) {
                 System.out.print(InputOutput.superShortLine());
-                System.out.println(currentSubTask);
+                System.out.println(currentTask);
             }
         }
         System.out.println(" ");
     }
-    private void printTaskBoard(ArrayList<SubTask> subTaskList){
+    private void printTaskBoard(ArrayList<Task> taskList){
         String leftAlignFormat = "| %-36s || %-36s || %-36s |%n";
         String line =     "+--------------------------------------++--------------------------------------++--------------------------------------+%n";
 
@@ -393,12 +391,12 @@ public class TaskTable {
 //        taskArrayList.add(task6);
 
         // Separating tasks into different lists
-        ArrayList<SubTask> todoList = new ArrayList<>();
-        ArrayList<SubTask> inprogressList = new ArrayList<>();
-        ArrayList<SubTask> completedList = new ArrayList<>();
-        for (int i = 0; i < subTaskList.size(); i++) {
+        ArrayList<Task> todoList = new ArrayList<>();
+        ArrayList<Task> inprogressList = new ArrayList<>();
+        ArrayList<Task> completedList = new ArrayList<>();
+        for (int i = 0; i < taskList.size(); i++) {
             int counter = 0;
-            SubTask currentTask = subTaskList.get(i);
+            Task currentTask = taskList.get(i);
             if (currentTask.getStatus().equals("TODO")) {
                 todoList.add(currentTask);
             } else if (currentTask.getStatus().equals("IN PROGRESS")) {
@@ -437,7 +435,7 @@ public class TaskTable {
 
 //        System.out.format(line);
     }
-    private void truthChecker(String leftAlignFormat, ArrayList<SubTask> todoList, ArrayList<SubTask> inprogressList, ArrayList<SubTask> completedList) {
+    private void truthChecker(String leftAlignFormat, ArrayList<Task> todoList, ArrayList<Task> inprogressList, ArrayList<Task> completedList) {
         for (int j = 0; j < 1; j++) {
             if (todoList.isEmpty() && inprogressList.isEmpty() && completedList.isEmpty()) {
 //            System.out.println("0, 0, 0");

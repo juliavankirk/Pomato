@@ -1,11 +1,9 @@
 package model.users;
 import model.project.Messages;
 import model.project.Project;
-import model.project.SubTask;
 import model.project.Task;
 
 import java.io.Serializable;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
@@ -25,7 +23,7 @@ public class User implements Serializable {
     private double mHourlyWage;
     private ArrayList<Project> mProjects;
     private ArrayList<Role> mRoles;
-    private ArrayList<SubTask> mTasks;
+    private ArrayList<Task> mTasks;
     private HashMap<UUID, ArrayList<Messages>> mInbox;
 
     private double mTotalWage;
@@ -45,7 +43,7 @@ public class User implements Serializable {
         mProjects = new ArrayList<Project>();
         mRoles = new ArrayList<Role>();
         mTotalWage = 0;
-        mTasks = new ArrayList<SubTask>();
+        mTasks = new ArrayList<Task>();
         mInbox = new HashMap<UUID, ArrayList<Messages>>();
 
     }
@@ -123,7 +121,7 @@ public class User implements Serializable {
 
     public ArrayList<Messages> getInbox(UUID Id) { return mInbox.get(mId); }
 
-    public ArrayList<SubTask> getSubTask() { return mTasks;}
+    public ArrayList<Task> getSubTask() { return mTasks;}
 
     public void addMessage (Messages message) {
         ArrayList<Messages> messages = mInbox.get(message.getSenderId());

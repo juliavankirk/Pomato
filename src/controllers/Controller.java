@@ -18,7 +18,7 @@ public class Controller {
     VMenu mCurrentMenu;
     private User mCurrentUser;
     private Project mCurrentProject;
-    private SubTask mCurrentTask;
+    private Task mCurrentTask;
 
 
     //Constructor
@@ -59,27 +59,27 @@ public class Controller {
     /**
      * Handling Task/Tasks
      */
-    public void addSubTask(String title, String description, LocalDate dueDate, LocalDate startDate,
+    public void addTask(String title, String description, LocalDate dueDate, LocalDate startDate,
                            double estimatedTime, int priority, ArrayList<String> assignees) {
-        SubTask subTask = new SubTask(title, description, dueDate, startDate, estimatedTime, priority);
-        getCurrentProject().addTaskToList(subTask);
-        String taskId = subTask.getId().toString();
+        Task task = new Task(title, description, dueDate, startDate, estimatedTime, priority);
+        getCurrentProject().addTaskToList(task);
+        String taskId = task.getId().toString();
 
         assignMembers(assignees);
 
-        mCurrentProject.addActivity(subTask.getTitle() + "\n" +
+        mCurrentProject.addActivity(task.getTitle() + "\n" +
                 getCurrentUser().getName() + " has created this task on" +  " " + java.time.LocalTime.now() +
                 "\n\n Assignees for this task are:\n");
 
-        for ( int i = 0; i < subTask.getUserList().size(); i++ ) {
+        for ( int i = 0; i < task.getUserList().size(); i++ ) {
                     System.out.print(
-                            subTask.getUserList().get(i) + "\n"
+                            task.getUserList().get(i) + "\n"
                     );
         }
     }
 
     public String removeSubTask(String taskId) {
-        SubTask subTask = getTaskById(taskId);
+        Task task = getTaskById(taskId);
         int taskListSize = getTaskListFromCurrentProject().size();
 
         for (int i = 0; i < taskListSize; i++) {
@@ -87,7 +87,7 @@ public class Controller {
 
             if (stringUuid.toString().equals(taskId)) {
                 getCurrentProject().removeTask(i);
-                mCurrentProject.addActivity(subTask.getTitle() + "\n" +
+                mCurrentProject.addActivity(task.getTitle() + "\n" +
                         getCurrentUser().getName() + " has removed this task" + " " +  java.time.LocalTime.now());
                 return "Task with ID: " + taskId + " has been removed";
             }
@@ -95,7 +95,7 @@ public class Controller {
         return "Task with ID: " + taskId + " was not found";
     }
 
-    public SubTask getTaskById(String taskId) {
+    public Task getTaskById(String taskId) {
         int taskListSize = getTaskListFromCurrentProject().size();
 
         for (int i = 0; i < taskListSize; i++) {
@@ -121,10 +121,10 @@ public class Controller {
         }
     }
 
-    public ArrayList<SubTask> getTasksForUser() { return getCurrentUser().getSubTask(); }
+    public ArrayList<Task> getTasksForUser() { return getCurrentUser().getSubTask(); }
 
 
-    public ArrayList<SubTask> getTaskListFromCurrentProject() {
+    public ArrayList<Task> getTaskListFromCurrentProject() {
 
         return getCurrentProject().getTaskList();
     }
@@ -134,39 +134,39 @@ public class Controller {
      * Updating Task
      */
     public void updateTaskStatus(String updatedStatus, String taskId){
-        SubTask subTask = getTaskById(taskId);
-        subTask.setStatus(updatedStatus);
-        mCurrentProject.addActivity(subTask.getTitle() + "\n" +
+        Task task = getTaskById(taskId);
+        task.setStatus(updatedStatus);
+        mCurrentProject.addActivity(task.getTitle() + "\n" +
                 getCurrentUser().getName() + " has changed this task status to " + updatedStatus + " " + java.time.LocalTime.now());
     }
     public void updateTaskTitle(String updatedTitle, String taskId){
-        SubTask subTask = getTaskById(taskId);
-        subTask.setTitle(updatedTitle);
-        mCurrentProject.addActivity(subTask.getTitle() + "\n"
+        Task task = getTaskById(taskId);
+        task.setTitle(updatedTitle);
+        mCurrentProject.addActivity(task.getTitle() + "\n"
                 + getCurrentUser().getName() + " has changed this task title to " + updatedTitle +  " " + java.time.LocalTime.now());
     }
     public void updateTaskDescription(String updatedDescription, String taskId){
-        SubTask subTask = getTaskById(taskId);
-        subTask.setDescription(updatedDescription);
-        mCurrentProject.addActivity(subTask.getTitle() + "\n"
+        Task task = getTaskById(taskId);
+        task.setDescription(updatedDescription);
+        mCurrentProject.addActivity(task.getTitle() + "\n"
                 + getCurrentUser().getName() + " has changed this task description to " + updatedDescription +  " " + java.time.LocalTime.now());
     }
     public void updateTaskPriority(int updatedPriority, String taskId){
-        SubTask subTask = getTaskById(taskId);
-        subTask.setPriority(updatedPriority);
-        mCurrentProject.addActivity(subTask.getTitle() + "\n" +
+        Task task = getTaskById(taskId);
+        task.setPriority(updatedPriority);
+        mCurrentProject.addActivity(task.getTitle() + "\n" +
                 getCurrentUser().getName() + " has changed this task priority to " + updatedPriority +  " " + java.time.LocalTime.now());
     }
     public void updateTaskDueDate(LocalDate dueDate, String taskId){
-        SubTask subTask = getTaskById(taskId);
-        subTask.setDueDate(dueDate);
-        mCurrentProject.addActivity(subTask.getTitle() + "\n"
+        Task task = getTaskById(taskId);
+        task.setDueDate(dueDate);
+        mCurrentProject.addActivity(task.getTitle() + "\n"
                 + getCurrentUser().getName() + " has changed this task due date to " + dueDate +  " " + java.time.LocalTime.now());
     }
     public void updateTaskEstimatedTime(Double estimatedTime, String taskId){
-        SubTask subTask = getTaskById(taskId);
-        subTask.setEstimatedTime(estimatedTime);
-        mCurrentProject.addActivity(subTask.getTitle() + "\n"
+        Task task = getTaskById(taskId);
+        task.setEstimatedTime(estimatedTime);
+        mCurrentProject.addActivity(task.getTitle() + "\n"
                 + getCurrentUser().getName() + " has changed this task estimated time to " + estimatedTime +  " " + java.time.LocalTime.now());
     }
 
@@ -186,7 +186,7 @@ public class Controller {
      */
 
     public String addChecklist(String name, String taskId/*, ArrayList<String> itemStringList*/) {
-        SubTask task = getTaskById(taskId);
+        Task task = getTaskById(taskId);
         Checklist checklist = new Checklist(name);
 
 
@@ -210,7 +210,7 @@ public class Controller {
     }
 
     public Checklist getChecklistById(String checklistId, String taskId) {
-        SubTask task = getTaskById(taskId);
+        Task task = getTaskById(taskId);
         int checklistSize = task.getChecklists().size();
         for (int i = 0; i < checklistSize; i++) {
             // get checklist
@@ -225,7 +225,7 @@ public class Controller {
     }
 
     public ArrayList<Checklist> getChecklists(String taskId) {
-        SubTask task = getTaskById(taskId);
+        Task task = getTaskById(taskId);
         return task.getChecklists();
     }
 
