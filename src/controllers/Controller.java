@@ -18,6 +18,7 @@ public class Controller {
     VMenu mCurrentMenu;
     private User mCurrentUser;
     private Project mCurrentProject;
+    private SubTask mCurrentTask;
 
 
     //Constructor
@@ -26,6 +27,7 @@ public class Controller {
         mCurrentMenu = new VMenuMain(null);
         mCurrentUser = null;
         mCurrentProject = null;
+        mCurrentTask = null;
     }
 
 
@@ -58,11 +60,22 @@ public class Controller {
      * Handling Task/Tasks
      */
     public void addSubTask(String title, String description, LocalDate dueDate, LocalDate startDate,
-                           double estimatedTime, int priority) {
+                           double estimatedTime, int priority, ArrayList<String> assignees) {
         SubTask subTask = new SubTask(title, description, dueDate, startDate, estimatedTime, priority);
         getCurrentProject().addTaskToList(subTask);
+        String taskId = subTask.getId().toString();
+
+        assignMembers(assignees);
+
         mCurrentProject.addActivity(subTask.getTitle() + "\n" +
-                getCurrentUser().getName() + " has created this task" +  " " + java.time.LocalTime.now());
+                getCurrentUser().getName() + " has created this task on" +  " " + java.time.LocalTime.now() +
+                "\n\n Assignees for this task are:\n");
+
+        for ( int i = 0; i < subTask.getUserList().size(); i++ ) {
+                    System.out.print(
+                            subTask.getUserList().get(i) + "\n"
+                    );
+        }
     }
 
     public String removeSubTask(String taskId) {
@@ -94,6 +107,22 @@ public class Controller {
         }
         return null;
     }
+
+    public void assignMembers(ArrayList<String> assignees) {
+        Collection<User> users = mDatabase.getUserList();
+
+        for ( String assignee : assignees ) {
+            for ( User employee : users ) {
+                if ( employee.getUserName().equals(assignee) ) {
+                    mCurrentTask.getUserList().add(employee);
+                    employee.getSubTask().add(mCurrentTask);
+                }
+            }
+        }
+    }
+
+    public ArrayList<SubTask> getTasksForUser() { return getCurrentUser().getSubTask(); }
+
 
     public ArrayList<SubTask> getTaskListFromCurrentProject() {
 
@@ -654,6 +683,8 @@ public class Controller {
             System.out.println("Message does not exist, please try again!");
         }
     }
+
+
 
 
     // Check only part of ID.

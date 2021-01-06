@@ -1,11 +1,13 @@
 package model.project;
 
+import model.users.User;
 import view.VMenu;
 
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.UUID;
 
 public class SubTask implements Serializable {
@@ -20,6 +22,7 @@ public class SubTask implements Serializable {
     private LocalDate mEndDate;
     private String mStatus;
     private ArrayList<Checklist> mChecklists;
+    private ArrayList<User> mUser;
 
     //Do we have to initialize startDate in constructor? Its already set?
     public SubTask(String title, String description, LocalDate dueDate, LocalDate startDate,
@@ -87,6 +90,14 @@ public class SubTask implements Serializable {
     public Checklist getChecklistById (int id) { return mChecklists.get(id);}
     public void addChecklist(Checklist checklist){ mChecklists.add(checklist);}
     public void removeChecklist(int id){ mChecklists.remove(id);}
+
+    public ArrayList<User> getUserList() { return mUser; }
+
+    public User getUserById ( int id ) { return mUser.get(id);}
+
+    public void addUser(User user) { mUser.add(user); }
+
+    public void removeUser(int id) { mUser.remove(id); }
 
     public String toString() {
         String retVal = "";

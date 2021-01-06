@@ -5,6 +5,7 @@ import utilities.InputOutput;
 import view.VMenu;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class VMenuAssignTask extends VMenu {
 
@@ -22,22 +23,23 @@ public class VMenuAssignTask extends VMenu {
 
     @Override
     public void menuContent(Controller controller) {
-        String title, description;
-        double estimatedTime;
-        LocalDate dueDate, startDate, endDate = null;
-        int priority;
 
-        System.out.println("Please enter the following information\n ");
-        title = InputOutput.inputString("Task:");
-        description = InputOutput.inputString("Description:");
-        priority = InputOutput.inputIntMinMax("Priority (1-5)",1,5);
-        dueDate = LocalDate.parse(InputOutput.inputString("Due Date (yyyy-mm-dd)"));
-        startDate = LocalDate.now();
-        //Do we have to initialize startDate? Its already set?
-        //problems with endDate
-        //controller.addTask(title, description, dueDate, startDate, endDate, priority);
+        if(controller.getCurrentUser().getRole(controller.getCurrentProject().getId().toString()).equals("Manager")) {
+            ArrayList<String> assignees = new ArrayList<String>();
 
-        //addMoreTasks(controller);
-        // TODO personal comment board?
+            assignees.add(controller.getCurrentUser().getUserName());
+            String answer = InputOutput.inputString("Would you like to add more members?(yes/no)");
+            while (answer.equals("yes")) {
+                String memberUsername = InputOutput.inputString("Insert member's username");
+                assignees.add(memberUsername);
+                answer = InputOutput.inputString("Do you want to continue adding members?(yes/no)");
+            }
+
+            controller.assignMembers(assignees);
+            System.out.println("New members are successfully added");
+        } else {
+            System.out.println("You do not have the authority to modify in this section.");
+        }
+        System.out.println(" ");
     }
 }
