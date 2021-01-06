@@ -161,6 +161,10 @@ public class User implements Serializable {
         return role;
     }
 
+    public ArrayList<Role> getRoles() {
+        return mRoles;
+    }
+
     public void addRole(String projectId) {
         mRoles.add(new Role(projectId));
     }

@@ -6,9 +6,12 @@ import com.google.gson.GsonBuilder;
 import controllers.Controller;
 import model.project.Database;
 import model.project.Project;
+import model.users.Role;
+import model.users.User;
 
 import java.io.*;
 import java.time.LocalDate;
+import java.util.*;
 
 public class JsonHandler {
 
@@ -42,10 +45,34 @@ public class JsonHandler {
 
             database = gson.fromJson(bufferedReader, Database.class);
 
-            // TODO add the members back to a project
-//            for (int i = 0; i < database.getUserList().size(); i++) {
-//
-//            }
+            // TODO Refactor this monster. It is not working properly.
+            //  This nested for loop is supposed to add a User back to a Project,
+            //  since we do not save the ProjectMembers in the Project class.
+            Collection<User> userList = database.getUserList();
+            for (Iterator<User> iterator = userList.iterator(); iterator.hasNext();) {
+                User currentUser = iterator.next();
+
+                for (int i = 0; i < currentUser.getRoles().size(); i++) {
+                    String currentRoleId = currentUser.getRoles().get(i).getProjectId();
+
+                    for (int j = 0; j < currentUser.getProjects().size(); j++) {
+                        Project currentProject = currentUser.getProjects().get(j);
+                        String currentProjectId = currentProject.getId().toString();
+
+                        if (currentProjectId.equals(currentRoleId)) {
+
+                            if (currentProject.getProjectMembers() == null) {
+                                ArrayList<User> tempUserList = new ArrayList<>();
+                                tempUserList.add(currentUser);
+                                currentProject.setProjectMembers(tempUserList);
+                            } else {
+                                currentProject.getProjectMembers().add(currentUser);
+                            }
+                        }
+                    }
+
+                }
+            }
 
         } catch (FileNotFoundException notFoundException){
             System.out.println("File was not found.");

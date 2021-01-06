@@ -38,9 +38,7 @@ public class Controller {
     public void executeViewsAndDatabase(Controller controller) {
 
         //Loading the database once, when the program starts
-//        loadDatabase();
         JsonHandler jsonHandler = new JsonHandler();
-
         try {
         mDatabase = jsonHandler.loadDatabase();
         } catch (FileNotFoundException e) {
