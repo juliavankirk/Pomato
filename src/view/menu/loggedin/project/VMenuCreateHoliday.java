@@ -1,13 +1,11 @@
 package view.menu.loggedin.project;
 
 import controllers.Controller;
-import model.project.Holiday;
 import utilities.InputErrors;
 import utilities.InputOutput;
 import view.VMenu;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 
 public class VMenuCreateHoliday extends VMenu {
 
@@ -29,8 +27,8 @@ public class VMenuCreateHoliday extends VMenu {
 
                 String hName = InputErrors.emptyFieldString(InputOutput.inputString("Enter developers Username"));
                 String hDescription = InputErrors.emptyFieldString(InputOutput.inputString("Enter type of Holiday (e.g. parental leave)"));
-                LocalDate hStartDate = LocalDate.parse(InputOutput.inputString("Enter start date of the Holiday (yyyy-mm-dd)"));
-                LocalDate hEndDate = LocalDate.parse(InputOutput.inputString("Enter end date of the Holiday (yyyy-mm-dd)"));
+                LocalDate hStartDate = InputErrors.checkDateFormat(InputOutput.inputString("Enter start date of the Holiday (yyyy-mm-dd)"));
+                LocalDate hEndDate = InputErrors.checkDateFormat(InputOutput.inputString("Enter end date of the Holiday (yyyy-mm-dd)"));
                 controller.addHoliday(hName, hDescription, hStartDate, hEndDate);
 
                 addMoreHolidays(controller);
