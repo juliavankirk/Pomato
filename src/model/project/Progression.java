@@ -35,8 +35,9 @@ public class Progression implements Serializable {
         return daysBetween;
     }
 
-    public void totalWages() {
+    public Double totalWages() {
         Double salary = totalHours() * mUser.getHourlyWage();
+        return salary;
     }
 
     public User getUser() { return mUser; }

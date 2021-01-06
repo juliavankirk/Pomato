@@ -719,6 +719,19 @@ public class Controller {
 
     }
 
+    public void showAllTasks() {
+        mDatabase.getProgressForUser(getCurrentUser());
+    }
+
+    public Double showTotalSalary() {
+       Double mySalary = 0.0;
+
+       for ( Progression progress : mDatabase.getProgressForUser(getCurrentUser()) ) {
+           mySalary += progress.totalWages();
+       }
+       return mySalary;
+    }
+
 
     // Check only part of ID.
 //    public boolean checkIdWithDatabase(String inputId,  checkWithId){
