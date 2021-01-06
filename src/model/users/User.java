@@ -121,7 +121,7 @@ public class User implements Serializable {
 
     public ArrayList<Messages> getInbox(UUID Id) { return mInbox.get(mId); }
 
-    public ArrayList<Task> getSubTask() { return mTasks;}
+    public ArrayList<Task> getTask() { return mTasks;}
 
     public void addMessage (Messages message) {
         ArrayList<Messages> messages = mInbox.get(message.getSenderId());

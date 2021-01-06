@@ -21,6 +21,7 @@ public class Task implements Serializable {
     private LocalDate mStartDate;
     private LocalDate mEndDate;
     private String mStatus;
+    private Boolean mCompletion;
     private ArrayList<Checklist> mChecklists;
     private ArrayList<User> mUser;
 
@@ -37,6 +38,7 @@ public class Task implements Serializable {
         mDateCreated = LocalDate.now();
         mDueDate = dueDate;
         mStatus = "TODO";
+        mCompletion = false;
         mChecklists = new ArrayList<>();
     }
 
@@ -71,6 +73,12 @@ public class Task implements Serializable {
     public LocalDate getStartDate() {
         return mStartDate;
     }
+
+    public Boolean Completion() { return mCompletion; }
+
+    public void beginTask() { mCompletion = false; }
+
+    public void completeTask() { mCompletion = true; }
 
     //assigns value to end date
     public void getSubmissionDate(LocalDate endDate) {

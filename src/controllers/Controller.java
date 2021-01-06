@@ -78,7 +78,7 @@ public class Controller {
         }
     }
 
-    public String removeSubTask(String taskId) {
+    public String removeTask(String taskId) {
         Task task = getTaskById(taskId);
         int taskListSize = getTaskListFromCurrentProject().size();
 
@@ -115,13 +115,13 @@ public class Controller {
             for ( User employee : users ) {
                 if ( employee.getUserName().equals(assignee) ) {
                     mCurrentTask.getUserList().add(employee);
-                    employee.getSubTask().add(mCurrentTask);
+                    employee.getTask().add(mCurrentTask);
                 }
             }
         }
     }
 
-    public ArrayList<Task> getTasksForUser() { return getCurrentUser().getSubTask(); }
+    public ArrayList<Task> getTasksForUser() { return getCurrentUser().getTask(); }
 
 
     public ArrayList<Task> getTaskListFromCurrentProject() {
@@ -684,7 +684,16 @@ public class Controller {
         }
     }
 
+    public void startTask(String task) {
+        Collection<Task> taskList = mDatabase.getTaskList();
 
+        //checks if input matches anything on the task list.
+        for (Task exists : taskList) {
+            if ( exists.getId().equals(task)) {
+                mDatabase.startTask(getCurrentUser(), exists, LocalDate.now());
+            }
+        }
+    }
 
 
     // Check only part of ID.
