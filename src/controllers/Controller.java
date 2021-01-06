@@ -7,6 +7,7 @@ import utilities.JsonHandler;
 import view.VMenu;
 import view.menu.VMenuMain;
 
+import javax.xml.crypto.Data;
 import java.io.*;
 import java.time.LocalDate;
 import java.util.*;
@@ -39,21 +40,22 @@ public class Controller {
      */
     public void executeViewsAndDatabase(Controller controller) {
 
-        //Loading the database once, when the program starts
+        // Loads the database.json if it is not empty. Loading the database once, when the program starts
         JsonHandler jsonHandler = new JsonHandler();
         try {
-        mDatabase = jsonHandler.loadDatabase();
+            jsonHandler.loadDatabase();
         } catch (FileNotFoundException e) {
-            System.out.println("File was not found.");
             e.printStackTrace();
+        }
+        Database temporaryDatabase = new Database();
+        temporaryDatabase = jsonHandler.getFoundDatabase();
+        if (temporaryDatabase != null) {
+            mDatabase = temporaryDatabase;
         }
 
         // This is the loop that keeps us within the different menu's
         // Since we are always in a menu this will always run.
         while (mCurrentMenu != null) {
-
-            // Right now we are saving the database every time we switch view
-//            saveDatabase();
 
             // The method ".executeMenu" in the class "VMenu" returns the "chosenMenu",
             // which means that "mCurrentMenu" becomes the "chosenMenu".
@@ -129,7 +131,6 @@ public class Controller {
     }
 
     public ArrayList<Task> getTasksForUser() { return getCurrentUser().getTask(); }
-
 
     public ArrayList<Task> getTaskListFromCurrentProject() {
 

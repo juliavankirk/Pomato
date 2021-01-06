@@ -24,6 +24,9 @@ public class Project implements Serializable {
     @Expose(serialize = false, deserialize = false)
     private transient ArrayList<User> mProjectMembers;
 
+    // New
+    private ArrayList<UUID> mProjectMemberUUIDs;
+
 //    private ArrayList<SubTask> mSubTaskList;
     private ArrayList<Task> mTaskList;
     private ArrayList <Holiday> mHolidayList;
@@ -41,6 +44,7 @@ public class Project implements Serializable {
         mStartDate = startDate;
         mDueDate = dueDate;
         mProjectMembers = new ArrayList<>();
+        mProjectMemberUUIDs = new ArrayList<>();
 //        mSubTaskList = new ArrayList<>();
         mTaskList = new ArrayList<>();
         mHolidayList = new ArrayList<>();
@@ -118,6 +122,14 @@ public class Project implements Serializable {
 
     public void setIdeas(ArrayList<Idea> Ideas) {
         mIdeas = Ideas;
+    }
+
+    public ArrayList<UUID> getProjectMemberUUIDs() {
+        return mProjectMemberUUIDs;
+    }
+
+    public void setProjectMemberUUIDs(ArrayList<UUID> mProjectMemberUUIDs) {
+        this.mProjectMemberUUIDs = mProjectMemberUUIDs;
     }
 
     /**
