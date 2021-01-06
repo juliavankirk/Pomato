@@ -35,9 +35,9 @@ public class VMenuLoggedIn extends VMenu {
      */
     @Override
     public void menuContent(Controller controller) {
-        //TODO REMOVE?
-//        JsonHandler jsonSave = new JsonHandler();
-//        jsonSave.test(controller);
+        // Saves the entire database
+        JsonHandler jsonHandler = new JsonHandler();
+        jsonHandler.saveDatabase(controller);
 
         addSubMenus(controller);
     }

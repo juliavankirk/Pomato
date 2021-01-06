@@ -2,6 +2,7 @@ package view.menu.loggedin;
 
 import controllers.Controller;
 import model.users.User;
+import utilities.JsonHandler;
 import view.VMenu;
 import view.menu.loggedin.project.*;
 
@@ -24,9 +25,7 @@ public class VMenuProject extends VMenu {
 
     @Override
     public void menuContent(Controller controller) {
-
         printProjectMembers(controller);
-
         addMenuOptions(controller);
     }
 
@@ -40,9 +39,10 @@ public class VMenuProject extends VMenu {
         mSubMenus.add(new VMenuPersonalWage(this));
         mSubMenus.add(new VMenuActivityLog(this));
         mSubMenus.add(new VMenuHolidays(this));
-
         mSubMenus.add(new VMenuAddMember(this));
-        mSubMenus.add(new VMenuChangeRoles(this));
+
+//        mSubMenus.add(new VMenuAddMember(this));
+//        mSubMenus.add(new VMenuChangeRoles(this));
 //        subMenu = true;
 
         String projectId = controller.getCurrentProject().getId().toString();
@@ -50,8 +50,7 @@ public class VMenuProject extends VMenu {
         // Only a project manager can access these subMenus
         if (controller.getCurrentUser().getRole(projectId).equals("Manager")){
             mSubMenus.add(new VMenuEconomicOverview(this));
-//            mSubMenus.add(new VMenuAddMember(this));
-//            mSubMenus.add(new VMenuChangeRoles(this));
+            mSubMenus.add(new VMenuChangeRoles(this));
         }
     }
 

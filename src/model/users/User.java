@@ -1,4 +1,5 @@
 package model.users;
+import com.google.gson.annotations.Expose;
 import model.project.Messages;
 import model.project.Project;
 import model.project.Task;
@@ -21,6 +22,7 @@ public class User implements Serializable {
     private String mCompanyName;
     private String mJobTitle;
     private double mHourlyWage;
+
     private ArrayList<Project> mProjects;
     private ArrayList<Role> mRoles;
     private HashMap<UUID, ArrayList<Task>> mTasks;
@@ -40,9 +42,10 @@ public class User implements Serializable {
         mCompanyName = companyName;
         mJobTitle = jobTitle;
         mHourlyWage = hourlyWage;
+        mTotalWage = 0;
+
         mProjects = new ArrayList<Project>();
         mRoles = new ArrayList<Role>();
-        mTotalWage = 0;
         mTasks = new HashMap<UUID, ArrayList<Task>>();
         mInbox = new HashMap<UUID, ArrayList<Messages>>();
 

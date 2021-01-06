@@ -3,6 +3,7 @@ package controllers;
 import model.project.*;
 import model.users.User;
 import utilities.InputOutput;
+import utilities.JsonHandler;
 import view.VMenu;
 import view.menu.VMenuMain;
 
@@ -37,14 +38,22 @@ public class Controller {
     public void executeViewsAndDatabase(Controller controller) {
 
         //Loading the database once, when the program starts
-        loadDatabase();
+//        loadDatabase();
+        JsonHandler jsonHandler = new JsonHandler();
+
+        try {
+        mDatabase = jsonHandler.loadDatabase();
+        } catch (FileNotFoundException e) {
+            System.out.println("File was not found.");
+            e.printStackTrace();
+        }
 
         // This is the loop that keeps us within the different menu's
         // Since we are always in a menu this will always run.
         while (mCurrentMenu != null) {
 
             // Right now we are saving the database every time we switch view
-            saveDatabase();
+//            saveDatabase();
 
             // The method ".executeMenu" in the class "VMenu" returns the "chosenMenu",
             // which means that "mCurrentMenu" becomes the "chosenMenu".
@@ -441,7 +450,7 @@ public class Controller {
     public void setCurrentProject(int chosenProject) {
         mCurrentProject = getCurrentUser().getProjects().get(chosenProject);
 
-        saveDatabase(); // We save the project once it has been accessed
+//        saveDatabase(); // We save the project once it has been accessed
     }
 
     public Project getCurrentProject() {
@@ -523,9 +532,11 @@ public class Controller {
         }
     }
 
+
     /**
      * Method for saving DATABASE to a file:
      */
+/*
     public void saveDatabase() {
         String fileLocation = "data/database.ser";
 
@@ -560,7 +571,7 @@ public class Controller {
             return;
         }
     }
-
+*/
 
 
     public void loadDatabaseTwo() {
@@ -599,6 +610,10 @@ public class Controller {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public Database getDatabase() {
+        return mDatabase;
     }
 
     public void sendMessage(String recipient, String subject, String content) {

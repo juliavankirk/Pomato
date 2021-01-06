@@ -1,5 +1,6 @@
 package model.project;
 
+import com.google.gson.annotations.Expose;
 import model.users.User;
 
 import java.io.Serializable;
@@ -14,13 +15,18 @@ public class Project implements Serializable{
     private UUID mId;
     private String mProjectTitle;
     private String mProjectDescription;
-    private ArrayList<User> mProjectMembers;
     private LocalDate mStartDate;
     private LocalDate mDueDate;
+
+    // I need to do this "transient" otherwise we get into a loop since we store User in Project and Project in User.
+    // "transient" is the alternative to "@Expose", which can determine if an attribute can be serialized or deserialized.
+    // This means that we do not store this information, for now.
+    @Expose(serialize = false, deserialize = false)
+    private transient ArrayList<User> mProjectMembers;
+
     private ArrayList<SubTask> mSubTaskList;
     private ArrayList <Holiday> mHolidayList;
     private ArrayList<Idea> mIdeas;
-//    private ArrayList<Board> mBoards;
     private ArrayList<String> mActivityList;
 
 
@@ -31,12 +37,12 @@ public class Project implements Serializable{
         mId = UUID.randomUUID();
         mProjectTitle = projectTitle;
         mProjectDescription = projectDescription;
-        mProjectMembers = new ArrayList<>();
         mStartDate = startDate;
         mDueDate = dueDate;
+        mProjectMembers = new ArrayList<>();
         mSubTaskList = new ArrayList<>();
         mHolidayList = new ArrayList<>();
-        mIdeas = new ArrayList<Idea>();
+        mIdeas = new ArrayList<>();
         mActivityList = new ArrayList();
 
 

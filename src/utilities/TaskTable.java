@@ -51,12 +51,12 @@ public class TaskTable {
     /**
      * METHODS
      * @param lists The list I'm taking in here is a list of a list.
-     * @param <T>   This means that I can take in any object. I forgot what this is called.
+     * @param <T>   This means that I can take in an object of any type.
      * @return      I'm returning the list with the largest size since I need to know this to be able to print empty rows
      *              I need to create empty rows in order to fill the cards that are too short.
      */
 
-    // This is a method that can take a list containing any object.
+    // This is a method that can take a list containing an object of any type.
     private <T> int maximumListSize(ArrayList<ArrayList<T>> lists) {
         int largestListSize = 0;
         for (int i = 0; i < lists.size(); i++) {

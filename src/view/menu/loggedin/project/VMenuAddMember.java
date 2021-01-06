@@ -15,7 +15,7 @@ public class VMenuAddMember extends VMenu {
     public VMenuAddMember(VMenu parent) {
         super(parent);
         mMenuHeader = "Add new members";
-        mMenuLabel = "Manager: Add members";
+        mMenuLabel = "Add members";
         mMenuQuestion = "Enter choice";
         mSubMenus = null;
     }
