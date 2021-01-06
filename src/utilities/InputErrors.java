@@ -3,10 +3,6 @@ package utilities;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-
 public class InputErrors {
     static int correctIntInput;
     static double correctDoubleInput;
@@ -18,6 +14,7 @@ public class InputErrors {
             System.out.println("");
             userInput = InputOutput.inputString("Please try one more time");
         }
+
         return userInput;
     }
 
@@ -30,6 +27,7 @@ public class InputErrors {
             userInput = InputOutput.inputString("Please try again");
             irrelevantInt(userInput);
         }
+
         return correctIntInput;
     }
 
@@ -42,11 +40,13 @@ public class InputErrors {
             userInput = InputOutput.inputString(" Please try again");
             irrelevantDouble(userInput);
         }
+
         return correctDoubleInput;
     }
 
     public static int inRangeIntInput (int userInput, int upperRange, int lowerRange) {
-        if (userInput <= upperRange && userInput > lowerRange) {
+
+        if (userInput < upperRange && userInput > lowerRange) {
             return userInput;
         }
         System.err.println("The number you entered is out of range.");
@@ -87,9 +87,9 @@ public class InputErrors {
                 System.err.println("Invalid input. You should answer with yes or no.");
                 System.out.println("");
                 userInput = InputOutput.inputString("Please try again");
+
                 return incorrectYesOrNo(userInput);
             }
         }
     }
-
 }
