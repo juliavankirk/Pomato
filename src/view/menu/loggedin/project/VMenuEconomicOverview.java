@@ -1,7 +1,6 @@
 package view.menu.loggedin.project;
 
 import controllers.Controller;
-import model.project.SubTask;
 import model.project.Task;
 import model.users.User;
 import view.VMenu;
@@ -89,7 +88,7 @@ public class VMenuEconomicOverview extends VMenu {
         System.out.format("| Amount of tasks | TODO | IN PROGRESS | COMPLETED |%n"); // OLD:  Tasks overdue |
         System.out.format(line);
 
-        ArrayList<SubTask> projectTasks = controller.getCurrentProject().getTaskList();
+        ArrayList<Task> projectTasks = controller.getCurrentProject().getTaskList();
         System.out.format(
                 leftAlignFormat, projectTasks.size(),
                 taskStatus(projectTasks, "TODO"),
@@ -101,10 +100,10 @@ public class VMenuEconomicOverview extends VMenu {
     }
 
     // Checks taskStatus
-    private int taskStatus(ArrayList<SubTask> projectTasks, String status){
+    private int taskStatus(ArrayList<Task> projectTasks, String status){
         int totalTasks = 0;
 
-        for (SubTask projectTask : projectTasks) {
+        for (Task projectTask : projectTasks) {
             if (projectTask.getStatus().equals(status)) {
                 totalTasks += 1;
             }

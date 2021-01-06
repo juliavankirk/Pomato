@@ -9,7 +9,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.UUID;
 
-public class Project implements Serializable{
+public class Project implements Serializable {
 
     //Attributes
     private UUID mId;
@@ -24,7 +24,8 @@ public class Project implements Serializable{
     @Expose(serialize = false, deserialize = false)
     private transient ArrayList<User> mProjectMembers;
 
-    private ArrayList<SubTask> mSubTaskList;
+//    private ArrayList<SubTask> mSubTaskList;
+    private ArrayList<Task> mTaskList;
     private ArrayList <Holiday> mHolidayList;
     private ArrayList<Idea> mIdeas;
     private ArrayList<String> mActivityList;
@@ -40,7 +41,8 @@ public class Project implements Serializable{
         mStartDate = startDate;
         mDueDate = dueDate;
         mProjectMembers = new ArrayList<>();
-        mSubTaskList = new ArrayList<>();
+//        mSubTaskList = new ArrayList<>();
+        mTaskList = new ArrayList<>();
         mHolidayList = new ArrayList<>();
         mIdeas = new ArrayList<>();
         mActivityList = new ArrayList();
@@ -50,7 +52,9 @@ public class Project implements Serializable{
 //        mBoards = new ArrayList<Board>();
 //        mPassword = password;
 
-
+//        if (mDueDate.isEqual(mStartDate) || mDueDate.isBefore(mStartDate)){
+//            throw new InvalidDataInput("Invalid input. Due date must come after date of creation.");
+//        }
     }
 
     public Project(String title) {
@@ -58,7 +62,8 @@ public class Project implements Serializable{
         mProjectTitle = title;
         mProjectDescription = "";
         mProjectMembers = new ArrayList<User>();
-        mSubTaskList = new ArrayList<>();
+//        mSubTaskList = new ArrayList<>();
+        mTaskList = new ArrayList<>();
         mIdeas = new ArrayList<Idea>();
         mHolidayList = new ArrayList<>();
         mActivityList = new ArrayList();
@@ -123,11 +128,11 @@ public class Project implements Serializable{
         return ChronoUnit.DAYS.between(mStartDate, mDueDate);
     }
 
-    public ArrayList<SubTask> getTaskList(){ return mSubTaskList; }
-    public void addTaskToList(SubTask subTask){ mSubTaskList.add(subTask); }
-    public void removeTask(int index){ mSubTaskList.remove(index); }
+    public ArrayList<Task> getTaskList(){ return mTaskList; }
+    public void addTaskToList(Task task){ mTaskList.add(task); }
+    public void removeTask(int index){ mTaskList.remove(index); }
     // public Task getTaskById (UUID id) { return mTaskList.get(id);}
-    public SubTask getTaskById (int index) { return mSubTaskList.get(index);}
+    public Task getTaskById (int index) { return mTaskList.get(index);}
 
     public ArrayList<Holiday> getHolidayList() { return mHolidayList; }
     public void addHolidayToList(Holiday holiday){ mHolidayList.add(holiday); }

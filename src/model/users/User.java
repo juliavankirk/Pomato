@@ -25,7 +25,7 @@ public class User implements Serializable {
 
     private ArrayList<Project> mProjects;
     private ArrayList<Role> mRoles;
-    private HashMap<UUID, ArrayList<Task>> mTasks;
+    private ArrayList<Task> mTasks;
     private HashMap<UUID, ArrayList<Messages>> mInbox;
 
     private double mTotalWage;
@@ -46,7 +46,7 @@ public class User implements Serializable {
 
         mProjects = new ArrayList<Project>();
         mRoles = new ArrayList<Role>();
-        mTasks = new HashMap<UUID, ArrayList<Task>>();
+        mTasks = new ArrayList<Task>();
         mInbox = new HashMap<UUID, ArrayList<Messages>>();
 
     }
@@ -124,6 +124,8 @@ public class User implements Serializable {
 
     public ArrayList<Messages> getInbox(UUID Id) { return mInbox.get(mId); }
 
+    public ArrayList<Task> getTask() { return mTasks;}
+
     public void addMessage (Messages message) {
         ArrayList<Messages> messages = mInbox.get(message.getSenderId());
         if ( null == messages ) {
@@ -190,21 +192,4 @@ public class User implements Serializable {
     public String toString(){
         return "First name: " + mFirstName + "\nLast name: " + mLastName + "\n";
     }
-
-    public String toJsonString() {
-        StringBuilder sb = new StringBuilder();
-
-        sb.append("Username: ").append(getUserName())
-                .append("First name: ").append(getFirstName())
-                .append("Last Name: ").append(getLastName())
-                .append("Password: ").append(getPassword())
-                .append("Password: ").append(getPassword())
-                .append("Password: ").append(getPassword())
-                .append("Password: ").append(getPassword())
-                .append("Password: ").append(getPassword()
-        );
-
-        return "";
-    }
-
 }
