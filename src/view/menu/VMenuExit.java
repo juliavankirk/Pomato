@@ -1,10 +1,9 @@
 package view.menu;
 
 import controllers.Controller;
+import utilities.InputErrors;
 import utilities.InputOutput;
 import view.VMenu;
-
-import java.util.ArrayList;
 
 public class VMenuExit extends VMenu {
 
@@ -31,7 +30,7 @@ public class VMenuExit extends VMenu {
 
 
 //        System.out.println(InputOutput.line() + menuHeader + "\n");
-        String yesNo = InputOutput.inputString("Are you sure you want to exit?(Yes/No)");
+        String yesNo = InputErrors.incorrectYesOrNo(InputOutput.inputString("Are you sure you want to exit?(Yes/No)"));
 
         if (yesNo.equalsIgnoreCase("YES")) {
             System.out.println("Exiting the system. Goodbye!");

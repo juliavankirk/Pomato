@@ -3,7 +3,9 @@ package view.menu;
 import controllers.Controller;
 import model.project.Project;
 import model.users.User;
+import utilities.InputErrors;
 import utilities.InputOutput;
+import utilities.JsonHandler;
 import view.VMenu;
 import view.menu.loggedin.VMenuAccount;
 import view.menu.loggedin.VMenuCreateProject;
@@ -33,6 +35,10 @@ public class VMenuLoggedIn extends VMenu {
      */
     @Override
     public void menuContent(Controller controller) {
+        // Saves the entire database
+        JsonHandler jsonHandler = new JsonHandler();
+        jsonHandler.saveDatabase(controller);
+
         addSubMenus(controller);
     }
 
@@ -40,7 +46,7 @@ public class VMenuLoggedIn extends VMenu {
     public VMenu chooseMenu(VMenu mParent, Controller controller) {
         VMenu chosenVMenu;
 
-        int inputResult = InputOutput.inputInt(mMenuQuestion/*,1,mSubMenus.size() + 1*/);
+        int inputResult = InputErrors.checkMenuChoice(InputOutput.inputString(mMenuQuestion), mSubMenus.size()+2, 0);
 
         if (mSubMenus != null && inputResult > 0 && inputResult < mSubMenus.size() + 1) {
             chosenVMenu = mSubMenus.get(inputResult - 1);

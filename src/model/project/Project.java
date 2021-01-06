@@ -1,7 +1,8 @@
 package model.project;
 
+import com.google.gson.annotations.Expose;
 import model.users.User;
-import utilities.InvalidDataInput;
+//import utilities.InvalidDataInput;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -15,47 +16,62 @@ public class Project implements Serializable {
     private UUID mId;
     private String mProjectTitle;
     private String mProjectDescription;
-    private ArrayList<User> mProjectMembers;
     private LocalDate mStartDate;
     private LocalDate mDueDate;
+
+    // I need to do this "transient" otherwise we get into a loop since we store User in Project and Project in User.
+    // "transient" is the alternative to "@Expose", which can determine if an attribute can be serialized or deserialized.
+    // This means that we do not store this information, for now.
+    @Expose(serialize = false, deserialize = false)
+    private transient ArrayList<User> mProjectMembers;
+
+    // New
+    private ArrayList<UUID> mProjectMemberUUIDs;
+
+//    private ArrayList<SubTask> mSubTaskList;
     private ArrayList<Task> mTaskList;
     private ArrayList <Holiday> mHolidayList;
     private ArrayList<Idea> mIdeas;
-    //private ArrayList<Board> mBoards;
     private ArrayList<String> mActivityList;
 
 
 
     //Constructor
-    public Project(String projectTitle, String projectDescription/*, ArrayList<User> projectMembers*/,
-                   LocalDate startDate, LocalDate dueDate/*, String password*/) {
+    public Project(String projectTitle, String projectDescription,
+                   LocalDate startDate, LocalDate dueDate) {
         mId = UUID.randomUUID();
         mProjectTitle = projectTitle;
         mProjectDescription = projectDescription;
-        mProjectMembers = new ArrayList<>();
         mStartDate = startDate;
         mDueDate = dueDate;
+        mProjectMembers = new ArrayList<>();
+        mProjectMemberUUIDs = new ArrayList<>();
+//        mSubTaskList = new ArrayList<>();
         mTaskList = new ArrayList<>();
         mHolidayList = new ArrayList<>();
-        mIdeas = new ArrayList<Idea>();
+        mIdeas = new ArrayList<>();
         mActivityList = new ArrayList();
 
 
-    //mProjectMembers = projectMembers;
-    //mBoards = new ArrayList<Board>();
-    //mPassword = password;
+//        mProjectMembers = projectMembers;
+//        mBoards = new ArrayList<Board>();
+//        mPassword = password;
 
-        if (mDueDate.isEqual(mStartDate) || mDueDate.isBefore(mStartDate)){
-            throw new InvalidDataInput("Invalid input. Due date must come after date of creation.");
-        }
+//        if (mDueDate.isEqual(mStartDate) || mDueDate.isBefore(mStartDate)){
+//            throw new InvalidDataInput("Invalid input. Due date must come after date of creation.");
+//        }
     }
 
     public Project(String title) {
         mId = UUID.randomUUID();
         mProjectTitle = title;
+        mProjectDescription = "";
         mProjectMembers = new ArrayList<User>();
+//        mSubTaskList = new ArrayList<>();
         mTaskList = new ArrayList<>();
         mIdeas = new ArrayList<Idea>();
+        mHolidayList = new ArrayList<>();
+        mActivityList = new ArrayList();
     }
 
     //Getters and Setters
@@ -107,6 +123,14 @@ public class Project implements Serializable {
 
     public void setIdeas(ArrayList<Idea> Ideas) {
         mIdeas = Ideas;
+    }
+
+    public ArrayList<UUID> getProjectMemberUUIDs() {
+        return mProjectMemberUUIDs;
+    }
+
+    public void setProjectMemberUUIDs(ArrayList<UUID> mProjectMemberUUIDs) {
+        this.mProjectMemberUUIDs = mProjectMemberUUIDs;
     }
 
     /**

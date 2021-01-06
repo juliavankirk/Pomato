@@ -1,6 +1,7 @@
 package view.menu.loggedin.project;
 
 import controllers.Controller;
+import utilities.InputErrors;
 import utilities.InputOutput;
 import view.VMenu;
 
@@ -27,8 +28,14 @@ public class VMenuViewComment extends VMenu{
 
     public void menuContent(Controller controller) {
 
-        int ideaNum = InputOutput.inputInt("Which idea's comments do want to see (insert the number of the idea)"); //I don't know if this sentence is grammatically correct. Fix it if it's not.
-        System.out.println("Here are the comments: \n");
-        controller.viewComments(ideaNum);
+        if (controller.getCurrentProject().getIdeas().size() == 0) {
+            System.out.println("There is no idea to dislike for now.");
+        } else {
+            int ideaNum = InputErrors.checkMenuChoice(InputOutput.inputString("Which idea's" +
+                            " comments do want to see (insert the number of the idea)"),
+                    controller.getCurrentProject().getIdeas().size() + 1, 0);
+            System.out.println("Here are the comments: \n");
+            controller.viewComments(ideaNum);
+        }
     }
 }

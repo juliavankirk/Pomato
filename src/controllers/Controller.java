@@ -3,9 +3,11 @@ package controllers;
 import model.project.*;
 import model.users.User;
 import utilities.InputOutput;
+import utilities.JsonHandler;
 import view.VMenu;
 import view.menu.VMenuMain;
 
+import javax.xml.crypto.Data;
 import java.io.*;
 import java.time.LocalDate;
 import java.util.*;
@@ -38,15 +40,22 @@ public class Controller {
      */
     public void executeViewsAndDatabase(Controller controller) {
 
-        //Loading the database once, when the program starts
-        loadDatabase();
+        // Loads the database.json if it is not empty. Loading the database once, when the program starts
+        JsonHandler jsonHandler = new JsonHandler();
+        try {
+            jsonHandler.loadDatabase();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        Database temporaryDatabase = new Database();
+        temporaryDatabase = jsonHandler.getFoundDatabase();
+        if (temporaryDatabase != null) {
+            mDatabase = temporaryDatabase;
+        }
 
         // This is the loop that keeps us within the different menu's
         // Since we are always in a menu this will always run.
         while (mCurrentMenu != null) {
-
-            // Right now we are saving the database every time we switch view
-            saveDatabase();
 
             // The method ".executeMenu" in the class "VMenu" returns the "chosenMenu",
             // which means that "mCurrentMenu" becomes the "chosenMenu".
@@ -122,7 +131,6 @@ public class Controller {
     }
 
     public ArrayList<Task> getTasksForUser() { return getCurrentUser().getTask(); }
-
 
     public ArrayList<Task> getTaskListFromCurrentProject() {
 
@@ -436,10 +444,12 @@ public class Controller {
 
         for (String newMembersUsername : newMembersUsernames) {
             for (User someOne : userList) {
-                if (someOne.getUserName().equals(newMembersUsername)) {
+                if (someOne.getUserName().equals(newMembersUsername) &&
+                        !(mCurrentProject.getProjectMembers().contains(someOne.getUserName()))) {
                     mCurrentProject.getProjectMembers().add(someOne);
                     someOne.getProjects().add(mCurrentProject);
                     someOne.addRole(mCurrentProject.getId().toString());
+                    System.out.println(someOne.getUserName() + " is successfully added.");
                 }
             }
         }
@@ -453,10 +463,13 @@ public class Controller {
             for (int j = 0; j < getCurrentProject().getProjectMembers().size(); j++) {
                 if (memberUsername.equals(getCurrentProject().getProjectMembers().get(j).getUserName())) {
                     getCurrentProject().getProjectMembers().get(j).changeRole(getCurrentProject().getId().toString());
+                    System.out.println(memberUsername.equals(getCurrentProject().getProjectMembers().get(j).getUserName()) +
+                            "'s role in this project is successfully changed");
                 }
             }
         }
-        System.out.println("Roles are successfully changed");
+        System.out.println("If you cannot find the usernames you entered before in here, you probably " +
+                "entered the usernames incorrectly or those users are not a part of this project. Please try again later.");
     }
 
     /**
@@ -465,7 +478,7 @@ public class Controller {
     public void setCurrentProject(int chosenProject) {
         mCurrentProject = getCurrentUser().getProjects().get(chosenProject);
 
-        saveDatabase(); // We save the project once it has been accessed
+//        saveDatabase(); // We save the project once it has been accessed
     }
 
     public Project getCurrentProject() {
@@ -547,9 +560,11 @@ public class Controller {
         }
     }
 
+
     /**
      * Method for saving DATABASE to a file:
      */
+/*
     public void saveDatabase() {
         String fileLocation = "data/database.ser";
 
@@ -576,17 +591,15 @@ public class Controller {
             fileInput.close();
         }
         catch (IOException ioEx) {
-            System.out.println("File is empty");
             ioEx.printStackTrace();
             return;
         }
         catch (ClassNotFoundException classEx) {
-            System.out.println("Database not found");
             classEx.printStackTrace();
             return;
         }
     }
-
+*/
 
 
     public void loadDatabaseTwo() {
@@ -601,17 +614,23 @@ public class Controller {
             while ((line = bufferedReader.readLine()) != null) {
                 String[] retrievedInfo = line.split(";");
                 if (retrievedInfo[0].equals("User")) {
-                    User user = new User(retrievedInfo);
-                    for(int i = 0; i < (retrievedInfo.length - 8); i = i + 2) {
-                        Project project = searchProjectByTitle(retrievedInfo[i + 8]);
-                        user.getProjects().add(project);
-                        project.getProjectMembers().add(user);
-                        user.addRole(project.getId().toString());
-                        if (!(user.getRole(project.getId().toString()).equals(retrievedInfo[i + 9]))) {
-                            user.changeRole(project.getId().toString());
+                    if (checkUsername(retrievedInfo[3]).equals(retrievedInfo[3])) {
+                        User user = new User(retrievedInfo[3], retrievedInfo[1], retrievedInfo[2],
+                                retrievedInfo[4], retrievedInfo[5], Double.parseDouble(retrievedInfo[6]), retrievedInfo[7]);
+
+                        for (int i = 0; i < (retrievedInfo.length - 8); i = i + 2) {
+                            Project project = searchProjectByTitle(retrievedInfo[i + 8]);
+                            if (!(user.getProjects().contains(project))) {
+                                user.getProjects().add(project);
+                            }
+                            if (!(project.getProjectMembers().contains(user.getUserName()))) {
+                                project.getProjectMembers().add(user);
+                            }
+                            user.addRole(project.getId().toString());
+                            if (!(user.getRole(project.getId().toString()).equals(retrievedInfo[i + 9]))) {
+                                user.changeRole(project.getId().toString());
+                            }
                         }
-                    }
-                    if (checkUsername(user.getUserName()).equals(user.getUserName())) {
                         mDatabase.addUser(user);
                     }
                     System.out.println("Added: " + Arrays.toString(retrievedInfo));
@@ -623,6 +642,10 @@ public class Controller {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public Database getDatabase() {
+        return mDatabase;
     }
 
     public void sendMessage(String recipient, String subject, String content) {

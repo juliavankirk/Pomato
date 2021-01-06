@@ -1,4 +1,5 @@
 package model.users;
+import com.google.gson.annotations.Expose;
 import model.project.Messages;
 import model.project.Project;
 import model.project.Task;
@@ -21,6 +22,7 @@ public class User implements Serializable {
     private String mCompanyName;
     private String mJobTitle;
     private double mHourlyWage;
+
     private ArrayList<Project> mProjects;
     private ArrayList<Role> mRoles;
     private ArrayList<Task> mTasks;
@@ -40,27 +42,28 @@ public class User implements Serializable {
         mCompanyName = companyName;
         mJobTitle = jobTitle;
         mHourlyWage = hourlyWage;
+        mTotalWage = 0;
+
         mProjects = new ArrayList<Project>();
         mRoles = new ArrayList<Role>();
-        mTotalWage = 0;
         mTasks = new ArrayList<Task>();
         mInbox = new HashMap<UUID, ArrayList<Messages>>();
 
     }
 
     // Save to .csv:
-    public User(String[] savedAttributes) {
-        mId = UUID.randomUUID();
-        mFirstName= savedAttributes[1];
-        mLastName = savedAttributes[2];
-        mUserName = savedAttributes[3];
-        mPassword = savedAttributes[4];
-        mCompanyName = savedAttributes[5];
-        mHourlyWage = Double.parseDouble(savedAttributes[6]);
-        mJobTitle = savedAttributes[7];
-        mProjects = new ArrayList<Project>();
-        mRoles = new ArrayList<Role>();
-    }
+//    public User(String[] savedAttributes) {
+//        mId = UUID.randomUUID();
+//        mFirstName= savedAttributes[1];
+//        mLastName = savedAttributes[2];
+//        mUserName = savedAttributes[3];
+//        mPassword = savedAttributes[4];
+//        mCompanyName = savedAttributes[5];
+//        mHourlyWage = Double.parseDouble(savedAttributes[6]);
+//        mJobTitle = savedAttributes[7];
+//        mProjects = new ArrayList<Project>();
+//        mRoles = new ArrayList<Role>();
+//    }
 
     //Methods
 
@@ -160,6 +163,10 @@ public class User implements Serializable {
         return role;
     }
 
+    public ArrayList<Role> getRoles() {
+        return mRoles;
+    }
+
     public void addRole(String projectId) {
         mRoles.add(new Role(projectId));
     }
@@ -185,5 +192,4 @@ public class User implements Serializable {
     public String toString(){
         return "First name: " + mFirstName + "\nLast name: " + mLastName + "\n";
     }
-
 }

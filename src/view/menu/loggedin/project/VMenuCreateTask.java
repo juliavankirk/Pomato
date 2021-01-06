@@ -11,8 +11,8 @@ public class VMenuCreateTask extends VMenu {
 
     VMenuCreateTask(VMenu parent) {
         super(parent);
-        mMenuHeader = "Create Subtask";
-        mMenuLabel = "Create Subtask";
+        mMenuHeader = "Create Task";
+        mMenuLabel = "Create Task";
         mMenuQuestion = "Enter choice";
         mSubMenus = null;
     }
@@ -59,7 +59,7 @@ public class VMenuCreateTask extends VMenu {
     private void addMoreTasks (Controller controller) {
         String answer;
 
-        answer = InputOutput.inputString("Would you like to add more subtasks?(yes/no)");
+        answer = InputOutput.inputString("Would you like to add more tasks?(yes/no)");
         while (answer.equals("yes")) {
             answer = "";
             menuContent(controller);

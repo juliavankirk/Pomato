@@ -1,8 +1,9 @@
 package model.project;
 
+import java.io.Serializable;
 import java.util.UUID;
 
-public class Messages {
+public class Messages implements Serializable {
     private UUID mSenderId;
     private String mSubject;
     private String mContent;
