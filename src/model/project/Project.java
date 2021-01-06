@@ -2,7 +2,7 @@ package model.project;
 
 import com.google.gson.annotations.Expose;
 import model.users.User;
-import utilities.InvalidDataInput;
+//import utilities.InvalidDataInput;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -57,9 +57,9 @@ public class Project implements Serializable {
 //        mBoards = new ArrayList<Board>();
 //        mPassword = password;
 
-        if (mDueDate.isEqual(mStartDate) || mDueDate.isBefore(mStartDate)){
-            throw new InvalidDataInput("Invalid input. Due date must come after date of creation.");
-        }
+//        if (mDueDate.isEqual(mStartDate) || mDueDate.isBefore(mStartDate)){
+//            throw new InvalidDataInput("Invalid input. Due date must come after date of creation.");
+//        }
     }
 
     public Project(String title) {
