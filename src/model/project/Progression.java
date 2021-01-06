@@ -16,12 +16,14 @@ public class Progression implements Serializable {
     public Progression(User user, Task task, LocalDate startDate) {
         mUser = user;
         mTask = task;
+        mTask.beginTask();
         mStartDate = startDate;
         mEndDate = null;
     }
 
     //sets completion to true and passes value to endDate
     public void submitTask(LocalDate endDate) {
+        mTask.completeTask();
         mEndDate = endDate;
     }
 
@@ -38,5 +40,9 @@ public class Progression implements Serializable {
     }
 
     public User getUser() { return mUser; }
+
+    public Project getProject() { return mProject; }
+
+    public Task getTask() { return mTask; }
 
 }

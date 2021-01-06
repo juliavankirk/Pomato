@@ -708,10 +708,34 @@ public class Controller {
 
         //checks if input matches anything on the task list.
         for (Task exists : taskList) {
-            if ( exists.getId().equals(task)) {
+            if ( exists.getTitle().equals(task)) {
                 mDatabase.startTask(getCurrentUser(), exists, LocalDate.now());
             }
         }
+    }
+
+    public void submitTask(String submit) {
+        Collection<Progression> progression = mDatabase.getProgressionList();
+        Progression progress = null;
+
+        for (Progression taskStarted : progression) {
+            if ( submit.equals(taskStarted.getTask().getTitle())) {
+                progress = taskStarted;
+            }
+        }
+
+        if ( null == progress ) {
+            System.out.println("Task does not exist.");
+        } else {
+            Task task = null;
+            for ( int i = 0; i < mDatabase.getTaskList().size(); i++) {
+               if ( mDatabase.getTaskList().get(i).getTitle().equals(submit)) {
+                   task = mDatabase.getTaskList().get(i);
+               }
+            }
+        }
+        progress.submitTask(LocalDate.now());
+
     }
 
 
