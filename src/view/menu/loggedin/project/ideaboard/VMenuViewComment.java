@@ -1,4 +1,4 @@
-package view.menu.loggedin.project;
+package view.menu.loggedin.project.ideaboard;
 
 import controllers.Controller;
 import utilities.InputErrors;

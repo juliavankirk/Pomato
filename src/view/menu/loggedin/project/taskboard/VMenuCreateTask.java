@@ -1,4 +1,4 @@
-package view.menu.loggedin.project;
+package view.menu.loggedin.project.taskboard;
 
 import utilities.InputOutput;
 import view.VMenu;
@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public class VMenuCreateTask extends VMenu {
 
-    VMenuCreateTask(VMenu parent) {
+    public VMenuCreateTask(VMenu parent) {
         super(parent);
         mMenuHeader = "Create Task";
         mMenuLabel = "Create Task";

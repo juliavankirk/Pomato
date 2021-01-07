@@ -1,4 +1,4 @@
-package view.menu.loggedin.project;
+package view.menu.loggedin.project.holidays;
 
 import controllers.Controller;
 import utilities.InputErrors;

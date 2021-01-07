@@ -1,4 +1,4 @@
-package view.menu.loggedin.project;
+package view.menu.loggedin.project.taskboard;
 
 import controllers.Controller;
 import utilities.InputOutput;
@@ -6,7 +6,7 @@ import view.VMenu;
 
 public class VMenuRemoveTask extends VMenu {
 
-    VMenuRemoveTask(VMenu parent) {
+    public VMenuRemoveTask(VMenu parent) {
         super(parent);
         mMenuHeader = "Remove Task";
         mMenuLabel = "Remove Task";

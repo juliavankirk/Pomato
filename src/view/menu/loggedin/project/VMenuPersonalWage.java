@@ -13,9 +13,8 @@ public class VMenuPersonalWage extends VMenu {
         mMenuHeader = "Your Total Wage";
         mMenuLabel = "View Total Wage";
         mMenuQuestion = "Enter choice";
-
-
     }
+
     @Override
     public void menuContent(Controller controller) {
         double hours;

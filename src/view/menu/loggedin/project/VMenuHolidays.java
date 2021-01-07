@@ -2,8 +2,10 @@ package view.menu.loggedin.project;
 
 import controllers.Controller;
 import view.VMenu;
+import view.menu.loggedin.project.holidays.VMenuCreateHoliday;
+import view.menu.loggedin.project.holidays.VMenuRemoveHoliday;
+import view.menu.loggedin.project.holidays.VMenuViewHolidays;
 
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 
 public class VMenuHolidays extends VMenu {

@@ -4,6 +4,7 @@ import controllers.Controller;
 import model.project.Task;
 import utilities.TaskTable;
 import view.VMenu;
+import view.menu.loggedin.project.taskboard.*;
 
 import java.util.ArrayList;
 
@@ -23,6 +24,7 @@ public class VMenuViewTaskBoard extends VMenu {
         mSubMenus.add(new VMenuRemoveTask(this));
         mSubMenus.add(new VMenuEditTask(this));
         mSubMenus.add(new VMenuAddChecklist(this));
+        mSubMenus.add(new VMenuEditTaskboard(this));
     }
 
 

@@ -1,4 +1,4 @@
-package view.menu.loggedin.project;
+package view.menu.loggedin.project.holidays;
 
 import controllers.Controller;
 import utilities.InputErrors;
@@ -8,7 +8,7 @@ import view.VMenu;
 
 public class VMenuRemoveHoliday extends VMenu {
 
-    VMenuRemoveHoliday(VMenu parent) {
+    public VMenuRemoveHoliday(VMenu parent) {
         super(parent);
         mMenuHeader = "Remove Employee's Holiday";
         mMenuLabel = "Manager: Remove Employee's Holiday";

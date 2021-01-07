@@ -414,6 +414,8 @@ public class Controller {
                     project.getProjectMembers().add(someOne);
                     someOne.getProjects().add(project);
                     someOne.addRole(projectId);
+
+                    project.getProjectMemberUUIDs().add(someOne.getId());
                 }
             }
         }
@@ -447,14 +449,14 @@ public class Controller {
                 if (someOne.getUserName().equals(newMembersUsername) &&
                         !(mCurrentProject.getProjectMembers().contains(someOne.getUserName()))) {
                     mCurrentProject.getProjectMembers().add(someOne);
+                    mCurrentProject.getProjectMemberUUIDs().add(someOne.getId());
+
                     someOne.getProjects().add(mCurrentProject);
                     someOne.addRole(mCurrentProject.getId().toString());
                     System.out.println(someOne.getUserName() + " is successfully added.");
                 }
             }
         }
-
-
     }
 
     public void changeRoles(ArrayList<String> memberUsernames) {
@@ -625,6 +627,7 @@ public class Controller {
                             }
                             if (!(project.getProjectMembers().contains(user.getUserName()))) {
                                 project.getProjectMembers().add(user);
+                                project.getProjectMemberUUIDs().add(user.getId());
                             }
                             user.addRole(project.getId().toString());
                             if (!(user.getRole(project.getId().toString()).equals(retrievedInfo[i + 9]))) {

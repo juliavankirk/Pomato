@@ -25,7 +25,7 @@ public class Project implements Serializable {
     @Expose(serialize = false, deserialize = false)
     private transient ArrayList<User> mProjectMembers;
 
-    // New
+    // This is temporary until we fix storing the Projects correctly:
     private ArrayList<UUID> mProjectMemberUUIDs;
 
 //    private ArrayList<SubTask> mSubTaskList;

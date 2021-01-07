@@ -14,9 +14,9 @@ public class TaskTable {
     /**
      * ATTRIBUTES
      */
+
     ArrayList<Task> tasks;
     ArrayList<String> headerList;
-    int cardWidth = 42;
 
     private String divider;
     private String cardDivider;
@@ -25,6 +25,7 @@ public class TaskTable {
     private ArrayList<ArrayList<Task>> taskLists = new ArrayList<>();
     private int largestListSize;
 
+    public static int cardWidth = 42;
     public static String dividerHorizontalChar = "-";
     public static String dividerCornerChar = "++";
     public static String cardBorderVerticalChar = "||";
@@ -35,6 +36,7 @@ public class TaskTable {
      * @param tasks         tasks should always be sent in through a constructor.
      * @param headerList    If a user does not send in a list with headers then a default list of headers will be created.
      */
+
     public TaskTable(ArrayList<Task> tasks, ArrayList<String> headerList) {
         this.headerList = headerList;
         this.tasks = tasks;
@@ -47,21 +49,8 @@ public class TaskTable {
 
 
     /**
-     * METHODS
-     * @param lists The list I'm taking in here is a list of a list.
-     * @param <T>   This means that I can take in an object of any type.
-     * @return      I'm returning the list with the largest size since I need to know this to be able to print empty rows
-     *              I need to create empty rows in order to fill the cards that are too short.
+     * Public methods:
      */
-
-    // This is a method that can take a list containing an object of any type.
-    private <T> int maximumListSize(ArrayList<ArrayList<T>> lists) {
-        int largestListSize = 0;
-        for (int i = 0; i < lists.size(); i++) {
-            largestListSize = Math.max(largestListSize, lists.get(i).size());
-        }
-        return largestListSize;
-    }
 
     // This method initializes everything we need and sets the relevant attributes. Then it prints the table.
     public void print() {
@@ -75,6 +64,24 @@ public class TaskTable {
 
         // Print
         printTable();
+    }
+
+
+    /**
+     * Private METHODS
+     * @param lists The list I'm taking in here is a list of a list.
+     * @param <T>   This means that I can take in an object of any type.
+     * @return      I'm returning the list with the largest size since I need to know this to be able to print empty rows
+     *              I need to create empty rows in order to fill the cards that are too short.
+     */
+
+    // This is a method that can take a list containing an object of any type.
+    private <T> int maximumListSize(ArrayList<ArrayList<T>> lists) {
+        int largestListSize = 0;
+        for (int i = 0; i < lists.size(); i++) {
+            largestListSize = Math.max(largestListSize, lists.get(i).size());
+        }
+        return largestListSize;
     }
 
     // Prints the headers and the cards.
@@ -333,515 +340,38 @@ public class TaskTable {
 
 
     /**
-     * Old and Experimental methods below
+     * Getters and setters:
      */
-    private void print(ArrayList<Task> taskList) {
-        String status;
-        System.out.print(InputOutput.shortLine());
-        printLists(taskList, status = "TODO");
-        System.out.print(InputOutput.shortLine());
-        printLists(taskList, status = "IN PROGRESS");
-        System.out.print(InputOutput.shortLine());
-        printLists(taskList, status = "COMPLETED");
+
+    public int getCardWidth() {
+        return cardWidth;
     }
-    private void printLists(ArrayList<Task> taskList, String status) {
-        System.out.println(status);
 
-        for (Task currentTask : taskList) {
-
-            if (currentTask.getStatus().equals(status)) {
-                System.out.print(InputOutput.superShortLine());
-                System.out.println(currentTask);
-            }
-        }
-        System.out.println(" ");
+    public void setCardWidth(int cardWidth) {
+        this.cardWidth = cardWidth;
     }
-    private void printTaskBoard(ArrayList<Task> taskList){
-        String leftAlignFormat = "| %-36s || %-36s || %-36s |%n";
-        String line =     "+--------------------------------------++--------------------------------------++--------------------------------------+%n";
 
-        System.out.format(line);
-        System.out.format("|                 TODO                 ||             IN PROGRESS              ||              COMPLETED               |%n");
-        System.out.format(line);
-
-        // Temporary tasks
-//        Task task = new Task("Task One", "I need you to do this ASAP", LocalDate.of(2020,12,24), 1);
-//        task.setStatus("COMPLETED");
-//        Task task2 = new Task("Task Two", "Who are you?", LocalDate.of(2020,12,23), 2);
-//        task2.setStatus("COMPLETED");
-//        Task task3 = new Task("Task Three", "The all-seeing unicorn bro", LocalDate.of(2020,12,22), 3);
-//        task3.setStatus("IN PROGRESS");
-//        Task task4 = new Task("Task Four", "Alright then I'll call you Benny", LocalDate.of(2020,12,21), 4);
-//        task4.setStatus("IN PROGRESS");
-//        Task task5 = new Task("Task Five", "This will do", LocalDate.of(2020,12,22), 3);
-//        task5.setStatus("TODO");
-//        Task task6 = new Task("Task Six", "And so Benny and unknown lived happy", LocalDate.of(2020,12,22), 3);
-//        task6.setStatus("TODO");
-
-//        HashMap<String, Task> taskHashMap = new HashMap<>();
-//        taskHashMap.put("1",task);
-//        taskHashMap.put("2",task2);
-//        taskHashMap.put("3",task3);
-//        ArrayList<Task> taskArrayList = new ArrayList<>();
-//        taskArrayList.add(task);
-//        taskArrayList.add(task2);
-//        taskArrayList.add(task3);
-//        taskArrayList.add(task4);
-//        taskArrayList.add(task5);
-//        taskArrayList.add(task6);
-
-        // Separating tasks into different lists
-        ArrayList<Task> todoList = new ArrayList<>();
-        ArrayList<Task> inprogressList = new ArrayList<>();
-        ArrayList<Task> completedList = new ArrayList<>();
-        for (int i = 0; i < taskList.size(); i++) {
-            int counter = 0;
-            Task currentTask = taskList.get(i);
-            if (currentTask.getStatus().equals("TODO")) {
-                todoList.add(currentTask);
-            } else if (currentTask.getStatus().equals("IN PROGRESS")) {
-                inprogressList.add(currentTask);
-            } else if (currentTask.getStatus().equals("COMPLETED")) {
-                completedList.add(currentTask);
-            }
-        }
-
-        // Getting size of list with largest size.
-        int tSize = todoList.size();
-        int iSize = inprogressList.size();
-        int cSize = completedList.size();
-        int largestListSize = 0;
-        if (tSize >= iSize && tSize >= cSize) {
-            largestListSize = tSize;
-        } else if (iSize >= tSize && iSize >= cSize) {
-            largestListSize = iSize;
-        } else if (cSize >= tSize && cSize >= iSize) {
-            largestListSize = cSize;
-        }
-
-        // Here we check some things
-        for (int i = 0; i < largestListSize; i++) {
-            truthChecker(leftAlignFormat, todoList, inprogressList, completedList);
-            if (!todoList.isEmpty()) {
-                todoList.remove(0);
-            }
-            if (!inprogressList.isEmpty()) {
-                inprogressList.remove(0);
-            }
-            if (!completedList.isEmpty()) {
-                completedList.remove(0);
-            }
-        }
-
-//        System.out.format(line);
+    public static String getDividerHorizontalChar() {
+        return dividerHorizontalChar;
     }
-    private void truthChecker(String leftAlignFormat, ArrayList<Task> todoList, ArrayList<Task> inprogressList, ArrayList<Task> completedList) {
-        for (int j = 0; j < 1; j++) {
-            if (todoList.isEmpty() && inprogressList.isEmpty() && completedList.isEmpty()) {
-//            System.out.println("0, 0, 0");
-            } else if (todoList.isEmpty() && inprogressList.isEmpty() && !completedList.isEmpty()) {
-                leftAlignFormat = "  %-36s    %-36s  | %-36s |%n";
 
-                for (int i = 0; i < 1; i++) {
-                    System.out.format(leftAlignFormat,
-                            "",
-                            "",
-                            "Title: " + completedList.get(i).getTitle()
-                    );
-                    System.out.format(leftAlignFormat,
-                            "",
-                            "",
-                            "-----"
-                    );
-                    System.out.format(leftAlignFormat,
-                            "",
-                            "",
-                            completedList.get(i).getDescription()
-                    );
-                    System.out.format(leftAlignFormat, "", "", "");
-                    System.out.format(leftAlignFormat,
-                            "",
-                            "",
-                            "-----"
-                    );
+    public static void setDividerHorizontalChar(String dividerHorizontalChar) {
+        TaskTable.dividerHorizontalChar = dividerHorizontalChar;
+    }
 
-                    System.out.format(leftAlignFormat,
-                            "",
-                            "",
-                            "Due:      " + completedList.get(i).getDueDate()
-                    );
-                    System.out.format(leftAlignFormat,
-                            "",
-                            "",
-                            "Priority: " + completedList.get(i).getPriority()
-                    );
-                    System.out.format(leftAlignFormat,
-                            "Start Date: " + todoList.get(i).getStartDate(),
-                            "",
-                            ""
-                    );
-                    System.out.format(leftAlignFormat,
-                            "Assigned: " + "Wario",
-                            "",
-                            ""
-                    );
-                    System.out.format(leftAlignFormat,
-                            todoList.get(i).getId().toString(),
-                            "",
-                            ""
-                    );
-                }
-                System.out.format("                                                                                +--------------------------------------+%n");
-//                todoList.remove(j);
-//                inprogressList.remove(j);
-//                completedList.remove(j);
-//            System.out.println("0, 0, C");
-            } else if (todoList.isEmpty() && !inprogressList.isEmpty() && completedList.isEmpty()) {
-                leftAlignFormat = "  %-36s  | %-36s |  %-36s  %n";
+    public static String getDividerCornerChar() {
+        return dividerCornerChar;
+    }
 
-//                for (int i = 0; i < 1; i++) {
-                System.out.format(leftAlignFormat,
-                        "",
-                        "Title: " + inprogressList.get(j).getTitle(),
-                        ""
-                );
-                System.out.format(leftAlignFormat,
-                        "",
-                        "-----",
-                        ""
-                );
-                System.out.format(leftAlignFormat,
-                        "",
-                        inprogressList.get(j).getDescription(),
-                        ""
-                );
-                System.out.format(leftAlignFormat, "", "", "");
-                System.out.format(leftAlignFormat,
-                        "",
-                        "-----",
-                        ""
-                );
+    public static void setDividerCornerChar(String dividerCornerChar) {
+        TaskTable.dividerCornerChar = dividerCornerChar;
+    }
 
-                System.out.format(leftAlignFormat,
-                        "",
-                        "Due:      " + inprogressList.get(j).getDueDate(),
-                        ""
-                );
-                System.out.format(leftAlignFormat,
-                        "",
-                        "Priority: " + inprogressList.get(j).getPriority(),
-                        ""
-                );
-                System.out.format(leftAlignFormat,
-                        "",
-                        "Start Date: " + inprogressList.get(j).getStartDate(),
-                        ""
-                );
-                System.out.format(leftAlignFormat,
-                        "",
-                        "Assigned: " + "Wario",
-                        ""
-                );
-                System.out.format(leftAlignFormat,
-                        "",
-                        inprogressList.get(j).getId().toString(),
-                        ""
-                );
-//                }
-                System.out.format("                                        +--------------------------------------+                                        %n");
-//                todoList.remove(j);
-//                inprogressList.remove(j);
-//                completedList.remove(j);
-//            System.out.println("0, IP, 0");
-            } else if (todoList.isEmpty() && !inprogressList.isEmpty() && !completedList.isEmpty()) {
-                leftAlignFormat = "  %-36s  | %-36s || %-36s |%n";
+    public static String getCardBorderVerticalChar() {
+        return cardBorderVerticalChar;
+    }
 
-                for (int i = 0; i < 1; i++) {
-                    System.out.format(leftAlignFormat,
-                            "",
-                            "Title: " + inprogressList.get(i).getTitle(),
-                            "Title: " + completedList.get(i).getTitle()
-                    );
-                    System.out.format(leftAlignFormat,
-                            "",
-                            "-----",
-                            "-----"
-                    );
-                    System.out.format(leftAlignFormat,
-                            "",
-                            inprogressList.get(i).getDescription(),
-                            completedList.get(i).getDescription()
-                    );
-                    System.out.format(leftAlignFormat, "", "", "");
-                    System.out.format(leftAlignFormat,
-                            "",
-                            "-----",
-                            "-----"
-                    );
-
-                    System.out.format(leftAlignFormat,
-                            "",
-                            "Due:      " + inprogressList.get(i).getDueDate(),
-                            "Due:      " + completedList.get(i).getDueDate()
-                    );
-                    System.out.format(leftAlignFormat,
-                            "",
-                            "Priority: " + inprogressList.get(i).getPriority(),
-                            "Priority: " + completedList.get(i).getPriority()
-                    );
-                    System.out.format(leftAlignFormat,
-                            "",
-                            "Start Date: " + inprogressList.get(i).getStartDate(),
-                            "Start Date: " + completedList.get(i).getStartDate()
-                    );
-                    System.out.format(leftAlignFormat,
-                            "",
-                            "Assigned: " + "Wario",
-                            "Assigned: " + "Wario"
-                    );
-                    System.out.format(leftAlignFormat,
-                            "",
-                            inprogressList.get(i).getId().toString(),
-                            completedList.get(i).getId().toString()
-                    );
-                }
-                System.out.format("                                        +--------------------------------------++--------------------------------------+%n");
-//                todoList.remove(j);
-//                inprogressList.remove(j);
-//                completedList.remove(j);
-//            System.out.println("0, IP, C");
-            } else if (!todoList.isEmpty() && inprogressList.isEmpty() && completedList.isEmpty()) {
-                leftAlignFormat = "| %-36s |  %-36s    %-36s  %n";
-
-                for (int i = 0; i < 1; i++) {
-                    System.out.format(leftAlignFormat,
-                            "Title: " + todoList.get(i).getTitle(),
-                            "",
-                            ""
-                    );
-                    System.out.format(leftAlignFormat,
-                            "-----",
-                            "",
-                            ""
-                    );
-                    System.out.format(leftAlignFormat,
-                            todoList.get(i).getDescription(),
-                            "",
-                            ""
-                    );
-                    System.out.format(leftAlignFormat, "", "", "");
-                    System.out.format(leftAlignFormat,
-                            "-----",
-                            "",
-                            ""
-                    );
-                    System.out.format(leftAlignFormat,
-                            "Due:      " + todoList.get(i).getDueDate(),
-                            "",
-                            ""
-                    );
-                    System.out.format(leftAlignFormat,
-                            "Priority: " + todoList.get(i).getPriority(),
-                            "",
-                            ""
-                    );
-                    System.out.format(leftAlignFormat,
-                            "Start Date: " + todoList.get(i).getStartDate(),
-                            "",
-                            ""
-                    );
-                    System.out.format(leftAlignFormat,
-                            "Assigned: " + "Wario",
-                            "",
-                            ""
-                    );
-                    System.out.format(leftAlignFormat,
-                            todoList.get(i).getId().toString(),
-                            "",
-                            ""
-                    );
-                }
-                System.out.format("+--------------------------------------+                                                                                %n");
-//                todoList.remove(j);
-//                inprogressList.remove(j);
-//                completedList.remove(j);
-//            System.out.println("T, 0, 0");
-            } else if (!todoList.isEmpty() && inprogressList.isEmpty() && !completedList.isEmpty()) {
-                leftAlignFormat = "| %-36s |  %-36s  | %-36s |%n";
-
-                for (int i = 0; i < 1; i++) {
-                    System.out.format(leftAlignFormat,
-                            "Title: " + todoList.get(i).getTitle(),
-                            "",
-                            "Title: " + completedList.get(i).getTitle()
-                    );
-                    System.out.format(leftAlignFormat,
-                            "-----",
-                            "",
-                            "-----"
-                    );
-                    System.out.format(leftAlignFormat,
-                            todoList.get(i).getDescription(),
-                            "",
-                            completedList.get(i).getDescription()
-                    );
-                    System.out.format(leftAlignFormat, "", "", "");
-                    System.out.format(leftAlignFormat,
-                            "-----",
-                            "",
-                            "-----"
-                    );
-
-                    System.out.format(leftAlignFormat,
-                            "Due:      " + todoList.get(i).getDueDate(),
-                            "",
-                            "Due:      " + completedList.get(i).getDueDate()
-                    );
-                    System.out.format(leftAlignFormat,
-                            "Priority: " + todoList.get(i).getPriority(),
-                            "",
-                            "Priority: " + completedList.get(i).getPriority()
-                    );
-                    System.out.format(leftAlignFormat,
-                            "Start Date: " + todoList.get(i).getStartDate(),
-                            "",
-                            "Start Date: " + completedList.get(i).getStartDate()
-                    );
-                    System.out.format(leftAlignFormat,
-                            "Assigned: " + "Wario",
-                            "",
-                            "Assigned: " + "Wario"
-                    );
-                    System.out.format(leftAlignFormat,
-                            todoList.get(i).getId().toString(),
-                            "",
-                            completedList.get(i).getId().toString()
-                    );
-                }
-                System.out.format("+--------------------------------------+                                        +--------------------------------------+%n");
-//                todoList.remove(j);
-//                inprogressList.remove(j);
-//                completedList.remove(j);
-//            System.out.println("T, 0, C");
-            } else if (!todoList.isEmpty() && !inprogressList.isEmpty() && completedList.isEmpty()) {
-                leftAlignFormat = "| %-36s || %-36s |%n";
-
-                for (int i = 0; i < 1; i++) {
-                    System.out.format(
-                            leftAlignFormat, "Title: " + todoList.get(i).getTitle(), "Title: " + inprogressList.get(i).getTitle(), ""
-                    );
-                    System.out.format(leftAlignFormat, "-----", "-----", "");
-                    System.out.format(
-                            leftAlignFormat, todoList.get(i).getDescription(), inprogressList.get(i).getDescription(), ""
-                    );
-                    System.out.format(leftAlignFormat, "", "", "");
-                    System.out.format(leftAlignFormat, "-----", "-----", "");
-
-                    System.out.format(
-                            leftAlignFormat, "Due:      " + todoList.get(i).getDueDate(), "Due:      " + inprogressList.get(i).getDueDate(), ""
-                    );
-                    System.out.format(
-                            leftAlignFormat, "Priority: " + todoList.get(i).getPriority(), "Priority: " + inprogressList.get(i).getPriority(), ""
-                    );
-                    System.out.format(leftAlignFormat,
-                            "Start Date: " + todoList.get(i).getStartDate(),
-                            "Start Date: " + inprogressList.get(i).getStartDate(),
-                            ""
-                    );
-                    System.out.format(leftAlignFormat,
-                            "Assigned: " + "Wario",
-                            "Assigned: " + "Wario",
-                            ""
-                    );
-                    System.out.format(leftAlignFormat,
-                            todoList.get(i).getId().toString(),
-                            inprogressList.get(i).getId().toString(),
-                            ""
-                    );
-                }
-                System.out.format("+--------------------------------------++--------------------------------------+%n");
-//                todoList.remove(j);
-//                inprogressList.remove(j);
-//                completedList.remove(j);
-//            System.out.println("T, IP, 0");
-            } else if (!todoList.isEmpty() && !inprogressList.isEmpty() && !completedList.isEmpty()) {
-                leftAlignFormat = "| %-36s || %-36s || %-36s |%n";
-
-//                for (int i = 0; i < 1; i++) {
-                System.out.format(leftAlignFormat,
-                        "Title: " + todoList.get(j).getTitle(),
-                        "Title: " + inprogressList.get(j).getTitle(),
-                        "Title: " + completedList.get(j).getTitle()
-                );
-                System.out.format(leftAlignFormat,
-                        "-----",
-                        "-----",
-                        "-----"
-                );
-                System.out.format(leftAlignFormat,
-                        todoList.get(j).getDescription(),
-                        inprogressList.get(j).getDescription(),
-                        completedList.get(j).getDescription()
-                );
-                System.out.format(leftAlignFormat, "", "", "");
-                System.out.format(leftAlignFormat,
-                        "-----",
-                        "-----",
-                        "-----"
-                );
-//                Controller controller = new Controller();
-//                for (int i = 0; i < todoList.get(i).getChecklists().size(); i++) {
-//
-//                    while(todoList.get(i).getChecklists().size() <)
-//                    System.out.format(leftAlignFormat,
-//                            "Checklist: " + todoList.get(i).getChecklists().get(i).getName(),
-//                            "",
-//                            ""
-//                    );
-//                    System.out.format(leftAlignFormat,
-//                            todoList.get(i).getChecklists().get(i).getId(),
-//                            "",
-//                            ""
-//                    );
-//                }
-//                System.out.format(leftAlignFormat,
-//                        "Checklist: " + todoList.get(j).getc,
-//                        "Checklist: " + inprogressList.get(j).getDueDate(),
-//                        "Checklist: " + completedList.get(j).getDueDate()
-//                );
-                System.out.format(leftAlignFormat,
-                        "Due:      " + todoList.get(j).getDueDate(),
-                        "Due:      " + inprogressList.get(j).getDueDate(),
-                        "Due:      " + completedList.get(j).getDueDate()
-                );
-                System.out.format(leftAlignFormat,
-                        "Priority: " + todoList.get(j).getPriority(),
-                        "Priority: " + inprogressList.get(j).getPriority(),
-                        "Priority: " + completedList.get(j).getPriority()
-                );
-                System.out.format(leftAlignFormat,
-                        "Start Date: " + todoList.get(j).getStartDate(),
-                        "Start Date: " + inprogressList.get(j).getStartDate(),
-                        "Start Date: " + completedList.get(j).getStartDate()
-                );
-                System.out.format(leftAlignFormat,
-                        "Assigned: " + "Wario",
-                        "Assigned: " + "Wario",
-                        "Assigned: " + "Wario"
-                );
-                System.out.format(leftAlignFormat,
-                        todoList.get(j).getId().toString(),
-                        inprogressList.get(j).getId().toString(),
-                        completedList.get(j).getId().toString()
-                );
-//                }
-                System.out.format("+--------------------------------------++--------------------------------------++--------------------------------------+%n");
-
-//                todoList.remove(j);
-//                inprogressList.remove(j);
-//                completedList.remove(j);
-//            System.out.println("T, IP, C");
-            }
-        }
+    public static void setCardBorderVerticalChar(String cardBorderVerticalChar) {
+        TaskTable.cardBorderVerticalChar = cardBorderVerticalChar;
     }
 }

@@ -1,4 +1,4 @@
-package view.menu.loggedin.project;
+package view.menu.loggedin.project.taskboard;
 
 import controllers.Controller;
 import utilities.InputOutput;

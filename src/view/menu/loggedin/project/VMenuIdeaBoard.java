@@ -3,6 +3,7 @@ package view.menu.loggedin.project;
 import controllers.Controller;
 import model.project.Idea;
 import view.VMenu;
+import view.menu.loggedin.project.ideaboard.*;
 
 import java.util.ArrayList;
 

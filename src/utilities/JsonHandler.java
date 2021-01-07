@@ -80,7 +80,7 @@ public class JsonHandler {
             // Since we do not save ProjectMembers we have to add them back when we launch the app again.
             addUsersToTheirProjects(database);
 
-            if (isDatabaseNull(database) == false) {
+            if (!isDatabaseNull(database)) {
                 setFoundDatabase(database);
             }
 
@@ -100,10 +100,33 @@ public class JsonHandler {
     //  since we do not save the ProjectMembers in the Project class.
     private void addUsersToTheirProjects(Database database) {
         Collection<User> userList = database.getUserList();
+
+        for (User currentUser : userList) {
+            for (int i = 0; i < currentUser.getProjects().size(); i++) {
+                Project currentProject = currentUser.getProjects().get(i);
+                for (int j = 0; j < currentUser.getRoles().size(); j++) {
+                    String currentRoleId = currentUser.getRoles().get(j).getProjectId();
+
+                    if (currentProject.getId().toString().equals(currentRoleId)){
+
+                        if (currentProject.getProjectMembers() == null) {
+                            ArrayList<User> tempUserList = new ArrayList<>();
+                            tempUserList.add(currentUser);
+                            currentProject.setProjectMembers(tempUserList);
+                        } else {
+                            currentProject.getProjectMembers().add(currentUser);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private void addUsersToTheirProjectsTwo(Database database) {
+        Collection<User> userList = database.getUserList();
         for (User currentUser : userList) {
             for (int i = 0; i < currentUser.getRoles().size(); i++) {
                 String currentRoleId = currentUser.getRoles().get(i).getProjectId();
-
                 for (int j = 0; j < currentUser.getProjects().size(); j++) {
                     Project currentProject = currentUser.getProjects().get(j);
                     String currentProjectId = currentProject.getId().toString();
@@ -121,7 +144,5 @@ public class JsonHandler {
                 }
             }
         }
-
     }
-
 }
