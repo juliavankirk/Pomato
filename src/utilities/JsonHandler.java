@@ -42,7 +42,7 @@ public class JsonHandler {
         GsonBuilder gsonBuilder = new GsonBuilder();
         gsonBuilder.registerTypeAdapter(LocalDate.class, new DateSerializer());
 
-        Gson gson = gsonBuilder.create();
+        Gson gson = gsonBuilder.setPrettyPrinting().create();
 
         FileWriter fileWriter = new FileWriter(fileLocation);
         fileWriter.write(gson.toJson(anyT));
