@@ -11,8 +11,8 @@ public class VMenuImport extends VMenu {
 
     public VMenuImport(VMenu parent) {
         super(parent);
-        mMenuHeader = "Import data";
-        mMenuLabel = "Import data";
+        mMenuHeader = "Imported data";
+        mMenuLabel = "Imported data";
         mMenuQuestion = "Enter choice";
         mSubMenus = new ArrayList<>();
 
