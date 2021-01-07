@@ -3,6 +3,9 @@ package utilities;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 //import com.google.gson.reflect.TypeToken;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.stream.JsonReader;
 import controllers.Controller;
 import model.project.Database;
 import model.project.Project;
@@ -46,7 +49,7 @@ public class JsonHandler {
         fileWriter.close();
     }
 
-    public boolean isDatabaseNull (Database database) {
+    private boolean isDatabaseNull (Database database) {
         JsonHandler jsonHandler = new JsonHandler();
         if ( database == null) {
             return true;
@@ -59,7 +62,7 @@ public class JsonHandler {
         return mFoundDatabase;
     }
 
-    public void setFoundDatabase(Database database) {
+    private void setFoundDatabase(Database database) {
         this.mFoundDatabase = database;
     }
 
@@ -95,6 +98,16 @@ public class JsonHandler {
         }
     }
 
+    public String printDatabase() throws FileNotFoundException {
+        GsonBuilder gsonBuilder = new GsonBuilder();
+        gsonBuilder.registerTypeAdapter(LocalDate.class, new DateDeserializer());
+
+        Gson gson = gsonBuilder.setPrettyPrinting().create();
+        JsonElement json = gson.fromJson(new FileReader("data/database.json"), JsonElement.class);
+        String jsonString = gson.toJson(json);
+        return jsonString;
+    }
+
     // TODO Refactor this monster. It is not working properly.
     //  This nested for loop is supposed to add a User back to a Project,
     //  since we do not save the ProjectMembers in the Project class.
@@ -122,6 +135,13 @@ public class JsonHandler {
         }
     }
 
+
+    /**
+     * OLD METHOD
+     * @param database
+     */
+
+    /*
     private void addUsersToTheirProjectsTwo(Database database) {
         Collection<User> userList = database.getUserList();
         for (User currentUser : userList) {
@@ -145,4 +165,5 @@ public class JsonHandler {
             }
         }
     }
+     */
 }

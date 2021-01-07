@@ -40,22 +40,18 @@ public class Controller {
      */
     public void executeViewsAndDatabase(Controller controller) {
 
-        // Loads the database.json if it is not empty. Loading the database once, when the program starts
-        JsonHandler jsonHandler = new JsonHandler();
-        try {
-            jsonHandler.loadDatabase();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        Database temporaryDatabase = new Database();
-        temporaryDatabase = jsonHandler.getFoundDatabase();
-        if (temporaryDatabase != null) {
-            mDatabase = temporaryDatabase;
-        }
+        // Loads the .json file.
+        loadJSON();
 
         // This is the loop that keeps us within the different menu's
         // Since we are always in a menu this will always run.
         while (mCurrentMenu != null) {
+
+            // Saves the entire database
+            if (mDatabase != null) {
+                JsonHandler jsonHandler = new JsonHandler();
+                jsonHandler.saveDatabase(controller);
+            }
 
             // The method ".executeMenu" in the class "VMenu" returns the "chosenMenu",
             // which means that "mCurrentMenu" becomes the "chosenMenu".
@@ -562,95 +558,6 @@ public class Controller {
         }
     }
 
-
-    /**
-     * Method for saving DATABASE to a file:
-     */
-/*
-    public void saveDatabase() {
-        String fileLocation = "data/database.ser";
-
-        try {
-            FileOutputStream fileOut = new FileOutputStream(fileLocation);
-            ObjectOutputStream outStream = new ObjectOutputStream(fileOut);
-            outStream.writeObject(mDatabase);
-            outStream.close();
-            fileOut.close();
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-    }
-
-    public void loadDatabase() {
-        String fileLocation = "data/database.ser";
-//        mDatabase = null;
-
-        try {
-            FileInputStream fileInput = new FileInputStream(fileLocation);
-            ObjectInputStream inputStream = new ObjectInputStream(fileInput);
-            mDatabase = (Database) inputStream.readObject();
-            inputStream.close();
-            fileInput.close();
-        }
-        catch (IOException ioEx) {
-            ioEx.printStackTrace();
-            return;
-        }
-        catch (ClassNotFoundException classEx) {
-            classEx.printStackTrace();
-            return;
-        }
-    }
-*/
-
-
-    public void loadDatabaseTwo() {
-
-        String STORAGE = "./src/STORAGE.csv";
-
-        try {
-            File customerFile = new File(STORAGE);
-            FileReader fileReader = new FileReader(customerFile);
-            BufferedReader bufferedReader = new BufferedReader(fileReader);
-            String line = null;
-            while ((line = bufferedReader.readLine()) != null) {
-                String[] retrievedInfo = line.split(";");
-                if (retrievedInfo[0].equals("User")) {
-                    if (checkUsername(retrievedInfo[3]).equals(retrievedInfo[3])) {
-                        User user = new User(retrievedInfo[3], retrievedInfo[1], retrievedInfo[2],
-                                retrievedInfo[4], retrievedInfo[5], Double.parseDouble(retrievedInfo[6]), retrievedInfo[7]);
-
-                        for (int i = 0; i < (retrievedInfo.length - 8); i = i + 2) {
-                            Project project = searchProjectByTitle(retrievedInfo[i + 8]);
-                            if (!(user.getProjects().contains(project))) {
-                                user.getProjects().add(project);
-                            }
-                            if (!(project.getProjectMembers().contains(user.getUserName()))) {
-                                project.getProjectMembers().add(user);
-                                project.getProjectMemberUUIDs().add(user.getId());
-                            }
-                            user.addRole(project.getId().toString());
-                            if (!(user.getRole(project.getId().toString()).equals(retrievedInfo[i + 9]))) {
-                                user.changeRole(project.getId().toString());
-                            }
-                        }
-                        mDatabase.addUser(user);
-                    }
-                    System.out.println("Added: " + Arrays.toString(retrievedInfo));
-                }
-            }
-
-        } catch (FileNotFoundException e) {
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public Database getDatabase() {
-        return mDatabase;
-    }
-
     public void sendMessage(String recipient, String subject, String content) {
         Messages message = new Messages(getCurrentUser().getId(), subject, content);
         for (User userMsgVar : mDatabase.getUserList()) {
@@ -758,6 +665,116 @@ public class Controller {
        return mySalary;
     }
 
+    // This method will load the database.json if it is not empty. Loading the database once, when the program starts
+    public void loadJSON() {
+        JsonHandler jsonHandler = new JsonHandler();
+        try {
+            jsonHandler.loadDatabase();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        Database temporaryDatabase = new Database();
+        temporaryDatabase = jsonHandler.getFoundDatabase();
+        if (temporaryDatabase != null) {
+            mDatabase = temporaryDatabase;
+        }
+    }
+
+    public Database getDatabase() {
+        return mDatabase;
+    }
+
+
+    /**
+     * OLD CODE:
+     */
+
+
+    /**
+     * Method for saving DATABASE to a file:
+     */
+/*
+    public void saveDatabase() {
+        String fileLocation = "data/database.ser";
+
+        try {
+            FileOutputStream fileOut = new FileOutputStream(fileLocation);
+            ObjectOutputStream outStream = new ObjectOutputStream(fileOut);
+            outStream.writeObject(mDatabase);
+            outStream.close();
+            fileOut.close();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public void loadDatabase() {
+        String fileLocation = "data/database.ser";
+//        mDatabase = null;
+
+        try {
+            FileInputStream fileInput = new FileInputStream(fileLocation);
+            ObjectInputStream inputStream = new ObjectInputStream(fileInput);
+            mDatabase = (Database) inputStream.readObject();
+            inputStream.close();
+            fileInput.close();
+        }
+        catch (IOException ioEx) {
+            ioEx.printStackTrace();
+            return;
+        }
+        catch (ClassNotFoundException classEx) {
+            classEx.printStackTrace();
+            return;
+        }
+    }
+*/
+
+/*
+    public void loadDatabaseTwo() {
+
+        String STORAGE = "./src/STORAGE.csv";
+
+        try {
+            File customerFile = new File(STORAGE);
+            FileReader fileReader = new FileReader(customerFile);
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+            String line = null;
+            while ((line = bufferedReader.readLine()) != null) {
+                String[] retrievedInfo = line.split(";");
+                if (retrievedInfo[0].equals("User")) {
+                    if (checkUsername(retrievedInfo[3]).equals(retrievedInfo[3])) {
+                        User user = new User(retrievedInfo[3], retrievedInfo[1], retrievedInfo[2],
+                                retrievedInfo[4], retrievedInfo[5], Double.parseDouble(retrievedInfo[6]), retrievedInfo[7]);
+
+                        for (int i = 0; i < (retrievedInfo.length - 8); i = i + 2) {
+                            Project project = searchProjectByTitle(retrievedInfo[i + 8]);
+                            if (!(user.getProjects().contains(project))) {
+                                user.getProjects().add(project);
+                            }
+                            if (!(project.getProjectMembers().contains(user.getUserName()))) {
+                                project.getProjectMembers().add(user);
+                                project.getProjectMemberUUIDs().add(user.getId());
+                            }
+                            user.addRole(project.getId().toString());
+                            if (!(user.getRole(project.getId().toString()).equals(retrievedInfo[i + 9]))) {
+                                user.changeRole(project.getId().toString());
+                            }
+                        }
+                        mDatabase.addUser(user);
+                    }
+                    System.out.println("Added: " + Arrays.toString(retrievedInfo));
+                }
+            }
+
+        } catch (FileNotFoundException e) {
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+ */
 
     // Check only part of ID.
 //    public boolean checkIdWithDatabase(String inputId,  checkWithId){

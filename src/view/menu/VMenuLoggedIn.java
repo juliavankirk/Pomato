@@ -35,10 +35,6 @@ public class VMenuLoggedIn extends VMenu {
      */
     @Override
     public void menuContent(Controller controller) {
-        // Saves the entire database
-        JsonHandler jsonHandler = new JsonHandler();
-        jsonHandler.saveDatabase(controller);
-
         addSubMenus(controller);
     }
 
