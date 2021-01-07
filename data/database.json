@@ -1,7 +1,7 @@
 {
   "mUserList": {
     "78f47405-a665-4803-a170-b40084773e51": {
-      "mUserName": "lucas",
+      "mUserName": "erik",
       "mId": "78f47405-a665-4803-a170-b40084773e51",
       "mFirstName": "Erik",
       "mLastName": "Billgren",
@@ -12,7 +12,7 @@
       "mProjects": [
         {
           "mId": "33fb7af7-e3d2-4b0c-be53-660f3a9af8d7",
-          "mProjectTitle": "Pomato- Project Management Tool",
+          "mProjectTitle": "Pomato - Project Management Tool",
           "mProjectDescription": "Null",
           "mStartDate": "2020-11-02",
           "mDueDate": "2021-01-13",
@@ -36,10 +36,10 @@
       "mTotalWage": 0.0
     },
     "20a944ea-604b-492f-bc1a-f38e77348a19": {
-      "mUserName": "maryam",
+      "mUserName": "linda",
       "mId": "20a944ea-604b-492f-bc1a-f38e77348a19",
-      "mFirstName": "Maryam",
-      "mLastName": "Esmaeli",
+      "mFirstName": "Linda",
+      "mLastName": "Bergman",
       "mPassword": "123",
       "mCompanyName": "PomatoTeam",
       "mJobTitle": "Developer",
