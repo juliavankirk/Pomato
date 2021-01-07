@@ -1,6 +1,7 @@
 package view.menu.loggedin.account;
 
 import controllers.Controller;
+import utilities.InputErrors;
 import utilities.InputOutput;
 import view.VMenu;
 
@@ -17,7 +18,7 @@ public class VMenuRemoveUser extends VMenu {
     @Override
     public void menuContent(Controller controller) {
 
-        String Id = InputOutput.inputString("Please enter your ID");
-        controller.removeUser(Id);
+        String username = InputErrors.emptyFieldString(InputOutput.inputString("Please enter your username"));
+        System.out.println(controller.removeUser(username));
     }
 }

@@ -60,5 +60,6 @@ public class VMenuMessage extends VMenu {
 
 
         // TODO personal message center?
+
     }
 }

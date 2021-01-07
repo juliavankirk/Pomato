@@ -7,7 +7,6 @@ import utilities.JsonHandler;
 import view.VMenu;
 import view.menu.VMenuMain;
 
-import javax.xml.crypto.Data;
 import java.io.*;
 import java.time.LocalDate;
 import java.util.*;
@@ -366,8 +365,16 @@ public class Controller {
         System.out.println("Your username is: " + user.getUserName() + "\nYour password is: " + user.getPassword());
     }
 
-    public void removeUser(String id) {
-        mDatabase.removeUser(UUID.fromString(id));
+    public String removeUser(String username) {
+        Collection<User> userList = mDatabase.getUserList();
+        String realUsername = getCurrentUser().getUserName();
+        if (username.equals(realUsername)) {
+            getCurrentUser().getProjects().clear();
+            mDatabase.getUserList().remove(getCurrentUser());
+            return "You are no longer a user of Pomato.";
+
+        }
+        return "You entered a wrong username.";
     }
 
 
