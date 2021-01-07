@@ -47,11 +47,12 @@ public class Controller {
         // Since we are always in a menu this will always run.
         while (mCurrentMenu != null) {
 
-            // Saves the entire database
-            if (mDatabase != null) {
-                JsonHandler jsonHandler = new JsonHandler();
-                jsonHandler.saveDatabase(controller);
-            }
+            //TODO Fix this:
+//            // Saves the entire database
+//            if (mDatabase != null) {
+//                JsonHandler jsonHandler = new JsonHandler();
+//                jsonHandler.saveDatabase(controller);
+//            }
 
             // The method ".executeMenu" in the class "VMenu" returns the "chosenMenu",
             // which means that "mCurrentMenu" becomes the "chosenMenu".
@@ -67,10 +68,10 @@ public class Controller {
     public void addTask(String title, String description, LocalDate dueDate, LocalDate startDate,
                            double estimatedTime, int priority, ArrayList<String> assignees) {
         Task task = new Task(title, description, dueDate, startDate, estimatedTime, priority);
-        getCurrentProject().addTaskToList(task);
+
         String taskId = task.getId().toString();
 
-        assignMembers(assignees);
+        assignMembers(assignees, task);
 
         mCurrentProject.addActivity(task.getTitle() + "\n" +
                 getCurrentUser().getName() + " has created this task on" +  " " + java.time.LocalTime.now() +
@@ -113,14 +114,21 @@ public class Controller {
         return null;
     }
 
-    public void assignMembers(ArrayList<String> assignees) {
+    public void assignMembers(ArrayList<String> assignees, Task task) {
         Collection<User> users = mDatabase.getUserList();
 
         for ( String assignee : assignees ) {
             for ( User employee : users ) {
                 if ( employee.getUserName().equals(assignee) ) {
+
+                    // Set the current task
+                    mCurrentTask = task;
                     mCurrentTask.getUserList().add(employee);
+
+                    // add the task to an employee and to the project.
                     employee.getTask().add(mCurrentTask);
+                    getCurrentProject().addTaskToList(task);
+
                 }
             }
         }
@@ -411,6 +419,7 @@ public class Controller {
                     someOne.getProjects().add(project);
                     someOne.addRole(projectId);
 
+                    mDatabase.addProject(project);
                     project.getProjectMemberUUIDs().add(someOne.getId());
                 }
             }
@@ -432,7 +441,7 @@ public class Controller {
         return "\n" + getCurrentUser().getFirstName() + " " + getCurrentUser().getLastName() + " is the manager of this project now ;)";
     }
 
-    public ArrayList<Project> getProjects() {
+    public ArrayList<Project> getProjectsForCurrentUser() {
         return getCurrentUser().getProjects();
     }
 
@@ -728,6 +737,13 @@ public class Controller {
         return mDatabase;
     }
 
+    public Task getCurrentTask() {
+        return mCurrentTask;
+    }
+
+    public void setCurrentTask(Task mCurrentTask) {
+        this.mCurrentTask = mCurrentTask;
+    }
 
     /**
      * OLD CODE:

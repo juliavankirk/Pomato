@@ -1,13 +1,12 @@
 package model.project;
 
+import com.google.gson.annotations.Expose;
 import model.users.User;
-import view.VMenu;
 
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.UUID;
 
 public class Task implements Serializable {
@@ -23,7 +22,12 @@ public class Task implements Serializable {
     private String mStatus;
     private Boolean mCompletion;
     private ArrayList<Checklist> mChecklists;
-    private ArrayList<User> mUser;
+
+    // I need to do this "transient" otherwise we get into a loop since we store User in Project and Project in User.
+    // "transient" is the alternative to "@Expose", which can determine if an attribute can be serialized or deserialized.
+    // This means that we do not store this information, for now.
+    @Expose(serialize = false, deserialize = false)
+    private transient ArrayList<User> mUserList;
 
     //Do we have to initialize startDate in constructor? Its already set?
     public Task(String title, String description, LocalDate dueDate, LocalDate startDate,
@@ -40,6 +44,7 @@ public class Task implements Serializable {
         mStatus = "TODO";
         mCompletion = false;
         mChecklists = new ArrayList<>();
+        mUserList = new ArrayList<>();
     }
 
     public UUID getId() { return mId; }
@@ -99,13 +104,17 @@ public class Task implements Serializable {
     public void addChecklist(Checklist checklist){ mChecklists.add(checklist);}
     public void removeChecklist(int id){ mChecklists.remove(id);}
 
-    public ArrayList<User> getUserList() { return mUser; }
+    public ArrayList<User> getUserList() { return mUserList; }
 
-    public User getUserById ( int id ) { return mUser.get(id);}
+    public void setUserList(ArrayList<User> userList) {
+        this.mUserList = mUserList;
+    }
 
-    public void addUser(User user) { mUser.add(user); }
+    public User getUserById (int id ) { return mUserList.get(id);}
 
-    public void removeUser(int id) { mUser.remove(id); }
+    public void addUser(User user) { mUserList.add(user); }
+
+    public void removeUser(int id) { mUserList.remove(id); }
 
     public String toString() {
         String retVal = "";

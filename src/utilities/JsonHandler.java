@@ -4,15 +4,11 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 //import com.google.gson.reflect.TypeToken;
 import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.stream.JsonReader;
 import controllers.Controller;
 import model.project.Database;
 import model.project.Project;
-import model.users.Role;
 import model.users.User;
 
-import javax.xml.crypto.Data;
 import java.io.*;
 import java.time.LocalDate;
 import java.util.*;
@@ -21,6 +17,8 @@ public class JsonHandler {
 
     Database mFoundDatabase;
 
+    // TODO FIX THESE:
+    /*
     public void saveDatabase(Controller controller) {
         JsonHandler jsonHandler = new JsonHandler();
         Database database = controller.getDatabase();
@@ -48,6 +46,8 @@ public class JsonHandler {
         fileWriter.write(gson.toJson(anyT));
         fileWriter.close();
     }
+
+     */
 
     private boolean isDatabaseNull (Database database) {
         JsonHandler jsonHandler = new JsonHandler();
@@ -81,7 +81,7 @@ public class JsonHandler {
             database = gson.fromJson(bufferedReader, Database.class);
 
             // Since we do not save ProjectMembers we have to add them back when we launch the app again.
-            addUsersToTheirProjects(database);
+            addUsersToTheirProjectsAndTasks(database);
 
             if (!isDatabaseNull(database)) {
                 setFoundDatabase(database);
@@ -111,8 +111,9 @@ public class JsonHandler {
     // TODO Refactor this monster. It is not working properly.
     //  This nested for loop is supposed to add a User back to a Project,
     //  since we do not save the ProjectMembers in the Project class.
-    private void addUsersToTheirProjects(Database database) {
+    private void addUsersToTheirProjectsAndTasks(Database database) {
         Collection<User> userList = database.getUserList();
+
 
         for (User currentUser : userList) {
             for (int i = 0; i < currentUser.getProjects().size(); i++) {
@@ -131,6 +132,11 @@ public class JsonHandler {
                         }
                     }
                 }
+
+//                //temporary code for dealing with not saving the users working on a task.
+//                for (int k = 0; k < currentProject.getTaskList().size(); k++) {
+//                    currentProject.getTaskList().get(k).setUserList(new ArrayList<User>());
+//                }
             }
         }
     }

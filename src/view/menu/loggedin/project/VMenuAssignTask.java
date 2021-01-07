@@ -35,7 +35,7 @@ public class VMenuAssignTask extends VMenu {
                 answer = InputOutput.inputString("Do you want to continue adding members?(yes/no)");
             }
 
-            controller.assignMembers(assignees);
+            controller.assignMembers(assignees, controller.getCurrentTask());
             System.out.println("New members are successfully added");
         } else {
             System.out.println("You do not have the authority to modify in this section.");

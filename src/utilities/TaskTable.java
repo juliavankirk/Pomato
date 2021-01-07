@@ -3,6 +3,7 @@ package utilities;
 import model.project.Checklist;
 import model.project.ChecklistItem;
 import model.project.Task;
+import model.users.User;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -198,6 +199,10 @@ public class TaskTable {
         taskAttributeStringList.add("Priority: " + String.valueOf(task.getPriority()));
         taskAttributeStringList.add("ID: " + task.getId().toString());
         taskAttributeStringList.add("Status:   " + task.getStatus());
+        for (int i = 0; i < task.getUserList().size(); i++) {
+            User currentUser = task.getUserList().get(i);
+            taskAttributeStringList.add("Assignee " + (i + 1) + ": " + currentUser.getUserName());
+        }
         taskAttributeStringList.add(initHorizontalCardDivider(task));
 
         for (int i = 0; i < task.getChecklists().size(); i++) {

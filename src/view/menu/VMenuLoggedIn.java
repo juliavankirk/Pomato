@@ -5,7 +5,6 @@ import model.project.Project;
 import model.users.User;
 import utilities.InputErrors;
 import utilities.InputOutput;
-import utilities.JsonHandler;
 import view.VMenu;
 import view.menu.loggedin.VMenuAccount;
 import view.menu.loggedin.VMenuCreateProject;
@@ -66,7 +65,7 @@ public class VMenuLoggedIn extends VMenu {
      */
     private void addSubMenus(Controller controller){
         mSubMenus.clear();
-        ArrayList<Project> projectList = controller.getProjects();
+        ArrayList<Project> projectList = controller.getProjectsForCurrentUser();
         User current = controller.getCurrentUser();
 
         for (int i = 0; i < projectList.size(); i++) {
