@@ -2,6 +2,7 @@ package view.menu.loggedin.project;
 
 import controllers.Controller;
 import model.project.Task;
+import utilities.InputErrors;
 import utilities.InputOutput;
 import view.VMenu;
 
@@ -23,7 +24,7 @@ public class VMenuStartTask extends VMenu {
 
         controller.getCurrentUser().getTask().toString();
 
-        String task = InputOutput.inputString("Enter task you would like to start");
+        String task = InputErrors.emptyFieldString(InputOutput.inputString("Enter task you would like to start"));
         for ( Task tasks : taskList) {
             System.out.println(tasks.toString());
         }

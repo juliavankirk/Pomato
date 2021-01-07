@@ -1,13 +1,9 @@
 package view.menu.loggedin;
 
 import controllers.Controller;
-import model.project.Messages;
-import model.users.User;
+import utilities.InputErrors;
 import utilities.InputOutput;
 import view.VMenu;
-
-import java.util.ArrayList;
-import java.util.UUID;
 
 public class VMenuMessage extends VMenu {
 
@@ -26,33 +22,33 @@ public class VMenuMessage extends VMenu {
 
     @Override
     public void menuContent(Controller controller) {
-        int optionSelect = InputOutput.inputInt("Select one of the following options:\n" +
+        int optionSelect = InputErrors.irrelevantInt(InputOutput.inputString("Select one of the following options:\n" +
                 "1. Send a message\n" +
                 "2. View inbox\n" +
                 "3. Delete a message\n" +
-                "4. Return to previous menu\n");
+                "4. Return to previous menu\n"));
 
         switch (optionSelect) {
             case 1 -> {
-                String recipient = InputOutput.inputString(
-                        "Enter recipient username for this message");
+                String recipient = InputErrors.emptyFieldString(InputOutput.inputString(
+                        "Enter recipient username for this message"));
 
-                String subject = InputOutput.inputString("Enter message subject");
-                String content = InputOutput.inputString("Enter message body");
+                String subject = InputErrors.emptyFieldString(InputOutput.inputString("Enter message subject"));
+                String content = InputErrors.emptyFieldString(InputOutput.inputString("Enter message body"));
                 controller.sendMessage(recipient, subject, content);
             }
 
             case 2 -> {
                 System.out.println("Inbox");
                 controller.showMessages();
-                String input = InputOutput.inputString("Enter message you would like to view");
+                String input = InputErrors.emptyFieldString(InputOutput.inputString("Enter message you would like to view"));
                 controller.viewMessage(input);
             }
 
             case 3 -> {
                 System.out.println("Delete a message");
                 controller.showMessages();
-                String delete = InputOutput.inputString("Select the message you would like to remove");
+                String delete = InputErrors.emptyFieldString(InputOutput.inputString("Select the message you would like to remove"));
                 controller.deleteMessage(delete);
 
             }

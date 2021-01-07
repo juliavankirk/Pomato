@@ -1,10 +1,10 @@
 package view.menu.loggedin.project;
 
 import controllers.Controller;
+import utilities.InputErrors;
 import utilities.InputOutput;
 import view.VMenu;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class VMenuAssignTask extends VMenu {
@@ -28,11 +28,11 @@ public class VMenuAssignTask extends VMenu {
             ArrayList<String> assignees = new ArrayList<String>();
 
             assignees.add(controller.getCurrentUser().getUserName());
-            String answer = InputOutput.inputString("Would you like to add more members?(yes/no)");
+            String answer = InputErrors.incorrectYesOrNo(InputOutput.inputString("Would you like to add more members?(yes/no)"));
             while (answer.equals("yes")) {
-                String memberUsername = InputOutput.inputString("Insert member's username");
+                String memberUsername = InputErrors.emptyFieldString(InputOutput.inputString("Insert member's username"));
                 assignees.add(memberUsername);
-                answer = InputOutput.inputString("Do you want to continue adding members?(yes/no)");
+                answer = InputErrors.incorrectYesOrNo(InputOutput.inputString("Do you want to continue adding members?(yes/no)"));
             }
 
             controller.assignMembers(assignees, controller.getCurrentTask());

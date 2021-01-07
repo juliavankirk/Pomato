@@ -32,18 +32,18 @@ public class VMenuCreateProject extends VMenu {
         pMemberUsername.add(controller.getCurrentUser().getUserName());
         String answer = InputErrors.incorrectYesOrNo(InputOutput.inputString("Would you like to add more members?(yes/no)"));
         while(answer.equals("yes")) {
-            String memberUsername = InputOutput.inputString("Insert member's username");
+            String memberUsername = InputErrors.emptyFieldString(InputOutput.inputString("Insert member's username"));
             pMemberUsername.add(memberUsername);
-            answer = InputOutput.inputString("Do you want to continue adding members?(yes/no)");
+            answer = InputErrors.incorrectYesOrNo(InputOutput.inputString("Do you want to continue adding members?(yes/no)"));
         }
 
 
         LocalDate startDate = InputErrors.checkDateFormat(InputOutput.inputString("Please enter the start date of project (yyyy-mm-dd)"));
         LocalDate dueDate = InputErrors.checkDateFormat(InputOutput.inputString("Please enter due date of project (yyyy-mm-dd)"));
         while (dueDate.isEqual(startDate) || dueDate.isBefore(startDate)){
-            startDate = LocalDate.parse(InputOutput.inputString("Due date must be later than start" +
+            startDate = InputErrors.checkDateFormat(InputOutput.inputString("Due date must be later than start" +
                     " date. Please insert dates one more time.\n Start date"));
-            dueDate = LocalDate.parse(InputOutput.inputString("Due date"));
+            dueDate = InputErrors.checkDateFormat(InputOutput.inputString("Due date"));
         }
 
 

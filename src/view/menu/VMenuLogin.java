@@ -1,6 +1,7 @@
 package view.menu;
 
 import controllers.Controller;
+import utilities.InputErrors;
 import utilities.InputOutput;
 import view.VMenu;
 
@@ -31,8 +32,8 @@ public class VMenuLogin extends VMenu {
     public void menuContent(Controller controller) {
 
         mSubMenus.clear();
-        String userName = InputOutput.inputString("Enter Username");
-        String password = InputOutput.inputString("Enter Password");
+        String userName = InputErrors.emptyFieldString(InputOutput.inputString("Enter Username"));
+        String password = InputErrors.emptyFieldString(InputOutput.inputString("Enter Password"));
 
         String response = controller.logInUser(userName, password);
         System.out.println(response);
