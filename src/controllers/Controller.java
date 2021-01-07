@@ -680,6 +680,50 @@ public class Controller {
         }
     }
 
+    // this method is for loading the .csv file.
+    public void loadDatabaseTwo() {
+
+        String STORAGE = "./src/STORAGE.csv";
+
+        try {
+            File customerFile = new File(STORAGE);
+            FileReader fileReader = new FileReader(customerFile);
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+            String line = null;
+            while ((line = bufferedReader.readLine()) != null) {
+                String[] retrievedInfo = line.split(";");
+                if (retrievedInfo[0].equals("User")) {
+                    if (checkUsername(retrievedInfo[3]).equals(retrievedInfo[3])) {
+                        User user = new User(retrievedInfo[3], retrievedInfo[1], retrievedInfo[2],
+                                retrievedInfo[4], retrievedInfo[5], Double.parseDouble(retrievedInfo[6]), retrievedInfo[7]);
+
+                        for (int i = 0; i < (retrievedInfo.length - 8); i = i + 2) {
+                            Project project = searchProjectByTitle(retrievedInfo[i + 8]);
+                            if (!(user.getProjects().contains(project))) {
+                                user.getProjects().add(project);
+                            }
+                            if (!(project.getProjectMembers().contains(user.getUserName()))) {
+                                project.getProjectMembers().add(user);
+                                project.getProjectMemberUUIDs().add(user.getId());
+                            }
+                            user.addRole(project.getId().toString());
+                            if (!(user.getRole(project.getId().toString()).equals(retrievedInfo[i + 9]))) {
+                                user.changeRole(project.getId().toString());
+                            }
+                        }
+                        mDatabase.addUser(user);
+                    }
+                    System.out.println("Added: " + Arrays.toString(retrievedInfo));
+                }
+            }
+
+        } catch (FileNotFoundException e) {
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public Database getDatabase() {
         return mDatabase;
     }
@@ -729,52 +773,6 @@ public class Controller {
         }
     }
 */
-
-/*
-    public void loadDatabaseTwo() {
-
-        String STORAGE = "./src/STORAGE.csv";
-
-        try {
-            File customerFile = new File(STORAGE);
-            FileReader fileReader = new FileReader(customerFile);
-            BufferedReader bufferedReader = new BufferedReader(fileReader);
-            String line = null;
-            while ((line = bufferedReader.readLine()) != null) {
-                String[] retrievedInfo = line.split(";");
-                if (retrievedInfo[0].equals("User")) {
-                    if (checkUsername(retrievedInfo[3]).equals(retrievedInfo[3])) {
-                        User user = new User(retrievedInfo[3], retrievedInfo[1], retrievedInfo[2],
-                                retrievedInfo[4], retrievedInfo[5], Double.parseDouble(retrievedInfo[6]), retrievedInfo[7]);
-
-                        for (int i = 0; i < (retrievedInfo.length - 8); i = i + 2) {
-                            Project project = searchProjectByTitle(retrievedInfo[i + 8]);
-                            if (!(user.getProjects().contains(project))) {
-                                user.getProjects().add(project);
-                            }
-                            if (!(project.getProjectMembers().contains(user.getUserName()))) {
-                                project.getProjectMembers().add(user);
-                                project.getProjectMemberUUIDs().add(user.getId());
-                            }
-                            user.addRole(project.getId().toString());
-                            if (!(user.getRole(project.getId().toString()).equals(retrievedInfo[i + 9]))) {
-                                user.changeRole(project.getId().toString());
-                            }
-                        }
-                        mDatabase.addUser(user);
-                    }
-                    System.out.println("Added: " + Arrays.toString(retrievedInfo));
-                }
-            }
-
-        } catch (FileNotFoundException e) {
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
- */
 
     // Check only part of ID.
 //    public boolean checkIdWithDatabase(String inputId,  checkWithId){

@@ -67,6 +67,7 @@ public class Project implements Serializable {
         mProjectTitle = title;
         mProjectDescription = "";
         mProjectMembers = new ArrayList<User>();
+        mProjectMemberUUIDs = new ArrayList<>();
 //        mSubTaskList = new ArrayList<>();
         mTaskList = new ArrayList<>();
         mIdeas = new ArrayList<Idea>();
