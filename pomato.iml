@@ -11,5 +11,6 @@
     <orderEntry type="library" name="lib" level="project" />
     <orderEntry type="library" name="javafx.web" level="application" />
     <orderEntry type="library" name="gson" level="project" />
+    <orderEntry type="library" name="gson-2.8.6" level="application" />
   </component>
 </module>

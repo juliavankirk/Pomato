@@ -29,6 +29,11 @@ public class VMenuCreateHoliday extends VMenu {
                 String hDescription = InputErrors.emptyFieldString(InputOutput.inputString("Enter type of Holiday (e.g. parental leave)"));
                 LocalDate hStartDate = InputErrors.checkDateFormat(InputOutput.inputString("Enter start date of the Holiday (yyyy-mm-dd)"));
                 LocalDate hEndDate = InputErrors.checkDateFormat(InputOutput.inputString("Enter end date of the Holiday (yyyy-mm-dd)"));
+                while (hEndDate.isEqual(hStartDate) || hEndDate.isBefore(hStartDate)){
+                    hStartDate = InputErrors.checkDateFormat(InputOutput.inputString("End date must be later than start" +
+                            " date. Please insert dates one more time.\n Start date"));
+                    hEndDate = InputErrors.checkDateFormat(InputOutput.inputString("End date"));
+                }
                 controller.addHoliday(hName, hDescription, hStartDate, hEndDate);
 
                 addMoreHolidays(controller);
