@@ -370,6 +370,7 @@ public class Controller {
         String realUsername = getCurrentUser().getUserName();
         if (username.equals(realUsername)) {
             getCurrentUser().getProjects().clear();
+            getCurrentUser().getRoles().clear();
             mDatabase.getUserList().remove(getCurrentUser());
             return "You are no longer a user of Pomato.";
 
