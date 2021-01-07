@@ -15,42 +15,6 @@
       "mInbox": {},
       "mTotalWage": 0.0
     },
-    "feced120-3764-4ce6-80ba-f2bb9e8b1587": {
-      "mUserName": "234",
-      "mId": "feced120-3764-4ce6-80ba-f2bb9e8b1587",
-      "mFirstName": "Cassie",
-      "mLastName": "Cage",
-      "mPassword": "234",
-      "mCompanyName": "policeDep",
-      "mJobTitle": "police",
-      "mHourlyWage": 52.0,
-      "mProjects": [
-        {
-          "mId": "cc105581-2b12-4cb4-98b3-12a8e9ae1b8f",
-          "mProjectTitle": "mortal kombat",
-          "mProjectDescription": "",
-          "mProjectMemberUUIDs": [
-            "77b32955-9869-44a5-bdaa-3357c916100e",
-            "feced120-3764-4ce6-80ba-f2bb9e8b1587",
-            "add81c75-f6f5-43f7-a166-c38609c93c38",
-            "ac5ddae7-a260-4bce-a7f9-a356bfb53113"
-          ],
-          "mTaskList": [],
-          "mHolidayList": [],
-          "mIdeas": [],
-          "mActivityList": []
-        }
-      ],
-      "mRoles": [
-        {
-          "projectId": "cc105581-2b12-4cb4-98b3-12a8e9ae1b8f",
-          "memberRole": "Developer"
-        }
-      ],
-      "mTasks": [],
-      "mInbox": {},
-      "mTotalWage": 0.0
-    },
     "29e7913b-ea87-4c14-a378-4f364ac9a0db": {
       "mUserName": "covid",
       "mId": "29e7913b-ea87-4c14-a378-4f364ac9a0db",
@@ -217,42 +181,6 @@
         {
           "projectId": "cc105581-2b12-4cb4-98b3-12a8e9ae1b8f",
           "memberRole": "Developer"
-        }
-      ],
-      "mTasks": [],
-      "mInbox": {},
-      "mTotalWage": 0.0
-    },
-    "77b32955-9869-44a5-bdaa-3357c916100e": {
-      "mUserName": "999",
-      "mId": "77b32955-9869-44a5-bdaa-3357c916100e",
-      "mFirstName": "Johnny",
-      "mLastName": "Cage",
-      "mPassword": "999",
-      "mCompanyName": "marshalArt",
-      "mJobTitle": "warrior",
-      "mHourlyWage": 12.0,
-      "mProjects": [
-        {
-          "mId": "cc105581-2b12-4cb4-98b3-12a8e9ae1b8f",
-          "mProjectTitle": "mortal kombat",
-          "mProjectDescription": "",
-          "mProjectMemberUUIDs": [
-            "77b32955-9869-44a5-bdaa-3357c916100e",
-            "feced120-3764-4ce6-80ba-f2bb9e8b1587",
-            "add81c75-f6f5-43f7-a166-c38609c93c38",
-            "ac5ddae7-a260-4bce-a7f9-a356bfb53113"
-          ],
-          "mTaskList": [],
-          "mHolidayList": [],
-          "mIdeas": [],
-          "mActivityList": []
-        }
-      ],
-      "mRoles": [
-        {
-          "projectId": "cc105581-2b12-4cb4-98b3-12a8e9ae1b8f",
-          "memberRole": "Manager"
         }
       ],
       "mTasks": [],
