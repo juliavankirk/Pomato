@@ -1,11 +1,12 @@
 package model.project;
 
+import java.io.Serializable;
 import java.util.UUID;
 
-public class Messages {
-    private UUID mSenderId;
-    private String mSubject;
-    private String mContent;
+public class Messages implements Serializable {
+    private final UUID mSenderId;
+    private final String mSubject;
+    private final String mContent;
     private boolean mStatus;
 
     public Messages(UUID senderId, String subject, String content) {

@@ -1,6 +1,8 @@
 package model.project;
 
+import com.google.gson.annotations.Expose;
 import model.users.User;
+//import utilities.InvalidDataInput;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -11,17 +13,24 @@ import java.util.UUID;
 public class Project implements Serializable {
 
     //Attributes
-    private UUID mId;
+    private final UUID mId;
     private String mProjectTitle;
     private String mProjectDescription;
-    private ArrayList<User> mProjectMembers;
     private LocalDate mStartDate;
     private LocalDate mDueDate;
-    private ArrayList<SubTask> mSubTaskList;
-    private ArrayList <Holiday> mHolidayList;
+
+    // If we want to start saving this class to a json or csv then we need to make the attribute below transient.
+    // @Expose(serialize = false, deserialize = false) private transient ArrayList<User> mProjectMembers;
+    private ArrayList<User> mProjectMembers;
+
+    // Todo - Implement this for storing which user is attached to a Project( Instead of mProjectMembers):
+    private ArrayList<UUID> mProjectMemberUUIDs;
+
+//    private ArrayList<SubTask> mSubTaskList;
+    private final ArrayList<Task> mTaskList;
+    private final ArrayList <Holiday> mHolidayList;
     private ArrayList<Idea> mIdeas;
-//    private ArrayList<Board> mBoards;
-    private ArrayList<String> mActivityList;
+    private final ArrayList<String> mActivityList;
 
 
 
@@ -31,12 +40,14 @@ public class Project implements Serializable {
         mId = UUID.randomUUID();
         mProjectTitle = projectTitle;
         mProjectDescription = projectDescription;
-        mProjectMembers = new ArrayList<>();
         mStartDate = startDate;
         mDueDate = dueDate;
-        mSubTaskList = new ArrayList<>();
+        mProjectMembers = new ArrayList<>();
+        mProjectMemberUUIDs = new ArrayList<>();
+//        mSubTaskList = new ArrayList<>();
+        mTaskList = new ArrayList<>();
         mHolidayList = new ArrayList<>();
-        mIdeas = new ArrayList<Idea>();
+        mIdeas = new ArrayList<>();
         mActivityList = new ArrayList();
 
 
@@ -44,7 +55,9 @@ public class Project implements Serializable {
 //        mBoards = new ArrayList<Board>();
 //        mPassword = password;
 
-
+//        if (mDueDate.isEqual(mStartDate) || mDueDate.isBefore(mStartDate)){
+//            throw new InvalidDataInput("Invalid input. Due date must come after date of creation.");
+//        }
     }
 
     public Project(String title) {
@@ -52,7 +65,9 @@ public class Project implements Serializable {
         mProjectTitle = title;
         mProjectDescription = "";
         mProjectMembers = new ArrayList<User>();
-        mSubTaskList = new ArrayList<>();
+        mProjectMemberUUIDs = new ArrayList<>();
+//        mSubTaskList = new ArrayList<>();
+        mTaskList = new ArrayList<>();
         mIdeas = new ArrayList<Idea>();
         mHolidayList = new ArrayList<>();
         mActivityList = new ArrayList();
@@ -109,6 +124,14 @@ public class Project implements Serializable {
         mIdeas = Ideas;
     }
 
+    public ArrayList<UUID> getProjectMemberUUIDs() {
+        return mProjectMemberUUIDs;
+    }
+
+    public void setProjectMemberUUIDs(ArrayList<UUID> mProjectMemberUUIDs) {
+        this.mProjectMemberUUIDs = mProjectMemberUUIDs;
+    }
+
     /**
      * Methods
      */
@@ -117,11 +140,11 @@ public class Project implements Serializable {
         return ChronoUnit.DAYS.between(mStartDate, mDueDate);
     }
 
-    public ArrayList<SubTask> getTaskList(){ return mSubTaskList; }
-    public void addTaskToList(SubTask subTask){ mSubTaskList.add(subTask); }
-    public void removeTask(int index){ mSubTaskList.remove(index); }
+    public ArrayList<Task> getTaskList(){ return mTaskList; }
+    public void addTaskToList(Task task){ mTaskList.add(task); }
+    public void removeTask(int index){ mTaskList.remove(index); }
     // public Task getTaskById (UUID id) { return mTaskList.get(id);}
-    public SubTask getTaskById (int index) { return mSubTaskList.get(index);}
+    public Task getTaskById (int index) { return mTaskList.get(index);}
 
     public ArrayList<Holiday> getHolidayList() { return mHolidayList; }
     public void addHolidayToList(Holiday holiday){ mHolidayList.add(holiday); }

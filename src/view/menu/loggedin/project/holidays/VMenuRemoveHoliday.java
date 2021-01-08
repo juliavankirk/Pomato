@@ -1,13 +1,14 @@
-package view.menu.loggedin.project;
+package view.menu.loggedin.project.holidays;
 
 import controllers.Controller;
+import utilities.InputErrors;
 import utilities.InputOutput;
 import view.VMenu;
 
 
 public class VMenuRemoveHoliday extends VMenu {
 
-    VMenuRemoveHoliday(VMenu parent) {
+    public VMenuRemoveHoliday(VMenu parent) {
         super(parent);
         mMenuHeader = "Remove Employee's Holiday";
         mMenuLabel = "Manager: Remove Employee's Holiday";
@@ -20,7 +21,7 @@ public class VMenuRemoveHoliday extends VMenu {
         if (controller.getCurrentUser().getRole(controller.getCurrentProject().getId().toString()).equals("Manager")) {
             String answer = "yes";
             if (answer.equals("yes")) {
-                String developerName = InputOutput.inputString("Please enter developers name to remove Holiday");
+                String developerName = InputErrors.emptyFieldString(InputOutput.inputString("Please enter developers name to remove Holiday"));
                 String remove = controller.removeHolidayFromList(developerName);
                 System.out.println(remove);
             }

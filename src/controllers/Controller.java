@@ -3,6 +3,7 @@ package controllers;
 import model.project.*;
 import model.users.User;
 import utilities.InputOutput;
+import utilities.JsonHandler;
 import view.VMenu;
 import view.menu.VMenuMain;
 
@@ -18,6 +19,7 @@ public class Controller {
     VMenu mCurrentMenu;
     private User mCurrentUser;
     private Project mCurrentProject;
+    private Task mCurrentTask;
 
 
     //Constructor
@@ -26,6 +28,7 @@ public class Controller {
         mCurrentMenu = new VMenuMain(null);
         mCurrentUser = null;
         mCurrentProject = null;
+        mCurrentTask = null;
     }
 
 
@@ -36,15 +39,19 @@ public class Controller {
      */
     public void executeViewsAndDatabase(Controller controller) {
 
-        //Loading the database once, when the program starts
-        loadDatabase();
+        // Loads the .json file.
+        loadJSON();
 
         // This is the loop that keeps us within the different menu's
         // Since we are always in a menu this will always run.
         while (mCurrentMenu != null) {
 
-            // Right now we are saving the database every time we switch view
-            saveDatabase();
+            //TODO Fix this:
+//            // Saves the entire database
+//            if (mDatabase != null) {
+//                JsonHandler jsonHandler = new JsonHandler();
+//                jsonHandler.saveDatabase(controller);
+//            }
 
             // The method ".executeMenu" in the class "VMenu" returns the "chosenMenu",
             // which means that "mCurrentMenu" becomes the "chosenMenu".
@@ -57,16 +64,27 @@ public class Controller {
     /**
      * Handling Task/Tasks
      */
-    public void addSubTask(String title, String description, LocalDate dueDate, LocalDate startDate,
-                           double estimatedTime, int priority) {
-        SubTask subTask = new SubTask(title, description, dueDate, startDate, estimatedTime, priority);
-        getCurrentProject().addTaskToList(subTask);
-        mCurrentProject.addActivity(subTask.getTitle() + "\n" +
-                getCurrentUser().getName() + " has created this task" +  " " + java.time.LocalTime.now());
+    public void addTask(String title, String description, LocalDate dueDate, LocalDate startDate,
+                           double estimatedTime, int priority, ArrayList<String> assignees) {
+        Task task = new Task(title, description, dueDate, startDate, estimatedTime, priority);
+
+        String taskId = task.getId().toString();
+
+        assignMembers(assignees, task);
+
+        mCurrentProject.addActivity(task.getTitle() + "\n" +
+                getCurrentUser().getName() + " has created this task on" +  " " + java.time.LocalTime.now() +
+                "\n\n Assignees for this task are:\n");
+
+        for ( int i = 0; i < task.getUserList().size(); i++ ) {
+                    System.out.print(
+                            task.getUserList().get(i) + "\n"
+                    );
+        }
     }
 
-    public String removeSubTask(String taskId) {
-        SubTask subTask = getTaskById(taskId);
+    public String removeTask(String taskId) {
+        Task task = getTaskById(taskId);
         int taskListSize = getTaskListFromCurrentProject().size();
 
         for (int i = 0; i < taskListSize; i++) {
@@ -74,7 +92,7 @@ public class Controller {
 
             if (stringUuid.toString().equals(taskId)) {
                 getCurrentProject().removeTask(i);
-                mCurrentProject.addActivity(subTask.getTitle() + "\n" +
+                mCurrentProject.addActivity(task.getTitle() + "\n" +
                         getCurrentUser().getName() + " has removed this task" + " " +  java.time.LocalTime.now());
                 return "Task with ID: " + taskId + " has been removed";
             }
@@ -82,7 +100,7 @@ public class Controller {
         return "Task with ID: " + taskId + " was not found";
     }
 
-    public SubTask getTaskById(String taskId) {
+    public Task getTaskById(String taskId) {
         int taskListSize = getTaskListFromCurrentProject().size();
 
         for (int i = 0; i < taskListSize; i++) {
@@ -95,7 +113,29 @@ public class Controller {
         return null;
     }
 
-    public ArrayList<SubTask> getTaskListFromCurrentProject() {
+    public void assignMembers(ArrayList<String> assignees, Task task) {
+        Collection<User> users = mDatabase.getUserList();
+
+        for ( String assignee : assignees ) {
+            for ( User employee : users ) {
+                if ( employee.getUserName().equals(assignee) ) {
+
+                    // Set the current task
+                    mCurrentTask = task;
+                    mCurrentTask.getUserList().add(employee);
+
+                    // add the task to an employee and to the project.
+                    employee.getTask().add(mCurrentTask);
+                    getCurrentProject().addTaskToList(task);
+
+                }
+            }
+        }
+    }
+
+    public ArrayList<Task> getTasksForUser() { return getCurrentUser().getTask(); }
+
+    public ArrayList<Task> getTaskListFromCurrentProject() {
 
         return getCurrentProject().getTaskList();
     }
@@ -105,39 +145,39 @@ public class Controller {
      * Updating Task
      */
     public void updateTaskStatus(String updatedStatus, String taskId){
-        SubTask subTask = getTaskById(taskId);
-        subTask.setStatus(updatedStatus);
-        mCurrentProject.addActivity(subTask.getTitle() + "\n" +
+        Task task = getTaskById(taskId);
+        task.setStatus(updatedStatus);
+        mCurrentProject.addActivity(task.getTitle() + "\n" +
                 getCurrentUser().getName() + " has changed this task status to " + updatedStatus + " " + java.time.LocalTime.now());
     }
     public void updateTaskTitle(String updatedTitle, String taskId){
-        SubTask subTask = getTaskById(taskId);
-        subTask.setTitle(updatedTitle);
-        mCurrentProject.addActivity(subTask.getTitle() + "\n"
+        Task task = getTaskById(taskId);
+        task.setTitle(updatedTitle);
+        mCurrentProject.addActivity(task.getTitle() + "\n"
                 + getCurrentUser().getName() + " has changed this task title to " + updatedTitle +  " " + java.time.LocalTime.now());
     }
     public void updateTaskDescription(String updatedDescription, String taskId){
-        SubTask subTask = getTaskById(taskId);
-        subTask.setDescription(updatedDescription);
-        mCurrentProject.addActivity(subTask.getTitle() + "\n"
+        Task task = getTaskById(taskId);
+        task.setDescription(updatedDescription);
+        mCurrentProject.addActivity(task.getTitle() + "\n"
                 + getCurrentUser().getName() + " has changed this task description to " + updatedDescription +  " " + java.time.LocalTime.now());
     }
     public void updateTaskPriority(int updatedPriority, String taskId){
-        SubTask subTask = getTaskById(taskId);
-        subTask.setPriority(updatedPriority);
-        mCurrentProject.addActivity(subTask.getTitle() + "\n" +
+        Task task = getTaskById(taskId);
+        task.setPriority(updatedPriority);
+        mCurrentProject.addActivity(task.getTitle() + "\n" +
                 getCurrentUser().getName() + " has changed this task priority to " + updatedPriority +  " " + java.time.LocalTime.now());
     }
     public void updateTaskDueDate(LocalDate dueDate, String taskId){
-        SubTask subTask = getTaskById(taskId);
-        subTask.setDueDate(dueDate);
-        mCurrentProject.addActivity(subTask.getTitle() + "\n"
+        Task task = getTaskById(taskId);
+        task.setDueDate(dueDate);
+        mCurrentProject.addActivity(task.getTitle() + "\n"
                 + getCurrentUser().getName() + " has changed this task due date to " + dueDate +  " " + java.time.LocalTime.now());
     }
     public void updateTaskEstimatedTime(Double estimatedTime, String taskId){
-        SubTask subTask = getTaskById(taskId);
-        subTask.setEstimatedTime(estimatedTime);
-        mCurrentProject.addActivity(subTask.getTitle() + "\n"
+        Task task = getTaskById(taskId);
+        task.setEstimatedTime(estimatedTime);
+        mCurrentProject.addActivity(task.getTitle() + "\n"
                 + getCurrentUser().getName() + " has changed this task estimated time to " + estimatedTime +  " " + java.time.LocalTime.now());
     }
 
@@ -157,7 +197,7 @@ public class Controller {
      */
 
     public String addChecklist(String name, String taskId/*, ArrayList<String> itemStringList*/) {
-        SubTask task = getTaskById(taskId);
+        Task task = getTaskById(taskId);
         Checklist checklist = new Checklist(name);
 
 
@@ -181,7 +221,7 @@ public class Controller {
     }
 
     public Checklist getChecklistById(String checklistId, String taskId) {
-        SubTask task = getTaskById(taskId);
+        Task task = getTaskById(taskId);
         int checklistSize = task.getChecklists().size();
         for (int i = 0; i < checklistSize; i++) {
             // get checklist
@@ -196,7 +236,7 @@ public class Controller {
     }
 
     public ArrayList<Checklist> getChecklists(String taskId) {
-        SubTask task = getTaskById(taskId);
+        Task task = getTaskById(taskId);
         return task.getChecklists();
     }
 
@@ -325,8 +365,17 @@ public class Controller {
         System.out.println("Your username is: " + user.getUserName() + "\nYour password is: " + user.getPassword());
     }
 
-    public void removeUser(String id) {
-        mDatabase.removeUser(UUID.fromString(id));
+    public String removeUser(String username) {
+        Collection<User> userList = mDatabase.getUserList();
+        String realUsername = getCurrentUser().getUserName();
+        if (username.equals(realUsername)) {
+            getCurrentUser().getProjects().clear();
+            getCurrentUser().getRoles().clear();
+            mDatabase.getUserList().remove(getCurrentUser());
+            return "You are no longer a user of Pomato.";
+
+        }
+        return "You entered a wrong username.";
     }
 
 
@@ -377,6 +426,9 @@ public class Controller {
                     project.getProjectMembers().add(someOne);
                     someOne.getProjects().add(project);
                     someOne.addRole(projectId);
+
+                    mDatabase.addProject(project);
+                    project.getProjectMemberUUIDs().add(someOne.getId());
                 }
             }
         }
@@ -397,7 +449,7 @@ public class Controller {
         return "\n" + getCurrentUser().getFirstName() + " " + getCurrentUser().getLastName() + " is the manager of this project now ;)";
     }
 
-    public ArrayList<Project> getProjects() {
+    public ArrayList<Project> getProjectsForCurrentUser() {
         return getCurrentUser().getProjects();
     }
 
@@ -410,14 +462,14 @@ public class Controller {
                 if (someOne.getUserName().equals(newMembersUsername) &&
                         !(mCurrentProject.getProjectMembers().contains(someOne.getUserName()))) {
                     mCurrentProject.getProjectMembers().add(someOne);
+                    mCurrentProject.getProjectMemberUUIDs().add(someOne.getId());
+
                     someOne.getProjects().add(mCurrentProject);
                     someOne.addRole(mCurrentProject.getId().toString());
                     System.out.println(someOne.getUserName() + " is successfully added.");
                 }
             }
         }
-
-
     }
 
     public void changeRoles(ArrayList<String> memberUsernames) {
@@ -441,7 +493,7 @@ public class Controller {
     public void setCurrentProject(int chosenProject) {
         mCurrentProject = getCurrentUser().getProjects().get(chosenProject);
 
-        saveDatabase(); // We save the project once it has been accessed
+//        saveDatabase(); // We save the project once it has been accessed
     }
 
     public Project getCurrentProject() {
@@ -472,7 +524,7 @@ public class Controller {
         for (int i = 0; i < holidayListSize; i++) {
         String userName = getHolidayListFromCurrentProject().get(i).getUserName();
 
-        if (developerName.toString().equals(userName)) {
+        if (developerName.equals(userName)) {
             getCurrentProject().removeHoliday(i);
             return developerName + "'s " + "holiday information" + " has been removed";
         }
@@ -520,86 +572,6 @@ public class Controller {
             }
         } else {
             System.out.println("There is still no comment for this idea. You can be the one who adds the first comment.");
-        }
-    }
-
-    /**
-     * Method for saving DATABASE to a file:
-     */
-    public void saveDatabase() {
-        String fileLocation = "data/database.ser";
-
-        try {
-            FileOutputStream fileOut = new FileOutputStream(fileLocation);
-            ObjectOutputStream outStream = new ObjectOutputStream(fileOut);
-            outStream.writeObject(mDatabase);
-            outStream.close();
-            fileOut.close();
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-    }
-
-    public void loadDatabase() {
-        String fileLocation = "data/database.ser";
-//        mDatabase = null;
-
-        try {
-            FileInputStream fileInput = new FileInputStream(fileLocation);
-            ObjectInputStream inputStream = new ObjectInputStream(fileInput);
-            mDatabase = (Database) inputStream.readObject();
-            inputStream.close();
-            fileInput.close();
-        }
-        catch (IOException ioEx) {
-            System.out.println("File is empty");
-            ioEx.printStackTrace();
-            return;
-        }
-        catch (ClassNotFoundException classEx) {
-            System.out.println("Database not found");
-            classEx.printStackTrace();
-            return;
-        }
-    }
-
-
-
-    public void loadDatabaseTwo() {
-
-        String STORAGE = "./src/STORAGE.csv";
-
-        try {
-            File customerFile = new File(STORAGE);
-            FileReader fileReader = new FileReader(customerFile);
-            BufferedReader bufferedReader = new BufferedReader(fileReader);
-            String line = null;
-            while ((line = bufferedReader.readLine()) != null) {
-                String[] retrievedInfo = line.split(";");
-                if (retrievedInfo[0].equals("User")) {
-                    User user = new User(retrievedInfo);
-                    for(int i = 0; i < (retrievedInfo.length - 8); i = i + 2) {
-                        Project project = searchProjectByTitle(retrievedInfo[i + 8]);
-                        user.getProjects().add(project);
-                        if(!(project.getProjectMembers().contains(user.getUserName()))) {
-                            project.getProjectMembers().add(user);
-                        }
-                        user.addRole(project.getId().toString());
-                        if (!(user.getRole(project.getId().toString()).equals(retrievedInfo[i + 9]))) {
-                            user.changeRole(project.getId().toString());
-                        }
-                    }
-                    if (checkUsername(user.getUserName()).equals(user.getUserName())) {
-                        mDatabase.addUser(user);
-                    }
-                    System.out.println("Added: " + Arrays.toString(retrievedInfo));
-                }
-            }
-
-        } catch (FileNotFoundException e) {
-
-        } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 
@@ -662,6 +634,170 @@ public class Controller {
         }
     }
 
+    public void startTask(String task) {
+        Collection<Task> taskList = mDatabase.getTaskList();
+
+        //checks if input matches anything on the task list.
+        for (Task exists : taskList) {
+            if ( exists.getTitle().equals(task)) {
+                mDatabase.startTask(getCurrentUser(), exists, LocalDate.now());
+            }
+        }
+    }
+
+    public void submitTask(String submit) {
+        Collection<Progression> progression = mDatabase.getProgressionList();
+        Progression progress = null;
+
+        for (Progression taskStarted : progression) {
+            if ( submit.equals(taskStarted.getTask().getTitle())) {
+                progress = taskStarted;
+            }
+        }
+
+        if ( null == progress ) {
+            System.out.println("Task does not exist.");
+        } else {
+            Task task = null;
+            for ( int i = 0; i < mDatabase.getTaskList().size(); i++) {
+               if ( mDatabase.getTaskList().get(i).getTitle().equals(submit)) {
+                   task = mDatabase.getTaskList().get(i);
+               }
+            }
+        }
+        progress.submitTask(LocalDate.now());
+
+    }
+
+    public void showAllTasks() {
+        mDatabase.getProgressForUser(getCurrentUser());
+    }
+
+    public Double showTotalSalary() {
+       Double mySalary = 0.0;
+
+       for ( Progression progress : mDatabase.getProgressForUser(getCurrentUser()) ) {
+           mySalary += progress.totalWages();
+       }
+       return mySalary;
+    }
+
+    // This method will load the database.json if it is not empty. Loading the database once, when the program starts
+    public void loadJSON() {
+        JsonHandler jsonHandler = new JsonHandler();
+        try {
+            jsonHandler.loadDatabase();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        Database temporaryDatabase = new Database();
+        temporaryDatabase = jsonHandler.getFoundDatabase();
+        if (temporaryDatabase != null) {
+            mDatabase = temporaryDatabase;
+        }
+    }
+
+    // this method is for loading the .csv file.
+    public void loadDatabaseTwo() {
+
+//        String STORAGE = "./src/STORAGE.csv";
+        String STORAGE = "STORAGE.csv";
+
+        try {
+            File customerFile = new File(STORAGE);
+            FileReader fileReader = new FileReader(customerFile);
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+            String line = null;
+            while ((line = bufferedReader.readLine()) != null) {
+                String[] retrievedInfo = line.split(";");
+                if (retrievedInfo[0].equals("User")) {
+                    if (checkUsername(retrievedInfo[3]).equals(retrievedInfo[3])) {
+                        User user = new User(retrievedInfo[3], retrievedInfo[1], retrievedInfo[2],
+                                retrievedInfo[4], retrievedInfo[5], Double.parseDouble(retrievedInfo[6]), retrievedInfo[7]);
+
+                        for (int i = 0; i < (retrievedInfo.length - 8); i = i + 2) {
+                            Project project = searchProjectByTitle(retrievedInfo[i + 8]);
+                            if (!(user.getProjects().contains(project))) {
+                                user.getProjects().add(project);
+                            }
+                            if (!(project.getProjectMembers().contains(user.getUserName()))) {
+                                project.getProjectMembers().add(user);
+                                project.getProjectMemberUUIDs().add(user.getId());
+                            }
+                            user.addRole(project.getId().toString());
+                            if (!(user.getRole(project.getId().toString()).equals(retrievedInfo[i + 9]))) {
+                                user.changeRole(project.getId().toString());
+                            }
+                        }
+                        mDatabase.addUser(user);
+                    }
+                    System.out.println("Added: " + Arrays.toString(retrievedInfo));
+                }
+            }
+
+        } catch (FileNotFoundException e) {
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public Database getDatabase() {
+        return mDatabase;
+    }
+
+    public Task getCurrentTask() {
+        return mCurrentTask;
+    }
+
+    public void setCurrentTask(Task mCurrentTask) {
+        this.mCurrentTask = mCurrentTask;
+    }
+
+    /**
+     * OLD CODE:
+     */
+
+
+    /**
+     * Method for saving DATABASE to a file:
+     */
+/*
+    public void saveDatabase() {
+        String fileLocation = "data/database.ser";
+
+        try {
+            FileOutputStream fileOut = new FileOutputStream(fileLocation);
+            ObjectOutputStream outStream = new ObjectOutputStream(fileOut);
+            outStream.writeObject(mDatabase);
+            outStream.close();
+            fileOut.close();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public void loadDatabase() {
+        String fileLocation = "data/database.ser";
+//        mDatabase = null;
+
+        try {
+            FileInputStream fileInput = new FileInputStream(fileLocation);
+            ObjectInputStream inputStream = new ObjectInputStream(fileInput);
+            mDatabase = (Database) inputStream.readObject();
+            inputStream.close();
+            fileInput.close();
+        }
+        catch (IOException ioEx) {
+            ioEx.printStackTrace();
+            return;
+        }
+        catch (ClassNotFoundException classEx) {
+            classEx.printStackTrace();
+            return;
+        }
+    }
+*/
 
     // Check only part of ID.
 //    public boolean checkIdWithDatabase(String inputId,  checkWithId){

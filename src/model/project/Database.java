@@ -1,5 +1,6 @@
 package model.project;
 
+import controllers.Controller;
 import model.users.User;
 
 import java.io.Serializable;
@@ -50,15 +51,16 @@ public class Database implements Serializable {
         return progression.totalHours();
     }
 
+    public Collection<Progression> getProgressionList() { return mProgression; }
+
     public Collection<Progression> getProgressForUser(User user) {
         ArrayList<Progression> userProgress = new ArrayList<>();
         for (Progression progress : mProgression) {
-            if (user.getName().equals(progress.getUser().getName())) {
+            if (user.equals(progress.getUser())) {
                 userProgress.add(progress);
             }
         }
         return userProgress;
     }
-
 
 }

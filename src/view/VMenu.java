@@ -102,7 +102,7 @@ public abstract class VMenu {
         if(mSubMenus != null) {
             inputResult = InputErrors.checkMenuChoice(InputOutput.inputString(mMenuQuestion), mSubMenus.size() + 2, 0);
         } else {
-            inputResult = InputErrors.checkMenuChoice(InputOutput.inputString(mMenuQuestion), 1, 0);
+            inputResult = InputErrors.checkMenuChoice(InputOutput.inputString(mMenuQuestion), 2, 0);
         }
 
         if (mSubMenus != null && inputResult > 0 && inputResult < mSubMenus.size() + 1) {

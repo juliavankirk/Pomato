@@ -1,0 +1,98 @@
+{
+  "mUserList": {
+    "02bc864f-0255-4389-b578-e59bc81ca2d4": {
+      "mUserName": "erik",
+      "mId": "02bc864f-0255-4389-b578-e59bc81ca2d4",
+      "mFirstName": "Erik",
+      "mLastName": "billgren",
+      "mPassword": "123",
+      "mCompanyName": "123",
+      "mJobTitle": "Pro",
+      "mHourlyWage": 3.0,
+      "mProjects": [
+        {
+          "mId": "2e06bcb5-2c51-4b79-a056-14ed8f829061",
+          "mProjectTitle": "Test Project",
+          "mProjectDescription": "test",
+          "mStartDate": "2021-01-08",
+          "mDueDate": "2021-12-12",
+          "mProjectMemberUUIDs": [
+            "02bc864f-0255-4389-b578-e59bc81ca2d4",
+            "a4a41f3d-f0f5-401f-aeb8-28a6115b9ebb"
+          ],
+          "mTaskList": [],
+          "mHolidayList": [],
+          "mIdeas": [],
+          "mActivityList": [
+            "Test task 1\nErik billgren has created this task on 13:20:48.727579100\n\n Assignees for this task are:\n"
+          ]
+        }
+      ],
+      "mRoles": [
+        {
+          "projectId": "2e06bcb5-2c51-4b79-a056-14ed8f829061",
+          "memberRole": "Manager"
+        }
+      ],
+      "mTasks": [],
+      "mInbox": {},
+      "mTotalWage": 0.0
+    },
+    "a4a41f3d-f0f5-401f-aeb8-28a6115b9ebb": {
+      "mUserName": "linda",
+      "mId": "a4a41f3d-f0f5-401f-aeb8-28a6115b9ebb",
+      "mFirstName": "Linda",
+      "mLastName": "Dalberg",
+      "mPassword": "123",
+      "mCompanyName": "abc 123",
+      "mJobTitle": "Manager",
+      "mHourlyWage": 4.0,
+      "mProjects": [
+        {
+          "mId": "2e06bcb5-2c51-4b79-a056-14ed8f829061",
+          "mProjectTitle": "Test Project",
+          "mProjectDescription": "test",
+          "mStartDate": "2021-01-08",
+          "mDueDate": "2021-12-12",
+          "mProjectMemberUUIDs": [
+            "02bc864f-0255-4389-b578-e59bc81ca2d4",
+            "a4a41f3d-f0f5-401f-aeb8-28a6115b9ebb"
+          ],
+          "mTaskList": [],
+          "mHolidayList": [],
+          "mIdeas": [],
+          "mActivityList": []
+        }
+      ],
+      "mRoles": [
+        {
+          "projectId": "2e06bcb5-2c51-4b79-a056-14ed8f829061",
+          "memberRole": "Developer"
+        }
+      ],
+      "mTasks": [],
+      "mInbox": {},
+      "mTotalWage": 0.0
+    }
+  },
+  "mProjectList": {
+    "2e06bcb5-2c51-4b79-a056-14ed8f829061": {
+      "mId": "2e06bcb5-2c51-4b79-a056-14ed8f829061",
+      "mProjectTitle": "Test Project",
+      "mProjectDescription": "test",
+      "mStartDate": "2021-01-08",
+      "mDueDate": "2021-12-12",
+      "mProjectMemberUUIDs": [
+        "02bc864f-0255-4389-b578-e59bc81ca2d4",
+        "a4a41f3d-f0f5-401f-aeb8-28a6115b9ebb"
+      ],
+      "mTaskList": [],
+      "mHolidayList": [],
+      "mIdeas": [],
+      "mActivityList": []
+    }
+  },
+  "mTaskList": [],
+  "mProgression": [],
+  "mActivityList": []
+}

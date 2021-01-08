@@ -1,12 +1,11 @@
-package view.menu.loggedin.project;
+package view.menu.loggedin.project.holidays;
 
 import controllers.Controller;
-import model.project.Holiday;
+import utilities.InputErrors;
 import utilities.InputOutput;
 import view.VMenu;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 
 public class VMenuCreateHoliday extends VMenu {
 
@@ -26,10 +25,15 @@ public class VMenuCreateHoliday extends VMenu {
 
                 System.out.println("Please enter the following information\n ");
 
-                String hName = InputOutput.inputString("Enter developers Username");
-                String hDescription = InputOutput.inputString("Enter type of Holiday (e.g. parental leave)");
-                LocalDate hStartDate = LocalDate.parse(InputOutput.inputString("Enter start date of the Holiday (yyyy-mm-dd)"));
-                LocalDate hEndDate = LocalDate.parse(InputOutput.inputString("Enter end date of the Holiday (yyyy-mm-dd)"));
+                String hName = InputErrors.emptyFieldString(InputOutput.inputString("Enter developers Username"));
+                String hDescription = InputErrors.emptyFieldString(InputOutput.inputString("Enter type of Holiday (e.g. parental leave)"));
+                LocalDate hStartDate = InputErrors.checkDateFormat(InputOutput.inputString("Enter start date of the Holiday (yyyy-mm-dd)"));
+                LocalDate hEndDate = InputErrors.checkDateFormat(InputOutput.inputString("Enter end date of the Holiday (yyyy-mm-dd)"));
+                while (hEndDate.isEqual(hStartDate) || hEndDate.isBefore(hStartDate)){
+                    hStartDate = InputErrors.checkDateFormat(InputOutput.inputString("End date must be later than start" +
+                            " date. Please insert dates one more time.\n Start date"));
+                    hEndDate = InputErrors.checkDateFormat(InputOutput.inputString("End date"));
+                }
                 controller.addHoliday(hName, hDescription, hStartDate, hEndDate);
 
                 addMoreHolidays(controller);
@@ -47,15 +51,15 @@ public class VMenuCreateHoliday extends VMenu {
     private void addMoreHolidays (Controller controller) {
         String answer;
 
-        answer = InputOutput.inputString("Would you like to add more Holidays?(yes/no)");
+        answer = InputErrors.incorrectYesOrNo(InputOutput.inputString("Would you like to add more Holidays?(yes/no)"));
         while (answer.equals("yes")) {
-            answer = "";
+            answer = " ";
             menuContent(controller);
         }
 
-
+        }
 
         }
-    }
+
 
 

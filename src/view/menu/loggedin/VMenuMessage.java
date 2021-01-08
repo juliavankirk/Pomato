@@ -7,7 +7,6 @@ import utilities.InputErrors;
 import utilities.InputOutput;
 import view.VMenu;
 
-import java.util.ArrayList;
 import java.util.UUID;
 
 public class VMenuMessage extends VMenu {
@@ -27,11 +26,11 @@ public class VMenuMessage extends VMenu {
 
     @Override
     public void menuContent(Controller controller) {
-        int optionSelect = InputOutput.inputInt("Select one of the following options:\n" +
+        int optionSelect = InputErrors.irrelevantInt(InputOutput.inputString("Select one of the following options:\n" +
                 "1. Send a message\n" +
                 "2. View inbox\n" +
                 "3. Delete a message\n" +
-                "4. Return to previous menu\n");
+                "4. Return to previous menu\n"));
 
         switch (optionSelect) {
             case 1 -> {
@@ -44,7 +43,7 @@ public class VMenuMessage extends VMenu {
             }
 
             case 2 -> {
-                System.out.println("Here are your messages");
+                System.out.println("Inbox");
                 controller.showMessages();
                 String input = InputErrors.emptyFieldString(InputOutput.inputString("Enter message you would like to view"));
                 controller.viewMessage(input);
@@ -65,5 +64,6 @@ public class VMenuMessage extends VMenu {
 
 
         // TODO personal message center?
+
     }
 }

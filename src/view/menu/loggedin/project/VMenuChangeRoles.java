@@ -26,8 +26,8 @@ public class VMenuChangeRoles extends VMenu {
         ArrayList<String> newRolesUsernames = new ArrayList<>();
         String answer = "yes";
         while(answer.equals("yes")) {
-            String newRoleUsername = InputOutput.inputString("Insert the usernames of the members you" +
-                    " wish to change their role");
+            String newRoleUsername = InputErrors.emptyFieldString(InputOutput.inputString("Insert the usernames of the members you" +
+                    " wish to change their role"));
             newRolesUsernames.add(newRoleUsername);
             answer = InputErrors.incorrectYesOrNo(InputOutput.inputString("Would you like to " +
                     "add more usernames?(yes/No)"));

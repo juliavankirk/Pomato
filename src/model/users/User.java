@@ -1,4 +1,5 @@
 package model.users;
+import com.google.gson.annotations.Expose;
 import model.project.Messages;
 import model.project.Project;
 import model.project.Task;
@@ -13,17 +14,18 @@ public class User implements Serializable {
 
     //Attributes
     private String mUserName;
-    private UUID mId;
+    private final UUID mId;
     private String mFirstName;
     private String mLastName;
     private String mPassword;
-    private String mCompanyName;
-    private String mJobTitle;
-    private double mHourlyWage;
-    private ArrayList<Project> mProjects;
-    private ArrayList<Role> mRoles;
-    private HashMap<UUID, ArrayList<Task>> mTasks;
-    private HashMap<UUID, ArrayList<Messages>> mInbox;
+    private final String mCompanyName;
+    private final String mJobTitle;
+    private final double mHourlyWage;
+
+    private final ArrayList<Project> mProjects;
+    private final ArrayList<Role> mRoles;
+    private final ArrayList<Task> mTasks;
+    private final HashMap<UUID, ArrayList<Messages>> mInbox;
 
     private double mTotalWage;
 //    private ArrayList<UUID> mProjectsUserCanAccess;
@@ -42,27 +44,28 @@ public class User implements Serializable {
         mJobTitle = jobTitle;
         mHourlyWage = hourlyWage;
 
+        mTotalWage = 0;
+
         mProjects = new ArrayList<Project>();
         mRoles = new ArrayList<Role>();
-        mTotalWage = 0;
-        mTasks = new HashMap<UUID, ArrayList<Task>>();
+        mTasks = new ArrayList<Task>();
         mInbox = new HashMap<UUID, ArrayList<Messages>>();
 
     }
 
     // Save to .csv:
-    public User(String[] savedAttributes) {
-        mId = UUID.randomUUID();
-        mFirstName= savedAttributes[1];
-        mLastName = savedAttributes[2];
-        mUserName = savedAttributes[3];
-        mPassword = savedAttributes[4];
-        mCompanyName = savedAttributes[5];
-        mHourlyWage = Double.parseDouble(savedAttributes[6]);
-        mJobTitle = savedAttributes[7];
-        mProjects = new ArrayList<Project>();
-        mRoles = new ArrayList<Role>();
-    }
+//    public User(String[] savedAttributes) {
+//        mId = UUID.randomUUID();
+//        mFirstName= savedAttributes[1];
+//        mLastName = savedAttributes[2];
+//        mUserName = savedAttributes[3];
+//        mPassword = savedAttributes[4];
+//        mCompanyName = savedAttributes[5];
+//        mHourlyWage = Double.parseDouble(savedAttributes[6]);
+//        mJobTitle = savedAttributes[7];
+//        mProjects = new ArrayList<Project>();
+//        mRoles = new ArrayList<Role>();
+//    }
 
     //Methods
 
@@ -121,7 +124,9 @@ public class User implements Serializable {
         return mProjects;
     }
 
-    public ArrayList<Messages> getInbox(UUID Id) { return mInbox.get(mId); }
+    public ArrayList<Messages> getInbox(UUID id) { return mInbox.get(id); }
+
+    public ArrayList<Task> getTask() { return mTasks;}
 
     public void addMessage (Messages message) {
         ArrayList<Messages> messages = mInbox.get(message.getSenderId());
@@ -160,6 +165,10 @@ public class User implements Serializable {
         return role;
     }
 
+    public ArrayList<Role> getRoles() {
+        return mRoles;
+    }
+
     public void addRole(String projectId) {
         mRoles.add(new Role(projectId));
     }
@@ -185,5 +194,4 @@ public class User implements Serializable {
     public String toString(){
         return "First name: " + mFirstName + "\nLast name: " + mLastName + "\n";
     }
-
 }

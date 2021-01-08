@@ -1,15 +1,12 @@
 package view.menu.loggedin.project;
 
 import controllers.Controller;
-import model.project.SubTask;
 import model.project.Task;
-import utilities.InputOutput;
 import utilities.TaskTable;
 import view.VMenu;
+import view.menu.loggedin.project.taskboard.*;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.List;
 
 public class VMenuViewTaskBoard extends VMenu {
 
@@ -23,10 +20,11 @@ public class VMenuViewTaskBoard extends VMenu {
         mMenuLabel = "View Task Board";
         mMenuQuestion = "Enter choice";
         mSubMenus = new ArrayList<>();
-        mSubMenus.add(new VMenuCreateSubtask(this));
+        mSubMenus.add(new VMenuCreateTask(this));
         mSubMenus.add(new VMenuRemoveTask(this));
         mSubMenus.add(new VMenuEditTask(this));
         mSubMenus.add(new VMenuAddChecklist(this));
+        mSubMenus.add(new VMenuEditTaskboard(this));
     }
 
 
@@ -35,9 +33,9 @@ public class VMenuViewTaskBoard extends VMenu {
      */
     @Override
     public void menuContent(Controller controller) {
-        ArrayList<SubTask> subTaskList = controller.getTaskListFromCurrentProject();
+        ArrayList<Task> taskList = controller.getTaskListFromCurrentProject();
 
-        TaskTable table = new TaskTable(subTaskList);
+        TaskTable table = new TaskTable(taskList);
         table.print();
     }
 }

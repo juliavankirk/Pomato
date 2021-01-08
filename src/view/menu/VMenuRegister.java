@@ -46,7 +46,7 @@ public class VMenuRegister extends VMenu {
         String message = controller.checkUsername(userName);
         while (!message.equals(userName)) {
             System.out.println(message);
-            userName = InputOutput.inputString("Username");
+            userName = InputErrors.emptyFieldString(InputOutput.inputString("Username"));
             message = controller.checkUsername(userName);
         }
         password = InputErrors.emptyFieldString(InputOutput.inputString("Password"));
@@ -54,7 +54,7 @@ public class VMenuRegister extends VMenu {
         // 2. Send the gathered data to be handled by the controller.
         controller.addUser(userName, firstName, lastName, password, companyName, hourlyWage, jobTitle );
 
-        System.out.println("");
+        System.out.println();
     }
 
 

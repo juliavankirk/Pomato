@@ -2,7 +2,7 @@ package model.users;
 
 import java.io.Serializable;
 
-public class Role implements Serializable {
+public class Role implements Serializable{
 
     /**
      * Attribute
