@@ -1,5 +1,6 @@
 package view.menu.loggedin.project.taskboard;
 
+import utilities.InputErrors;
 import utilities.InputOutput;
 import view.VMenu;
 import controllers.Controller;
@@ -29,22 +30,27 @@ public class VMenuCreateTask extends VMenu {
         ArrayList<String> assignees = new ArrayList<String>();
 
         System.out.println("Please enter the following information\n ");
-        title = InputOutput.inputString("Title");
-        description = InputOutput.inputString("Description");
-        estimatedTime = InputOutput.inputDouble("Estimated Time (hours)");
-        priority = InputOutput.inputIntMinMax("Priority (1-5)",1,5);
-        dueDate = LocalDate.parse(InputOutput.inputString("Due Date (yyyy-mm-dd)"));
+        title = InputErrors.emptyFieldString(InputOutput.inputString("Title"));
+        description = InputErrors.emptyFieldString(InputOutput.inputString("Description"));
+        estimatedTime = InputErrors.irrelevantDouble(InputOutput.inputString("Estimated Time (hours)"));
+        priority = InputErrors.inRangeIntInput(InputErrors.irrelevantInt(InputOutput.inputString("Priority (1-5)")),
+                6,0);
+        dueDate = InputErrors.checkDateFormat(InputOutput.inputString("Due Date (yyyy-mm-dd)"));
         startDate = LocalDate.now();
-        username = InputOutput.inputString("Enter username of employee you would like to assign this to");
+        username = InputErrors.emptyFieldString(InputOutput.inputString("Enter username of" +
+                " employee you would like to assign this to"));
         assignees.add(username);
 
-        String input = InputOutput.inputString("Would you like to assign more members to this task? (yes/no)");
+        String input = InputErrors.incorrectYesOrNo(InputOutput.inputString("Would you " +
+                "like to assign more members to this task? (yes/no)"));
         //possibility to assign other employees to same task
         while(input.equals("yes")) {
-            String otherMembers = InputOutput.inputString("Enter the username of the employee you would like"
-                    + "to assign this task to");
+            String otherMembers = InputErrors.emptyFieldString(InputOutput.inputString("Enter the " +
+                    "username of the employee you would like"
+                    + "to assign this task to"));
             assignees.add(otherMembers);
-            input = InputOutput.inputString("Would you like to assign more members to this task? (yes/no)");
+            input = InputErrors.incorrectYesOrNo(InputOutput.inputString("Would you like " +
+                    "to assign more members to this task? (yes/no)"));
             menuContent(controller);
         }
 
@@ -59,7 +65,7 @@ public class VMenuCreateTask extends VMenu {
     private void addMoreTasks (Controller controller) {
         String answer;
 
-        answer = InputOutput.inputString("Would you like to add more tasks?(yes/no)");
+        answer = InputErrors.incorrectYesOrNo(InputOutput.inputString("Would you like to add more tasks?(yes/no)"));
         while (answer.equals("yes")) {
             answer = "";
             menuContent(controller);

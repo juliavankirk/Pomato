@@ -460,7 +460,7 @@ public class Controller {
         for (String newMembersUsername : newMembersUsernames) {
             for (User someOne : userList) {
                 if (someOne.getUserName().equals(newMembersUsername) &&
-                        !(mCurrentProject.getProjectMembers().contains(someOne.getUserName()))) {
+                        !(mCurrentProject.getProjectMembers().contains(someOne))) {
                     mCurrentProject.getProjectMembers().add(someOne);
                     mCurrentProject.getProjectMemberUUIDs().add(someOne.getId());
 
