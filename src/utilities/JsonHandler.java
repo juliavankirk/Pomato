@@ -111,7 +111,6 @@ public class JsonHandler {
     private void addUsersToTheirProjectsAndTasks(Database database) {
         Collection<User> userList = database.getUserList();
 
-
         for (User currentUser : userList) {
             for (int i = 0; i < currentUser.getProjects().size(); i++) {
                 Project currentProject = currentUser.getProjects().get(i);
