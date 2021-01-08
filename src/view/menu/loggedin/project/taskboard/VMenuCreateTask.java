@@ -51,7 +51,7 @@ public class VMenuCreateTask extends VMenu {
             assignees.add(otherMembers);
             input = InputErrors.incorrectYesOrNo(InputOutput.inputString("Would you like " +
                     "to assign more members to this task? (yes/no)"));
-            menuContent(controller);
+//            menuContent(controller);
         }
 
         controller.addTask(title, description, dueDate, startDate, estimatedTime, priority, assignees);
