@@ -46,8 +46,8 @@ public class InputErrors {
     }
 
     public static int inRangeIntInput (int userInput, int upperRange, int lowerRange) {
-//        if (userInput < upperRange && userInput > lowerRange) {
-        if (userInput <= upperRange && userInput > lowerRange) {
+        if (userInput < upperRange && userInput > lowerRange) {
+//        if (userInput <= upperRange && userInput > lowerRange) {
             return userInput;
         }
         System.err.println("The number you entered is out of range.");
