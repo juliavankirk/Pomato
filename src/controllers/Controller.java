@@ -200,6 +200,9 @@ public class Controller {
 
     public String addChecklist(String name, String taskId/*, ArrayList<String> itemStringList*/) {
         Task task = getTaskById(taskId);
+        if (task == null) {
+            return "the Task ID you entered is incorrect.";
+        } else {
         Checklist checklist = new Checklist(name);
 
 
@@ -219,7 +222,7 @@ public class Controller {
                     getCurrentUser().getName() + " added a checklist with name " + checklist.getName() + " to this task " +  " " + java.time.LocalTime.now());
 
             return "Checklist with name: " + name + " has successfully been created";
-       // }
+       }
     }
 
     public Checklist getChecklistById(String checklistId, String taskId) {
