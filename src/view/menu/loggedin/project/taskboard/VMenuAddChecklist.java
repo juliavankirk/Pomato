@@ -23,11 +23,20 @@ public class VMenuAddChecklist extends VMenu {
         int counter = 0;
 
         id = InputOutput.inputString("Which task would you like to add a checklist to? id");
-        name = InputOutput.inputString("Enter the name of the checklist");
-        //ArrayList<String> itemListTwo = addCheckListItems(itemList, counter);
+        for (int i = 0; i < controller.getCurrentProject().getTaskList().size(); i++) {
 
-        response = controller.addChecklist(name, id /*itemListTwo*/);
-        System.out.println(response);
+            // if the task exists in the current project then we continue adding a checklist.
+            if (controller.getCurrentProject().getTaskList().get(i).getId().equals(id)) {
+                name = InputOutput.inputString("Enter the name of the checklist");
+                //ArrayList<String> itemListTwo = addCheckListItems(itemList, counter);
+
+                response = controller.addChecklist(name, id /*itemListTwo*/);
+                System.out.println(response);
+            }
+        }
+
+        // else we say that the task was not found
+        System.out.println("The task was not found. Please try again.");
 
     }
 
