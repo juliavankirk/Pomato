@@ -32,7 +32,7 @@ public class VMenuEditTask extends VMenu {
         LocalDate updatedDueDate;
         int property, updatedPriority;
 
-        taskId = InputOutput.inputString("Which task do you want to edit? (ID)");
+        taskId = InputErrors.emptyFieldString(InputOutput.inputString("Which task do you want to edit? (ID)"));
         Task task = controller.getTaskById(taskId);
 
         /*When the user have made a change to a property, they will be given the option
@@ -41,7 +41,7 @@ public class VMenuEditTask extends VMenu {
         if (task != null) {
             do {
                 propertyChoices();
-                property = InputOutput.inputInt("Enter your option");
+                property = InputErrors.irrelevantInt(InputOutput.inputString("Enter your option"));
 
 
                     switch (property) {
@@ -50,27 +50,30 @@ public class VMenuEditTask extends VMenu {
                             controller.updateTaskTitle(updatedTitle, taskId);
                         }
                         case 2 -> {
-                            updatedDescription = InputErrors.emptyFieldString(InputOutput.inputString("Enter new description"));
+                            updatedDescription = InputErrors.emptyFieldString(InputOutput.inputString("Enter " +
+                                    "new description"));
                             controller.updateTaskDescription(updatedDescription, taskId);
                         }
                         case 3 -> {
-                            updatedStatus = InputErrors.incorrectStatus(InputOutput.inputString("Enter new Status: \n  (1) TODO, (2)IN PROGRESS or (3)COMPLETED"));
+                            updatedStatus = InputErrors.incorrectStatus(InputOutput.inputString("Enter " +
+                                    "new Status(TODO, IN PROGRESS or COMPLETED)"));
                             controller.updateTaskStatus(updatedStatus, taskId);
                         }
                         case 4 -> {
-                            updatedEstimation = InputErrors.irrelevantDouble(InputOutput.inputString("Enter new Estimated Time(hours)"));
+                            updatedEstimation = InputErrors.irrelevantDouble(InputOutput.inputString("Enter new " +
+                                    "Estimated Time(hours)"));
                             controller.updateTaskEstimatedTime(updatedEstimation, taskId);
                         }
                         case 5 -> {
-                            updatedPriority = InputOutput.inputIntMinMax("Please enter new priority (1-5)", 1, 5);
+                            updatedPriority = InputErrors.inRangeIntInput(InputErrors.irrelevantInt(InputOutput.inputString("Enter new Priority(1-5)")),
+                                    6, 0);
                             controller.updateTaskPriority(updatedPriority, taskId);
                         }
                         case 6 -> {
-
-                           updatedDueDate = InputErrors.checkDateFormat(InputOutput.inputString("Enter new due date (yyyy-mm-dd)"));
-                            while (updatedDueDate.isBefore(task.getStartDate())) {
-                                updatedDueDate = LocalDate.parse(InputOutput.inputString("Due date must be later than start date. Please enter new Due Date one more time (yyyy-mm-dd)\n"));
-                            }
+                            updatedDueDate = InputErrors.checkDateFormat(InputOutput.inputString("Enter new Due Date (yyyy-mm-dd)"));
+//                            while (updatedDueDate.isBefore(task.getStartDate())) {
+//                                updatedDueDate = LocalDate.parse(InputOutput.inputString("Due date must be later than start date. Please enter new Due Date one more time (yyyy-mm-dd)\n"));
+//                            }
 
                             controller.updateTaskDueDate(updatedDueDate, taskId);
                         }
@@ -97,23 +100,23 @@ public class VMenuEditTask extends VMenu {
                         }
 
                         case 10 -> {
-                            checklistId = InputErrors.emptyFieldString(InputOutput.inputString("Please enter checklist ID you would like to add items to"));
+                            checklistId = InputErrors.emptyFieldString(InputOutput.inputString("Please ente" +
+                                    "r checklist ID you would like to add items to"));
                             System.out.println("Please enter the following information\n ");
-
-
-                            do{
-                                id = InputErrors.emptyFieldString(InputOutput.inputString("Id"));
-                                message = controller.checkItemId(id, checklistId, taskId);
-                                System.out.println(message);
-                            }while (!message.equals(id));
+                            id = InputErrors.emptyFieldString(InputOutput.inputString("Id"));
+                            message = controller.checkItemId(id, checklistId, taskId);
+                            System.out.println(message);
+                            if (!message.equals("The checklist Id is invalid.")) {
                                 topic = InputErrors.emptyFieldString(InputOutput.inputString("Topic"));
                                 controller.addChecklistItems(checklistId, taskId, topic, id);
+                            }
                         }
 
                         case 11 ->{
                             checklistId = InputErrors.emptyFieldString(InputOutput.inputString("Please enter checklist ID"));
                             itemId = InputErrors.emptyFieldString(InputOutput.inputString("Please enter checklist item number"));
-                            response = InputErrors.incorrectYesOrNo(InputOutput.inputString("Would you like to change item status to Done? Enter yes/no"));
+                            response = InputErrors.incorrectYesOrNo(InputOutput.inputString("Would you like to change" +
+                                    " item status to Done? Enter yes"));
                             if ( response.equalsIgnoreCase("yes"));
                             controller.updateItemStatus(checklistId,taskId,itemId);
 
@@ -122,7 +125,7 @@ public class VMenuEditTask extends VMenu {
 
                         case 12 -> {
                             checklistId = InputErrors.emptyFieldString(InputOutput.inputString("Please enter checklist ID"));
-                            itemId = InputErrors.emptyFieldString(InputOutput.inputString("please enter checklist item number"));
+                            itemId = InputErrors.emptyFieldString(InputOutput.inputString("please enter checklist item ID"));
                             updatedTopic = InputErrors.emptyFieldString(InputOutput.inputString("Please enter new item topic"));
                             controller.updateItemTopic(updatedTopic,checklistId,taskId,itemId);
                             // Change item topic

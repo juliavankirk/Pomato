@@ -118,7 +118,7 @@ public class Controller {
 
         for ( String assignee : assignees ) {
             for ( User employee : users ) {
-                if ( employee.getUserName().equals(assignee) ) {
+                if ( employee.getUserName().equals(assignee) && getCurrentProject().getProjectMembers().contains(employee)) {
 
                     // Set the current task
                     mCurrentTask = task;
@@ -127,10 +127,12 @@ public class Controller {
                     // add the task to an employee and to the project.
                     employee.getTask().add(mCurrentTask);
                     getCurrentProject().addTaskToList(task);
-
+                    System.out.println(assignee + " is added to this task.");
                 }
             }
         }
+        System.out.println("If a username that you entered is not appeared in here, you probably " +
+                "entered the username incorrectly or they were not a member in this project.");
     }
 
     public ArrayList<Task> getTasksForUser() { return getCurrentUser().getTask(); }
@@ -198,6 +200,9 @@ public class Controller {
 
     public String addChecklist(String name, String taskId/*, ArrayList<String> itemStringList*/) {
         Task task = getTaskById(taskId);
+        if (task == null) {
+            return "the Task ID you entered is incorrect.";
+        } else {
         Checklist checklist = new Checklist(name);
 
 
@@ -217,7 +222,7 @@ public class Controller {
                     getCurrentUser().getName() + " added a checklist with name " + checklist.getName() + " to this task " +  " " + java.time.LocalTime.now());
 
             return "Checklist with name: " + name + " has successfully been created";
-       // }
+       }
     }
 
     public Checklist getChecklistById(String checklistId, String taskId) {
@@ -311,12 +316,17 @@ public class Controller {
 
     public String checkItemId(String enteredId, String checklistId, String taskId){
         Checklist checklist = getChecklistById(checklistId, taskId);
-        ArrayList <ChecklistItem> checklistItems = checklist.getChecklistItems();
-        for (ChecklistItem checklistItem : checklistItems) {
-            if (checklistItem.getId().equals(enteredId)){
-                return "Id: " + enteredId +  "already exists in this checklist, please enter another topic";
+        if (checklist == null) {
+            return "The checklist Id is invalid.";
+        } else {
+            ArrayList<ChecklistItem> checklistItems = checklist.getChecklistItems();
+            for (ChecklistItem checklistItem : checklistItems) {
+                if (checklistItem.getId().equals(enteredId)) {
+                    return "Id: " + enteredId + "already exists in this checklist, please enter another topic";
+                }
             }
-        }return enteredId;
+            return enteredId;
+        }
     }
 
     public String addChecklistItems(String checklistId, String taskId, String topic, String id) {
@@ -460,7 +470,7 @@ public class Controller {
         for (String newMembersUsername : newMembersUsernames) {
             for (User someOne : userList) {
                 if (someOne.getUserName().equals(newMembersUsername) &&
-                        !(mCurrentProject.getProjectMembers().contains(someOne.getUserName()))) {
+                        !(mCurrentProject.getProjectMembers().contains(someOne))) {
                     mCurrentProject.getProjectMembers().add(someOne);
                     mCurrentProject.getProjectMemberUUIDs().add(someOne.getId());
 
