@@ -53,7 +53,12 @@ public class VMenuEditTask extends VMenu {
                             controller.updateTaskDescription(updatedDescription, taskId);
                         }
                         case 3 -> {
+                            // TODO Change the while loop and make it depend on the status attribute instead.
                             updatedStatus = InputOutput.inputString("Enter new Status(TODO, IN PROGRESS or COMPLETED)");
+                            while (!updatedStatus.equals("TODO") && !updatedStatus.equals("IN PROGRESS") && !updatedStatus.equals("COMPLETED") ) {
+                                System.out.println("Please choose the correct status(TODO, IN PROGRESS or COMPLETED)");
+                                updatedStatus = InputOutput.inputString("Enter new Status(TODO, IN PROGRESS or COMPLETED)");
+                            }
                             controller.updateTaskStatus(updatedStatus, taskId);
                         }
                         case 4 -> {
