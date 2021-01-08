@@ -19,16 +19,13 @@ public class Project implements Serializable {
     private LocalDate mStartDate;
     private LocalDate mDueDate;
 
-    // I need to do this "transient" otherwise we get into a loop since we store User in Project and Project in User.
-    // "transient" is the alternative to "@Expose", which can determine if an attribute can be serialized or deserialized.
-    // This means that we do not store this information, for now.
-    @Expose(serialize = false, deserialize = false)
-    private transient ArrayList<User> mProjectMembers;
+    // If we want to start saving this class to a json or csv then we need to make the attribute below transient.
+    // @Expose(serialize = false, deserialize = false) private transient ArrayList<User> mProjectMembers;
+    private ArrayList<User> mProjectMembers;
 
-    // This is temporary until we fix storing the Projects correctly:
+    // Todo - Implement this for storing which user is attached to a Project( Instead of mProjectMembers):
     private ArrayList<UUID> mProjectMemberUUIDs;
 
-//    private ArrayList<SubTask> mSubTaskList;
     private ArrayList<Task> mTaskList;
     private ArrayList <Holiday> mHolidayList;
     private ArrayList<Idea> mIdeas;

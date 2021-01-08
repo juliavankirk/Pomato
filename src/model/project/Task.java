@@ -23,11 +23,9 @@ public class Task implements Serializable {
     private Boolean mCompletion;
     private ArrayList<Checklist> mChecklists;
 
-    // I need to do this "transient" otherwise we get into a loop since we store User in Project and Project in User.
-    // "transient" is the alternative to "@Expose", which can determine if an attribute can be serialized or deserialized.
-    // This means that we do not store this information, for now.
-    @Expose(serialize = false, deserialize = false)
-    private transient ArrayList<User> mUserList;
+    // If we want to start saving this class to a json or csv then we need to make the attribute below transient.
+    // @Expose(serialize = false, deserialize = false) private transient ArrayList<User> mUserList;
+    private ArrayList<User> mUserList;
 
     //Do we have to initialize startDate in constructor? Its already set?
     public Task(String title, String description, LocalDate dueDate, LocalDate startDate,
