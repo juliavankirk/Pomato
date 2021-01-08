@@ -7,10 +7,10 @@ import java.time.LocalDate;
 import java.time.Period;
 
 public class Progression implements Serializable {
-    private User mUser;
+    private final User mUser;
     private Project mProject;
-    private Task mTask;
-    private LocalDate mStartDate;
+    private final Task mTask;
+    private final LocalDate mStartDate;
     private LocalDate mEndDate;
 
     public Progression(User user, Task task, LocalDate startDate) {

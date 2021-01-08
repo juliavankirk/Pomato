@@ -5,6 +5,8 @@ import utilities.InputErrors;
 import utilities.InputOutput;
 import view.VMenu;
 
+import java.util.UUID;
+
 public class VMenuMessage extends VMenu {
 
 
@@ -40,14 +42,18 @@ public class VMenuMessage extends VMenu {
 
             case 2 -> {
                 System.out.println("Inbox");
-                controller.showMessages();
+                for (UUID id : controller.getCurrentUser().getInboxId()) {
+                    System.out.println(id);
+                }
                 String input = InputErrors.emptyFieldString(InputOutput.inputString("Enter message you would like to view"));
                 controller.viewMessage(input);
             }
 
             case 3 -> {
                 System.out.println("Delete a message");
-                controller.showMessages();
+                for (UUID id : controller.getCurrentUser().getInboxId()) {
+                    System.out.println(id);
+                }
                 String delete = InputErrors.emptyFieldString(InputOutput.inputString("Select the message you would like to remove"));
                 controller.deleteMessage(delete);
 

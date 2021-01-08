@@ -10,18 +10,18 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 public class Task implements Serializable {
-    private UUID   mId;
+    private final UUID   mId;
     private String mTitle;
     private String mDescription;
     private double mEstimatedTime;
     private int mPriority;
-    private LocalDate mDateCreated;
+    private final LocalDate mDateCreated;
     private LocalDate mDueDate;
-    private LocalDate mStartDate;
+    private final LocalDate mStartDate;
     private LocalDate mEndDate;
     private String mStatus;
     private Boolean mCompletion;
-    private ArrayList<Checklist> mChecklists;
+    private final ArrayList<Checklist> mChecklists;
 
     // I need to do this "transient" otherwise we get into a loop since we store User in Project and Project in User.
     // "transient" is the alternative to "@Expose", which can determine if an attribute can be serialized or deserialized.

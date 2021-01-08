@@ -46,7 +46,7 @@ public class VMenuIdeaBoard extends VMenu {
                 for (int j = 0; j < ideaLength + 6; j++) {
                     System.out.print("#");
                 }
-                System.out.println("");
+                System.out.println();
 
                 System.out.print("#  Idea Number: " + (i + 1));
                 for(int j = 0; j < (ideaLength - 11 - ideaNum); j++) {
@@ -77,20 +77,20 @@ public class VMenuIdeaBoard extends VMenu {
                 for (int j = 0; j < ideaLength + 6; j++) {
                     System.out.print("#");
                 }
-                System.out.println("");
+                System.out.println();
             }
-            System.out.println("");
+            System.out.println();
         } else {
             String prompt= "There is no idea available for this project yet. Come on people. Be more creative!";
             for (int i = 0; i < prompt.length() + 6 ; i++) {
                 System.out.print("#");
             }
-        System.out.println("");
+        System.out.println();
         System.out.println("#  " + prompt + "  #");
         for (int i = 0; i < prompt.length() + 6 ; i++) {
             System.out.print("#");
         }
-        System.out.println("");
+        System.out.println();
         }
 
     }

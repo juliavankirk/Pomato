@@ -32,7 +32,7 @@ public class VMenuAddIdea extends VMenu {
                 "your brilliant idea for this project"));
         controller.addIdeaToProject(newIdea);
         System.out.println("Your idea is added to the idea board.");
-        System.out.println("");
+        System.out.println();
 
     }
 }

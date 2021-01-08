@@ -43,10 +43,10 @@ public class VMenuEconomicOverview extends VMenu {
                     leftAlignFormat,
                     currentMember.getFirstName() + " " + currentMember.getLastName(),
                     currentMember.getUserName(),
-                    String.valueOf(currentMember.getHourlyWage()) + " SEK",
-                    String.valueOf(currentMember.getHourlyWage() * 8 * 5 * 4.5) + " SEK",
-                    String.valueOf((currentMember.getHourlyWage() * 8 * 5 * 4.5) * 12) + " SEK",
-                    String.valueOf(2) // TODO Get total worked hours?
+                    currentMember.getHourlyWage() + " SEK",
+                    currentMember.getHourlyWage() * 8 * 5 * 4.5 + " SEK",
+                    (currentMember.getHourlyWage() * 8 * 5 * 4.5) * 12 + " SEK",
+                    2 // TODO Get total worked hours?
             );
         }
 
@@ -58,10 +58,10 @@ public class VMenuEconomicOverview extends VMenu {
         System.out.format(line);
         System.out.format(
                 leftAlignFormat,
-                String.valueOf(projectMembers.size()),
-                String.valueOf(totalHourlyWage) + " SEK",
-                String.valueOf(totalHourlyWage * 8 * 5 * 4.5) + " SEK",
-                String.valueOf((totalHourlyWage * 8 * 5 * 4.5) * 12) + " SEK"
+                projectMembers.size(),
+                totalHourlyWage + " SEK",
+                totalHourlyWage * 8 * 5 * 4.5 + " SEK",
+                (totalHourlyWage * 8 * 5 * 4.5) * 12 + " SEK"
 //                String.valueOf(2) // TODO Get total worked hours?
         );
         System.out.format(line);

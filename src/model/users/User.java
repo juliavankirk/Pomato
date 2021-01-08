@@ -15,18 +15,18 @@ public class User implements Serializable {
 
     //Attributes
     private String mUserName;
-    private UUID mId;
+    private final UUID mId;
     private String mFirstName;
     private String mLastName;
     private String mPassword;
-    private String mCompanyName;
-    private String mJobTitle;
-    private double mHourlyWage;
+    private final String mCompanyName;
+    private final String mJobTitle;
+    private final double mHourlyWage;
 
-    private ArrayList<Project> mProjects;
-    private ArrayList<Role> mRoles;
-    private ArrayList<Task> mTasks;
-    private HashMap<UUID, ArrayList<Messages>> mInbox;
+    private final ArrayList<Project> mProjects;
+    private final ArrayList<Role> mRoles;
+    private final ArrayList<Task> mTasks;
+    private final HashMap<UUID, ArrayList<Messages>> mInbox;
 
     private double mTotalWage;
 //    private ArrayList<UUID> mProjectsUserCanAccess;
@@ -122,7 +122,7 @@ public class User implements Serializable {
         return mProjects;
     }
 
-    public ArrayList<Messages> getInbox(UUID Id) { return mInbox.get(mId); }
+    public ArrayList<Messages> getInbox(UUID id) { return mInbox.get(id); }
 
     public ArrayList<Task> getTask() { return mTasks;}
 

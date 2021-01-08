@@ -13,7 +13,7 @@ import java.util.UUID;
 public class Project implements Serializable {
 
     //Attributes
-    private UUID mId;
+    private final UUID mId;
     private String mProjectTitle;
     private String mProjectDescription;
     private LocalDate mStartDate;
@@ -29,10 +29,10 @@ public class Project implements Serializable {
     private ArrayList<UUID> mProjectMemberUUIDs;
 
 //    private ArrayList<SubTask> mSubTaskList;
-    private ArrayList<Task> mTaskList;
-    private ArrayList <Holiday> mHolidayList;
+    private final ArrayList<Task> mTaskList;
+    private final ArrayList <Holiday> mHolidayList;
     private ArrayList<Idea> mIdeas;
-    private ArrayList<String> mActivityList;
+    private final ArrayList<String> mActivityList;
 
 
 

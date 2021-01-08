@@ -51,11 +51,7 @@ public class JsonHandler {
 
     private boolean isDatabaseNull (Database database) {
         JsonHandler jsonHandler = new JsonHandler();
-        if ( database == null) {
-            return true;
-        }
-
-        return false;
+        return database == null;
     }
 
     public Database getFoundDatabase() {

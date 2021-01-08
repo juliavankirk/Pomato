@@ -4,9 +4,9 @@ import java.io.Serializable;
 import java.util.UUID;
 
 public class Messages implements Serializable {
-    private UUID mSenderId;
-    private String mSubject;
-    private String mContent;
+    private final UUID mSenderId;
+    private final String mSubject;
+    private final String mContent;
     private boolean mStatus;
 
     public Messages(UUID senderId, String subject, String content) {

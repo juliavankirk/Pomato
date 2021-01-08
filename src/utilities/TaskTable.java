@@ -23,7 +23,7 @@ public class TaskTable {
     private String cardDivider;
     private int cardRows;
     private int cardColumns;
-    private ArrayList<ArrayList<Task>> taskLists = new ArrayList<>();
+    private final ArrayList<ArrayList<Task>> taskLists = new ArrayList<>();
     private int largestListSize;
 
     public static int cardWidth = 42;
@@ -195,8 +195,8 @@ public class TaskTable {
 
         taskAttributeStringList.add("Created:  " + task.getDateCreated().toString());
         taskAttributeStringList.add("Due:      " + task.getDueDate().toString());
-        taskAttributeStringList.add("Time to complete: " + String.valueOf(task.getEstimatedTime()));
-        taskAttributeStringList.add("Priority: " + String.valueOf(task.getPriority()));
+        taskAttributeStringList.add("Time to complete: " + task.getEstimatedTime());
+        taskAttributeStringList.add("Priority: " + task.getPriority());
         taskAttributeStringList.add("ID: " + task.getId().toString());
         taskAttributeStringList.add("Status:   " + task.getStatus());
         for (int i = 0; i < task.getUserList().size(); i++) {
@@ -231,7 +231,7 @@ public class TaskTable {
     }
     private String createCardLine(String text){
         StringBuilder str = new StringBuilder();                    // 11
-        double remainingchars = (double)this.cardWidth - text.length();     // 19
+        double remainingchars = (double) cardWidth - text.length();     // 19
 
 //        if (remainingchars < 2 && text.charAt(1){
 //
@@ -240,13 +240,13 @@ public class TaskTable {
         if (remainingchars < 2) {
             str
                     .append(" ")
-                    .append(text, 0, Math.max(0,this.cardWidth) - 5)
+                    .append(text, 0, Math.max(0, cardWidth) - 5)
 //                    .append(splitString(text))
                     .append("... ");
         } else {
             str
                     .append(" ")
-                    .append(text, 0, Math.min(Math.max(0,this.cardWidth), text.length()))
+                    .append(text, 0, Math.min(Math.max(0, cardWidth), text.length()))
                     .append((" ").repeat((int)remainingchars - 1));
         }
 //        System.out.println(str);
@@ -257,7 +257,7 @@ public class TaskTable {
     // Method for splitting a string that is too long to fit in a card
     private ArrayList<String> splitString(String text){
         int textLength = text.length();
-        int textRows = textLength/this.cardWidth;
+        int textRows = textLength/ cardWidth;
         ArrayList<String> finalDescriptionRows = new ArrayList<>();
         int startLineIndex= 0;
 
@@ -286,12 +286,12 @@ public class TaskTable {
     private String createTableHeader(String text) {
         StringBuilder str = new StringBuilder();
         int textLength = text.length();                         // 11
-        double remainingchars = this.cardWidth - textLength;    // 19
+        double remainingchars = cardWidth - textLength;    // 19
 
         if (remainingchars < 2) {
             str
                     .append(" ")
-                    .append(text, 0, Math.max(0,this.cardWidth - 5))
+                    .append(text, 0, Math.max(0, cardWidth - 5))
                     .append("... ");
         } else {
             int pre = (int) (remainingchars / 2.0);              // 3
@@ -353,7 +353,7 @@ public class TaskTable {
     }
 
     public void setCardWidth(int cardWidth) {
-        this.cardWidth = cardWidth;
+        TaskTable.cardWidth = cardWidth;
     }
 
     public static String getDividerHorizontalChar() {
