@@ -7,6 +7,7 @@ import utilities.InputOutput;
 import view.VMenu;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class VMenuEditTask extends VMenu {
 
@@ -55,8 +56,18 @@ public class VMenuEditTask extends VMenu {
                             controller.updateTaskDescription(updatedDescription, taskId);
                         }
                         case 3 -> {
-                            updatedStatus = InputErrors.incorrectStatus(InputOutput.inputString("Enter " +
+                            ArrayList<String> correctLists = new ArrayList<>();
+                            correctLists.add("TODO");
+                            correctLists.add("IN PROGRESS");
+                            correctLists.add("COMPLETED");
+
+                            updatedStatus = InputErrors.incorrectStatus(correctLists ,InputOutput.inputString("Enter " +
                                     "new Status(TODO, IN PROGRESS or COMPLETED)"));
+                            while (updatedStatus.equals("wrong")) {
+                                updatedStatus = InputErrors.incorrectStatus(correctLists ,InputOutput.inputString("Please enter " +
+                                        "new Status(TODO, IN PROGRESS or COMPLETED)"));
+                            }
+
                             controller.updateTaskStatus(updatedStatus, taskId);
                         }
                         case 4 -> {

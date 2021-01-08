@@ -2,6 +2,7 @@ package utilities;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 
 public class InputErrors {
     static int correctIntInput;
@@ -92,23 +93,33 @@ public class InputErrors {
             }
         }
     }
-public static String incorrectStatus (String input){
-        switch (input) {
-            case "1" -> {
-                return "TODO";
-            }
-            case "2" -> {
-                return "IN PROGRESS";
-            }
-            case "3" -> {
-                return "COMPLETED";
-            }
-            default -> {
-                System.err.println("Invalid input. You should answer with yes or no.");
-                System.out.println("");
-                input = InputOutput.inputString("Please try again");
-                return incorrectStatus(input);
-            }
-         }
+public static String incorrectStatus (ArrayList<String> correctAnswers, String answer){
+
+
+    for (String currentAnswer : correctAnswers) {
+        if (currentAnswer.equals(answer)) {
+            return currentAnswer;
+        }
+    }
+
+    return "wrong";
+
+//        switch (input) {
+//            case "1" -> {
+//                return "TODO";
+//            }
+//            case "2" -> {
+//                return "IN PROGRESS";
+//            }
+//            case "3" -> {
+//                return "COMPLETED";
+//            }
+//            default -> {
+//                System.err.println("Invalid input. You should answer with yes or no.");
+//                System.out.println("");
+//                input = InputOutput.inputString("Please try again");
+//                return incorrectStatus(input);
+//            }
+//         }
     }
 }
