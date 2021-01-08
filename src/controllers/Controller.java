@@ -322,7 +322,7 @@ public class Controller {
             ArrayList<ChecklistItem> checklistItems = checklist.getChecklistItems();
             for (ChecklistItem checklistItem : checklistItems) {
                 if (checklistItem.getId().equals(enteredId)) {
-                    return "Id: " + enteredId + "already exists in this checklist, please enter another topic";
+                    return "Id: " + enteredId + " already exists in this checklist, please enter another topic";
                 }
             }
             return enteredId;
