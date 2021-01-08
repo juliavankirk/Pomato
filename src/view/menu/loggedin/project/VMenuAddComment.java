@@ -1,6 +1,7 @@
 package view.menu.loggedin.project;
 
 import controllers.Controller;
+import utilities.InputErrors;
 import utilities.InputOutput;
 import view.VMenu;
 
@@ -26,10 +27,15 @@ public class VMenuAddComment extends VMenu {
      */
 
     public void menuContent(Controller controller) {
-
-        int ideaNum = InputOutput.inputInt("Please insert the number of idea you wish to add comment to"); //I don't know if this sentence is grammatically correct. Fix it if it's not.
-        String comment = InputOutput.inputString("Please write your comment");
-        controller.addComment(ideaNum, comment);
-        System.out.println("You successfully made a comment about this idea!");
+        if (controller.getCurrentProject().getIdeas().size() == 0) {
+            System.out.println("There is no idea to add comment for now.");
+        } else {
+            int ideaNum = InputErrors.checkMenuChoice(InputOutput.inputString("Please insert " +
+                    "the number of the idea you wish to add comment to"),
+                    controller.getCurrentProject().getIdeas().size()+1,0);
+            String comment = InputOutput.inputString("Please write your comment");
+            controller.addComment(ideaNum, comment);
+            System.out.println("You successfully made a comment about this idea!");
+        }
     }
 }

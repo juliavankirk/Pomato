@@ -26,8 +26,8 @@ public class Project implements Serializable {
 
 
     //Constructor
-    public Project(String projectTitle, String projectDescription/*, ArrayList<User> projectMembers*/,
-                   LocalDate startDate, LocalDate dueDate/*, String password*/) {
+    public Project(String projectTitle, String projectDescription,
+                   LocalDate startDate, LocalDate dueDate) {
         mId = UUID.randomUUID();
         mProjectTitle = projectTitle;
         mProjectDescription = projectDescription;
@@ -50,9 +50,12 @@ public class Project implements Serializable {
     public Project(String title) {
         mId = UUID.randomUUID();
         mProjectTitle = title;
+        mProjectDescription = "";
         mProjectMembers = new ArrayList<User>();
         mSubTaskList = new ArrayList<>();
         mIdeas = new ArrayList<Idea>();
+        mHolidayList = new ArrayList<>();
+        mActivityList = new ArrayList();
     }
 
     //Getters and Setters

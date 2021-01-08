@@ -5,6 +5,8 @@ import utilities.InputErrors;
 import utilities.InputOutput;
 import view.VMenu;
 
+import java.util.ArrayList;
+
 public class VMenuRegister extends VMenu {
 
 
@@ -17,6 +19,7 @@ public class VMenuRegister extends VMenu {
         mMenuHeader = "Register Form";
         mMenuLabel = "Register";
         mMenuQuestion = "Enter Choice";
+        mSubMenus = new ArrayList<>();
 //        children = null;
     }
 

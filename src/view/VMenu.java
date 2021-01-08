@@ -2,6 +2,7 @@ package view;
 
 
 import controllers.Controller;
+import utilities.InputErrors;
 import utilities.InputOutput;
 
 import java.util.ArrayList;
@@ -96,8 +97,14 @@ public abstract class VMenu {
     // 6. A menu at last contains a question. Where do you want to go?
     public VMenu chooseMenu(VMenu mParent, Controller controller) {
         VMenu chosenVMenu;
+        int inputResult;
 
-        int inputResult = InputOutput.inputInt(mMenuQuestion/*,1,mSubMenus.size() + 1*/);
+        if(mSubMenus != null) {
+            inputResult = InputErrors.checkMenuChoice(InputOutput.inputString(mMenuQuestion), mSubMenus.size() + 2, 0);
+        } else {
+            inputResult = InputErrors.checkMenuChoice(InputOutput.inputString(mMenuQuestion), 1, 0);
+        }
+
         if (mSubMenus != null && inputResult > 0 && inputResult < mSubMenus.size() + 1) {
 
             chosenVMenu = mSubMenus.get(inputResult - 1);

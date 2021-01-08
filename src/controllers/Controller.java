@@ -407,10 +407,12 @@ public class Controller {
 
         for (String newMembersUsername : newMembersUsernames) {
             for (User someOne : userList) {
-                if (someOne.getUserName().equals(newMembersUsername)) {
+                if (someOne.getUserName().equals(newMembersUsername) &&
+                        !(mCurrentProject.getProjectMembers().contains(someOne.getUserName()))) {
                     mCurrentProject.getProjectMembers().add(someOne);
                     someOne.getProjects().add(mCurrentProject);
                     someOne.addRole(mCurrentProject.getId().toString());
+                    System.out.println(someOne.getUserName() + " is successfully added.");
                 }
             }
         }
@@ -424,10 +426,13 @@ public class Controller {
             for (int j = 0; j < getCurrentProject().getProjectMembers().size(); j++) {
                 if (memberUsername.equals(getCurrentProject().getProjectMembers().get(j).getUserName())) {
                     getCurrentProject().getProjectMembers().get(j).changeRole(getCurrentProject().getId().toString());
+                    System.out.println(memberUsername.equals(getCurrentProject().getProjectMembers().get(j).getUserName()) +
+                            "'s role in this project is successfully changed");
                 }
             }
         }
-        System.out.println("Roles are successfully changed");
+        System.out.println("If you cannot find the usernames you entered before in here, you probably " +
+                "entered the usernames incorrectly or those users are not a part of this project. Please try again later.");
     }
 
     /**
@@ -576,7 +581,9 @@ public class Controller {
                     for(int i = 0; i < (retrievedInfo.length - 8); i = i + 2) {
                         Project project = searchProjectByTitle(retrievedInfo[i + 8]);
                         user.getProjects().add(project);
-                        project.getProjectMembers().add(user);
+                        if(!(project.getProjectMembers().contains(user.getUserName()))) {
+                            project.getProjectMembers().add(user);
+                        }
                         user.addRole(project.getId().toString());
                         if (!(user.getRole(project.getId().toString()).equals(retrievedInfo[i + 9]))) {
                             user.changeRole(project.getId().toString());
