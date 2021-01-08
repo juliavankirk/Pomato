@@ -21,9 +21,9 @@ public class VMenuViewTaskBoard extends VMenu {
         mMenuQuestion = "Enter choice";
         mSubMenus = new ArrayList<>();
         mSubMenus.add(new VMenuCreateTask(this));
-        mSubMenus.add(new VMenuRemoveTask(this));
         mSubMenus.add(new VMenuEditTask(this));
         mSubMenus.add(new VMenuAddChecklist(this));
+        mSubMenus.add(new VMenuRemoveTask(this));
         mSubMenus.add(new VMenuEditTaskboard(this));
     }
 
