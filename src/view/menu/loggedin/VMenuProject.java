@@ -25,6 +25,7 @@ public class VMenuProject extends VMenu {
 
     @Override
     public void menuContent(Controller controller) {
+        System.out.println("\nDescription:\n" + controller.getCurrentProject().getProjectDescription());
         printProjectMembers(controller);
         addMenuOptions(controller);
     }
@@ -51,6 +52,7 @@ public class VMenuProject extends VMenu {
         if (controller.getCurrentUser().getRole(projectId).equals("Manager")){
             mSubMenus.add(new VMenuEconomicOverview(this));
             mSubMenus.add(new VMenuChangeRoles(this));
+            mSubMenus.add(new VMenuAssignTask(this));
         }
     }
 

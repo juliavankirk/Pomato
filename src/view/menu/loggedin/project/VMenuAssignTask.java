@@ -15,7 +15,7 @@ public class VMenuAssignTask extends VMenu {
     public VMenuAssignTask(VMenu parent) {
         super(parent);
         mMenuHeader = "Assign Tasks";
-        mMenuLabel = "Assign Tasks to Developers";
+        mMenuLabel = "Manager: Assign Tasks to Developers";
         mMenuQuestion = "Enter choice";
         mSubMenus = null;
 //        subMenu = false;
