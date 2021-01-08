@@ -52,7 +52,7 @@ public class VMenuCreateTask extends VMenu {
         //possibility to assign other employees to same task
         while(input.equals("yes")) {
             String otherMembers = InputErrors.emptyFieldString(InputOutput.inputString("Enter the " +
-                    "username of the employee you would like"
+                    "username of the employee you would like "
                     + "to assign this task to"));
             assignees.add(otherMembers);
             input = InputErrors.incorrectYesOrNo(InputOutput.inputString("Would you like " +
