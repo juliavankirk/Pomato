@@ -524,7 +524,7 @@ public class Controller {
         for (int i = 0; i < holidayListSize; i++) {
         String userName = getHolidayListFromCurrentProject().get(i).getUserName();
 
-        if (developerName.toString().equals(userName)) {
+        if (developerName.equals(userName)) {
             getCurrentProject().removeHoliday(i);
             return developerName + "'s " + "holiday information" + " has been removed";
         }

@@ -6,7 +6,7 @@ import java.util.UUID;
 
 public class Checklist implements Serializable {
 
-    private UUID mId;
+    private final UUID mId;
     private String mName;
     private ArrayList<ChecklistItem> mChecklistItems; // really unsure about the naming,
     // but couldn't come up with something better

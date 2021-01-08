@@ -11,7 +11,7 @@ public class InputErrors {
     public static String emptyFieldString(String userInput) {
         while (userInput.equals("")) {
             System.err.println("\nYou did not insert any information for this field.");
-            System.out.println("");
+            System.out.println();
             userInput = InputOutput.inputString("Please try one more time");
         }
 
@@ -23,7 +23,7 @@ public class InputErrors {
             correctIntInput = Integer.parseInt(userInput);
         }catch(NumberFormatException wrongInput){
             System.err.println("You should insert a number here.");
-            System.out.println("");
+            System.out.println();
             userInput = InputOutput.inputString("Please try again");
             irrelevantInt(userInput);
         }
@@ -36,7 +36,7 @@ public class InputErrors {
             correctDoubleInput = Double.parseDouble(userInput);
         }catch(NumberFormatException wrongInput){
             System.err.println("You should insert a number here.");
-            System.out.println("");
+            System.out.println();
             userInput = InputOutput.inputString(" Please try again");
             irrelevantDouble(userInput);
         }
@@ -50,7 +50,7 @@ public class InputErrors {
             return userInput;
         }
         System.err.println("The number you entered is out of range.");
-        System.out.println("");
+        System.out.println();
         userInput = irrelevantInt(InputOutput.inputString("Please try again"));
         return inRangeIntInput(userInput, upperRange, lowerRange);
     }
@@ -67,7 +67,7 @@ public class InputErrors {
             correctDateInput = LocalDate.parse(inputDate);
         }catch(DateTimeParseException invalidFormat) {
             System.err.println("The entered date format is not correct. You should enter the date in yyyy-mm-dd format.");
-            System.out.println("");
+            System.out.println();
             inputDate = InputOutput.inputString("Please try one more time");
             checkDateFormat(inputDate);
         }
@@ -85,7 +85,7 @@ public class InputErrors {
             }
             default -> {
                 System.err.println("Invalid input. You should answer with yes or no.");
-                System.out.println("");
+                System.out.println();
                 userInput = InputOutput.inputString("Please try again");
 
                 return incorrectYesOrNo(userInput);

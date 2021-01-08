@@ -13,7 +13,7 @@ import java.util.UUID;
 public class Project implements Serializable {
 
     //Attributes
-    private UUID mId;
+    private final UUID mId;
     private String mProjectTitle;
     private String mProjectDescription;
     private LocalDate mStartDate;
@@ -26,10 +26,11 @@ public class Project implements Serializable {
     // Todo - Implement this for storing which user is attached to a Project( Instead of mProjectMembers):
     private ArrayList<UUID> mProjectMemberUUIDs;
 
-    private ArrayList<Task> mTaskList;
-    private ArrayList <Holiday> mHolidayList;
+//    private ArrayList<SubTask> mSubTaskList;
+    private final ArrayList<Task> mTaskList;
+    private final ArrayList <Holiday> mHolidayList;
     private ArrayList<Idea> mIdeas;
-    private ArrayList<String> mActivityList;
+    private final ArrayList<String> mActivityList;
 
 
 

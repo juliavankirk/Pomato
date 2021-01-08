@@ -5,6 +5,8 @@ import utilities.InputErrors;
 import utilities.InputOutput;
 import view.VMenu;
 
+import java.util.UUID;
+
 public class VMenuMessage extends VMenu {
 
 

@@ -10,18 +10,18 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 public class Task implements Serializable {
-    private UUID   mId;
+    private final UUID mId;
     private String mTitle;
     private String mDescription;
     private double mEstimatedTime;
     private int mPriority;
-    private LocalDate mDateCreated;
+    private final LocalDate mDateCreated;
     private LocalDate mDueDate;
-    private LocalDate mStartDate;
+    private final LocalDate mStartDate;
     private LocalDate mEndDate;
     private String mStatus;
     private Boolean mCompletion;
-    private ArrayList<Checklist> mChecklists;
+    private final ArrayList<Checklist> mChecklists;
 
     // If we want to start saving this class to a json or csv then we need to make the attribute below transient.
     // @Expose(serialize = false, deserialize = false) private transient ArrayList<User> mUserList;
