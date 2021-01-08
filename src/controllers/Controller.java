@@ -118,7 +118,7 @@ public class Controller {
 
         for ( String assignee : assignees ) {
             for ( User employee : users ) {
-                if ( employee.getUserName().equals(assignee) ) {
+                if ( employee.getUserName().equals(assignee) && getCurrentProject().getProjectMembers().contains(employee)) {
 
                     // Set the current task
                     mCurrentTask = task;
