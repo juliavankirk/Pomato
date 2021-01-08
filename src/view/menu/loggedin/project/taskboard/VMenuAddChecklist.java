@@ -33,11 +33,13 @@ public class VMenuAddChecklist extends VMenu {
     }
 
     private ArrayList<String> addCheckListItems(ArrayList<String> itemList, int counter) {
-        String checkListItem = InputOutput.inputString("Enter a text you want to add to the Checklist");
+        String checkListItem = InputErrors.emptyFieldString(InputOutput.inputString("Enter a text " +
+                "you want to add to the Checklist"));
         itemList.add(counter, checkListItem);
         counter += 1;
 
-        String answer = InputOutput.inputString("Would you like to add more things to the checklist?(yes/no)");
+        String answer = InputErrors.incorrectYesOrNo(InputOutput.inputString("Would you " +
+                "like to add more things to the checklist?(yes/no)"));
         while (answer.equalsIgnoreCase("yes")) {
             answer = "";
             addCheckListItems(itemList, counter);

@@ -316,12 +316,17 @@ public class Controller {
 
     public String checkItemId(String enteredId, String checklistId, String taskId){
         Checklist checklist = getChecklistById(checklistId, taskId);
-        ArrayList <ChecklistItem> checklistItems = checklist.getChecklistItems();
-        for (ChecklistItem checklistItem : checklistItems) {
-            if (checklistItem.getId().equals(enteredId)){
-                return "Id: " + enteredId +  "already exists in this checklist, please enter another topic";
+        if (checklist == null) {
+            return "The checklist Id is invalid.";
+        } else {
+            ArrayList<ChecklistItem> checklistItems = checklist.getChecklistItems();
+            for (ChecklistItem checklistItem : checklistItems) {
+                if (checklistItem.getId().equals(enteredId)) {
+                    return "Id: " + enteredId + "already exists in this checklist, please enter another topic";
+                }
             }
-        }return enteredId;
+            return enteredId;
+        }
     }
 
     public String addChecklistItems(String checklistId, String taskId, String topic, String id) {

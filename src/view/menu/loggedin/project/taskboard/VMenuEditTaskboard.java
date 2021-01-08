@@ -1,6 +1,7 @@
 package view.menu.loggedin.project.taskboard;
 
 import controllers.Controller;
+import utilities.InputErrors;
 import utilities.InputOutput;
 import utilities.TaskTable;
 import view.VMenu;
@@ -23,10 +24,12 @@ public class VMenuEditTaskboard extends VMenu{
 
         switch (menuChoice) {
             case 1 -> {
-                TaskTable.cardWidth = InputOutput.inputInt("Enter a value between 10-100: ");
+                TaskTable.cardWidth = InputErrors.inRangeIntInput(InputErrors.irrelevantInt(
+                        InputOutput.inputString("Enter a value between 10-100: ")), 101, 9);
             }
             case 2 -> {
-                TaskTable.cardBorderVerticalChar = InputOutput.inputString("Enter a character or two( Standard: || ): ");
+                TaskTable.cardBorderVerticalChar = InputErrors.emptyFieldString(InputOutput.inputString("Enter" +
+                        " a character or two( Standard: || ): "));
             }
             case 3 -> {
                 TaskTable.dividerHorizontalChar = InputOutput.inputString("Enter a single character( Standard: - ): ");
