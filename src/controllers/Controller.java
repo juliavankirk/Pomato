@@ -126,11 +126,12 @@ public class Controller {
 
                     // add the task to an employee and to the project.
                     employee.getTask().add(mCurrentTask);
-                    getCurrentProject().addTaskToList(task);
+
                     System.out.println(assignee + " is added to this task.");
                 }
             }
         }
+        getCurrentProject().addTaskToList(task);
         System.out.println("If a username that you entered is not appeared in here, you probably " +
                 "entered the username incorrectly or they were not a member in this project.");
     }
