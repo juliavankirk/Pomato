@@ -2,16 +2,18 @@ package view.menu.loggedin.project;
 
 import controllers.Controller;
 import view.VMenu;
+import view.menu.loggedin.project.holidays.VMenuCreateHoliday;
+import view.menu.loggedin.project.holidays.VMenuRemoveHoliday;
+import view.menu.loggedin.project.holidays.VMenuViewHolidays;
 
 import java.util.ArrayList;
 
 public class VMenuHolidays extends VMenu {
 
 
-
     public VMenuHolidays(VMenu parent) {
         super(parent);
-        mMenuHeader = "View/Edit Employee's Holidays";
+        mMenuHeader = "Employee's Holidays";
         mMenuLabel = "Employee's Holidays";
         mMenuQuestion = "Enter choice";
         mSubMenus = new ArrayList<>();
@@ -22,6 +24,8 @@ public class VMenuHolidays extends VMenu {
     }
 
     @Override
-    public void menuContent(Controller controller){
+    public void menuContent(Controller controller) {
+
+
     }
 }

@@ -1,6 +1,7 @@
 package view.menu.loggedin.project;
 
 import controllers.Controller;
+import utilities.InputErrors;
 import utilities.InputOutput;
 import view.VMenu;
 
@@ -25,17 +26,18 @@ public class VMenuChangeRoles extends VMenu {
         ArrayList<String> newRolesUsernames = new ArrayList<>();
         String answer = "yes";
         while(answer.equals("yes")) {
-            String newRoleUsername = InputOutput.inputString("Insert the usernames of the members you" +
-                    " wish to change their role");
+            String newRoleUsername = InputErrors.emptyFieldString(InputOutput.inputString("Insert the usernames of the members you" +
+                    " wish to change their role"));
             newRolesUsernames.add(newRoleUsername);
-            answer = InputOutput.inputString("Would you like to add more usernames?(yes/No)");
+            answer = InputErrors.incorrectYesOrNo(InputOutput.inputString("Would you like to " +
+                    "add more usernames?(yes/No)"));
         }
         controller.changeRoles(newRolesUsernames);
         } else {
-            System.out.println("You do not have the authority to make changes in this section. Because you are nothing more " +
-                    "than a poor developer.");
+            System.out.println("You do not have the authority to make changes in this section. Because " +
+                    "you are not a manager in this project.");
         }
         System.out.println(" ");
-//2nd
+
     }
 }

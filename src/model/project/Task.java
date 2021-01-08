@@ -1,35 +1,48 @@
 package model.project;
 
-import view.VMenu;
+import com.google.gson.annotations.Expose;
+import model.users.User;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.time.Period;
+import java.util.ArrayList;
 import java.util.UUID;
 
 public class Task implements Serializable {
-    private UUID mId;
+    private final UUID mId;
     private String mTitle;
     private String mDescription;
+    private double mEstimatedTime;
     private int mPriority;
-    private LocalDate mDateCreated;
+    private final LocalDate mDateCreated;
     private LocalDate mDueDate;
+    private final LocalDate mStartDate;
+    private LocalDate mEndDate;
     private String mStatus;
-    private ArrayList<Checklist> mChecklists;
     private Boolean mCompletion;
+    private final ArrayList<Checklist> mChecklists;
+
+    // If we want to start saving this class to a json or csv then we need to make the attribute below transient.
+    // @Expose(serialize = false, deserialize = false) private transient ArrayList<User> mUserList;
+    private ArrayList<User> mUserList;
 
     //Do we have to initialize startDate in constructor? Its already set?
-    public Task(String title, String description, LocalDate dueDate, int priority) {
+    public Task(String title, String description, LocalDate dueDate, LocalDate startDate,
+                double estimatedTime, int priority) {
         mId = UUID.randomUUID();
         mTitle = title;
         mDescription = description;
+        mStartDate = startDate;
+        mEndDate = null;
+        mEstimatedTime = estimatedTime;
         mPriority = priority;
         mDateCreated = LocalDate.now();
         mDueDate = dueDate;
         mStatus = "TODO";
-        mCompletion = false; //initialized as false as task is incomplete
+        mCompletion = false;
         mChecklists = new ArrayList<>();
+        mUserList = new ArrayList<>();
     }
 
     public UUID getId() { return mId; }
@@ -40,31 +53,66 @@ public class Task implements Serializable {
 
     public LocalDate getDueDate(){ return mDueDate; }
 
+    public double getEstimatedTime(){ return mEstimatedTime; }
+
     public double getPriority(){ return mPriority; }
 
     public LocalDate getDateCreated(){ return mDateCreated; }
 
     public String getStatus(){ return mStatus; }
 
-    public void startTask() { mCompletion = false; }
+    public void setTitle(String Title) { mTitle = Title; }
 
-    public void endTask() { mCompletion = true; }
-
-    public void setTitle(String title) { mTitle = title; }
-
-    public void setDescription(String description) { mDescription = description;}
+    public void setDescription(String Description) { mDescription = Description; }
 
     public void setDueDate(LocalDate DueDate){ mDueDate = DueDate; }
 
-    public void setPriority (int priority) { mPriority = priority;}
+    public void setEstimatedTime(double EstimatedTime){ mEstimatedTime = EstimatedTime; }
 
-    public void setStatus (String status){ mStatus = status;}
+    public void setPriority (int taskPriority) { mPriority = taskPriority; }
+
+    public void setStatus (String taskStatus){ mStatus = taskStatus; }
+
+    public LocalDate getStartDate() {
+        return mStartDate;
+    }
+
+    public Boolean Completion() { return mCompletion; }
+
+    public void beginTask() { mCompletion = false; }
+
+    public void completeTask() { mCompletion = true; }
+
+    //assigns value to end date
+    public void getSubmissionDate(LocalDate endDate) {
+        mEndDate = endDate;
+    }
+
+    //method that returns total days spent on task
+    public long totalDays() {
+        //end date is assigned current date if null, otherwise passed value is entered
+        LocalDate submission = mEndDate == null ? LocalDate.now() : mEndDate;
+        //delta calculation between start and end dates
+        long daysBetween = Period.between(mStartDate, submission).getDays() + 1;
+        return daysBetween;
+    }
 
     public ArrayList<Checklist> getChecklists(){ return mChecklists;}
     public Checklist getChecklistById (int id) { return mChecklists.get(id);}
     public void addChecklist(Checklist checklist){ mChecklists.add(checklist);}
     public void removeChecklist(int id){ mChecklists.remove(id);}
 
+    public ArrayList<User> getUserList() { return mUserList; }
+
+    public void setUserList(ArrayList<User> userList) {
+        this.mUserList = mUserList;
+    }
+
+    public User getUserById (int id ) { return mUserList.get(id);}
+
+    public void addUser(User user) { mUserList.add(user); }
+
+    public void removeUser(int id) { mUserList.remove(id); }
 
     public String toString() {
         String retVal = "";
@@ -72,6 +120,7 @@ public class Task implements Serializable {
         retVal += ("\nDescription: " +getDescription());
         retVal += ("\nDate Created: " + getDateCreated());
         retVal += ("\nDue Date: " + getDueDate());
+        retVal += ("\nEstimated Time: " + getEstimatedTime() + " hours");
         retVal += ("\nPriority: " + getPriority() + "/5");
         retVal += ("\nID: " + getId() + "\n");
 
@@ -86,4 +135,5 @@ public class Task implements Serializable {
         }
         return retVal;
     }
+
 }

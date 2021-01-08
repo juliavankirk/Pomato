@@ -1,15 +1,12 @@
 package view.menu.loggedin.project;
 
 import controllers.Controller;
-import model.project.SubTask;
 import model.project.Task;
-import utilities.InputOutput;
 import utilities.TaskTable;
 import view.VMenu;
+import view.menu.loggedin.project.taskboard.*;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.List;
 
 public class VMenuViewTaskBoard extends VMenu {
 
@@ -23,10 +20,6 @@ public class VMenuViewTaskBoard extends VMenu {
         mMenuLabel = "View Task Board";
         mMenuQuestion = "Enter choice";
         mSubMenus = new ArrayList<>();
-        mSubMenus.add(new VMenuCreateSubtask(this));
-        mSubMenus.add(new VMenuRemoveTask(this));
-        mSubMenus.add(new VMenuEditTask(this));
-        mSubMenus.add(new VMenuAddChecklist(this));
     }
 
 
@@ -35,9 +28,28 @@ public class VMenuViewTaskBoard extends VMenu {
      */
     @Override
     public void menuContent(Controller controller) {
-        ArrayList<SubTask> subTaskList = controller.getTaskListFromCurrentProject();
+        addMenuOptions(controller);
 
-        TaskTable table = new TaskTable(subTaskList);
+        ArrayList<Task> taskList = controller.getTaskListFromCurrentProject();
+        TaskTable table = new TaskTable(taskList);
         table.print();
+    }
+
+    // I made this since we need to add menu options depending on if the user is a manager or not.
+    private void addMenuOptions(Controller controller) {
+        mSubMenus.clear(); // Clears the subMenu's
+
+        mSubMenus.add(new VMenuCreateTask(this));
+        mSubMenus.add(new VMenuEditTask(this));
+        mSubMenus.add(new VMenuAddChecklist(this));
+        mSubMenus.add(new VMenuRemoveTask(this));
+        mSubMenus.add(new VMenuEditTaskboard(this));
+
+        String projectId = controller.getCurrentProject().getId().toString();
+        // Only a project manager can access these subMenus
+        if (controller.getCurrentUser().getRole(projectId).equals("Manager")){
+            // TODO Fix this:
+            //            mSubMenus.add(new VMenuAssignTask(this));
+        }
     }
 }

@@ -3,27 +3,28 @@ package model.project;
 import model.users.User;
 
 import java.io.Serializable;
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.Period;
 
 public class Progression implements Serializable {
-    private User mUser;
+    private final User mUser;
     private Project mProject;
-    private Task mTask;
-    private LocalDate mStartDate;
+    private final Task mTask;
+    private final LocalDate mStartDate;
     private LocalDate mEndDate;
 
     public Progression(User user, Task task, LocalDate startDate) {
         mUser = user;
         mTask = task;
-        mTask.startTask();
+        mTask.beginTask();
         mStartDate = startDate;
         mEndDate = null;
     }
 
     //sets completion to true and passes value to endDate
     public void submitTask(LocalDate endDate) {
-        mTask.endTask();
+        mTask.completeTask();
         mEndDate = endDate;
     }
 
@@ -31,14 +32,19 @@ public class Progression implements Serializable {
         //end date is assigned current date if null, otherwise passed value is entered
         LocalDate submission = mEndDate == null ? LocalDate.now() : mEndDate;
         //delta calculation between start and end dates
-        long daysBetween = Period.between(mStartDate, submission).getDays() + 1;
+        long daysBetween = Duration.between(mStartDate, submission).toHours() - 1;
         return daysBetween;
     }
 
-    public void totalWages() {
+    public Double totalWages() {
         Double salary = totalHours() * mUser.getHourlyWage();
+        return salary;
     }
 
     public User getUser() { return mUser; }
+
+    public Project getProject() { return mProject; }
+
+    public Task getTask() { return mTask; }
 
 }

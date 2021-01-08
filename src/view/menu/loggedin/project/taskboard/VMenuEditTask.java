@@ -1,12 +1,13 @@
-package view.menu.loggedin.project;
+package view.menu.loggedin.project.taskboard;
 
 import controllers.Controller;
-import model.project.SubTask;
 import model.project.Task;
+import utilities.InputErrors;
 import utilities.InputOutput;
 import view.VMenu;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class VMenuEditTask extends VMenu {
 
@@ -32,83 +33,101 @@ public class VMenuEditTask extends VMenu {
         LocalDate updatedDueDate;
         int property, updatedPriority;
 
-        taskId = InputOutput.inputString("Which task do you want to edit? (ID)");
-        SubTask subTask = controller.getTaskById(taskId);
+        taskId = InputErrors.emptyFieldString(InputOutput.inputString("Which task do you want to edit? (ID)"));
+        Task task = controller.getTaskById(taskId);
 
         /*When the user have made a change to a property, they will be given the option
         to make another change to the chosen task, until they enter the number 7.
          */
-        if (subTask != null) {
+        if (task != null) {
             do {
                 propertyChoices();
-                property = InputOutput.inputInt("Enter your option");
+                property = InputErrors.irrelevantInt(InputOutput.inputString("Enter your option"));
 
 
                     switch (property) {
                         case 1 -> {
-                            updatedTitle = InputOutput.inputString("Enter new title");
+                            updatedTitle = InputErrors.emptyFieldString(InputOutput.inputString("Enter new title"));
                             controller.updateTaskTitle(updatedTitle, taskId);
                         }
                         case 2 -> {
-                            updatedDescription = InputOutput.inputString("Enter new description");
+                            updatedDescription = InputErrors.emptyFieldString(InputOutput.inputString("Enter " +
+                                    "new description"));
                             controller.updateTaskDescription(updatedDescription, taskId);
                         }
                         case 3 -> {
-                            updatedStatus = InputOutput.inputString("Enter new Status(TODO, IN PROGRESS or COMPLETED)");
+                            ArrayList<String> correctLists = new ArrayList<>();
+                            correctLists.add("TODO");
+                            correctLists.add("IN PROGRESS");
+                            correctLists.add("COMPLETED");
+
+                            updatedStatus = InputErrors.incorrectStatus(correctLists ,InputOutput.inputString("Enter " +
+                                    "new Status(TODO, IN PROGRESS or COMPLETED)"));
+                            while (updatedStatus.equals("wrong")) {
+                                updatedStatus = InputErrors.incorrectStatus(correctLists ,InputOutput.inputString("Please enter " +
+                                        "new Status(TODO, IN PROGRESS or COMPLETED)"));
+                            }
+
                             controller.updateTaskStatus(updatedStatus, taskId);
                         }
                         case 4 -> {
-                            updatedEstimation = InputOutput.inputDouble("Enter new Estimated Time(hours)");
+                            updatedEstimation = InputErrors.irrelevantDouble(InputOutput.inputString("Enter new " +
+                                    "Estimated Time(hours)"));
                             controller.updateTaskEstimatedTime(updatedEstimation, taskId);
                         }
                         case 5 -> {
-                            updatedPriority = InputOutput.inputInt("Enter new Priority(1-5)");
+                            updatedPriority = InputErrors.inRangeIntInput(InputErrors.irrelevantInt(InputOutput.inputString("Enter new Priority(1-5)")),
+                                    6, 0);
                             controller.updateTaskPriority(updatedPriority, taskId);
                         }
                         case 6 -> {
-                            updatedDueDate = LocalDate.parse(InputOutput.inputString("Enter new Due Date (yyyy-mm-dd)"));
+                            updatedDueDate = InputErrors.checkDateFormat(InputOutput.inputString("Enter new Due Date (yyyy-mm-dd)"));
+//                            while (updatedDueDate.isBefore(task.getStartDate())) {
+//                                updatedDueDate = LocalDate.parse(InputOutput.inputString("Due date must be later than start date. Please enter new Due Date one more time (yyyy-mm-dd)\n"));
+//                            }
+
                             controller.updateTaskDueDate(updatedDueDate, taskId);
                         }
 
                         case 7 -> {
-                            checklistId = InputOutput.inputString("Please enter checklist ID");
+                            checklistId = InputErrors.emptyFieldString(InputOutput.inputString("Please enter checklist ID"));
                             message = controller.removeChecklist(checklistId, taskId);
                             System.out.println(message);
 
                         }
 
                         case 8 -> {
-                            checklistId = InputOutput.inputString("Please enter checklist ID");
-                            updatedName = InputOutput.inputString("Please enter new checklist name");
+                            checklistId = InputErrors.emptyFieldString(InputOutput.inputString("Please enter checklist ID"));
+                            updatedName = InputErrors.emptyFieldString(InputOutput.inputString("Please enter new checklist name"));
                             controller.updateChecklistName(updatedName,checklistId, taskId);
                         }
 
                         case 9 -> {
-                            checklistId = InputOutput.inputString("Please enter checklist ID");
-                            itemId = InputOutput.inputString("Please enter checklist item number");
+                            checklistId = InputErrors.emptyFieldString(InputOutput.inputString("Please enter checklist ID"));
+                            itemId = InputErrors.emptyFieldString(InputOutput.inputString("Please enter checklist item number"));
                             message = controller.removeChecklistItem(checklistId, itemId, taskId);
                             System.out.println(message);
                             //Remove checklist items
                         }
 
                         case 10 -> {
-                            checklistId = InputOutput.inputString("Please enter checklist ID you would like to add items to");
+                            checklistId = InputErrors.emptyFieldString(InputOutput.inputString("Please ente" +
+                                    "r checklist ID you would like to add items to"));
                             System.out.println("Please enter the following information\n ");
-
-
-                            do{
-                                id = InputOutput.inputString("Id");
-                                message = controller.checkItemId(id, checklistId, taskId);
-                                System.out.println(message);
-                            }while (!message.equals(id));
-                                topic = InputOutput.inputString("Topic");
+                            id = InputErrors.emptyFieldString(InputOutput.inputString("Id"));
+                            message = controller.checkItemId(id, checklistId, taskId);
+                            System.out.println(message);
+                            if (!message.equals("The checklist Id is invalid.")) {
+                                topic = InputErrors.emptyFieldString(InputOutput.inputString("Topic"));
                                 controller.addChecklistItems(checklistId, taskId, topic, id);
+                            }
                         }
 
                         case 11 ->{
-                            checklistId = InputOutput.inputString("Please enter checklist ID");
-                            itemId = InputOutput.inputString("Please enter checklist item number");
-                            response = InputOutput.inputString("Would you like to change item status to Done? Enter yes");
+                            checklistId = InputErrors.emptyFieldString(InputOutput.inputString("Please enter checklist ID"));
+                            itemId = InputErrors.emptyFieldString(InputOutput.inputString("Please enter checklist item number"));
+                            response = InputErrors.incorrectYesOrNo(InputOutput.inputString("Would you like to change" +
+                                    " item status to Done? Enter yes"));
                             if ( response.equalsIgnoreCase("yes"));
                             controller.updateItemStatus(checklistId,taskId,itemId);
 
@@ -116,9 +135,9 @@ public class VMenuEditTask extends VMenu {
                         }
 
                         case 12 -> {
-                            checklistId = InputOutput.inputString("Please enter checklist ID");
-                            itemId = InputOutput.inputString("please enter checklist item number");
-                            updatedTopic = InputOutput.inputString("Please enter new item topic");
+                            checklistId = InputErrors.emptyFieldString(InputOutput.inputString("Please enter checklist ID"));
+                            itemId = InputErrors.emptyFieldString(InputOutput.inputString("please enter checklist item ID"));
+                            updatedTopic = InputErrors.emptyFieldString(InputOutput.inputString("Please enter new item topic"));
                             controller.updateItemTopic(updatedTopic,checklistId,taskId,itemId);
                             // Change item topic
                         }

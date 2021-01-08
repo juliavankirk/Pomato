@@ -1,12 +1,13 @@
-package view.menu.loggedin.project;
+package view.menu.loggedin.project.taskboard;
 
 import controllers.Controller;
+import utilities.InputErrors;
 import utilities.InputOutput;
 import view.VMenu;
 
 public class VMenuRemoveTask extends VMenu {
 
-    VMenuRemoveTask(VMenu parent) {
+    public VMenuRemoveTask(VMenu parent) {
         super(parent);
         mMenuHeader = "Remove Task";
         mMenuLabel = "Remove Task";
@@ -16,8 +17,8 @@ public class VMenuRemoveTask extends VMenu {
 
     @Override
     public void menuContent(Controller controller) {
-        String id = InputOutput.inputString("Please enter task ID");
-        String remove = controller.removeSubTask(id);
+        String id = InputErrors.emptyFieldString(InputOutput.inputString("Please enter task ID"));
+        String remove = controller.removeTask(id);
         System.out.println(remove);
     }
 }

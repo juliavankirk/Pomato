@@ -1,9 +1,11 @@
-package view.menu.loggedin.project;
+package view.menu.loggedin.project.holidays;
 
 import controllers.Controller;
-import jdk.swing.interop.SwingInterOpUtils;
 import model.project.Holiday;
+import utilities.InputOutput;
 import view.VMenu;
+
+import java.util.ArrayList;
 
 public class VMenuViewHolidays extends VMenu {
 
@@ -18,9 +20,15 @@ public class VMenuViewHolidays extends VMenu {
     @Override
     public void menuContent(Controller controller) {
 
-        System.out.println(controller.getHolidayListFromCurrentProject());
+        ArrayList<Holiday> holidayList = controller.getHolidayListFromCurrentProject();
+
+        for (Holiday holiday : holidayList) {
+            System.out.print(InputOutput.superShortLine());
+            System.out.println(holiday);
+
+
+        }
+
 
     }
-
-
 }

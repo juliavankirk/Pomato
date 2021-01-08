@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.UUID;
 
 public class ChecklistItem implements Serializable {
-    private String mId;
+    private final String mId;
     private String mTopic;
     private String mStatus;
 

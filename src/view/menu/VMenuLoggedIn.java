@@ -3,6 +3,7 @@ package view.menu;
 import controllers.Controller;
 import model.project.Project;
 import model.users.User;
+import utilities.InputErrors;
 import utilities.InputOutput;
 import view.VMenu;
 import view.menu.loggedin.VMenuAccount;
@@ -40,7 +41,7 @@ public class VMenuLoggedIn extends VMenu {
     public VMenu chooseMenu(VMenu mParent, Controller controller) {
         VMenu chosenVMenu;
 
-        int inputResult = InputOutput.inputInt(mMenuQuestion/*,1,mSubMenus.size() + 1*/);
+        int inputResult = InputErrors.checkMenuChoice(InputOutput.inputString(mMenuQuestion), mSubMenus.size()+2, 0);
 
         if (mSubMenus != null && inputResult > 0 && inputResult < mSubMenus.size() + 1) {
             chosenVMenu = mSubMenus.get(inputResult - 1);
@@ -62,21 +63,23 @@ public class VMenuLoggedIn extends VMenu {
     /**
      * Add subMenus
      */
-    private void addSubMenus(Controller controller){
+    private void addSubMenus(Controller controller) {
         mSubMenus.clear();
-        ArrayList<Project> projectList = controller.getProjects();
+        ArrayList<Project> projectList = controller.getProjectsForCurrentUser();
         User current = controller.getCurrentUser();
+        if (controller.getDatabase().getUserList().contains(current)) {
 
-        for (int i = 0; i < projectList.size(); i++) {
-            Project currentProject = projectList.get(i);
-            mSubMenus.add(new VMenuProject(this));
-            mSubMenus.get(i).setmMenuLabel("View Project: " + currentProject.getProjectTitle());
-            mSubMenus.get(i).setmMenuHeader("Project Page for " + currentProject.getProjectTitle());
+            for (int i = 0; i < projectList.size(); i++) {
+                Project currentProject = projectList.get(i);
+                mSubMenus.add(new VMenuProject(this));
+                mSubMenus.get(i).setmMenuLabel("View Project: " + currentProject.getProjectTitle());
+                mSubMenus.get(i).setmMenuHeader("Project Page for " + currentProject.getProjectTitle());
+            }
+
+            mSubMenus.add(new VMenuCreateProject(this));
+            mSubMenus.add(new VMenuMessage(this));
+            mSubMenus.add(new VMenuAccount(this));
         }
-
-        mSubMenus.add(new VMenuCreateProject(this));
-        mSubMenus.add(new VMenuMessage(this));
-        mSubMenus.add(new VMenuAccount(this));
     }
 
 //    private void setCurrentProject(Controller controller, int chosenProject){

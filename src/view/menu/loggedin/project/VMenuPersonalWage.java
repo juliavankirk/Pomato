@@ -1,6 +1,7 @@
 package view.menu.loggedin.project;
 
 import controllers.Controller;
+import utilities.InputErrors;
 import utilities.InputOutput;
 import view.VMenu;
 
@@ -12,15 +13,14 @@ public class VMenuPersonalWage extends VMenu {
         mMenuHeader = "Your Total Wage";
         mMenuLabel = "View Total Wage";
         mMenuQuestion = "Enter choice";
-
-
     }
+
     @Override
     public void menuContent(Controller controller) {
         double hours;
         System.out.println("Please enter the following information\n ");
 
-        hours = InputOutput.inputDouble("Hours");
+        hours = InputErrors.irrelevantDouble(InputOutput.inputString("Hours"));
 
         String messageToUser = controller.calculateHours(hours);
         System.out.println(messageToUser);

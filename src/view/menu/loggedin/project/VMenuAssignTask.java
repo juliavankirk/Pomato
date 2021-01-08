@@ -1,10 +1,11 @@
 package view.menu.loggedin.project;
 
 import controllers.Controller;
+import utilities.InputErrors;
 import utilities.InputOutput;
 import view.VMenu;
 
-import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class VMenuAssignTask extends VMenu {
 
@@ -14,7 +15,7 @@ public class VMenuAssignTask extends VMenu {
     public VMenuAssignTask(VMenu parent) {
         super(parent);
         mMenuHeader = "Assign Tasks";
-        mMenuLabel = "Assign Tasks to Developers";
+        mMenuLabel = "Manager: Assign Tasks to Developers";
         mMenuQuestion = "Enter choice";
         mSubMenus = null;
 //        subMenu = false;
@@ -22,22 +23,23 @@ public class VMenuAssignTask extends VMenu {
 
     @Override
     public void menuContent(Controller controller) {
-        String title, description;
-        double estimatedTime;
-        LocalDate dueDate, startDate, endDate = null;
-        int priority;
 
-        System.out.println("Please enter the following information\n ");
-        title = InputOutput.inputString("Task:");
-        description = InputOutput.inputString("Description:");
-        priority = InputOutput.inputIntMinMax("Priority (1-5)",1,5);
-        dueDate = LocalDate.parse(InputOutput.inputString("Due Date (yyyy-mm-dd)"));
-        startDate = LocalDate.now();
-        //Do we have to initialize startDate? Its already set?
-        //problems with endDate
-        //controller.addTask(title, description, dueDate, startDate, endDate, priority);
+        if(controller.getCurrentUser().getRole(controller.getCurrentProject().getId().toString()).equals("Manager")) {
+            ArrayList<String> assignees = new ArrayList<String>();
 
-        //addMoreTasks(controller);
-        // TODO personal comment board?
+            assignees.add(controller.getCurrentUser().getUserName());
+            String answer = InputErrors.incorrectYesOrNo(InputOutput.inputString("Would you like to add more members?(yes/no)"));
+            while (answer.equals("yes")) {
+                String memberUsername = InputErrors.emptyFieldString(InputOutput.inputString("Insert member's username"));
+                assignees.add(memberUsername);
+                answer = InputErrors.incorrectYesOrNo(InputOutput.inputString("Do you want to continue adding members?(yes/no)"));
+            }
+
+            controller.assignMembers(assignees, controller.getCurrentTask());
+            System.out.println("New members are successfully added");
+        } else {
+            System.out.println("You do not have the authority to modify in this section.");
+        }
+        System.out.println(" ");
     }
 }

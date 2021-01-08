@@ -12,7 +12,6 @@ public class Main {
      * Attributes
      */
     Controller controller;
-//    StorageController storageController = new StorageController();
 
 
     /**

@@ -1,6 +1,7 @@
-package view.menu.loggedin.project;
+package view.menu.loggedin.project.ideaboard;
 
 import controllers.Controller;
+import utilities.InputErrors;
 import utilities.InputOutput;
 import view.VMenu;
 
@@ -27,10 +28,11 @@ public class VMenuAddIdea extends VMenu {
 
     public void menuContent(Controller controller) {
 
-        String newIdea = InputOutput.inputString("Please type your brilliant idea for this project");
+        String newIdea = InputErrors.emptyFieldString(InputOutput.inputString("Please type " +
+                "your brilliant idea for this project"));
         controller.addIdeaToProject(newIdea);
         System.out.println("Your idea is added to the idea board.");
-        System.out.println("");
+        System.out.println();
 
     }
 }
