@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 public class Task implements Serializable {
-    private final UUID   mId;
+    private final UUID mId;
     private String mTitle;
     private String mDescription;
     private double mEstimatedTime;

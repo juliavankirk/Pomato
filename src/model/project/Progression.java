@@ -3,6 +3,7 @@ package model.project;
 import model.users.User;
 
 import java.io.Serializable;
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.Period;
 
@@ -31,7 +32,7 @@ public class Progression implements Serializable {
         //end date is assigned current date if null, otherwise passed value is entered
         LocalDate submission = mEndDate == null ? LocalDate.now() : mEndDate;
         //delta calculation between start and end dates
-        long daysBetween = Period.between(mStartDate, submission).getDays() + 1;
+        long daysBetween = Duration.between(mStartDate, submission).toHours() - 1;
         return daysBetween;
     }
 
