@@ -18,14 +18,14 @@ public class User implements Serializable {
     private String mFirstName;
     private String mLastName;
     private String mPassword;
-    private final String mCompanyName;
-    private final String mJobTitle;
-    private final double mHourlyWage;
+    private String mCompanyName;
+    private String mJobTitle;
+    private double mHourlyWage;
 
-    private final ArrayList<Project> mProjects;
-    private final ArrayList<Role> mRoles;
-    private final ArrayList<Task> mTasks;
-    private final HashMap<UUID, ArrayList<Messages>> mInbox;
+    private ArrayList<Project> mProjects;
+    private ArrayList<Role> mRoles;
+    private ArrayList<Task> mTasks;
+    private HashMap<UUID, ArrayList<Messages>> mInbox;
 
     private double mTotalWage;
 //    private ArrayList<UUID> mProjectsUserCanAccess;

@@ -10,7 +10,7 @@ public class VMenuActivityLog extends VMenu {
     public VMenuActivityLog(VMenu parent) {
         super(parent);
         mMenuHeader = "Activity log";
-        mMenuLabel = "View activity log";
+        mMenuLabel = "View activity log for all members";
         mMenuQuestion = "Enter choice";
         mSubMenus = null;
     }
