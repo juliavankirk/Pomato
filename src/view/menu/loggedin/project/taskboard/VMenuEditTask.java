@@ -68,7 +68,7 @@ public class VMenuEditTask extends VMenu {
                         case 6 -> {
 
                            updatedDueDate = InputErrors.checkDateFormat(InputOutput.inputString("Enter new due date (yyyy-mm-dd)"));
-                            while (updatedDueDate.isBefore(subTask.getStartDate())) {
+                            while (updatedDueDate.isBefore(task.getStartDate())) {
                                 updatedDueDate = LocalDate.parse(InputOutput.inputString("Due date must be later than start date. Please enter new Due Date one more time (yyyy-mm-dd)\n"));
                             }
 
