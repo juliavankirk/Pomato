@@ -52,7 +52,6 @@ public class VMenuProject extends VMenu {
         if (controller.getCurrentUser().getRole(projectId).equals("Manager")){
             mSubMenus.add(new VMenuEconomicOverview(this));
             mSubMenus.add(new VMenuChangeRoles(this));
-            mSubMenus.add(new VMenuAssignTask(this));
         }
     }
 
