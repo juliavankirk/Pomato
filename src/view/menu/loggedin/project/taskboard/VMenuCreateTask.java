@@ -9,6 +9,8 @@ import java.util.ArrayList;
 
 public class VMenuCreateTask extends VMenu {
 
+    int characterLimitForDescription = 150;
+
     public VMenuCreateTask(VMenu parent) {
         super(parent);
         mMenuHeader = "Create Task";
@@ -30,7 +32,11 @@ public class VMenuCreateTask extends VMenu {
 
         System.out.println("Please enter the following information\n ");
         title = InputOutput.inputString("Title");
-        description = InputOutput.inputString("Description");
+        description = InputOutput.inputString("Description(150 Char limit)");
+        while(description.length() > characterLimitForDescription) {
+            System.out.println("Please keep the description under 150 characters.");
+            description = InputOutput.inputString("Description(100 Char limit)");
+        }
         estimatedTime = InputOutput.inputDouble("Estimated Time (hours)");
         priority = InputOutput.inputIntMinMax("Priority (1-5)",1,5);
         dueDate = LocalDate.parse(InputOutput.inputString("Due Date (yyyy-mm-dd)"));
@@ -53,8 +59,6 @@ public class VMenuCreateTask extends VMenu {
         addMoreTasks(controller);
 
     }
-
-
 
     private void addMoreTasks (Controller controller) {
         String answer;

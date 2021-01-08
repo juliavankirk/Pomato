@@ -119,8 +119,6 @@ public class TaskTable {
 
     // Create cards for printing. This also handles printing at the moment but this should be refactored out.
     private void createCards(){
-
-
         for (int currentRow = 0; currentRow < largestListSize; currentRow++) {
             ArrayList<ArrayList<String>> cardsForRowList = new ArrayList<>();
 
@@ -142,10 +140,8 @@ public class TaskTable {
 
             // Make all cards the same height
             for (int i = 0; i < cardsForRowList.size(); i++) {
-
                 // Shortcut to cardsForRowList
                 ArrayList<String> cardStringList = cardsForRowList.get(i);
-
                 for (int j = cardStringList.size(); j < highest; j++) {
                     cardStringList.add(createEmptyRow());
                 }
@@ -174,6 +170,7 @@ public class TaskTable {
             System.out.println(divider);
         }
     }
+
     private ArrayList<String> createCard(Task task){
         ArrayList<String> taskAttributeStringList = new ArrayList<>();
 
@@ -224,11 +221,13 @@ public class TaskTable {
 
         return taskAttributeStringList;
     }
+
     private ArrayList<String> createEmptyCard() {
         ArrayList<String> test = new ArrayList<>();
         test.add(createEmptyRow());
         return test;
     }
+
     private String createCardLine(String text){
         StringBuilder str = new StringBuilder();                    // 11
         double remainingchars = (double)this.cardWidth - text.length();     // 19

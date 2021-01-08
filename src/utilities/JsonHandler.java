@@ -67,7 +67,8 @@ public class JsonHandler {
     }
 
     public void loadDatabase() throws FileNotFoundException {
-        String fileLocation = "data/database.json";
+//        String fileLocation = "data/database.json";
+        String fileLocation = "database.json";
         Database database = new Database();
 
         try {
@@ -103,7 +104,8 @@ public class JsonHandler {
         gsonBuilder.registerTypeAdapter(LocalDate.class, new DateDeserializer());
 
         Gson gson = gsonBuilder.setPrettyPrinting().create();
-        JsonElement json = gson.fromJson(new FileReader("data/database.json"), JsonElement.class);
+//        JsonElement json = gson.fromJson(new FileReader("data/database.json"), JsonElement.class);
+        JsonElement json = gson.fromJson(new FileReader("database.json"), JsonElement.class);
         String jsonString = gson.toJson(json);
         return jsonString;
     }

@@ -700,7 +700,8 @@ public class Controller {
     // this method is for loading the .csv file.
     public void loadDatabaseTwo() {
 
-        String STORAGE = "./src/STORAGE.csv";
+//        String STORAGE = "./src/STORAGE.csv";
+        String STORAGE = "STORAGE.csv";
 
         try {
             File customerFile = new File(STORAGE);
