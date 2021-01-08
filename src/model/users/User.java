@@ -1,5 +1,5 @@
 package model.users;
-import com.google.gson.annotations.Expose;
+
 import model.project.Messages;
 import model.project.Project;
 import model.project.Task;
